@@ -11,6 +11,7 @@ end
 function love.update(dt)
 
     player:update(dt)
+    sword:update(dt)
     world:update(dt)
 
 end
@@ -24,6 +25,7 @@ function love.draw()
         -- Draw the background from the Tiled map
         gameMap:drawLayer(gameMap.layers["Background"])
 
+        sword:draw()
         player:draw()
 
         love.graphics.setLineWidth(5)
@@ -31,7 +33,7 @@ function love.draw()
 
     cam:detach()
 
-    debug:playerDir()
+    --debug:playerDir()
     --player:drawHealth()
 
 end
@@ -41,11 +43,9 @@ function love.keypressed(key)
     if key == "escape" then
         love.event.quit(0)
     end
-    
-    -- Resets the player's position to (0, 0)
-    if key == "r" then
-        player.collider:setPosition(0, 0)
-        player.collider:setLinearVelocity(0, 0)
+
+    if key == 'z' then
+        player:attack()
     end
 
     if key == 'space' then

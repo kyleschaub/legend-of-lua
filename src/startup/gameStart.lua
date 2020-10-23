@@ -6,6 +6,8 @@ function gameStart()
     Camera = require "libraries/hump/camera"
     cam = Camera(1300, 800, 1)
 
+    vector = require "libraries/hump/vector"
+
     anim8 = require("libraries/anim8/anim8")
     sti = require("libraries/Simple-Tiled-Implementation/sti")
 
@@ -19,6 +21,7 @@ function gameStart()
     -- Load assets and resources
     require("src/startup/resources")
     require("src/player")
+    require("src/weapons/sword")
     require("src/global")
 
 end

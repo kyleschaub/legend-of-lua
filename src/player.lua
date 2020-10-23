@@ -10,6 +10,11 @@ player.isMoving = false
 player.dir = "down"
 player.item = 2 -- number corresponds to some item
 
+-- Player can be in many states:
+-- 0: normal, walking state
+-- 1: attacking
+player.state = 0
+
 -- Health; Player starts at full hearts
 player.max_hearts = 3
 player.hearts = player.max_hearts
@@ -23,55 +28,87 @@ player.animations.walkRight = anim8.newAnimation(player.grids.walk('1-2', 2), 0.
 player.animations.walkLeft = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
 player.animations.walkUp = anim8.newAnimation(player.grids.walk('1-2', 3), 0.1)
 
+function playerAttackComplete()
+
+    -- state 1 is standard attack animation
+    if player.state == 1 then
+        player.state = 0
+        if player.dir == "down" then
+            player.anim = player.animations.walkDown
+        elseif player.dir == "left" then
+            player.anim = player.animations.walkLeft
+        elseif player.dir == "right" then
+            player.anim = player.animations.walkRight
+        elseif player.dir == "up" then
+            player.anim = player.animations.walkUp
+        end
+        player.anim:gotoFrame(1) -- go to standing frame
+    end
+
+end
+
+player.animations.attackDown = anim8.newAnimation(player.grids.walk(2,1, 3,1, 2,1), {0.07, 0.3, 0.07}, playerAttackComplete)
+player.animations.attackRight = anim8.newAnimation(player.grids.walk(2,2, 3,2, 2,2), {0.07, 0.3, 0.07}, playerAttackComplete)
+player.animations.attackLeft = anim8.newAnimation(player.grids.walk(2,2, 3,2, 2,2), {0.07, 0.3, 0.07}, playerAttackComplete)
+player.animations.attackUp = anim8.newAnimation(player.grids.walk(2,3, 3,3, 2,3), {0.07, 0.3, 0.07}, playerAttackComplete)
+
 -- This value stores the player's current animation
 player.anim = player.animations.walkDown
 
 function player:update(dt)
 
-    -- Freeze the animation if the player isn't moving
-    if player.isMoving then
+    -- State 0: normal state, walking around
+    if player.state == 0 then
+
+        -- Freeze the animation if the player isn't moving
+        if player.isMoving then
+            player.anim:update(dt)
+        end
+
+        local vectorX = 0
+        local vectorY = 0
+
+        -- Keyboard direction checks for movement
+        if love.keyboard.isDown("left") then
+            vectorX = -1
+            player.anim = player.animations.walkLeft
+            player.dir = "left"
+        end
+        if love.keyboard.isDown("right") then
+            vectorX = 1
+            player.anim = player.animations.walkRight
+            player.dir = "right"
+        end
+        if love.keyboard.isDown("up") then
+            vectorY = -1
+            player.anim = player.animations.walkUp
+            player.dir = "up"
+        end
+        if love.keyboard.isDown("down") then
+            vectorY = 1
+            player.anim = player.animations.walkDown
+            player.dir = "down"
+        end
+
+        player:setLinearVelocity(vectorX * player.speed, vectorY * player.speed)
+
+        -- Check if player is moving
+        if vectorX == 0 and vectorY == 0 then
+            player.isMoving = false
+            player.anim:gotoFrame(1) -- go to standing frame
+        elseif not player.isMoving then
+            player.isMoving =  true
+            player.anim:gotoFrame(2)
+        end
+
+        if love.keyboard.isDown("h") then
+            player.hello = true
+        else
+            player.hello = false
+        end
+
+    elseif player.state == 1 then
         player.anim:update(dt)
-    end
-
-    local vectorX = 0
-    local vectorY = 0
-
-    -- Keyboard direction checks for movement
-    if love.keyboard.isDown("left") then
-        vectorX = -1
-        player.anim = player.animations.walkLeft
-        player.dir = "left"
-    end
-    if love.keyboard.isDown("right") then
-        vectorX = 1
-        player.anim = player.animations.walkRight
-        player.dir = "right"
-    end
-    if love.keyboard.isDown("up") then
-        vectorY = -1
-        player.anim = player.animations.walkUp
-        player.dir = "up"
-    end
-    if love.keyboard.isDown("down") then
-        vectorY = 1
-        player.anim = player.animations.walkDown
-        player.dir = "down"
-    end
-
-    player:setLinearVelocity(vectorX * player.speed, vectorY * player.speed)
-
-    -- Check if player is moving
-    if vectorX == 0 and vectorY == 0 then
-        player.isMoving = false
-        player.anim:gotoFrame(2) -- go to standing frame
-    else
-        player.isMoving =  true
-    end
-
-    if love.keyboard.isDown("h") then
-        player.hello = true
-    else
-        player.hello = false
     end
 
 end
@@ -84,7 +121,7 @@ function player:draw()
     -- sx represents the scale on the x axis for the player animation
     -- If it is -1, the animation will flip horizontally (for walking left)
     local sx = 1
-    if player.anim == player.animations.walkLeft then
+    if player.anim == player.animations.walkLeft or player.anim == player.animations.attackLeft then
         sx = -1
     end
 
@@ -95,6 +132,26 @@ function player:draw()
 
     if player.hello then
         love.graphics.draw(sprites.hello, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
+    end
+
+end
+
+function player:attack()
+
+    if player.state == 0 then
+        player.state = 1
+        player:setLinearVelocity(0, 0)
+        if player.dir == "down" then
+            player.anim = player.animations.attackDown
+        elseif player.dir == "left" then
+            player.anim = player.animations.attackLeft
+        elseif player.dir == "right" then
+            player.anim = player.animations.attackRight
+        elseif player.dir == "up" then
+            player.anim = player.animations.attackUp
+        end
+
+        sword:attack()
     end
 
 end
