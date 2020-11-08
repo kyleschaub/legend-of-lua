@@ -20,28 +20,23 @@ sword.timer = 0
 
 function sword:setStats()
 
-    if sword.id == 0 then -- Wooden Sword
-        sword.sprite = sprites.weapons.wooden_sword
-        sword.power = 1
-    elseif sword.id == 1 then -- White Sword
-        sword.sprite = sprites.weapons.white_sword
-        sword.power = 2
-    elseif sword.id == 2 then -- Magic Rod
-        sword.sprite = sprites.weapons.white_sword
-        sword.power = 0
-    end
+    local weaponStats = getWeaponStats("sword", sword.id)
+    sword.sprite = weaponStats.sprite
+    sword.power = weaponStats.power
 
     sword.width = sword.sprite:getWidth()
     sword.height = sword.sprite:getHeight()
 
 end
 
-function sword:attack()
+function sword:attack(id)
 
     -- Cannot attack with a sword if the sword is already in use
     if sword.state > 0 then
         return
     end
+
+    sword.id = id
 
     sword:setStats()
     sword.dir = player.dir
