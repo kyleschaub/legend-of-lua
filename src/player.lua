@@ -13,7 +13,9 @@ player.item = 2 -- number corresponds to some item
 -- Player can be in many states:
 -- 0: normal, walking state
 -- 1: attacking
+-- 2: found item
 player.state = 0
+player.timer = 0
 
 -- Health; Player starts at full hearts
 player.max_hearts = 3
@@ -27,6 +29,12 @@ player.animations.walkDown = anim8.newAnimation(player.grids.walk('1-2', 1), 0.1
 player.animations.walkRight = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
 player.animations.walkLeft = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
 player.animations.walkUp = anim8.newAnimation(player.grids.walk('1-2', 3), 0.1)
+
+player.holdSprite = sprites.weapons.wooden_sword
+
+player.weaponType = ""
+player.weaponId = 0
+player.weaponTag = 0
 
 function playerAttackComplete()
 
@@ -56,6 +64,16 @@ player.animations.attackUp = anim8.newAnimation(player.grids.walk(2,3, 3,3, 2,3)
 player.anim = player.animations.walkDown
 
 function player:update(dt)
+
+    if player.timer > 0 then
+        player.timer = player.timer - dt
+        if player.timer < 0 then
+            -- Found Item state
+            if player.state == 2 then
+                player.state = 0
+            end
+        end
+    end
 
     -- State 0: normal state, walking around
     if player.state == 0 then
@@ -109,11 +127,18 @@ function player:update(dt)
 
     elseif player.state == 1 then
         player.anim:update(dt)
+    elseif player.state == 2 then
+        player.isMoving = false
+        player:setLinearVelocity(0, 0)
     end
+
+    player:searchForItems()
 
 end
 
 function player:draw()
+
+    love.graphics.setColor(1,1,1,1)
 
     local px = player:getX()
     local py = player:getY()
@@ -125,10 +150,15 @@ function player:draw()
         sx = -1
     end
 
-    -- Draw the player's walk animation
-    love.graphics.setColor(1, 1, 1, 1)
-    --love.graphics.draw(sprites.linkWalkSheet, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
-    player.anim:draw(sprites.linkWalkSheet, px, py, nil, sx, 1, player.width/2, player.height/2)
+    if player.state == 0 or player.state == 1 then
+        -- Draw the player's walk animation
+        love.graphics.setColor(1, 1, 1, 1)
+        --love.graphics.draw(sprites.linkWalkSheet, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
+        player.anim:draw(sprites.linkWalkSheet, px, py, nil, sx, 1, player.width/2, player.height/2)
+    elseif player.state == 2 then
+        love.graphics.draw(sprites.linkGet, px, py, nil, nil, 1, player.width/2, player.height/2)
+        love.graphics.draw(player.holdSprite, px - 34, py - 46, 3*math.pi/2, nil, 1, 4, player.holdSprite:getHeight()/2)
+    end
 
     if player.hello then
         love.graphics.draw(sprites.hello, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
@@ -136,7 +166,19 @@ function player:draw()
 
 end
 
+function player:equipWeapon(type, id, tag)
+
+    player.weaponType = type
+    player.weaponId = id
+    player.weaponTag = tag
+
+end
+
 function player:attack()
+
+    if gamestate ~= 0 then
+        return
+    end
 
     if player.state == 0 then
         player.state = 1
@@ -151,7 +193,29 @@ function player:attack()
             player.anim = player.animations.attackUp
         end
 
-        sword:attack()
+        if player.weaponTag ~= 0 then
+            if player.weaponType == "sword" then
+                sword:attack(player.weaponId)
+            end
+        end
+    end
+
+end
+
+-- searches nearby items to pick up
+function player:searchForItems()
+
+    for i,a in ipairs(items) do
+        if distanceBetween(player:getX(), player:getY(), a.x, a.y) < 45 then
+            player.state = 2
+            player.holdSprite = a.sprite
+            player.timer = 0.85
+            a.collected = true
+
+            if a.type == "sword" then
+                addWeapon(a.type, a.id)
+            end
+        end
     end
 
 end
