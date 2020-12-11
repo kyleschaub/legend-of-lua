@@ -2,7 +2,7 @@
 sprites = {}
 sprites.background = love.graphics.newImage('sprites/background.png')
 sprites.linkTest = love.graphics.newImage('sprites/linkTest.png')
-sprites.linkWalkSheet = love.graphics.newImage('sprites/real-link.png')
+sprites.linkWalkSheet = love.graphics.newImage('sprites/link-blue.png')
 sprites.linkGet = love.graphics.newImage('sprites/link-get.png')
 sprites.hello = love.graphics.newImage('sprites/hello.png')
 sprites.heart_filled = love.graphics.newImage('sprites/heart_filled.png')
@@ -19,6 +19,9 @@ sprites.ui.item_box_empty = love.graphics.newImage('sprites/ui/item-box-empty.pn
 sprites.ui.item_box_selected = love.graphics.newImage('sprites/ui/item-box-selected.png')
 sprites.ui.item_box_empty_hover = love.graphics.newImage('sprites/ui/item-box-empty-hover.png')
 sprites.ui.item_box_selected_hover = love.graphics.newImage('sprites/ui/item-box-selected-hover.png')
+
+sprites.env = {}
+sprites.env.water = love.graphics.newImage('sprites/env/water.png')
 
 
 -- All fonts

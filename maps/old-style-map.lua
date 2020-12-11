@@ -8,8 +8,8 @@ return {
   height = 18,
   tilewidth = 96,
   tileheight = 96,
-  nextlayerid = 2,
-  nextobjectid = 1,
+  nextlayerid = 3,
+  nextobjectid = 10,
   properties = {},
   tilesets = {
     {
@@ -64,15 +64,172 @@ return {
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 43, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 43, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-        1, 1, 6, 6, 6, 6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 6, 6, 6, 6, 6, 1, 1, 1, 1,
-        1, 1, 43, 15, 15, 15, 15, 15, 16, 1, 43, 1, 1, 1, 1, 1, 43, 1, 14, 15, 15, 15, 15, 1, 1, 43, 1, 1,
-        1, 1, 1, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 15, 15, 15, 15, 1, 1, 1, 1, 1,
-        1, 1, 1, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 15, 15, 15, 15, 1, 1, 1, 1, 1,
-        6, 6, 6, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 15, 15, 15, 15, 1, 1, 43, 1, 1,
+        1, 1, 6, 6, 6, 6, 6, 6, 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 43, 15, 15, 15, 15, 15, 16, 1, 43, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 43, 1, 1,
+        1, 1, 1, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        6, 6, 6, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 43, 1, 1,
         15, 15, 15, 15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 2, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 1, 2, 3, 3, 12, 12, 12, 4, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 2, 12, 12, 12, 12, 12, 12, 12, 4, 1, 1, 1, 43, 1, 1, 43, 1, 1,
         15, 15, 15, 15, 15, 16, 1, 1, 1, 1, 12, 12, 12, 12, 12, 12, 12, 12, 12, 4, 1, 1, 1, 1, 1, 1, 1, 1
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 2,
+      name = "Water",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      objects = {
+        {
+          id = 1,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1632,
+          y = 576,
+          width = 384,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "u"
+          }
+        },
+        {
+          id = 2,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1536,
+          y = 576,
+          width = 96,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "ul"
+          }
+        },
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2016,
+          y = 576,
+          width = 96,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "ur"
+          }
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2016,
+          y = 672,
+          width = 96,
+          height = 288,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "r"
+          }
+        },
+        {
+          id = 5,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 2016,
+          y = 960,
+          width = 96,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "dr"
+          }
+        },
+        {
+          id = 6,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1632,
+          y = 960,
+          width = 384,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "d"
+          }
+        },
+        {
+          id = 7,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1536,
+          y = 672,
+          width = 96,
+          height = 288,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "l"
+          }
+        },
+        {
+          id = 8,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1536,
+          y = 960,
+          width = 96,
+          height = 96,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "dl"
+          }
+        },
+        {
+          id = 9,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1632,
+          y = 672,
+          width = 384,
+          height = 288,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["biome"] = "field",
+            ["segmentType"] = "c"
+          }
+        }
       }
     }
   }

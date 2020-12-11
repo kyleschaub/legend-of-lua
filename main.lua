@@ -22,6 +22,7 @@ function love.update(dt)
         sword:update(dt)
         world:update(dt)
         items:update()
+        water:update(dt)
     end
     flux.update(dt)
 
@@ -37,18 +38,19 @@ function love.draw()
         love.graphics.setColor(1,1,1,1)
         gameMap:drawLayer(gameMap.layers["Background"])
 
+        water:draw()
         drawItems()
         sword:draw()
         player:draw()
 
         love.graphics.setLineWidth(5)
-        --world:draw()
+        world:draw()
 
     cam:detach()
 
     weaponUi:draw()
 
-    --debug:playerDir()
+    debug:playerDir()
     --player:drawHealth()
 
 end
@@ -78,4 +80,8 @@ end
 
 function loadMap(mapName)
     gameMap = sti("maps/" .. mapName .. ".lua")
+
+    for i, obj in pairs(gameMap.layers["Water"].objects) do
+        water:createSegment(obj.x, obj.y, obj.width, obj.height, obj.properties.segmentType, obj.properties.biome)
+    end
 end

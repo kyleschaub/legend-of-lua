@@ -25,6 +25,7 @@ function gameStart()
 
     -- Load assets and resources
     require("src/startup/resources")
+    require("src/environment/water")
     require("src/player")
     require("src/weapons/stats")
     require("src/weapons/weaponStorage")

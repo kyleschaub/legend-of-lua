@@ -29,6 +29,7 @@ player.animations.walkDown = anim8.newAnimation(player.grids.walk('1-2', 1), 0.1
 player.animations.walkRight = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
 player.animations.walkLeft = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
 player.animations.walkUp = anim8.newAnimation(player.grids.walk('1-2', 3), 0.1)
+player.animations.pickup = anim8.newAnimation(player.grids.walk(1, 4), 1)
 
 player.holdSprite = sprites.weapons.wooden_sword
 
@@ -153,10 +154,9 @@ function player:draw()
     if player.state == 0 or player.state == 1 then
         -- Draw the player's walk animation
         love.graphics.setColor(1, 1, 1, 1)
-        --love.graphics.draw(sprites.linkWalkSheet, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
         player.anim:draw(sprites.linkWalkSheet, px, py, nil, sx, 1, player.width/2, player.height/2)
     elseif player.state == 2 then
-        love.graphics.draw(sprites.linkGet, px, py, nil, nil, 1, player.width/2, player.height/2)
+        player.animations.pickup:draw(sprites.linkWalkSheet, px, py, nil, nil, 1, player.width/2, player.height/2)
         love.graphics.draw(player.holdSprite, px - 34, py - 46, 3*math.pi/2, nil, 1, 4, player.holdSprite:getHeight()/2)
     end
 
