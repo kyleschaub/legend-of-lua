@@ -47,6 +47,10 @@ function love.keypressed(key)
         player.health = player.health + 0.5
     end
 
+    if key == 'l' then
+        data.maxHealth = data.maxHealth + 1
+    end
+
     if key == 'escape' then
         love.event.quit()
     end
