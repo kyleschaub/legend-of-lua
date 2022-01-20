@@ -1,24 +1,3 @@
--- Returns the x, y position that is in front of Link
--- "dist" number of pixels away
-function getLinkFrontPosition(dist)
-
-    local px, py = player:getPosition()
-
-    if player.dir == "right" then
-        px = px + dist
-    elseif player.dir == "left" then
-        px = px - dist
-    elseif player.dir == "up" then
-        py = py - dist
-    elseif player.dir == "down" then
-        py = py + dist
-    end
-
-    return px, py
-
-end
-
-
 -- Returns the radian equivalent for a given direction string
 function getRadianRotation(direction)
 
@@ -56,4 +35,50 @@ end
 
 function distanceBetween(x1, y1, x2, y2)
     return math.sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
+end
+
+function setWhite()
+    love.graphics.setColor(1, 1, 1, 1)
+end
+
+function midpoint(x1, y1, x2, y2)
+    local p = {}
+    p.x = (x1+x2)/2;
+    p.y = (y1+y2)/2;
+    return p;
+end
+
+function updateTimer(v, dt)
+    if v > 0 then
+        v = v - dt
+    elseif v < 0 then
+        v = 0
+    end
+    return v
+end
+
+function getPerfectY(destY)
+    local tileNum = math.floor(destY / 16)
+    return (tileNum * 16) + 8.7
+end
+
+function secondsToTime(sec)
+    local minutes = math.floor(sec/60)
+    local seconds = math.floor(sec%60)
+    if seconds < 10 then seconds = "0" .. seconds end
+    return minutes .. ":" .. seconds
+end
+
+function dirToInt(dir)
+    if dir == "up" then
+        return -1
+    elseif dir == "down" then
+        return 1
+    elseif dir == "right" then
+        return 1
+    elseif dir == "left" then
+        return -1
+    else
+        return dir
+    end
 end

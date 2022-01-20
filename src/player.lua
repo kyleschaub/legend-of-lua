@@ -1,245 +1,218 @@
--- Link's collider
-player = world:newCircleCollider(1300, 800, 40)
-player:setCollisionClass("Player")
-
--- Player properties
-player.width = 96  -- width of the animation frames
-player.height = 96  -- height of the animation frames
-player.speed = 360
-player.isMoving = false
+player = world:newBSGRectangleCollider(200, 200, 12, 15, 3)
+player.x = 0
+player.y = 0
 player.dir = "down"
-player.item = 2 -- number corresponds to some item
+player.speed = 90
+player.animSpeed = 0.14
+player.walking = false
+player.animTimer = 0
+player.health = 3.5
 
--- Player can be in many states:
--- 0: normal, walking state
--- 1: attacking
--- 2: found item
+-- 0 = Normal gameplay
+-- 1 = Sword swing
+-- 2 = Use (bomb)
 player.state = 0
-player.timer = 0
 
--- Health; Player starts at full hearts
-player.max_hearts = 3
-player.hearts = player.max_hearts
+player:setCollisionClass("Player")
+player:setFixedRotation(true)
 
-player.grids = {}
-player.grids.walk = anim8.newGrid(player.width, player.height, sprites.linkWalkSheet:getWidth(), sprites.linkWalkSheet:getHeight(), 0, 0, 6)
+player.grid = anim8.newGrid(16, 24, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
 
 player.animations = {}
-player.animations.walkDown = anim8.newAnimation(player.grids.walk('1-2', 1), 0.1)
-player.animations.walkRight = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
-player.animations.walkLeft = anim8.newAnimation(player.grids.walk('1-2', 2), 0.125)
-player.animations.walkUp = anim8.newAnimation(player.grids.walk('1-2', 3), 0.1)
+player.animations.down = anim8.newAnimation(player.grid('1-4', 1), player.animSpeed)
+player.animations.up = anim8.newAnimation(player.grid('1-4', 2), player.animSpeed)
+player.animations.right = anim8.newAnimation(player.grid('1-4', 3), player.animSpeed)
+player.animations.left = anim8.newAnimation(player.grid('1-4', 4), player.animSpeed)
+player.animations.swordDown = anim8.newAnimation(player.grid('1-2', 5), player.animSpeed)
+player.animations.swordUp = anim8.newAnimation(player.grid('1-2', 6), player.animSpeed)
+player.animations.swordRight = anim8.newAnimation(player.grid('1-2', 7), player.animSpeed)
+player.animations.swordLeft = anim8.newAnimation(player.grid('1-2', 8), player.animSpeed)
+player.animations.useDown = anim8.newAnimation(player.grid(3, 5), player.animSpeed)
+player.animations.useUp = anim8.newAnimation(player.grid(3, 6), player.animSpeed)
+player.animations.useRight = anim8.newAnimation(player.grid(3, 7), player.animSpeed)
+player.animations.useLeft = anim8.newAnimation(player.grid(3, 8), player.animSpeed)
 
-player.holdSprite = sprites.weapons.wooden_sword
+player.anim = player.animations.down
 
-player.weaponType = ""
-player.weaponId = 0
-player.weaponTag = 0
-
-function playerAttackComplete()
-
-    -- state 1 is standard attack animation
-    if player.state == 1 then
-        player.state = 0
-        if player.dir == "down" then
-            player.anim = player.animations.walkDown
-        elseif player.dir == "left" then
-            player.anim = player.animations.walkLeft
-        elseif player.dir == "right" then
-            player.anim = player.animations.walkRight
-        elseif player.dir == "up" then
-            player.anim = player.animations.walkUp
-        end
-        player.anim:gotoFrame(1) -- go to standing frame
-    end
-
-end
-
-player.animations.attackDown = anim8.newAnimation(player.grids.walk(2,1, 3,1, 2,1), {0.07, 0.3, 0.07}, playerAttackComplete)
-player.animations.attackRight = anim8.newAnimation(player.grids.walk(2,2, 3,2, 2,2), {0.07, 0.3, 0.07}, playerAttackComplete)
-player.animations.attackLeft = anim8.newAnimation(player.grids.walk(2,2, 3,2, 2,2), {0.07, 0.3, 0.07}, playerAttackComplete)
-player.animations.attackUp = anim8.newAnimation(player.grids.walk(2,3, 3,3, 2,3), {0.07, 0.3, 0.07}, playerAttackComplete)
-
--- This value stores the player's current animation
-player.anim = player.animations.walkDown
+player:setLinearVelocity(-100, 0)
 
 function player:update(dt)
 
-    if player.timer > 0 then
-        player.timer = player.timer - dt
-        if player.timer < 0 then
-            -- Found Item state
-            if player.state == 2 then
-                player.state = 0
-            end
-        end
-    end
-
-    -- State 0: normal state, walking around
     if player.state == 0 then
+    
+        local dirX = 0
+        local dirY = 0
 
-        -- Freeze the animation if the player isn't moving
-        if player.isMoving then
-            player.anim:update(dt)
-        end
-
-        local vectorX = 0
-        local vectorY = 0
-
-        -- Keyboard direction checks for movement
-        if love.keyboard.isDown("left") then
-            vectorX = -1
-            player.anim = player.animations.walkLeft
-            player.dir = "left"
-        end
         if love.keyboard.isDown("right") then
-            vectorX = 1
-            player.anim = player.animations.walkRight
+            dirX = 1
+            player.anim = player.animations.right
             player.dir = "right"
         end
-        if love.keyboard.isDown("up") then
-            vectorY = -1
-            player.anim = player.animations.walkUp
-            player.dir = "up"
+
+        if love.keyboard.isDown("left") then
+            dirX = -1
+            player.anim = player.animations.left
+            player.dir = "left"
         end
+
         if love.keyboard.isDown("down") then
-            vectorY = 1
-            player.anim = player.animations.walkDown
+            dirY = 1
+            player.anim = player.animations.down
             player.dir = "down"
         end
 
-        player:setLinearVelocity(vectorX * player.speed, vectorY * player.speed)
-
-        -- Check if player is moving
-        if vectorX == 0 and vectorY == 0 then
-            player.isMoving = false
-            player.anim:gotoFrame(1) -- go to standing frame
-        elseif not player.isMoving then
-            player.isMoving =  true
-            player.anim:gotoFrame(2)
+        if love.keyboard.isDown("up") then
+            dirY = -1
+            player.anim = player.animations.up
+            player.dir = "up"
         end
 
-        if love.keyboard.isDown("h") then
-            player.hello = true
+        local vec = vector(dirX, dirY):normalized() * player.speed
+        player:setLinearVelocity(vec.x, vec.y)
+
+        if dirX == 0 and dirY == 0 then
+            player.walking = false
+            player.anim:gotoFrame(1)
         else
-            player.hello = false
+            player.walking = true
         end
 
-    elseif player.state == 1 then
-        player.anim:update(dt)
-    elseif player.state == 2 then
-        player.isMoving = false
-        player:setLinearVelocity(0, 0)
-    end
+        if player.walking then
+            player.anim:update(dt)
+        end
 
-    player:searchForItems()
+    elseif player.state >= 1 and player.state < 2 then
+
+        player:setLinearVelocity(0, 0)
+        player.animTimer = player.animTimer - dt
+
+        if player.animTimer < 0 then
+            if player.state == 1 then
+                player.state = 1.1
+                player.anim:gotoFrame(2)
+                -- animTimer for finished sword swing stance
+                player.animTimer = 0.25
+                effects:spawn("slice", player:getX(), player:getY())
+            elseif player.state == 1.1 then
+                player.state = 0
+                player:resetAnimation(player.dir)
+            end
+        end
+
+    elseif player.state == 2 then
+
+        player:setLinearVelocity(0, 0)
+        player.animTimer = player.animTimer - dt
+
+        if player.animTimer < 0 then
+            player.state = 0
+            player:resetAnimation(player.dir)
+        end
+
+    end
 
 end
 
 function player:draw()
 
-    love.graphics.setColor(1,1,1,1)
+    -- Sword sprite
+    local swSpr = sprites.sword
 
-    local px = player:getX()
-    local py = player:getY()
+    local px = player:getX()+1
+    local py = player:getY()-5
 
-    -- sx represents the scale on the x axis for the player animation
-    -- If it is -1, the animation will flip horizontally (for walking left)
-    local sx = 1
-    if player.anim == player.animations.walkLeft or player.anim == player.animations.attackLeft then
-        sx = -1
+    -- Sword 'down' finished
+    if player.dir == "down" and player.state == 1.1 then
+        love.graphics.draw(swSpr, px+12.5, py+7, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
-    if player.state == 0 or player.state == 1 then
-        -- Draw the player's walk animation
-        love.graphics.setColor(1, 1, 1, 1)
-        --love.graphics.draw(sprites.linkWalkSheet, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
-        player.anim:draw(sprites.linkWalkSheet, px, py, nil, sx, 1, player.width/2, player.height/2)
-    elseif player.state == 2 then
-        love.graphics.draw(sprites.linkGet, px, py, nil, nil, 1, player.width/2, player.height/2)
-        love.graphics.draw(player.holdSprite, px - 34, py - 46, 3*math.pi/2, nil, 1, 4, player.holdSprite:getHeight()/2)
+    -- Sword 'up' windup
+    if player.dir == "up" and player.state == 1 then
+        love.graphics.draw(swSpr, px+9.5, py+6.5, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
-    if player.hello then
-        love.graphics.draw(sprites.hello, px, py - 182, nil, nil, nil, sprites.hello:getWidth()/2, sprites.hello:getHeight()/2)
+    -- Sword 'up' finished
+    if player.dir == "up" and player.state == 1.1 then
+        love.graphics.draw(swSpr, px-14, py+7, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
-end
-
-function player:equipWeapon(type, id, tag)
-
-    player.weaponType = type
-    player.weaponId = id
-    player.weaponTag = tag
-
-end
-
-function player:attack()
-
-    if gamestate ~= 0 then
-        return
+    -- Sword 'right' finished
+    if player.dir == "right" and player.state == 1.1 then
+        love.graphics.draw(swSpr, px+1, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
-    if player.state == 0 then
-        player.state = 1
-        player:setLinearVelocity(0, 0)
-        if player.dir == "down" then
-            player.anim = player.animations.attackDown
-        elseif player.dir == "left" then
-            player.anim = player.animations.attackLeft
-        elseif player.dir == "right" then
-            player.anim = player.animations.attackRight
-        elseif player.dir == "up" then
-            player.anim = player.animations.attackUp
-        end
+    -- Sword 'left' finished
+    if player.dir == "left" and player.state == 1.1 then
+        love.graphics.draw(swSpr, px-3, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
 
-        if player.weaponTag ~= 0 then
-            if player.weaponType == "sword" then
-                sword:attack(player.weaponId)
-            end
-        end
+    player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, nil, nil, 8, 12)
+
+    -- Sword 'down' windup
+    if player.dir == "down" and player.state == 1 then
+        love.graphics.draw(swSpr, px-7.5, py+6, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
+
+    -- Sword 'right' windup
+    if player.dir == "right" and player.state == 1 then
+        love.graphics.draw(swSpr, px+1, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
+
+    -- Sword 'left' windup
+    if player.dir == "left" and player.state == 1 then
+        love.graphics.draw(swSpr, px-3, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
 end
 
--- searches nearby items to pick up
-function player:searchForItems()
+function player:swingSword()
 
-    for i,a in ipairs(items) do
-        if distanceBetween(player:getX(), player:getY(), a.x, a.y) < 45 then
-            player.state = 2
-            player.holdSprite = a.sprite
-            player.timer = 0.85
-            a.collected = true
+    -- The player can only swing their sword if the player.state is 0 (regular gameplay)
+    if player.state ~= 0 then return end
 
-            if a.type == "sword" then
-                addWeapon(a.type, a.id)
-            end
-        end
+    player.state = 1
+
+    if player.dir == "down" then
+        player.anim = player.animations.swordDown
+    elseif player.dir == "up" then
+        player.anim = player.animations.swordUp
+    elseif player.dir == "right" then
+        player.anim = player.animations.swordRight
+    elseif player.dir == "left" then
+        player.anim = player.animations.swordLeft
     end
+
+    player.anim:gotoFrame(1)
+    -- animTimer for sword wind-up
+    player.animTimer = 0.1
 
 end
 
--- Draws the hearts to the upper-left corner of the screen
-function player:drawHealth()
+function player:useItem(duration)
 
-    local width = sprites.heart_filled:getWidth() + 10
-    
-    for i=1, player.max_hearts do
-    
-        local offset = (i-1) * width
-        local heartSprite = sprites.heart_filled
+    player.state = 2
 
-        if i > player.hearts then
-            heartSprite = sprites.heart_empty
-        end
-
-        if player.hearts - i == -0.5 then
-            heartSprite = sprites.heart_half
-        end
-
-        love.graphics.draw(heartSprite, 10 + offset, 10)
-        
+    if player.dir == "down" then
+        player.anim = player.animations.useDown
+    elseif player.dir == "up" then
+        player.anim = player.animations.useUp
+    elseif player.dir == "right" then
+        player.anim = player.animations.useRight
+    elseif player.dir == "left" then
+        player.anim = player.animations.useLeft
     end
 
+    player.anim:gotoFrame(1)
+    player.animTimer = duration
+
+end
+
+function player:useBomb()
+    player:useItem(0.2)
+    spawnBomb()
+end
+
+function player:resetAnimation(direction)
+    player.anim = player.animations[direction]
+    player.anim:gotoFrame(1)
 end

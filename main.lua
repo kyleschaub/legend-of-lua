@@ -1,81 +1,61 @@
 function love.load()
 
+    d1 = 0
+    d2 = 0
+    colliderToggle = false
+
     require("src/startup/gameStart")
     gameStart()
+    createNewSave()
 
-    score = 0
-    loadMap("old-style-map")
+    loadMap("test")
 
-    spawnItem("sword", 1, 800, 650)
-    spawnItem("sword", 0, 1000, 650)
-    spawnItem("sword", 2, 1200, 650)
-    spawnItem("sword", 1, 1400, 650)
-    spawnItem("sword", 0, 1600, 650)
-    spawnItem("sword", 2, 1800, 650)
+    dj.volume("effect", 1)
 
 end
 
 function love.update(dt)
-
-    if gamestate == 0 then
-        player:update(dt)
-        sword:update(dt)
-        world:update(dt)
-        items:update()
-    end
-    flux.update(dt)
-
+    updateAll(dt)
 end
 
 function love.draw()
-
-    local debug = require "src/debug"
+    drawBeforeCamera()
 
     cam:attach()
-
-        -- Draw the background from the Tiled map
-        love.graphics.setColor(1,1,1,1)
-        gameMap:drawLayer(gameMap.layers["Background"])
-
-        drawItems()
-        sword:draw()
-        player:draw()
-
-        love.graphics.setLineWidth(5)
-        --world:draw()
-
+        drawCamera()
+        if colliderToggle then
+            world:draw()
+        end
     cam:detach()
 
-    weaponUi:draw()
+    drawAfterCamera()
 
-    --debug:playerDir()
-    --player:drawHealth()
-
+    --local debug = require "src/debug"
+    --debug:d()
 end
 
 function love.keypressed(key)
-
-    weaponUi:navigate(key)
-
-    if key == "escape" then
-        love.event.quit(0)
+    if key == 'c' then
+        colliderToggle = not (colliderToggle and true);
     end
 
-    if key == "return" then
-        weaponUi:toggle()
+    if key == 'o' then
+        player.health = player.health - 0.5
+    end
+
+    if key == 'p' then
+        player.health = player.health + 0.5
+    end
+
+    if key == 'escape' then
+        love.event.quit()
     end
 
     if key == 'z' then
-        player:attack()
+        player:swingSword()
     end
 
-    --[[if key == 'space' then
-        player:interact()
-        player:useItem()
-    end]]
-
-end
-
-function loadMap(mapName)
-    gameMap = sti("maps/" .. mapName .. ".lua")
+    if key == 'x' then
+        player:useBomb()
+    end
 end

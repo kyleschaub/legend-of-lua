@@ -2,13 +2,25 @@
 
 local debug = {}
 
+function debug:d()
+
+    love.graphics.setColor(0, 0, 0, 0.7)
+    love.graphics.rectangle("fill", 16, 16, 840, 220)
+
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(fonts.debug)
+    love.graphics.print("d1: " .. d1, 50, 32)
+    love.graphics.print("d2: " .. d2, 50, 118)
+
+end
+
 function debug:playerPosition()
 
     love.graphics.setColor(0, 0, 0, 0.7)
     love.graphics.rectangle("fill", 16, 16, 660, 220)
 
-    local px = player.x
-    local py = player.y
+    local px = player:getX()
+    local py = player:getY()
 
     if px >= 0 then
         px = " " .. px
@@ -22,31 +34,6 @@ function debug:playerPosition()
     love.graphics.setFont(fonts.debug)
     love.graphics.print("player.x: " .. px, 50, 32)
     love.graphics.print("player.y: " .. py, 50, 118)
-
-end
-
-function debug:playerDir()
-
-    love.graphics.setColor(0, 0, 0, 0.7)
-    love.graphics.rectangle("fill", 16, 16, 660, 220)
-
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setFont(fonts.debug)
-    love.graphics.print("score: " .. score, 50, 32)
-    love.graphics.print("player.dir: " .. player.dir, 50, 118)
-
-end
-
-function debug:origin()
-
-    love.graphics.setColor(0, 0, 1, 1)
-    love.graphics.circle("fill", 0, 0, 20)
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setLineWidth(4)
-    love.graphics.circle("line", 0, 0, 20)
-
-    love.graphics.setFont(fonts.origin)
-    love.graphics.print("(0, 0)", -92, 20)
 
 end
 
