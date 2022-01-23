@@ -8,6 +8,9 @@ function updateAll(dt)
 
     cam:update(dt)
 
+    particles:update(dt)
+    particleWorld:update(dt)
+
     flux.update(dt)
     dj.cleanup()
 

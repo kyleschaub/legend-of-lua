@@ -22,6 +22,7 @@ function drawCamera()
     bombs:draw()
     player:draw()
     effects:draw()
+    particles:draw()
 
 end
 

@@ -27,6 +27,10 @@ function gameStart()
     world = windfield.newWorld(0, 0, false)
     world:setQueryDebugDrawing(true)
 
+    -- This second world is for particles, and has downward gravity
+    particleWorld = windfield.newWorld(0, 250, false)
+    particleWorld:setQueryDebugDrawing(true)
+
     require("src/startup/require")
     requireAll()
 

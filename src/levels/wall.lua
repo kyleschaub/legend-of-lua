@@ -16,10 +16,9 @@ function spawnWall(x, y, width, height, name)
         -- an example of a name is 'breakRock1', where Rock tells us the sprite
         if name:find("Rock") then
             wall.sprite = sprites.environment.breakableRock
-        end
-
-        function wall:onBreak()
-            -- Spawn appropriate particles
+            function wall:onBreak()
+                particleEvent("rockBreak", x+width/2, y+height/2)
+            end
         end
     end
 

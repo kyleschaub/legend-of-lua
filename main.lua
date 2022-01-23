@@ -25,6 +25,7 @@ function love.draw()
         drawCamera()
         if colliderToggle then
             world:draw()
+            particleWorld:draw()
         end
     cam:detach()
 

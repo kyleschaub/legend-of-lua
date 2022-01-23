@@ -12,6 +12,8 @@ function requireAll()
     require("src/draw")
 
     require("src/effects/effect")
+    require("src/effects/particles/particle")
+    require("src/effects/particles/particleEvent")
 
     require("src/items/bomb")
 
