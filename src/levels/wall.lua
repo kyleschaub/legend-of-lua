@@ -15,7 +15,7 @@ function spawnWall(x, y, width, height, name)
 
         -- an example of a name is 'breakRock1', where Rock tells us the sprite
         if name:find("Rock") then
-            wall.sprite = sprites.sword
+            wall.sprite = sprites.environment.breakableRock
         end
 
         function wall:onBreak()
@@ -43,7 +43,7 @@ function walls:draw()
     -- most walls are invisible colliders, but some have sprites
     for _,w in ipairs(walls) do
         if w.sprite then
-            love.graphics.draw(w.sprite, w:getX(), w:getY())
+            love.graphics.draw(w.sprite, w:getX(), w:getY(), nil, nil, nil, w.sprite:getWidth()/2, w.sprite:getHeight()/2)
         end
     end
 end
