@@ -18,6 +18,7 @@ function drawCamera()
         --gameMap:drawLayer(gameMap.layers["Test"])
     end
 
+    walls:draw()
     bombs:draw()
     player:draw()
     effects:draw()

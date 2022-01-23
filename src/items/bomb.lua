@@ -8,6 +8,7 @@ function spawnBomb()
     bomb.timer = 1
     bomb.smokeTimer = 0.03
     bomb.dead = false
+    bomb.explosionRadius = 16
 
     bomb.grid = anim8.newGrid(12, 12, sprites.items.bombSheet:getWidth(), sprites.items.bombSheet:getHeight())
     bomb.anim1 = anim8.newAnimation(bomb.grid(1, 1), 1)
@@ -25,6 +26,19 @@ function spawnBomb()
         bomb.x = bomb.x + 14
     end
 
+    function bomb:explode()
+        effects:spawn("explosion", self.x, self.y)
+        self.dead = true
+
+        -- Query for breakable walls
+        local walls = world:queryCircleArea(self.x, self.y, self.explosionRadius, {'Wall'})
+        for _,w in ipairs(walls) do
+            if w.breakable then
+                w.dead = true
+            end
+        end
+    end
+
     function bomb:update(dt)
         self.timer = self.timer - dt
         if self.timer < 0 then
@@ -33,8 +47,7 @@ function spawnBomb()
                 self.anim = self.anim2 -- start flashing
                 self.state = 1
             elseif self.state == 1 then
-                effects:spawn("explosion", self.x, self.y)
-                self.dead = true
+                self:explode()
             end
         end
         self.smokeTimer = self.smokeTimer - dt

@@ -82,3 +82,9 @@ function dirToInt(dir)
         return dir
     end
 end
+
+-- 'startswith' courtesy of StackOverflow
+-- https://stackoverflow.com/questions/22831701/lua-read-beginning-of-a-string
+string.startswith = function(self, str) 
+    return self:find('^' .. str) ~= nil
+end

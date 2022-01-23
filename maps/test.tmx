@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="17">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="18">
  <editorsettings>
   <export target="test.lua" format="lua"/>
  </editorsettings>
@@ -48,6 +48,7 @@
   <object id="13" x="256" y="240" width="16" height="16"/>
   <object id="15" x="400" y="32" width="48" height="16"/>
   <object id="16" x="64" y="128" width="16" height="16"/>
+  <object id="17" name="breakRock1" x="48" y="176" width="16" height="16"/>
  </objectgroup>
  <layer id="2" name="Objects" width="30" height="22">
   <data encoding="csv">
@@ -75,7 +76,7 @@
 686,687,686,687,686,687,686,687,686,687,686,687,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="4" name="Test" width="30" height="22">
+ <layer id="4" name="Test" width="30" height="22" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
