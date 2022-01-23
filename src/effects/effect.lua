@@ -47,8 +47,10 @@ function effects:spawn(type, x, y, args)
 
     if type == "fuseSmoke" then
         effect.rad = 1
-        effect.alpha = 0.3
+        effect.alpha = 0.2
         effect.timer = 0.75
+        effect.sprite = sprites.effects.fuseSmoke
+        effect.scaleX = 0.25
         
         -- Define the path that the smoke rises
         local vec = vector(0, -1)
@@ -62,13 +64,13 @@ function effects:spawn(type, x, y, args)
             local speed = 15
             self.x = self.x + (speed * self.vec.x * dt)
             self.y = self.y + (speed * self.vec.y * dt)
-            self.rad = self.rad + (3*dt)
-            self.alpha = self.timer / 0.75 * 0.3
+            self.scaleX = self.scaleX + (dt)
+            self.alpha = self.timer / 0.75 * 0.2
         end
 
         function effect:draw()
-            love.graphics.setColor(0.5, 0.5, 0.5, self.alpha)
-            love.graphics.circle("fill", self.x, self.y, self.rad)
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
     end
