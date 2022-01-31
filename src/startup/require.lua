@@ -16,7 +16,8 @@ function requireAll()
     require("src/effects/particles/particleEvent")
 
     require("src/items/bomb")
-
+    require("src/items/boomerang")
+    
     require("src/levels/loadMap")
     require("src/levels/wall")
 

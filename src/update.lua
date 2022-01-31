@@ -5,6 +5,7 @@ function updateAll(dt)
     walls:update(dt)
     effects:update(dt)
     bombs:update(dt)
+    boomerang:update(dt)
 
     cam:update(dt)
 

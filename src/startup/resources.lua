@@ -11,6 +11,7 @@ sprites.environment.breakableRock = love.graphics.newImage('sprites/environment/
 sprites.items = {}
 sprites.items.bomb = love.graphics.newImage('sprites/items/bomb.png')
 sprites.items.bombSheet = love.graphics.newImage('sprites/items/bombSheet.png')
+sprites.items.boomerang = love.graphics.newImage('sprites/items/boomerang.png')
 sprites.hud = {}
 sprites.hud.heart = love.graphics.newImage('sprites/ui/heart.png')
 sprites.hud.halfHeart = love.graphics.newImage('sprites/ui/heart-half.png')

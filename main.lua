@@ -63,4 +63,8 @@ function love.keypressed(key)
     if key == 'x' then
         player:useBomb()
     end
+
+    if key == 'c' then
+        boomerang:throw(player.dir)
+    end
 end
