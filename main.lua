@@ -36,7 +36,7 @@ function love.draw()
 end
 
 function love.keypressed(key)
-    if key == 'c' then
+    if key == 'q' then
         colliderToggle = not (colliderToggle and true);
     end
 
@@ -65,6 +65,6 @@ function love.keypressed(key)
     end
 
     if key == 'c' then
-        boomerang:throw(player.dir)
+        player:useBoomerang()
     end
 end

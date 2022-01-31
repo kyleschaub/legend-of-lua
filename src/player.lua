@@ -212,6 +212,11 @@ function player:useBomb()
     spawnBomb()
 end
 
+function player:useBoomerang()
+    player:useItem(0.2)
+    boomerang:throw(player.dir)
+end
+
 function player:resetAnimation(direction)
     player.anim = player.animations[direction]
     player.anim:gotoFrame(1)
