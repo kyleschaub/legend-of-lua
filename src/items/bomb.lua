@@ -12,7 +12,7 @@ function spawnBomb()
 
     bomb.grid = anim8.newGrid(12, 12, sprites.items.bombSheet:getWidth(), sprites.items.bombSheet:getHeight())
     bomb.anim1 = anim8.newAnimation(bomb.grid(1, 1), 1)
-    bomb.anim2 = anim8.newAnimation(bomb.grid('1-2', 1), 0.12)
+    bomb.anim2 = anim8.newAnimation(bomb.grid('1-2', 1), 0.13)
     bomb.anim = bomb.anim1
 
     -- put bomb in front of the player
