@@ -38,6 +38,13 @@ function spawnBomb()
                 w.dead = true
             end
         end
+
+        for _,b in ipairs(bombs) do
+            if distanceBetween(self.x, self.y, b.x, b.y) < (self.explosionRadius + 12) then
+                b.state = 1
+                b.timer = -1
+            end
+        end        
     end
 
     function bomb:update(dt)
