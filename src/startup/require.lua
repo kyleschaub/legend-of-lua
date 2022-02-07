@@ -24,6 +24,7 @@ function requireAll()
     require("src/ui/hud")
 
     require("src/utilities/cam")
+    require("src/utilities/shake")
     require("src/utilities/utils")
 
 end

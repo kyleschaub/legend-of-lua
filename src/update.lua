@@ -8,6 +8,7 @@ function updateAll(dt)
     boomerang:update(dt)
 
     cam:update(dt)
+    shake:update(dt)
 
     particles:update(dt)
     particleWorld:update(dt)

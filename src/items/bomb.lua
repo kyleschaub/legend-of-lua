@@ -28,6 +28,7 @@ function spawnBomb()
 
     function bomb:explode()
         effects:spawn("explosion", self.x, self.y)
+        shake:start(0.1, 1.5, 0.03)
         self.dead = true
 
         -- Query for breakable walls
