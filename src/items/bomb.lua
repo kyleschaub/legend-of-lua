@@ -5,7 +5,7 @@ function spawnBomb()
     bomb.x = player:getX()
     bomb.y = player:getY()
     bomb.state = 0 -- 0 is just placed, 1 is flashing
-    bomb.timer = 1
+    bomb.timer = 2
     bomb.smokeTimer = 0.03
     bomb.dead = false
     bomb.explosionRadius = 16
@@ -28,6 +28,7 @@ function spawnBomb()
 
     function bomb:explode()
         effects:spawn("explosion", self.x, self.y)
+        effects:spawn("scorch", self.x, self.y)
         shake:start(0.1, 1.5, 0.03)
         self.dead = true
 
@@ -42,7 +43,7 @@ function spawnBomb()
         for _,b in ipairs(bombs) do
             if distanceBetween(self.x, self.y, b.x, b.y) < (self.explosionRadius + 12) then
                 b.state = 1
-                b.timer = -1
+                b.timer = 0.1
             end
         end        
     end

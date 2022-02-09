@@ -18,11 +18,12 @@ function drawCamera()
         --gameMap:drawLayer(gameMap.layers["Test"])
     end
 
+    effects:draw(-1) -- two layers of effects
     walls:draw()
     bombs:draw()
     boomerang:draw()
     player:draw()
-    effects:draw()
+    effects:draw(1)
     particles:draw()
 
 end

@@ -9,6 +9,7 @@ function effects:spawn(type, x, y, args)
     effect.dead = false
     effect.scaleX = 1
     effect.scaleY = 1
+    effect.layer = 1
 
     if type == "slice" then
         effect.spriteSheet = sprites.effects.slice
@@ -43,6 +44,32 @@ function effects:spawn(type, x, y, args)
         effect.scaleY = 1.25
         effect.grid = anim8.newGrid(32, 32, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
         effect.anim = anim8.newAnimation(effect.grid('1-6', 1), 0.08, function() effect.dead = true end)
+    end
+
+    if type == "scorch" then
+        effect.sprite = sprites.effects.scorch
+        effect.width = 32
+        effect.height = 32
+        effect.scaleX = 0.6
+        effect.scaleY = 0.6
+        effect.alpha = 0
+        effect.timer = 2
+        effect.layer = -1
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX - (dt/10)
+            --self.alpha = self.timer / 2
+            self.alpha = self.alpha - dt/2
+            if self.alpha < -0.1 then
+                self.alpha = 0.8
+            end
+        end
+
+        function effect:draw()
+            love.graphics.setColor(0.2, 0.2, 0.2, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
     end
 
     if type == "fuseSmoke" then
@@ -104,13 +131,15 @@ function effects:update(dt)
     end
 end
 
-function effects:draw()
+function effects:draw(layer)
     for _,e in ipairs(effects) do
-        if e.anim then
-            e.anim:draw(e.spriteSheet, e.x, e.y, e.rot, e.scaleX, e.scaleY, e.width/2, e.height/2)
-        end
-        if e.draw then
-            e:draw()
+        if e.layer == layer then
+            if e.anim then
+                e.anim:draw(e.spriteSheet, e.x, e.y, e.rot, e.scaleX, e.scaleY, e.width/2, e.height/2)
+            end
+            if e.draw then
+                e:draw()
+            end
         end
     end
 end
