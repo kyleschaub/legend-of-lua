@@ -53,6 +53,7 @@ function boomerang:draw()
 end
 
 function boomerang:throw(dir)
+    if self.state > 0 then return end
     self.x = player:getX()
     self.y = player:getY()
     self.state = 1
