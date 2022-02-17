@@ -9,7 +9,7 @@ local function debrisInit(particle, x, y, args)
     particle.rot = math.random() * 3.14
     particle.rotSpeed = math.random() * 0.1 + 0.01
 
-    particle.timer = 1
+    particle.timer = 3
     particle.alpha = 1
 
     if args then
@@ -26,7 +26,7 @@ local function debrisInit(particle, x, y, args)
 
     function particle:update(dt)
         self.rot = self.rot + self.rotSpeed
-        self.alpha = self.alpha - dt
+        --self.alpha = self.alpha - dt
     end
 
     function particle:draw()
