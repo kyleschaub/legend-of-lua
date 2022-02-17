@@ -4,8 +4,11 @@ boomerang.y = 0
 boomerang.sprite = sprites.items.boomerang
 boomerang.rot = 0
 boomerang.dir = vector(0, 0)
-boomerang.speed = 140
+boomerang.speed = 250
+boomerang.baseSpeed = 250
 boomerang.timer = 0
+boomerang.accel = 340
+boomerang.rad = 6
 
 -- 0 = inactive
 -- 1 = flying away
@@ -17,19 +20,25 @@ function boomerang:update(dt)
 
     self.rot = self.rot + 20*dt
     
-    if self.timer > 0 then
-        self.timer = self.timer - dt
-    end
+    if self.state == 1 then
+        self.speed = self.speed - self.accel*dt
+        self.dir = self.dir:normalized() * self.speed
+        if self.speed < 0 then
+            self.speed = 1
+            self.state = 2
+        end
 
-    if self.timer < 0 then
-        self.timer = 0
-        self.state = 2
-    end
-
-    if self.state == 2 then
+        -- Query for walls
+        local walls = world:queryCircleArea(self.x, self.y, self.rad, {'Wall'})
+        if #walls > 0 then
+            self.state = 2
+        end
+    elseif self.state == 2 then
         self.dir = vector(player:getX() - self.x, player:getY() - self.y):normalized() * self.speed
+        self.speed = self.speed + self.accel*dt
         if distanceBetween(player:getX(), player:getY(), self.x, self.y) < 10 then
             self.state = 0
+            self.speed = self.baseSpeed
         end
     end
 
