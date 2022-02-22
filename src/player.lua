@@ -193,7 +193,7 @@ function player:swordDamage()
     -- Query for enemies to hit with the sword
     local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
     for _,e in ipairs(hitEnemies) do
-        e.parent.health = 0
+        e.parent.health = e.parent.health - 1
     end
 end
 

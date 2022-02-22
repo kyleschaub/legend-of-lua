@@ -2,8 +2,9 @@ local function eyeInit(enemy, x, y, args)
 
     enemy.physics = world:newBSGRectangleCollider(x, y, 12, 16, 3)
     enemy.physics:setCollisionClass('Enemy')
-    enemy.physics:setType('static')
     enemy.physics:setFixedRotation(true)
+    enemy.physics:setMass(1)
+    enemy.physics:setLinearDamping(1)
     enemy.physics.parent = enemy
 
     enemy.grid = anim8.newGrid(20, 20, sprites.enemies.eye:getWidth(), sprites.enemies.eye:getHeight())
@@ -11,7 +12,10 @@ local function eyeInit(enemy, x, y, args)
 
     enemy.health = 2
     enemy.speed = 0
-    enemy.maxSpeed = 70
+    enemy.maxSpeed = 120
+    enemy.magnitude = 150
+    enemy.dir = vector(0, 1)
+    enemy.viewDistance = 100
 
     function enemy:update(dt)
         self.anim:update(dt)
@@ -29,8 +33,17 @@ local function eyeInit(enemy, x, y, args)
             self.flyDir = self.flyDir * -1
         end]]
 
-        if enemy.floating then
+        --[[if enemy.floating then
             self.physics:setY(self.floatY)
+        end]]
+
+        local px, py = player:getPosition()
+        local ex, ey = self.physics:getPosition()
+        if distanceBetween(px, py, ex, ey) < self.viewDistance then
+            self.dir = vector(px - ex, py - ey):normalized() * self.magnitude
+            if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
+                self.physics:applyForce(self.dir:unpack())
+            end
         end
     end
 
