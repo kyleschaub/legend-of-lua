@@ -72,6 +72,24 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "eyeDeath" then
+        effect.sprite = sprites.enemies.eyeDead
+        effect.alpha = 1
+        effect.timer = 0.75
+        effect.layer = -1
+
+        function effect:update(dt)
+            self.alpha = self.alpha - dt*1.5
+        end
+
+        function effect:draw()
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, nil, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.draw(sprites.enemies.eyeShadow, self.x, self.y+7, nil, nil, nil, sprites.enemies.eyeShadow:getWidth()/2, sprites.enemies.eyeShadow:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
     if type == "fuseSmoke" then
         effect.rad = 1
         effect.alpha = 0.2

@@ -6,6 +6,8 @@ function updateAll(dt)
     effects:update(dt)
     bombs:update(dt)
     boomerang:update(dt)
+    enemies:update(dt)
+    enemies:destroyDead()
 
     cam:update(dt)
     shake:update(dt)

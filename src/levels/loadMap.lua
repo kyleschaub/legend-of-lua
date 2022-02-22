@@ -9,4 +9,10 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["Enemies"] then
+        for i, obj in pairs(gameMap.layers["Enemies"].objects) do
+            spawnEnemy(obj.x, obj.y, obj.name)
+        end
+    end
+
 end

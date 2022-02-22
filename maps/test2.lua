@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 5,
-  nextobjectid = 18,
+  nextlayerid = 6,
+  nextobjectid = 24,
   properties = {},
   tilesets = {
     {
@@ -94,6 +94,99 @@ return {
       parallaxy = 1,
       properties = {},
       objects = {}
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 5,
+      name = "Enemies",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 18,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 256,
+          y = 144,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 19,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 208,
+          y = 112,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 20,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 192,
+          y = 160,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 21,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 288,
+          y = 192,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 22,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 256,
+          y = 240,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 23,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 192,
+          y = 240,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "tilelayer",

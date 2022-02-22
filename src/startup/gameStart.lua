@@ -10,7 +10,7 @@ function gameStart()
 
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
-    setWindowSize(false, 1080, 720)
+    setWindowSize(false, 1920, 1080)
 
     -- The game's graphics scale up, this method finds the right ratio
     setScale()
@@ -58,7 +58,7 @@ function initGlobals()
 end
 
 function setScale(input)
-    scale = (6 / 1200) * windowHeight
+    scale = (8 / 1200) * windowHeight
 
     if input == "zone" then -- 12 tiles high
         scale = (6.25 / 1200) * windowHeight

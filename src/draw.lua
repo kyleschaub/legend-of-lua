@@ -23,6 +23,7 @@ function drawCamera()
     bombs:draw()
     boomerang:draw()
     player:draw()
+    enemies:draw()
     effects:draw(1)
     particles:draw()
 

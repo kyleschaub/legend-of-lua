@@ -93,6 +93,7 @@ function player:update(dt)
                 -- animTimer for finished sword swing stance
                 player.animTimer = 0.25
                 effects:spawn("slice", player:getX(), player:getY())
+                player:swordDamage()
             elseif player.state == 1.1 then
                 player.state = 0
                 player:resetAnimation(player.dir)
@@ -186,6 +187,14 @@ function player:swingSword()
     -- animTimer for sword wind-up
     player.animTimer = 0.1
 
+end
+
+function player:swordDamage()
+    -- Query for enemies to hit with the sword
+    local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
+    for _,e in ipairs(hitEnemies) do
+        e.parent.health = 0
+    end
 end
 
 function player:useItem(duration)
