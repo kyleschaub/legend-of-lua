@@ -8,6 +8,7 @@ function spawnEnemy(x, y, type, args)
     enemy.dead = false
     enemy.stamp = "enemy"
     enemy.health = 3
+    enemy.flashTimer = 0
 
     -- Function that sets the properties of the new enemy
     local init
@@ -19,9 +20,11 @@ function spawnEnemy(x, y, type, args)
 
     -- This update function is the same for all enemies, regardless of type
     function enemy:genericUpdate(dt)
-        if self.health <= 0 then
-            self.dead = true
-            self:die()
+        if self.flashTimer > 0 then
+            self.flashTimer = self.flashTimer - dt
+            if self.flashTimer < 0 then
+                self.flashTimer = 0
+            end
         end
     end
 

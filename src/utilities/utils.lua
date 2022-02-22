@@ -37,6 +37,10 @@ function distanceBetween(x1, y1, x2, y2)
     return math.sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
 end
 
+function getPlayerToSelfVector(x, y)
+    return vector(x - player:getX(), y - player:getY()):normalized()
+end
+
 function setWhite()
     love.graphics.setColor(1, 1, 1, 1)
 end
