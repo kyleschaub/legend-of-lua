@@ -15,19 +15,19 @@ local function eyeInit(enemy, x, y, args)
     enemy.health = 2
     enemy.speed = 0
     enemy.maxSpeed = 60
-    enemy.magnitude = 320
+    enemy.magnitude = 400
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
     if enemy.form == 2 then
         enemy.health = 3
         enemy.maxSpeed = 80
-        enemy.magnitude = 360
+        enemy.magnitude = 450
         enemy.sprite = sprites.enemies.eye2
     elseif enemy.form == 3 then
         enemy.health = 4
         enemy.maxSpeed = 100
-        enemy.magnitude = 400
+        enemy.magnitude = 500
         enemy.sprite = sprites.enemies.eye3
     end
 
@@ -70,7 +70,7 @@ local function eyeInit(enemy, x, y, args)
         local ex, ey = self.physics:getPosition()
         love.graphics.draw(sprites.enemies.eyeShadow, ex, ey+10, nil, nil, nil, sprites.enemies.eyeShadow:getWidth()/2, sprites.enemies.eyeShadow:getHeight()/2)
         if self.flashTimer > 0 then
-            love.graphics.setColor(0.75,0,0,1)
+            love.graphics.setColor(223/255,106/255,106/255,1)
         end
         self.anim:draw(self.sprite, ex, ey, nil, nil, nil, 10, 10)
         setWhite()

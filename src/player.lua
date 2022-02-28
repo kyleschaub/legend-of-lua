@@ -196,7 +196,7 @@ function player:swordDamage()
         e.parent.health = e.parent.health - 1
         e:applyLinearImpulse((getPlayerToSelfVector(e:getX(), e:getY())*300):unpack())
         e.parent.stunTimer = 0.2
-        e.parent.flashTimer = 0.1
+        e.parent.flashTimer = 0.15
     end
 end
 
