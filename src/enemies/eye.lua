@@ -17,7 +17,7 @@ local function eyeInit(enemy, x, y, args)
     enemy.maxSpeed = 60
     enemy.magnitude = 400
     enemy.dir = vector(0, 1)
-    enemy.viewDistance = 100
+    enemy.viewDistance = 1.00
 
     if enemy.form == 2 then
         enemy.health = 3
@@ -35,6 +35,22 @@ local function eyeInit(enemy, x, y, args)
 
     enemy.grid = anim8.newGrid(20, 20, enemy.sprite:getWidth(), enemy.sprite:getHeight())
     enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.3)
+
+    enemy.floatTime = 0.7
+    enemy.floatY = 0
+    enemy.floatMax = 1.5
+
+    function enemy:floatDown(dest)
+        self.tween = flux.to(self, self.floatTime, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatUp(self.floatMax) end)
+    end
+
+    function enemy:floatUp(dest, start)
+        local time = self.floatTime
+        if start then time = math.random() end
+        self.tween = flux.to(self, time, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatDown(self.floatMax*-1) end)
+    end
+
+    enemy:floatUp(enemy.floatMax, true)
 
     function enemy:update(dt)
         if self.stunTimer > 0 then
@@ -72,7 +88,7 @@ local function eyeInit(enemy, x, y, args)
         if self.flashTimer > 0 then
             love.graphics.setColor(223/255,106/255,106/255,1)
         end
-        self.anim:draw(self.sprite, ex, ey, nil, nil, nil, 10, 10)
+        self.anim:draw(self.sprite, ex, ey-self.floatY, nil, nil, nil, 10, 10)
         setWhite()
     end
 
