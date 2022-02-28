@@ -73,10 +73,16 @@ function effects:spawn(type, x, y, args)
     end
 
     if type == "eyeDeath" then
-        effect.sprite = sprites.enemies.eyeDead
+        effect.sprite = sprites.enemies.eyeDead1
         effect.alpha = 1
         effect.timer = 0.75
         effect.layer = -1
+
+        if args and args.form == 2 then
+            effect.sprite = sprites.enemies.eyeDead2
+        elseif args and args.form == 3 then
+            effect.sprite = sprites.enemies.eyeDead3
+        end
 
         function effect:update(dt)
             self.alpha = self.alpha - dt*1.5

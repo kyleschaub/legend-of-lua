@@ -119,7 +119,9 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["form"] = 2
+          }
         },
         {
           id = 24,
@@ -132,7 +134,9 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["form"] = 3
+          }
         }
       }
     },

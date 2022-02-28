@@ -35,9 +35,15 @@
  <objectgroup id="3" name="Walls"/>
  <objectgroup id="5" name="Enemies">
   <object id="18" name="eye" x="288" y="112">
+   <properties>
+    <property name="form" type="int" value="2"/>
+   </properties>
    <point/>
   </object>
   <object id="24" name="eye" x="192" y="160">
+   <properties>
+    <property name="form" type="int" value="3"/>
+   </properties>
    <point/>
   </object>
  </objectgroup>

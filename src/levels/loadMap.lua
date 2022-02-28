@@ -11,7 +11,9 @@ function loadMap(mapName, destX, destY)
 
     if gameMap.layers["Enemies"] then
         for i, obj in pairs(gameMap.layers["Enemies"].objects) do
-            spawnEnemy(obj.x, obj.y, obj.name)
+            local args = {}
+            if obj.properties.form then args.form = obj.properties.form end
+            spawnEnemy(obj.x, obj.y, obj.name, args)
         end
     end
 

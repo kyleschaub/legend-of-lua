@@ -6,17 +6,35 @@ local function eyeInit(enemy, x, y, args)
     enemy.physics:setLinearDamping(2)
     enemy.physics.parent = enemy
 
-    enemy.grid = anim8.newGrid(20, 20, sprites.enemies.eye:getWidth(), sprites.enemies.eye:getHeight())
-    enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.3)
+    enemy.form = 1
+    enemy.sprite = sprites.enemies.eye1
+    if args and args.form ~= nil then
+        enemy.form = args.form
+    end
 
-    enemy.health = 3
+    enemy.health = 2
     enemy.speed = 0
-    enemy.maxSpeed = 100
-    enemy.magnitude = 400
+    enemy.maxSpeed = 60
+    enemy.magnitude = 320
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
+    if enemy.form == 2 then
+        enemy.health = 3
+        enemy.maxSpeed = 80
+        enemy.magnitude = 360
+        enemy.sprite = sprites.enemies.eye2
+    elseif enemy.form == 3 then
+        enemy.health = 4
+        enemy.maxSpeed = 100
+        enemy.magnitude = 400
+        enemy.sprite = sprites.enemies.eye3
+    end
+
     enemy.stunTimer = 0
+
+    enemy.grid = anim8.newGrid(20, 20, enemy.sprite:getWidth(), enemy.sprite:getHeight())
+    enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.3)
 
     function enemy:update(dt)
         if self.stunTimer > 0 then
@@ -54,13 +72,15 @@ local function eyeInit(enemy, x, y, args)
         if self.flashTimer > 0 then
             love.graphics.setColor(0.75,0,0,1)
         end
-        self.anim:draw(sprites.enemies.eye, ex, ey, nil, nil, nil, 10, 10)
+        self.anim:draw(self.sprite, ex, ey, nil, nil, nil, 10, 10)
         setWhite()
     end
 
     function enemy:die()
         local ex, ey = self.physics:getPosition()
-        effects:spawn("eyeDeath", ex, ey+3)
+        local args = {}
+        args.form = self.form
+        effects:spawn("eyeDeath", ex, ey+3, args)
     end
 
     return enemy
