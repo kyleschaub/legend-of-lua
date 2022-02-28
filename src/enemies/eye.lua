@@ -1,19 +1,18 @@
 local function eyeInit(enemy, x, y, args)
-
     enemy.physics = world:newBSGRectangleCollider(x, y, 12, 16, 3)
     enemy.physics:setCollisionClass('Enemy')
     enemy.physics:setFixedRotation(true)
     enemy.physics:setMass(1)
-    enemy.physics:setLinearDamping(1)
+    enemy.physics:setLinearDamping(2)
     enemy.physics.parent = enemy
 
     enemy.grid = anim8.newGrid(20, 20, sprites.enemies.eye:getWidth(), sprites.enemies.eye:getHeight())
     enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.3)
 
-    enemy.health = 2
+    enemy.health = 3
     enemy.speed = 0
     enemy.maxSpeed = 100
-    enemy.magnitude = 300
+    enemy.magnitude = 400
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 

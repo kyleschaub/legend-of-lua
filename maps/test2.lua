@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 6,
-  nextobjectid = 24,
+  nextobjectid = 25,
   properties = {},
   tilesets = {
     {
@@ -113,8 +113,21 @@ return {
           name = "eye",
           type = "",
           shape = "point",
-          x = 256,
-          y = 144,
+          x = 288,
+          y = 112,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 24,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 192,
+          y = 160,
           width = 0,
           height = 0,
           rotation = 0,

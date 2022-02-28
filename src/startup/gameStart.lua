@@ -10,7 +10,7 @@ function gameStart()
 
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
-    setWindowSize(false, 1920, 1080)
+    setWindowSize(false, 1340, 1920)
 
     -- The game's graphics scale up, this method finds the right ratio
     setScale()
