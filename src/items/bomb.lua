@@ -40,6 +40,12 @@ function spawnBomb()
             end
         end
 
+        local hitEnemies = world:queryCircleArea(self.x, self.y, self.explosionRadius, {'Enemy'})
+        for _,e in ipairs(hitEnemies) do
+            local dir = getFromToVector(self.x, self.y, e:getX(), e:getY())
+            e.parent:hit(3, dir, 0.2)
+        end
+
         for _,b in ipairs(bombs) do
             if distanceBetween(self.x, self.y, b.x, b.y) < (self.explosionRadius + 12) then
                 b.state = 1

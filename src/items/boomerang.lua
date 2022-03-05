@@ -36,7 +36,7 @@ function boomerang:update(dt)
 
         local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
         for _,e in ipairs(hitEnemies) do
-            e.parent:hit(0, self.dir, 0.1, 2) -- 1 is damage, 300 is default sword knockback
+            e.parent:hit(0, self.dir, 0.1, 2)
         end
         if #hitEnemies > 0 then self.state = 2 end
     elseif self.state == 2 then

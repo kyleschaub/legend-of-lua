@@ -41,6 +41,10 @@ function getPlayerToSelfVector(x, y)
     return vector(x - player:getX(), y - player:getY()):normalized()
 end
 
+function getFromToVector(fromX, fromY, toX, toY)
+    return vector(toX - fromX, toY - fromY):normalized()
+end
+
 function setWhite()
     love.graphics.setColor(1, 1, 1, 1)
 end
