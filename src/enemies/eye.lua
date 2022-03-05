@@ -17,7 +17,7 @@ local function eyeInit(enemy, x, y, args)
     enemy.maxSpeed = 60
     enemy.magnitude = 400
     enemy.dir = vector(0, 1)
-    enemy.viewDistance = 1.00
+    enemy.viewDistance = 100
 
     if enemy.form == 2 then
         enemy.health = 3
@@ -32,6 +32,7 @@ local function eyeInit(enemy, x, y, args)
     end
 
     enemy.stunTimer = 0
+    enemy.dizzyTimer = 0
 
     enemy.grid = anim8.newGrid(20, 20, enemy.sprite:getWidth(), enemy.sprite:getHeight())
     enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.3)
@@ -50,6 +51,15 @@ local function eyeInit(enemy, x, y, args)
         self.tween = flux.to(self, time, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatDown(self.floatMax*-1) end)
     end
 
+    function enemy:hit(damage, dir, stun, dizziness)
+        self.health = self.health - damage
+        self.physics:applyLinearImpulse((dir:normalized()*300):unpack())
+        self.stunTimer = stun
+        self.flashTimer = 0.15
+        if damage == 0 then self.flashTimer = 0 end
+        self.dizzyTimer = dizziness or 0
+    end
+
     enemy:floatUp(enemy.floatMax, true)
 
     function enemy:update(dt)
@@ -61,7 +71,14 @@ local function eyeInit(enemy, x, y, args)
             self.physics:setLinearVelocity(0, 0)
         end
 
-        if self.stunTimer == 0 then
+        if self.dizzyTimer > 0 then
+            self.dizzyTimer = self.dizzyTimer - dt
+        end
+        if self.dizzyTimer < 0 then
+            self.dizzyTimer = 0
+        end
+
+        if self.stunTimer == 0 and self.dizzyTimer == 0 then
             self.anim:update(dt)
             local px, py = player:getPosition()
             local ex, ey = self.physics:getPosition()
@@ -88,7 +105,11 @@ local function eyeInit(enemy, x, y, args)
         if self.flashTimer > 0 then
             love.graphics.setColor(223/255,106/255,106/255,1)
         end
-        self.anim:draw(self.sprite, ex, ey-self.floatY, nil, nil, nil, 10, 10)
+        if self.dizzyTimer == 0 then
+            self.anim:draw(self.sprite, ex, ey-self.floatY, nil, nil, nil, 10, 10)
+        else
+            love.graphics.draw(sprites.enemies["eyeDead" .. self.form], ex, ey+3, nil, nil, nil, 10, 10)
+        end
         setWhite()
     end
 

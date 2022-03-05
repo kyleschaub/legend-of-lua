@@ -33,6 +33,12 @@ function boomerang:update(dt)
         if #walls > 0 then
             self.state = 2
         end
+
+        local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
+        for _,e in ipairs(hitEnemies) do
+            e.parent:hit(0, self.dir, 0.1, 2) -- 1 is damage, 300 is default sword knockback
+        end
+        if #hitEnemies > 0 then self.state = 2 end
     elseif self.state == 2 then
         self.dir = vector(player:getX() - self.x, player:getY() - self.y):normalized() * self.speed
         self.speed = self.speed + self.accel*dt

@@ -193,10 +193,8 @@ function player:swordDamage()
     -- Query for enemies to hit with the sword
     local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
     for _,e in ipairs(hitEnemies) do
-        e.parent.health = e.parent.health - 1
-        e:applyLinearImpulse((getPlayerToSelfVector(e:getX(), e:getY())*300):unpack())
-        e.parent.stunTimer = 0.2
-        e.parent.flashTimer = 0.15
+        local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
+        e.parent:hit(1, knockbackDir, 0.2)
     end
 end
 
