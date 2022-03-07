@@ -30,5 +30,5 @@ function drawCamera()
 end
 
 function drawAfterCamera()
-    --drawHUD()
+    drawHUD()
 end

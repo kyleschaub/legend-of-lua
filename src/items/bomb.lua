@@ -46,6 +46,11 @@ function spawnBomb()
             e.parent:hit(3, dir, 0.2)
         end
 
+        local hitPlayer = world:queryCircleArea(self.x, self.y, self.explosionRadius, {'Player'})
+        if #hitPlayer > 0 then
+            player:hurt(1, self.x, self.y)
+        end
+
         for _,b in ipairs(bombs) do
             if distanceBetween(self.x, self.y, b.x, b.y) < (self.explosionRadius + 12) then
                 b.state = 1

@@ -6,11 +6,13 @@ player.speed = 90
 player.animSpeed = 0.14
 player.walking = false
 player.animTimer = 0
-player.health = 3.5
+player.health = 4
+player.stunTimer = 0
 
 -- 0 = Normal gameplay
 -- 1 = Sword swing
 -- 2 = Use (bomb)
+-- 10 = Damage stun
 player.state = 0
 
 player:setCollisionClass("Player")
@@ -37,6 +39,17 @@ player.anim = player.animations.down
 player:setLinearVelocity(-100, 0)
 
 function player:update(dt)
+
+    if player.stunTimer > 0 then
+        player.stunTimer = player.stunTimer - dt
+    end
+    if player.stunTimer < 0 then
+        player.stunTimer = 0
+        if player.state == 10 then
+            player.state = 0
+            player:setLinearVelocity(0, 0)
+        end
+    end
 
     if player.state == 0 then
     
@@ -81,6 +94,8 @@ function player:update(dt)
             player.anim:update(dt)
         end
 
+        player:checkDamage()
+
     elseif player.state >= 1 and player.state < 2 then
 
         player:setLinearVelocity(0, 0)
@@ -115,6 +130,12 @@ function player:update(dt)
 end
 
 function player:draw()
+
+    if player.stunTimer > 0 then
+        love.graphics.setColor(223/255,106/255,106/255,1)
+    else
+        love.graphics.setColor(1,1,1,1)
+    end
 
     -- Sword sprite
     local swSpr = sprites.sword
@@ -164,6 +185,20 @@ function player:draw()
         love.graphics.draw(swSpr, px-3, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
+end
+
+function player:checkDamage()
+    if player:enter('Enemy') then
+        local e = player:getEnterCollisionData('Enemy')
+        player:hurt(0.5, e.collider:getX(), e.collider:getY())
+    end
+end
+
+function player:hurt(damage, srcX, srcY)
+    player.health = player.health - damage
+    player.state = 10 -- damaged
+    player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
+    player.stunTimer = 0.1
 end
 
 function player:swingSword()
