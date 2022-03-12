@@ -61,10 +61,13 @@ function love.keypressed(key)
     end
 
     if key == 'x' then
-        player:useBomb()
+        useItem()
     end
 
-    if key == 'c' then
-        player:useBoomerang()
+    if key == 'lctrl' then
+        data.item = data.item + 1
+        if data.item > 2 then
+            data.item = 1
+        end
     end
 end
