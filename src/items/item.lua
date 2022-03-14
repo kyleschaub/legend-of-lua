@@ -1,7 +1,7 @@
 function useItem()
-    if data.item == 1 then -- boomerang
+    if data.item == 1 then
         player:useBoomerang()
-    elseif data.item == 2 then -- bomb
+    elseif data.item == 2 then
         player:useBomb()
     end
 end

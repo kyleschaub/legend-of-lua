@@ -16,16 +16,30 @@ function drawHearts()
 end
 
 function drawItemBox()
-    local bx = 6
-    local by = 16*scale
+    -- Below the hearts
+    --local bx = 6
+    --local by = 16*scale
+
+    -- Upper-right
+    local bx = love.graphics.getWidth() - 19*scale
+    local by = 6
+
     love.graphics.setColor(0,0,0, 0.35)
     love.graphics.rectangle("fill", bx+1, by+1, 16*scale, 16*scale)
     setWhite()
     love.graphics.draw(sprites.hud.itemBox, bx, by, nil, scale)
 
+    local spr = sprites.items.boomerang
+    local offX = -1.5
+    local offY = -1.5
+    local scaleMod = 1.25
     if data.item == 1 then -- boomerang
-        love.graphics.draw(sprites.items.boomerang, bx, by, nil, scale)
+        spr = sprites.items.boomerang
     elseif data.item == 2 then -- bomb
-        love.graphics.draw(sprites.items.bomb, bx, by, nil, scale)
+        spr = sprites.items.bomb
+        offX = 2.3
+        offY = 2.8
+        scaleMod = 1.1
     end
+    love.graphics.draw(spr, bx + (offX * scale), by + (offY * scale), nil, scale * scaleMod)
 end
