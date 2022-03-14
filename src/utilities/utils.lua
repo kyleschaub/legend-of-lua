@@ -33,6 +33,23 @@ function getDirectionVector(direction)
 
 end
 
+-- Returns the rotation needed for a given direction
+function getRotationFromDir(direction)
+
+    if direction == "right" then
+        return 0
+    elseif direction == "left" then
+        return math.pi
+    elseif direction == "up" then
+        return math.pi/-2
+    elseif direction == "down" then
+        return math.pi/2
+    else
+        return 0
+    end
+
+end
+
 function distanceBetween(x1, y1, x2, y2)
     return math.sqrt( (x2 - x1)^2 + (y2 - y1)^2 )
 end

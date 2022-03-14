@@ -64,10 +64,20 @@ function love.keypressed(key)
         useItem()
     end
 
+    if key == 'c' then
+        spawnArrow(player.dir)
+    end
+
     if key == 'lctrl' then
         data.item = data.item + 1
-        if data.item > 2 then
+        if data.item > 3 then
             data.item = 1
         end
+    end
+end
+
+function love.keyreleased(key)
+    if key == 'x' and data.item == 3 then
+        useItem()
     end
 end
