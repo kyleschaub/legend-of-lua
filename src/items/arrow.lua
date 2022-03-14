@@ -39,6 +39,13 @@ function spawnArrow(dir)
         local walls = world:queryCircleArea(self.x, self.y, self.rad, {'Wall'})
         if #walls > 0 then self.dead = true end
 
+        -- Query for enemies
+        local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
+        for _,e in ipairs(hitEnemies) do
+            e.parent:hit(1, self.dirVec, 0.1)
+        end
+        if #hitEnemies > 0 then self.dead = true end
+
     end
 
     table.insert(arrows, arrow)
