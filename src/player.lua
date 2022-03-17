@@ -148,7 +148,7 @@ function player:draw()
     local swSpr = sprites.sword
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
-    if player.state == 3.1 then bowSpr = sprites.items.bow2 end
+    if player.state == 3.1 or data.arrowCount < 1 then bowSpr = sprites.items.bow2 end
 
     local px = player:getX()+1
     local py = player:getY()-5
