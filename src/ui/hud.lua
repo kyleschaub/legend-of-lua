@@ -40,6 +40,11 @@ function drawItemBox()
         offX = 2.3
         offY = 2.8
         scaleMod = 1.1
+    elseif data.item == 3 then -- bow
+        spr = sprites.items.bowIcon
+        offX = 4.2
+        offY = 2.3
+        scaleMod = 0.17
     end
     love.graphics.draw(spr, bx + (offX * scale), by + (offY * scale), nil, scale * scaleMod)
 end

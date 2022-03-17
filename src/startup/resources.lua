@@ -21,6 +21,7 @@ sprites.items = {}
 sprites.items.arrow = love.graphics.newImage('sprites/items/arrow.png')
 sprites.items.bow1 = love.graphics.newImage('sprites/items/bow1.png')
 sprites.items.bow2 = love.graphics.newImage('sprites/items/bow2.png')
+sprites.items.bowIcon = love.graphics.newImage('sprites/items/bowIcon.png')
 sprites.items.bomb = love.graphics.newImage('sprites/items/bomb.png')
 sprites.items.bombSheet = love.graphics.newImage('sprites/items/bombSheet.png')
 sprites.items.boomerang = love.graphics.newImage('sprites/items/boomerang.png')
