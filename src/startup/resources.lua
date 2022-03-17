@@ -25,6 +25,7 @@ sprites.items.bowIcon = love.graphics.newImage('sprites/items/bowIcon.png')
 sprites.items.bomb = love.graphics.newImage('sprites/items/bomb.png')
 sprites.items.bombSheet = love.graphics.newImage('sprites/items/bombSheet.png')
 sprites.items.boomerang = love.graphics.newImage('sprites/items/boomerang.png')
+sprites.items.lootShadow = love.graphics.newImage('sprites/items/lootShadow.png')
 sprites.hud = {}
 sprites.hud.heart = love.graphics.newImage('sprites/ui/heart.png')
 sprites.hud.halfHeart = love.graphics.newImage('sprites/ui/heart-half.png')

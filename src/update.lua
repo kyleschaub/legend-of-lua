@@ -7,6 +7,7 @@ function updateAll(dt)
     arrows:update(dt)
     bombs:update(dt)
     boomerang:update(dt)
+    loots:update(dt)
     enemies:update(dt)
     enemies:destroyDead()
 

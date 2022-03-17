@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="18">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="22">
  <editorsettings>
   <export target="test.lua" format="lua"/>
  </editorsettings>
@@ -49,6 +49,20 @@
   <object id="15" x="400" y="32" width="48" height="16"/>
   <object id="16" x="64" y="128" width="16" height="16"/>
   <object id="17" name="breakRock1" x="48" y="176" width="32" height="26"/>
+ </objectgroup>
+ <objectgroup id="5" name="Loot">
+  <object id="18" type="arrow" x="80" y="272">
+   <point/>
+  </object>
+  <object id="19" type="bomb" x="112" y="272">
+   <point/>
+  </object>
+  <object id="20" type="arrow" x="48" y="112">
+   <point/>
+  </object>
+  <object id="21" type="bomb" x="416" y="336">
+   <point/>
+  </object>
  </objectgroup>
  <layer id="2" name="Objects" width="30" height="22">
   <data encoding="csv">

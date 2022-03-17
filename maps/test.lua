@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 5,
-  nextobjectid = 18,
+  nextlayerid = 6,
+  nextobjectid = 22,
   properties = {},
   tilesets = {
     {
@@ -298,6 +298,73 @@ return {
           y = 176,
           width = 32,
           height = 26,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 5,
+      name = "Loot",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 18,
+          name = "",
+          type = "arrow",
+          shape = "point",
+          x = 80,
+          y = 272,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 19,
+          name = "",
+          type = "bomb",
+          shape = "point",
+          x = 112,
+          y = 272,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 20,
+          name = "",
+          type = "arrow",
+          shape = "point",
+          x = 48,
+          y = 112,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 21,
+          name = "",
+          type = "bomb",
+          shape = "point",
+          x = 416,
+          y = 336,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
           properties = {}

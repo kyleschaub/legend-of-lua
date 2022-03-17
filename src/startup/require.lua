@@ -18,6 +18,7 @@ function requireAll()
     require("src/enemies/enemy")
 
     require("src/items/item")
+    require("src/items/loot")
     require("src/items/arrow")
     require("src/items/bomb")
     require("src/items/boomerang")
