@@ -1,6 +1,12 @@
 arrows = {}
 
 function spawnArrow(dir)
+    if data.arrowCount < 1 then
+        return
+    end
+    
+    data.arrowCount = data.arrowCount - 1
+
     local arrow = {}
     arrow.x = player:getX()
     arrow.y = player:getY()

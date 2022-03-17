@@ -1,6 +1,12 @@
 bombs = {}
 
 function spawnBomb()
+    if data.bombCount < 1 then
+        return
+    end
+    
+    data.bombCount = data.bombCount - 1
+
     local bomb = {}
     bomb.x = player:getX()
     bomb.y = player:getY()

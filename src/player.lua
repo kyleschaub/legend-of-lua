@@ -181,7 +181,7 @@ function player:draw()
     -- Bow 'up'
     if player.dir == "up" and (player.state == 3 or player.state == 3.1) then
         --love.graphics.draw(bowSpr, px-2, py-1, math.pi/-2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 then love.graphics.draw(arrowSpr, px-1, py-3, math.pi/-2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px-1, py-3, math.pi/-2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
     player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, nil, nil, 8, 12)
@@ -204,19 +204,19 @@ function player:draw()
     -- Bow 'right'
     if player.dir == "right" and (player.state == 3 or player.state == 3.1) then
         love.graphics.draw(bowSpr, px+5.5, py+6.5, nil, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 then love.graphics.draw(arrowSpr, px+2.5, py+6.5, nil, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px+2.5, py+6.5, nil, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
     -- Bow 'left'
     if player.dir == "left" and (player.state == 3 or player.state == 3.1) then
         love.graphics.draw(bowSpr, px-7.5, py+6.5, nil, -1, 1, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 then love.graphics.draw(arrowSpr, px-4.5, py+6.5, nil, -1, 1, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px-4.5, py+6.5, nil, -1, 1, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
     -- Bow 'down'
     if player.dir == "down" and (player.state == 3 or player.state == 3.1) then
         love.graphics.draw(bowSpr, px, py+10.5, math.pi/2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
 end
