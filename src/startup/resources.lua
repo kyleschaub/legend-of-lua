@@ -30,8 +30,10 @@ sprites.hud.heart = love.graphics.newImage('sprites/ui/heart.png')
 sprites.hud.halfHeart = love.graphics.newImage('sprites/ui/heart-half.png')
 sprites.hud.emptyHeart = love.graphics.newImage('sprites/ui/heart-empty.png')
 sprites.hud.itemBox = love.graphics.newImage('sprites/ui/itemBox.png')
+sprites.hud.ammoBox = love.graphics.newImage('sprites/ui/ammoBox.png')
 
 fonts = {}
 fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 20*scale)
+fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
 
 sounds = {}

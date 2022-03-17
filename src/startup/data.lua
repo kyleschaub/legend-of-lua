@@ -13,4 +13,8 @@ function createNewSave()
     -- 2 = bomb
     -- 3 = bow
     data.item = 1
+
+    -- keep track of certain stackable items
+    data.arrowCount = 25
+    data.bombCount = 10
 end

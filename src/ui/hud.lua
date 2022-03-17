@@ -29,6 +29,24 @@ function drawItemBox()
     setWhite()
     love.graphics.draw(sprites.hud.itemBox, bx, by, nil, scale)
 
+    local ammoCount = -1
+    if data.item == 2 then
+        ammoCount = data.bombCount
+    elseif data.item == 3 then
+        ammoCount = data.arrowCount
+    end
+    
+    if ammoCount > -1 then
+        love.graphics.setColor(0,0,0, 0.35)
+        love.graphics.rectangle("fill", bx+(3*scale), by+(20*scale), 11*scale, 7*scale)
+        setWhite()
+        love.graphics.draw(sprites.hud.ammoBox, bx+(2.5*scale), by+(19*scale), nil, scale)
+
+        love.graphics.setFont(fonts.ammo)
+        love.graphics.printf(ammoCount, bx+(4.5*scale), by+(20*scale), 9.5*scale, "center")
+        --love.graphics.print(ammoCount, bx+(3*scale), by+(20*scale))
+    end
+
     local spr = sprites.items.boomerang
     local offX = -1.5
     local offY = -1.5
