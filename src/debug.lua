@@ -37,4 +37,14 @@ function debug:playerPosition()
 
 end
 
+function debug:ammoCount()
+    love.graphics.setColor(0, 0, 0, 0.7)
+    love.graphics.rectangle("fill", 16, 16, love.graphics:getWidth()-32, 240)
+
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(fonts.debug)
+    love.graphics.print("bombCount: " .. data.bombCount, 50, 32)
+
+end
+
 return debug
