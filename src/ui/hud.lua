@@ -1,6 +1,6 @@
 function drawHUD()
-    --drawHearts()
-    --drawItemBox()
+    drawHearts()
+    drawItemBox()
 end
 
 function drawHearts()

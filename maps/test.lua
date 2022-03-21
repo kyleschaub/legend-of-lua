@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 6,
-  nextobjectid = 22,
+  nextlayerid = 7,
+  nextobjectid = 24,
   properties = {},
   tilesets = {
     {
@@ -368,6 +368,49 @@ return {
           rotation = 0,
           visible = true,
           properties = {}
+        },
+        {
+          id = 22,
+          name = "",
+          type = "heart",
+          shape = "point",
+          x = 288,
+          y = 176,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 6,
+      name = "Enemies",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 23,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 448,
+          y = 96,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
         }
       }
     },

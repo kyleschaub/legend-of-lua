@@ -1,4 +1,5 @@
 function love.load()
+    math.randomseed(os.time())
 
     d1 = 0
     d2 = 0
@@ -8,7 +9,7 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test2")
+    loadMap("test")
 
     dj.volume("effect", 1)
 
@@ -32,7 +33,7 @@ function love.draw()
     drawAfterCamera()
 
     --local debug = require "src/debug"
-    --debug:ammoCount()
+    --debug:d()
 end
 
 function love.keypressed(key)
@@ -65,7 +66,7 @@ function love.keypressed(key)
     end
 
     if key == 'c' then
-        spawnArrow(player.dir)
+        spawnLoot(player:getX() + 16, player:getY(), "heart", true)
     end
 
     if key == 'lctrl' then

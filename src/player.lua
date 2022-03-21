@@ -6,7 +6,7 @@ player.speed = 90
 player.animSpeed = 0.14
 player.walking = false
 player.animTimer = 0
-player.health = 4
+player.health = 3.5
 player.stunTimer = 0
 player.bowRecoveryTime = 0.3
 

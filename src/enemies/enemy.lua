@@ -71,3 +71,24 @@ function enemies:destroyDead()
         i = i - 1
     end
 end
+
+function spawnEnemyLoot(x, y)
+    -- TODO: this code is not good, make a proper loot-rolling system
+    if math.random() > 0.5 then
+        --return -- 50/50 no loot
+    end
+    local lootType = "arrow"
+    local randCheck = math.random()
+    if player.health < data.maxHealth then
+        if randCheck < 0.33 then
+            lootType = "heart"
+        elseif randCheck < 0.66 then
+            lootType = "bomb"
+        end
+    else
+        if randCheck < 0.5 then
+            lootType = "bomb"
+        end
+    end
+    spawnLoot(x, y, lootType, true)
+end

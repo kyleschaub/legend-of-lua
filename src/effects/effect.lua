@@ -10,6 +10,7 @@ function effects:spawn(type, x, y, args)
     effect.scaleX = 1
     effect.scaleY = 1
     effect.layer = 1
+    effect.type = type
 
     if type == "slice" then
         effect.spriteSheet = sprites.effects.slice
@@ -139,6 +140,9 @@ function effects:update(dt)
             e.timer = e.timer - dt
             if e.timer < 0 then
                 e.dead = true
+                if e.type == "eyeDeath" then
+                    spawnEnemyLoot(e.x, e.y)
+                end
             end
         end
         if e.update then
