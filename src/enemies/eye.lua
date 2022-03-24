@@ -7,7 +7,8 @@ local function eyeInit(enemy, x, y, args)
     enemy.physics.parent = enemy
 
     enemy.form = 1
-    enemy.sprite = sprites.enemies.eye1
+    enemy.sprite = sprites.enemies.eyeBody
+    enemy.iris = sprites.enemies.iris1
     if args and args.form ~= nil then
         enemy.form = args.form
     end
@@ -23,12 +24,12 @@ local function eyeInit(enemy, x, y, args)
         enemy.health = 3
         enemy.maxSpeed = 80
         enemy.magnitude = 450
-        enemy.sprite = sprites.enemies.eye2
+        --enemy.iris = sprites.enemies.iris2
     elseif enemy.form == 3 then
         enemy.health = 4
         enemy.maxSpeed = 100
         enemy.magnitude = 500
-        enemy.sprite = sprites.enemies.eye3
+        --enemy.iris = sprites.enemies.iris3
     end
 
     enemy.stunTimer = 0
@@ -106,7 +107,11 @@ local function eyeInit(enemy, x, y, args)
             love.graphics.setColor(223/255,106/255,106/255,1)
         end
         if self.dizzyTimer == 0 then
+            local irisOffset = getFromToVector(ex, ey, player:getX(), player:getY()) * 1.2
+            local irisX, irisY = irisOffset:unpack()
+
             self.anim:draw(self.sprite, ex, ey-self.floatY, nil, nil, nil, 10, 10)
+            love.graphics.draw(self.iris, ex + irisX, ey-self.floatY-1.5+irisY, nil, nil, nil, self.iris:getWidth()/2, self.iris:getHeight()/2)
         else
             love.graphics.draw(sprites.enemies["eyeDead" .. self.form], ex, ey+3, nil, nil, nil, 10, 10)
         end
