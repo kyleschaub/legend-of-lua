@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="24">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="40">
  <editorsettings>
   <export target="test.lua" format="lua"/>
  </editorsettings>
@@ -64,6 +64,48 @@
    <point/>
   </object>
   <object id="22" type="heart" x="288" y="176">
+   <point/>
+  </object>
+  <object id="24" type="arrow" x="112" y="176">
+   <point/>
+  </object>
+  <object id="25" type="arrow" x="128" y="176">
+   <point/>
+  </object>
+  <object id="26" type="arrow" x="144" y="176">
+   <point/>
+  </object>
+  <object id="27" type="arrow" x="160" y="176">
+   <point/>
+  </object>
+  <object id="28" type="arrow" x="176" y="176">
+   <point/>
+  </object>
+  <object id="29" type="arrow" x="192" y="176">
+   <point/>
+  </object>
+  <object id="30" type="arrow" x="208" y="176">
+   <point/>
+  </object>
+  <object id="31" type="bomb" x="112" y="192">
+   <point/>
+  </object>
+  <object id="32" type="bomb" x="128" y="192">
+   <point/>
+  </object>
+  <object id="34" type="bomb" x="144" y="192">
+   <point/>
+  </object>
+  <object id="35" type="bomb" x="160" y="192">
+   <point/>
+  </object>
+  <object id="37" type="bomb" x="176" y="192">
+   <point/>
+  </object>
+  <object id="38" type="bomb" x="192" y="192">
+   <point/>
+  </object>
+  <object id="39" type="bomb" x="208" y="192">
    <point/>
   </object>
  </objectgroup>

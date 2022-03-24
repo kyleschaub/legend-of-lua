@@ -36,8 +36,10 @@ function spawnLoot(x, y, type, bounce)
             self.dead = true
             if self.type == "arrow" then
                 data.arrowCount = data.arrowCount + 1
+                if data.arrowCount > data.maxArrowCount then data.arrowCount = data.maxArrowCount end
             elseif self.type == "bomb" then
                 data.bombCount = data.bombCount + 1
+                if data.bombCount > data.maxBombCount then data.bombCount = data.maxBombCount end
             elseif self.type == "heart" then
                 player.health = player.health + 1
                 if player.health > data.maxHealth then player.health = data.maxHealth end

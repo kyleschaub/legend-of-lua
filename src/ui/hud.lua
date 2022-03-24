@@ -30,10 +30,17 @@ function drawItemBox()
     love.graphics.draw(sprites.hud.itemBox, bx, by, nil, scale)
 
     local ammoCount = -1
+    local maxed = false
     if data.item == 2 then
         ammoCount = data.bombCount
+        if data.bombCount == data.maxBombCount then
+            maxed = true
+        end
     elseif data.item == 3 then
         ammoCount = data.arrowCount
+        if data.arrowCount == data.maxArrowCount then
+            maxed = true
+        end
     end
     
     if ammoCount > -1 then
@@ -43,8 +50,10 @@ function drawItemBox()
         love.graphics.draw(sprites.hud.ammoBox, bx+(2.5*scale), by+(19*scale), nil, scale)
 
         love.graphics.setFont(fonts.ammo)
+        if maxed then love.graphics.setColor(0,1,0,1) end
         love.graphics.printf(ammoCount, bx+(4.5*scale), by+(20*scale), 9.5*scale, "center")
         --love.graphics.print(ammoCount, bx+(3*scale), by+(20*scale))
+        setWhite()
     end
 
     local spr = sprites.items.boomerang

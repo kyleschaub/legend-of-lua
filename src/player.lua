@@ -8,6 +8,7 @@ player.walking = false
 player.animTimer = 0
 player.health = 3.5
 player.stunTimer = 0
+player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
 
 -- 0 = Normal gameplay
@@ -51,6 +52,9 @@ function player:update(dt)
             player.state = 0
             player:setLinearVelocity(0, 0)
         end
+    end
+    if player.invincible > 0 then
+        player.invincible = player.invincible - dt
     end
 
     if player.state == 0 then
@@ -229,10 +233,12 @@ function player:checkDamage()
 end
 
 function player:hurt(damage, srcX, srcY)
+    if player.invincible > 0 then return end
+    --player.invincible = 1 TODO: uncomment to enable invincibility frames
     player.health = player.health - damage
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
-    player.stunTimer = 0.1
+    player.stunTimer = 0.075
 end
 
 function player:swingSword()

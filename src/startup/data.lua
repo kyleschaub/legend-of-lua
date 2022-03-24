@@ -16,5 +16,7 @@ function createNewSave()
 
     -- keep track of certain stackable items
     data.arrowCount = 25
-    data.bombCount = 12
+    data.maxArrowCount = 30
+    data.bombCount = 18
+    data.maxBombCount = 20
 end
