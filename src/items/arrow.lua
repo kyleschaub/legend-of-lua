@@ -38,6 +38,8 @@ function spawnArrow(dir)
             self.dead = true
         end
 
+        effects:spawn("arrowTrail", self.x, self.y, self.dir)
+
         self.x = self.x + (self.dirVec.x * self.speed * dt)
         self.y = self.y + (self.dirVec.y * self.speed * dt)
 

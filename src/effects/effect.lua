@@ -73,6 +73,29 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "arrowTrail" then
+        effect.width = 6
+        effect.height = 3
+        effect.alpha = 0.2
+        effect.timer = 0.6
+        effect.layer = -1
+
+        if args == "up" or args == "down" then
+            effect.width = 3
+            effect.height = 6
+        end
+
+        function effect:update(dt)
+            self.alpha = self.alpha - dt
+        end
+
+        function effect:draw()
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.rectangle("fill", self.x-(self.width/2), self.y-(self.height/2), self.width, self.height)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
     if type == "eyeDeath" then
         effect.sprite = sprites.enemies.eyeDead1
         effect.alpha = 1
