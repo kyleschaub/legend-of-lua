@@ -10,12 +10,14 @@ player.health = 3.5
 player.stunTimer = 0
 player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
+player.holdSprite = sprites.items.heart
 
 -- 0 = Normal gameplay
 -- 1 = Sword swing
 -- 2 = Use (bomb)
 -- 3 = Bow (3: bow drawn, 3.1: recover)
 -- 10 = Damage stun
+-- 11 = Hold item
 player.state = 0
 
 player:setCollisionClass("Player")
@@ -36,6 +38,7 @@ player.animations.useDown = anim8.newAnimation(player.grid(3, 5), player.animSpe
 player.animations.useUp = anim8.newAnimation(player.grid(3, 6), player.animSpeed)
 player.animations.useRight = anim8.newAnimation(player.grid(3, 7), player.animSpeed)
 player.animations.useLeft = anim8.newAnimation(player.grid(3, 8), player.animSpeed)
+player.animations.hold = anim8.newAnimation(player.grid(1, 9), player.animSpeed)
 
 player.anim = player.animations.down
 
@@ -136,6 +139,15 @@ function player:update(dt)
         -- while drawing the bow back, always 'use' the item
         player:useItem(player.bowRecoveryTime)
 
+    elseif player.state == 11 then -- got an item
+
+        player.animTimer = player.animTimer - dt
+
+        if player.animTimer < 0 then
+            player.state = 0
+            player:resetAnimation(player.dir)
+        end
+
     end
 
 end
@@ -221,6 +233,10 @@ function player:draw()
     if player.dir == "down" and (player.state == 3 or player.state == 3.1) then
         love.graphics.draw(bowSpr, px, py+10.5, math.pi/2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+    end
+
+    if player.state == 11 then
+        love.graphics.draw(player.holdSprite, player:getX(), player:getY()-18, nil, nil, nil, player.holdSprite:getWidth()/2, player.holdSprite:getHeight()/2)
     end
 
 end
@@ -318,4 +334,13 @@ end
 function player:resetAnimation(direction)
     player.anim = player.animations[direction]
     player.anim:gotoFrame(1)
+end
+
+function player:gotItem(spr)
+    player.holdSprite = spr
+    player.state = 11
+    player.animTimer = 1
+    player.dir = "down"
+    player.anim = player.animations.hold
+    player:setLinearVelocity(0, 0)
 end

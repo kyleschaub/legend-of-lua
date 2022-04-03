@@ -53,6 +53,10 @@ function spawnLoot(x, y, type, bounce, price)
                 player.health = player.health + 1
                 if player.health > data.maxHealth then player.health = data.maxHealth end
             end
+
+            if self.price > 0 then
+                player:gotItem(self.spr)
+            end
         end
     end
 
