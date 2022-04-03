@@ -37,6 +37,8 @@ sprites.hud.halfHeart = love.graphics.newImage('sprites/ui/heart-half.png')
 sprites.hud.emptyHeart = love.graphics.newImage('sprites/ui/heart-empty.png')
 sprites.hud.itemBox = love.graphics.newImage('sprites/ui/itemBox.png')
 sprites.hud.ammoBox = love.graphics.newImage('sprites/ui/ammoBox.png')
+sprites.npc = {}
+sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 
 fonts = {}
 fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)

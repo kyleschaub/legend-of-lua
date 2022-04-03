@@ -24,6 +24,7 @@ function requireAll()
     require("src/items/boomerang")
     
     require("src/levels/loadMap")
+    require("src/levels/npc")
     require("src/levels/wall")
 
     require("src/ui/hud")

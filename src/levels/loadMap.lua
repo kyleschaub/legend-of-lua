@@ -23,4 +23,10 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["NPC"] then
+        for i, obj in pairs(gameMap.layers["NPC"].objects) do
+            spawnNPC(obj.name, obj.x, obj.y)
+        end
+    end
+
 end

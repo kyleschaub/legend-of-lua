@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 7,
-  nextobjectid = 49,
+  nextlayerid = 8,
+  nextobjectid = 50,
   properties = {},
   tilesets = {
     {
@@ -134,19 +134,6 @@ return {
           properties = {}
         },
         {
-          id = 42,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 176,
-          y = 240,
-          width = 128,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 43,
           name = "",
           type = "",
@@ -253,6 +240,34 @@ return {
       parallaxy = 1,
       properties = {},
       objects = {}
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 7,
+      name = "NPC",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 49,
+          name = "merchant",
+          type = "",
+          shape = "point",
+          x = 240,
+          y = 128,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "tilelayer",
