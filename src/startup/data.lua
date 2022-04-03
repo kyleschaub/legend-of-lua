@@ -6,6 +6,7 @@ function createNewSave()
     data.playerX = 0 -- player's X position
     data.playerY = 0 -- player's Y position
     data.maxHealth = 4 -- maximum number of hearts
+    data.money = 0 -- amount of currency
 
     -- equipped (secondary) item
     -- 0 = nothing

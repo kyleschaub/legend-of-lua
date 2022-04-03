@@ -9,12 +9,16 @@ function spawnLoot(x, y, type, bounce)
     loot.dead = false
     loot.bouncing = false
     loot.bounceY = 0 -- used for bounce animation when spawned
+    loot.shadowSpr = sprites.items.lootShadow
 
     if loot.type == "arrow" then
         loot.spr = sprites.items.arrow
         loot.rot = math.pi/-2
     elseif loot.type == "bomb" then
         loot.spr = sprites.items.bomb
+    elseif loot.type == "coin" then
+        loot.spr = sprites.items.coin
+        loot.shadowSpr = sprites.items.lootShadow2
     elseif loot.type == "heart" then
         loot.spr = sprites.items.heart
         --[[
@@ -40,6 +44,8 @@ function spawnLoot(x, y, type, bounce)
             elseif self.type == "bomb" then
                 data.bombCount = data.bombCount + 1
                 if data.bombCount > data.maxBombCount then data.bombCount = data.maxBombCount end
+            elseif self.type == "coin" then
+                data.money = data.money + 1
             elseif self.type == "heart" then
                 player.health = player.health + 1
                 if player.health > data.maxHealth then player.health = data.maxHealth end
@@ -49,9 +55,10 @@ function spawnLoot(x, y, type, bounce)
 
     function loot:draw()
         setWhite()
-        love.graphics.draw(sprites.items.lootShadow, self.x, self.y+4.5, nil, nil, nil, sprites.items.lootShadow:getWidth()/2, sprites.items.lootShadow:getHeight()/2)
+        love.graphics.draw(self.shadowSpr, self.x, self.y+4.5, nil, nil, nil, self.shadowSpr:getWidth()/2, self.shadowSpr:getHeight()/2)
         local offY = 0
         if self.type == "arrow" then offY = -2 end
+        if self.type == "coin" then offY = 2 end
         if self.anim then
             self.anim:draw(self.spr, self.x, self.y + offY + self.bounceY, nil, nil, nil, self.frameW/2, self.frameH/2)
         else
