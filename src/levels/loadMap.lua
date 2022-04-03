@@ -19,7 +19,7 @@ function loadMap(mapName, destX, destY)
 
     if gameMap.layers["Loot"] then
         for i, obj in pairs(gameMap.layers["Loot"].objects) do
-            spawnLoot(obj.x, obj.y, obj.type)
+            spawnLoot(obj.x, obj.y, obj.type, false, obj.properties.price)
         end
     end
 

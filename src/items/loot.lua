@@ -1,6 +1,6 @@
 loots = {}
 
-function spawnLoot(x, y, type, bounce)
+function spawnLoot(x, y, type, bounce, price)
     local loot = {}
     loot.x = x
     loot.y = y
@@ -10,6 +10,9 @@ function spawnLoot(x, y, type, bounce)
     loot.bouncing = false
     loot.bounceY = 0 -- used for bounce animation when spawned
     loot.shadowSpr = sprites.items.lootShadow
+    loot.shop = shop
+    loot.price = 0
+    if price and price > 0 then loot.price = price end
 
     if loot.type == "arrow" then
         loot.spr = sprites.items.arrow
@@ -55,14 +58,21 @@ function spawnLoot(x, y, type, bounce)
 
     function loot:draw()
         setWhite()
+
         love.graphics.draw(self.shadowSpr, self.x, self.y+4.5, nil, nil, nil, self.shadowSpr:getWidth()/2, self.shadowSpr:getHeight()/2)
         local offY = 0
         if self.type == "arrow" then offY = -2 end
         if self.type == "coin" then offY = 2 end
+
         if self.anim then
             self.anim:draw(self.spr, self.x, self.y + offY + self.bounceY, nil, nil, nil, self.frameW/2, self.frameH/2)
         else
             love.graphics.draw(self.spr, self.x, self.y + offY + self.bounceY, self.rot, nil, nil, self.spr:getWidth()/2, self.spr:getHeight()/2)
+        end
+
+        if self.price > 0 then
+            love.graphics.setFont(fonts.shop)
+            love.graphics.printf(self.price, self.x-10, self.y+5, 20, "center")
         end
     end
 

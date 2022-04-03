@@ -43,5 +43,6 @@ sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 fonts = {}
 fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
 fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
+fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 1*scale)
 
 sounds = {}

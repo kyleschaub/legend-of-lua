@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 8,
-  nextobjectid = 50,
+  nextobjectid = 52,
   properties = {},
   tilesets = {
     {
@@ -225,7 +225,36 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 50,
+          name = "",
+          type = "heart",
+          shape = "point",
+          x = 208,
+          y = 160,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["price"] = 20
+          }
+        },
+        {
+          id = 51,
+          name = "",
+          type = "bomb",
+          shape = "point",
+          x = 272,
+          y = 160,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
