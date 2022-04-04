@@ -1,6 +1,7 @@
 sprites = {}
 sprites.playerSheet = love.graphics.newImage('sprites/playerSheet.png')
 sprites.sword = love.graphics.newImage('sprites/sword.png')
+sprites.sword2 = love.graphics.newImage('sprites/sword2.png')
 sprites.effects = {}
 sprites.effects.slice = love.graphics.newImage('sprites/effects/slice.png')
 sprites.effects.explosion = love.graphics.newImage('sprites/effects/explosion.png')
@@ -29,6 +30,8 @@ sprites.items.bombSheet = love.graphics.newImage('sprites/items/bombSheet.png')
 sprites.items.boomerang = love.graphics.newImage('sprites/items/boomerang.png')
 sprites.items.coin = love.graphics.newImage('sprites/items/coin.png')
 sprites.items.heart = love.graphics.newImage('sprites/items/heart.png')
+sprites.items.container = love.graphics.newImage('sprites/items/container.png')
+sprites.items.quiver = love.graphics.newImage('sprites/items/quiver.png')
 sprites.items.lootShadow = love.graphics.newImage('sprites/items/lootShadow.png')
 sprites.items.lootShadow2 = love.graphics.newImage('sprites/items/lootShadow2.png')
 sprites.hud = {}
@@ -43,6 +46,6 @@ sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 fonts = {}
 fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
 fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
-fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 1*scale)
+fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
 
 sounds = {}

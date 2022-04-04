@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 8,
-  nextobjectid = 52,
+  nextobjectid = 53,
   properties = {},
   tilesets = {
     {
@@ -229,7 +229,7 @@ return {
         {
           id = 50,
           name = "",
-          type = "heart",
+          type = "container",
           shape = "point",
           x = 208,
           y = 160,
@@ -238,13 +238,13 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["price"] = 20
+            ["price"] = 50
           }
         },
         {
           id = 51,
           name = "",
-          type = "bomb",
+          type = "quiver",
           shape = "point",
           x = 272,
           y = 160,
@@ -252,7 +252,24 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["price"] = 30
+          }
+        },
+        {
+          id = 52,
+          name = "",
+          type = "sword2",
+          shape = "point",
+          x = 240,
+          y = 160,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["price"] = 75
+          }
         }
       }
     },

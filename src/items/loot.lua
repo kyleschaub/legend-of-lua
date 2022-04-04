@@ -31,6 +31,13 @@ function spawnLoot(x, y, type, bounce, price)
         loot.grid = anim8.newGrid(loot.frameW, loot.frameH, loot.spr:getWidth(), loot.spr:getHeight())
         loot.anim = anim8.newAnimation(loot.grid('1-4', 1), 0.18)
         ]]
+    elseif loot.type == "sword2" then
+        loot.spr = sprites.sword2
+        loot.rot = math.pi/-2
+    elseif loot.type == "container" then
+        loot.spr = sprites.items.container
+    elseif loot.type == "quiver" then
+        loot.spr = sprites.items.quiver
     else
         return -- invalid spawn loot
     end
@@ -67,6 +74,9 @@ function spawnLoot(x, y, type, bounce, price)
         local offY = 0
         if self.type == "arrow" then offY = -2 end
         if self.type == "coin" then offY = 2 end
+        if self.type == "sword2" then offY = -2.5 end
+        if self.type == "container" then offY = -0.5 end
+        if self.type == "quiver" then offY = -3.5 end
 
         if self.anim then
             self.anim:draw(self.spr, self.x, self.y + offY + self.bounceY, nil, nil, nil, self.frameW/2, self.frameH/2)
