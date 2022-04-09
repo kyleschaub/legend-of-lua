@@ -1,6 +1,7 @@
 function drawHUD()
     drawHearts()
     drawItemBox()
+    drawMoney()
 end
 
 function drawHearts()
@@ -13,6 +14,17 @@ function drawHearts()
         end
         love.graphics.draw(heartSpr, 6 + (i * 15*scale), 6, nil, scale)
     end
+end
+
+function drawMoney()
+    local mx = love.graphics.getWidth() - 21*scale
+    local my = love.graphics.getHeight() - 10*scale
+    local tx = love.graphics.getWidth() - 10*scale
+    local ty = love.graphics.getHeight() - 11*scale
+    setWhite()
+    love.graphics.draw(sprites.hud.coin, mx, my, nil, 1.5*scale)
+    love.graphics.setFont(fonts.coins)
+    love.graphics.print(data.money, tx, ty)
 end
 
 function drawItemBox()

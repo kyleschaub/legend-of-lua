@@ -58,7 +58,7 @@ function initGlobals()
 end
 
 function setScale(input)
-    scale = (7.5 / 1200) * windowHeight
+    scale = (9 / 1200) * windowHeight
 
     if input == "zone" then -- 12 tiles high
         scale = (6.25 / 1200) * windowHeight

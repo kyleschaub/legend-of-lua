@@ -42,12 +42,14 @@ sprites.hud.halfHeart = love.graphics.newImage('sprites/ui/heart-half.png')
 sprites.hud.emptyHeart = love.graphics.newImage('sprites/ui/heart-empty.png')
 sprites.hud.itemBox = love.graphics.newImage('sprites/ui/itemBox.png')
 sprites.hud.ammoBox = love.graphics.newImage('sprites/ui/ammoBox.png')
+sprites.hud.coin = love.graphics.newImage('sprites/items/coinIcon.png')
 sprites.npc = {}
 sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 
 fonts = {}
 fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
 fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
+fonts.coins = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 6.5*scale)
 fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
 
 sounds = {}
