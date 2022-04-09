@@ -318,32 +318,6 @@ return {
       properties = {},
       objects = {
         {
-          id = 18,
-          name = "",
-          type = "arrow",
-          shape = "point",
-          x = 80,
-          y = 272,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 19,
-          name = "",
-          type = "bomb",
-          shape = "point",
-          x = 112,
-          y = 272,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 20,
           name = "",
           type = "arrow",
@@ -372,23 +346,10 @@ return {
         {
           id = 22,
           name = "",
-          type = "heart",
-          shape = "point",
-          x = 288,
-          y = 176,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 39,
-          name = "",
           type = "coin",
           shape = "point",
           x = 112,
-          y = 208,
+          y = 256,
           width = 0,
           height = 0,
           rotation = 0,

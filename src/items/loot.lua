@@ -21,6 +21,10 @@ function spawnLoot(x, y, type, bounce, price)
         loot.spr = sprites.items.bomb
     elseif loot.type == "coin" then
         loot.spr = sprites.items.coin
+        loot.frameW = 8
+        loot.frameH = 8
+        loot.grid = anim8.newGrid(loot.frameW, loot.frameH, loot.spr:getWidth(), loot.spr:getHeight())
+        loot.anim = anim8.newAnimation(loot.grid('1-4', 1), 0.2)
         loot.shadowSpr = sprites.items.lootShadow2
     elseif loot.type == "heart" then
         loot.spr = sprites.items.heart
