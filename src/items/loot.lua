@@ -19,8 +19,22 @@ function spawnLoot(x, y, type, bounce, price)
         loot.rot = math.pi/-2
     elseif loot.type == "bomb" then
         loot.spr = sprites.items.bomb
-    elseif loot.type == "coin" then
-        loot.spr = sprites.items.coin
+    elseif loot.type == "coin1" then
+        loot.spr = sprites.items.coin1
+        loot.frameW = 8
+        loot.frameH = 8
+        loot.grid = anim8.newGrid(loot.frameW, loot.frameH, loot.spr:getWidth(), loot.spr:getHeight())
+        loot.anim = anim8.newAnimation(loot.grid('1-4', 1), 0.2)
+        loot.shadowSpr = sprites.items.lootShadow2
+    elseif loot.type == "coin2" then
+        loot.spr = sprites.items.coin2
+        loot.frameW = 8
+        loot.frameH = 8
+        loot.grid = anim8.newGrid(loot.frameW, loot.frameH, loot.spr:getWidth(), loot.spr:getHeight())
+        loot.anim = anim8.newAnimation(loot.grid('1-4', 1), 0.2)
+        loot.shadowSpr = sprites.items.lootShadow2
+    elseif loot.type == "coin3" then
+        loot.spr = sprites.items.coin3
         loot.frameW = 8
         loot.frameH = 8
         loot.grid = anim8.newGrid(loot.frameW, loot.frameH, loot.spr:getWidth(), loot.spr:getHeight())
@@ -58,8 +72,12 @@ function spawnLoot(x, y, type, bounce, price)
             elseif self.type == "bomb" then
                 data.bombCount = data.bombCount + 1
                 if data.bombCount > data.maxBombCount then data.bombCount = data.maxBombCount end
-            elseif self.type == "coin" then
+            elseif self.type == "coin1" then
                 data.money = data.money + 1
+            elseif self.type == "coin2" then
+                data.money = data.money + 3
+            elseif self.type == "coin3" then
+                data.money = data.money + 5
             elseif self.type == "heart" then
                 player.health = player.health + 1
                 if player.health > data.maxHealth then player.health = data.maxHealth end
@@ -77,7 +95,7 @@ function spawnLoot(x, y, type, bounce, price)
         love.graphics.draw(self.shadowSpr, self.x, self.y+4.5, nil, nil, nil, self.shadowSpr:getWidth()/2, self.shadowSpr:getHeight()/2)
         local offY = 0
         if self.type == "arrow" then offY = -2 end
-        if self.type == "coin" then offY = 2 end
+        if self.type == "coin1" or self.type == "coin2" or self.type == "coin3" then offY = 2 end
         if self.type == "sword2" then offY = -2.5 end
         if self.type == "container" then offY = -0.5 end
         if self.type == "quiver" then offY = -3.5 end
