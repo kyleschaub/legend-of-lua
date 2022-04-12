@@ -9,6 +9,7 @@ function spawnWall(x, y, width, height, name)
     local wall = world:newRectangleCollider(x, y, width, height, {collision_class = "Wall"})
     wall:setType('static')
     wall.dead = false
+    wall.offY = 0
 
     if name and name:startswith('break') then
         wall.breakable = true
@@ -16,6 +17,12 @@ function spawnWall(x, y, width, height, name)
         -- an example of a name is 'breakRock1', where Rock tells us the sprite
         if name:find("Rock") then
             wall.sprite = sprites.environment.breakableRock
+            function wall:onBreak()
+                particleEvent("rockBreak", x+width/2, y+height/2)
+            end
+        elseif name:find("Wall") then
+            wall.sprite = sprites.environment.breakableWall
+            wall.offY = -8
             function wall:onBreak()
                 particleEvent("rockBreak", x+width/2, y+height/2)
             end
@@ -42,7 +49,7 @@ function walls:draw()
     -- most walls are invisible colliders, but some have sprites
     for _,w in ipairs(walls) do
         if w.sprite then
-            love.graphics.draw(w.sprite, w:getX(), w:getY(), nil, nil, nil, w.sprite:getWidth()/2, w.sprite:getHeight()/2)
+            love.graphics.draw(w.sprite, w:getX(), w:getY() + w.offY, nil, nil, nil, w.sprite:getWidth()/2, w.sprite:getHeight()/2)
         end
     end
 end
