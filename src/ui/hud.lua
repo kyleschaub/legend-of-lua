@@ -17,9 +17,9 @@ function drawHearts()
 end
 
 function drawMoney()
-    local mx = love.graphics.getWidth() - 21*scale
+    local mx = love.graphics.getWidth() - 23*scale
     local my = love.graphics.getHeight() - 10*scale
-    local tx = love.graphics.getWidth() - 10*scale
+    local tx = love.graphics.getWidth() - 12*scale
     local ty = love.graphics.getHeight() - 11*scale
     setWhite()
     love.graphics.draw(sprites.hud.coin, mx, my, nil, 1.5*scale)
