@@ -18,6 +18,7 @@ player.holdSprite = sprites.items.heart
 -- 3 = Bow (3: bow drawn, 3.1: recover)
 -- 10 = Damage stun
 -- 11 = Hold item
+-- 12 = Transition
 player.state = 0
 
 player:setCollisionClass("Player")
@@ -149,6 +150,11 @@ function player:update(dt)
             player:resetAnimation(player.dir)
         end
 
+    elseif player.state == 12 then -- transition
+
+        player:setLinearVelocity(0, 0)
+        player:resetAnimation(player.dir)
+
     end
 
 end
@@ -252,7 +258,7 @@ end
 function player:checkTransition()
     if player:enter('Transition') then
         local t = player:getEnterCollisionData('Transition')
-        triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
+        curtain:call(t.collider.id, t.collider.destX, t.collider.destY)
     end
 end
 

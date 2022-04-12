@@ -7,15 +7,24 @@ curtain.state = 0
 curtain.alpha = 0
 curtain.rad = 0
 
-function curtain:call()
+-- Transition information
+curtain.destMap = "test"
+curtain.destX = 0
+curtain.destY = 0
+
+function curtain:call(destMap, destX, destY)
+    curtain.destMap = destMap
+    curtain.destX = destX
+    curtain.destY = destY
+    player.state = 12
     curtain:close()
 end
 
 function curtain:getRad()
     if love.graphics.getWidth() > love.graphics.getHeight() then
-        return love.graphics.getWidth()*0.75
+        return love.graphics.getWidth()*0.6
     else
-        return love.graphics.getHeight()*0.75
+        return love.graphics.getHeight()*0.6
     end
 end
 
@@ -31,10 +40,11 @@ end
 function curtain:close()
     self.state = 1
     local destRad = self.getRad()
-    flux.to(self, 1.25, {rad = destRad}):ease("quadout"):oncomplete(function() self:open() end)
+    flux.to(self, 1, {rad = destRad}):ease("quadout"):oncomplete(function() self:open() end)
 end
 
 function curtain:open()
     self.state = 2
-    flux.to(self, 1.25, {rad = 0}):ease("quadin"):oncomplete(function() self.state = 0 end)
+    triggerTransition(self.destMap, self.destX, self.destY)
+    flux.to(self, 1, {rad = 0}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
 end
