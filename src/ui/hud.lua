@@ -1,7 +1,7 @@
 function drawHUD()
-    drawHearts()
-    drawItemBox()
-    drawMoney()
+    --drawHearts()
+    --drawItemBox()
+    --drawMoney()
 end
 
 function drawHearts()

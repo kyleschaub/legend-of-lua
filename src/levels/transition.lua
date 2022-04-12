@@ -18,6 +18,12 @@ function triggerTransition(id, destX, destY)
 
     if id == "toTestShop" then
         newMap = "testShop"
+    elseif id == "toTest" then
+        newMap = "test"
+    elseif id == "toTestCave" then
+        newMap = "testCave"
+    elseif id == "toTest4" then
+        newMap = "test4"
     end
 
     player:setPosition(destX, destY)

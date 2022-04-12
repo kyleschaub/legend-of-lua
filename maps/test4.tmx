@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="30">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="31">
  <editorsettings>
   <export target="test4.lua" format="lua"/>
  </editorsettings>
@@ -37,10 +37,18 @@
   <object id="25" x="96" y="208" width="384" height="16"/>
   <object id="26" x="96" y="0" width="96" height="128"/>
   <object id="27" x="192" y="80" width="32" height="48"/>
-  <object id="28" x="224" y="80" width="16" height="32"/>
+  <object id="28" x="224" y="80" width="16" height="16"/>
   <object id="29" x="240" y="80" width="240" height="48"/>
  </objectgroup>
  <objectgroup id="5" name="Enemies"/>
+ <objectgroup id="6" name="Transitions">
+  <object id="30" name="toTestCave" x="224" y="100" width="16" height="16">
+   <properties>
+    <property name="destX" type="int" value="408"/>
+    <property name="destY" type="int" value="388"/>
+   </properties>
+  </object>
+ </objectgroup>
  <layer id="2" name="Objects" width="30" height="22">
   <data encoding="csv">
 0,0,0,0,0,0,646,647,646,647,646,647,405,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

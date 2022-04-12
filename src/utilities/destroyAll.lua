@@ -4,6 +4,7 @@ function destroyAll()
 
     removeTable(loots)
     removeTable(effects)
+    removeTable(npcs)
 
     -- Remove enemies
     for i=#enemies,1,-1 do

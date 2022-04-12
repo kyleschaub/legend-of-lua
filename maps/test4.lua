@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 6,
-  nextobjectid = 30,
+  nextlayerid = 7,
+  nextobjectid = 31,
   properties = {},
   tilesets = {
     {
@@ -154,7 +154,7 @@ return {
           x = 224,
           y = 80,
           width = 16,
-          height = 32,
+          height = 16,
           rotation = 0,
           visible = true,
           properties = {}
@@ -187,6 +187,37 @@ return {
       parallaxy = 1,
       properties = {},
       objects = {}
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 6,
+      name = "Transitions",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 30,
+          name = "toTestCave",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 100,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["destX"] = 408,
+            ["destY"] = 388
+          }
+        }
+      }
     },
     {
       type = "tilelayer",

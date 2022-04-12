@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="53">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="56">
  <editorsettings>
   <export target="testShop.lua" format="lua"/>
  </editorsettings>
@@ -43,6 +43,8 @@
   <object id="46" x="208" y="64" width="64" height="48"/>
   <object id="47" x="176" y="208" width="16" height="32"/>
   <object id="48" x="288" y="208" width="16" height="32"/>
+  <object id="53" x="176" y="240" width="48" height="16"/>
+  <object id="54" x="256" y="240" width="48" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Loot">
   <object id="50" type="container" x="208" y="160">
@@ -68,6 +70,14 @@
  <objectgroup id="7" name="NPC">
   <object id="49" name="merchant" x="240" y="128">
    <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Transitions">
+  <object id="55" name="toTest" x="224" y="248" width="32" height="16">
+   <properties>
+    <property name="destX" type="int" value="184"/>
+    <property name="destY" type="int" value="98"/>
+   </properties>
   </object>
  </objectgroup>
  <layer id="2" name="Objects" width="30" height="22">
