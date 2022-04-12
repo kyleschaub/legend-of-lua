@@ -20,4 +20,7 @@ function createNewSave()
     data.maxArrowCount = 30
     data.bombCount = 18
     data.maxBombCount = 20
+
+    -- table that keeps track of all breakables that have been destroyed
+    data.breakables = {}
 end

@@ -5,11 +5,13 @@ function spawnWall(x, y, width, height, name)
     -- name is used to identify special types of walls (ex. breakable walls)
     -- also used to identify walls that might not need to be spawned
     -- for example, once a breakable wall is destroyed, do not spawn it later
+    if data.breakables[name] then return end
 
     local wall = world:newRectangleCollider(x, y, width, height, {collision_class = "Wall"})
     wall:setType('static')
     wall.dead = false
     wall.offY = 0
+    wall.name = name
 
     if name and name:startswith('break') then
         wall.breakable = true
@@ -18,12 +20,14 @@ function spawnWall(x, y, width, height, name)
         if name:find("Rock") then
             wall.sprite = sprites.environment.breakableRock
             function wall:onBreak()
+                data.breakables[self.name] = true
                 particleEvent("rockBreak", x+width/2, y+height/2)
             end
         elseif name:find("Wall") then
             wall.sprite = sprites.environment.breakableWall
             wall.offY = -8
             function wall:onBreak()
+                data.breakables[self.name] = true
                 particleEvent("rockBreak", x+width/2, y+height/2)
             end
         end
