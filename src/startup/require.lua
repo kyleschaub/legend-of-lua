@@ -23,6 +23,7 @@ function requireAll()
     require("src/items/bomb")
     require("src/items/boomerang")
     
+    require("src/levels/curtain")
     require("src/levels/loadMap")
     require("src/levels/npc")
     require("src/levels/transition")

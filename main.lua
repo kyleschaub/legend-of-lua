@@ -41,6 +41,10 @@ function love.keypressed(key)
         colliderToggle = not (colliderToggle and true);
     end
 
+    if key == 'm' then
+        curtain:call()
+    end
+
     if key == 'o' then
         player.health = player.health - 0.5
     end
