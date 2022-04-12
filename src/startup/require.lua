@@ -25,11 +25,13 @@ function requireAll()
     
     require("src/levels/loadMap")
     require("src/levels/npc")
+    require("src/levels/transition")
     require("src/levels/wall")
 
     require("src/ui/hud")
 
     require("src/utilities/cam")
+    require("src/utilities/destroyAll")
     require("src/utilities/shake")
     require("src/utilities/utils")
 

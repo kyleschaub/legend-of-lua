@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 7,
-  nextobjectid = 49,
+  nextlayerid = 8,
+  nextobjectid = 52,
   properties = {},
   tilesets = {
     {
@@ -166,7 +166,7 @@ return {
           shape = "rectangle",
           x = 144,
           y = 16,
-          width = 80,
+          width = 32,
           height = 80,
           rotation = 0,
           visible = true,
@@ -298,6 +298,32 @@ return {
           y = 176,
           width = 32,
           height = 26,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 49,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 176,
+          y = 16,
+          width = 16,
+          height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 50,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 192,
+          y = 16,
+          width = 32,
+          height = 80,
           rotation = 0,
           visible = true,
           properties = {}
@@ -501,6 +527,37 @@ return {
           visible = true,
           properties = {
             ["form"] = 1
+          }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 7,
+      name = "Transitions",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 51,
+          name = "toTestShop",
+          type = "",
+          shape = "rectangle",
+          x = 176,
+          y = 64,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["destX"] = 240,
+            ["destY"] = 224
           }
         }
       }

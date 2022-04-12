@@ -104,6 +104,7 @@ function player:update(dt)
         end
 
         player:checkDamage()
+        player:checkTransition()
 
     elseif player.state >= 1 and player.state < 2 then
 
@@ -245,6 +246,13 @@ function player:checkDamage()
     if player:enter('Enemy') then
         local e = player:getEnterCollisionData('Enemy')
         player:hurt(0.5, e.collider:getX(), e.collider:getY())
+    end
+end
+
+function player:checkTransition()
+    if player:enter('Transition') then
+        local t = player:getEnterCollisionData('Transition')
+        triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
     end
 end
 

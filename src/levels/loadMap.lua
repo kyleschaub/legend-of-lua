@@ -1,5 +1,5 @@
 function loadMap(mapName, destX, destY)
-
+    destroyAll()
     loadedMap = mapName
     gameMap = sti("maps/" .. mapName .. ".lua")
 
@@ -26,6 +26,12 @@ function loadMap(mapName, destX, destY)
     if gameMap.layers["NPC"] then
         for i, obj in pairs(gameMap.layers["NPC"].objects) do
             spawnNPC(obj.name, obj.x, obj.y)
+        end
+    end
+
+    if gameMap.layers["Transitions"] then
+        for i, obj in pairs(gameMap.layers["Transitions"].objects) do
+            spawnTransition(obj.x, obj.y, obj.width, obj.height, obj.name, obj.properties.destX, obj.properties.destY)
         end
     end
 

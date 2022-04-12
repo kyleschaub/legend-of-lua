@@ -9,7 +9,7 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test4")
+    loadMap("test")
  
     dj.volume("effect", 1)
 
@@ -32,8 +32,8 @@ function love.draw()
 
     drawAfterCamera()
 
-    --local debug = require "src/debug"
-    --debug:d()
+    local debug = require "src/debug"
+    debug:d()
 end
 
 function love.keypressed(key)
