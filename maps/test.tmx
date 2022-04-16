@@ -59,18 +59,6 @@
   <object id="21" type="bomb" x="416" y="336">
    <point/>
   </object>
-  <object id="22" type="coin1" x="112" y="16">
-   <point/>
-  </object>
-  <object id="40" type="coin2" x="144" y="16">
-   <point/>
-  </object>
-  <object id="41" type="coin3" x="176" y="16">
-   <point/>
-  </object>
-  <object id="42" type="coin3" x="208" y="16">
-   <point/>
-  </object>
   <object id="43" type="coin2" x="96" y="272">
    <point/>
   </object>
@@ -78,15 +66,6 @@
    <point/>
   </object>
   <object id="45" type="coin3" x="112" y="272">
-   <point/>
-  </object>
-  <object id="46" type="coin1" x="240" y="240">
-   <point/>
-  </object>
-  <object id="47" type="coin3" x="272" y="192">
-   <point/>
-  </object>
-  <object id="48" type="coin2" x="304" y="208">
    <point/>
   </object>
  </objectgroup>

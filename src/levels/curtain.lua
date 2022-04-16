@@ -22,9 +22,9 @@ end
 
 function curtain:getRad()
     if love.graphics.getWidth() > love.graphics.getHeight() then
-        return love.graphics.getWidth()*0.6
+        return love.graphics.getWidth()*0.65
     else
-        return love.graphics.getHeight()*0.6
+        return love.graphics.getHeight()*0.65
     end
 end
 

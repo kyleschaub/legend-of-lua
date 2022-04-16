@@ -14,6 +14,17 @@ function debug:d()
 
 end
 
+function debug:single()
+
+    love.graphics.setColor(0, 0, 0, 0.7)
+    love.graphics.rectangle("fill", 16, 16, 1020, 140)
+
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setFont(fonts.debug2)
+    love.graphics.print("curtain.rad: " .. math.floor(curtain.rad), 30, 22)
+
+end
+
 function debug:playerPosition()
 
     love.graphics.setColor(0, 0, 0, 0.7)
