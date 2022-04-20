@@ -149,6 +149,14 @@ function player:update(dt)
             player.state = 0
             player:resetAnimation(player.dir)
         end
+    
+    elseif player.state == 11.1 then -- got an item (delay)
+
+        player.animTimer = player.animTimer - dt
+
+        if player.animTimer < 0 then
+            player:gotItem(player.holdSprite)
+        end
 
     elseif player.state == 12 then -- transition
 
@@ -350,7 +358,13 @@ function player:resetAnimation(direction)
     player.anim:gotoFrame(1)
 end
 
-function player:gotItem(spr)
+function player:gotItem(spr, delay)
+    if delay then
+        player.state = 11.1
+        player.animTimer = 0.5
+        player.holdSprite = spr
+        return
+    end
     player.holdSprite = spr
     player.state = 11
     player.animTimer = 1

@@ -41,7 +41,11 @@ function spawnChest(x, y, id, size)
         if self.state == 0 then
             self.state = 1
             data.chests[self.id] = true
-            chests:spawnSmallLoot(self.centerX, self.centerY, self.id)
+            if self.size == "small" then
+                chests:spawnSmallLoot(self.centerX, self.centerY, self.id)
+            elseif self.size == "big" then
+                player:gotItem(chests:getBigLoot(self.id), true)
+            end
         end
     end
     
@@ -78,5 +82,11 @@ function chests:spawnSmallLoot(x, y, id)
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 0))
+    end
+end
+
+function chests:getBigLoot(id)
+    if id == 'test2' then
+        return sprites.items.container
     end
 end
