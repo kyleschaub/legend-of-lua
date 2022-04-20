@@ -29,14 +29,18 @@ function spawnChest(x, y, id, size)
     if chest.size == "small" then
         chest.x = chest.x + 1
         chest.y = chest.y - 3
+        chest.centerX = chest.x + 7
+        chest.centerY = chest.y + 8
     elseif chest.size == "big" then
         chest.y = chest.y - 2
+        chest.centerX = chest.x + 10
+        chest.centerY = chest.y + 8
     end
 
     function chest:interact()
         if self.state == 0 then
             self.state = 1
-            -- spawn stuff
+            chests:spawnSmallLoot(self.centerX, self.centerY, self.id)
         end
     end
     
@@ -58,5 +62,20 @@ function chests:draw()
         elseif c.state == 1 and c.size == "big" then
             love.graphics.draw(sprites.items.chestBigOpen, c.x, c.y)
         end
+    end
+end
+
+function chests:spawnSmallLoot(x, y, id)
+    local function getJumpVec(dirX, dirY, speed)
+        local vecSpeed = 30
+        if speed then vecSpeed = speed end
+        return vector(dirX, dirY):normalized() * vecSpeed
+    end
+
+    if id == 'test1' or id == 'test2' then
+        spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 0))
+        spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 1))
+        spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 1))
+        spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 0))
     end
 end

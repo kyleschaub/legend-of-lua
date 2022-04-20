@@ -1,6 +1,6 @@
 loots = {}
 
-function spawnLoot(x, y, type, bounce, price)
+function spawnLoot(x, y, type, bounce, price, dir)
     local loot = {}
     loot.x = x
     loot.y = y
@@ -12,6 +12,7 @@ function spawnLoot(x, y, type, bounce, price)
     loot.shadowSpr = sprites.items.lootShadow
     loot.shop = shop
     loot.price = 0
+    loot.dir = dir
     if price and price > 0 then loot.price = price end
 
     if loot.type == "arrow" then
@@ -63,6 +64,10 @@ function spawnLoot(x, y, type, bounce, price)
     function loot:update(dt)
         if self.anim then
             self.anim:update(dt)
+        end
+        if self.bouncing and self.dir then
+            self.x = self.x + self.dir.x * dt
+            self.y = self.y + self.dir.y * dt
         end
         if distanceBetween(self.x, self.y, player:getX(), player:getY()) < 10 and self.dead == false and self.bouncing == false then
             self.dead = true
