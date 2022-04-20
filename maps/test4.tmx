@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="33">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="35">
  <editorsettings>
   <export target="test4.lua" format="lua"/>
  </editorsettings>
@@ -41,6 +41,10 @@
   <object id="29" x="240" y="80" width="240" height="48"/>
   <object id="31" x="211.545" y="52.4545" width="10.8182" height="7.63636"/>
   <object id="32" x="276.455" y="41.6364" width="23.8182" height="20.3636"/>
+ </objectgroup>
+ <objectgroup id="7" name="Chests">
+  <object id="33" name="test1" type="small" x="288" y="144" width="16" height="16"/>
+  <object id="34" name="test2" type="big" x="320" y="144" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Enemies"/>
  <objectgroup id="6" name="Transitions">

@@ -1,6 +1,6 @@
 walls = {}
 
-function spawnWall(x, y, width, height, name)
+function spawnWall(x, y, width, height, name, parent)
 
     -- name is used to identify special types of walls (ex. breakable walls)
     -- also used to identify walls that might not need to be spawned
@@ -12,6 +12,7 @@ function spawnWall(x, y, width, height, name)
     wall.dead = false
     wall.offY = 0
     wall.name = name
+    wall.parent = parent
 
     if name and name:startswith('break') then
         wall.breakable = true

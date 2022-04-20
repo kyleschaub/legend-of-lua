@@ -8,8 +8,8 @@ return {
   height = 22,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 7,
-  nextobjectid = 31,
+  nextlayerid = 8,
+  nextobjectid = 35,
   properties = {},
   tilesets = {
     {
@@ -168,6 +168,73 @@ return {
           y = 80,
           width = 240,
           height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 31,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 211.545,
+          y = 52.4545,
+          width = 10.8182,
+          height = 7.63636,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 32,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 276.455,
+          y = 41.6364,
+          width = 23.8182,
+          height = 20.3636,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 7,
+      name = "Chests",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 33,
+          name = "test1",
+          type = "small",
+          shape = "rectangle",
+          x = 288,
+          y = 144,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 34,
+          name = "test2",
+          type = "big",
+          shape = "rectangle",
+          x = 320,
+          y = 144,
+          width = 16,
+          height = 16,
           rotation = 0,
           visible = true,
           properties = {}

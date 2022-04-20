@@ -20,6 +20,7 @@ function drawCamera()
 
     effects:draw(-1) -- two layers of effects
     walls:draw()
+    chests:draw()
     bombs:draw()
     boomerang:draw()
     loots:draw()

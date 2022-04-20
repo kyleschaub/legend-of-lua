@@ -23,4 +23,7 @@ function createNewSave()
 
     -- table that keeps track of all breakables that have been destroyed
     data.breakables = {}
+
+    -- table that keeps track of chests that have been opened
+    data.chests = {}
 end

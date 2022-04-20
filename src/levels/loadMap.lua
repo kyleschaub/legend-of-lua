@@ -23,6 +23,12 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["Chests"] then
+        for i, obj in pairs(gameMap.layers["Chests"].objects) do
+            spawnChest(obj.x, obj.y, obj.name, obj.type)
+        end
+    end
+
     if gameMap.layers["NPC"] then
         for i, obj in pairs(gameMap.layers["NPC"].objects) do
             spawnNPC(obj.name, obj.x, obj.y)
