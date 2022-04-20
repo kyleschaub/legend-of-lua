@@ -358,3 +358,11 @@ function player:gotItem(spr)
     player.anim = player.animations.hold
     player:setLinearVelocity(0, 0)
 end
+
+function player:interact()
+    -- query for interactable walls
+    local interactables = world:queryCircleArea(player:getX(), player:getY(), 12, {'Wall'})
+    for _,i in ipairs(interactables) do
+        i.parent:interact()
+    end
+end

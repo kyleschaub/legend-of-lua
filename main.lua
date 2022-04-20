@@ -79,6 +79,10 @@ function love.keypressed(key)
             data.item = 1
         end
     end
+
+    if key == 'lshift' or key == 'rshift' then
+        player:interact()
+    end
 end
 
 function love.keyreleased(key)
