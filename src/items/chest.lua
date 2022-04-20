@@ -40,6 +40,7 @@ function spawnChest(x, y, id, size)
     function chest:interact()
         if self.state == 0 then
             self.state = 1
+            data.chests[self.id] = true
             chests:spawnSmallLoot(self.centerX, self.centerY, self.id)
         end
     end
