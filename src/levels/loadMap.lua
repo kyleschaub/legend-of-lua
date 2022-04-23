@@ -2,7 +2,6 @@ function loadMap(mapName, destX, destY)
     destroyAll()
     loadedMap = mapName
     gameMap = sti("maps/" .. mapName .. ".lua")
-    gameMap.dark = true
 
     if gameMap.layers["Walls"] then
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
@@ -40,6 +39,12 @@ function loadMap(mapName, destX, destY)
         for i, obj in pairs(gameMap.layers["Transitions"].objects) do
             spawnTransition(obj.x, obj.y, obj.width, obj.height, obj.name, obj.properties.destX, obj.properties.destY)
         end
+    end
+
+    if gameMap.properties.dark then
+        gameMap.dark = gameMap.properties.dark
+    else
+        gameMap.dark = false
     end
 
 end

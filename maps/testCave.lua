@@ -10,7 +10,9 @@ return {
   tileheight = 16,
   nextlayerid = 8,
   nextobjectid = 63,
-  properties = {},
+  properties = {
+    ["dark"] = true
+  },
   tilesets = {
     {
       name = "overworld",

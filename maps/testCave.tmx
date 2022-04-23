@@ -3,6 +3,9 @@
  <editorsettings>
   <export target="testCave.lua" format="lua"/>
  </editorsettings>
+ <properties>
+  <property name="dark" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
   <image source="_tilesets/overworld.png" width="640" height="576"/>
  </tileset>
