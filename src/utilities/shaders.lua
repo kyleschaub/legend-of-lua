@@ -4,7 +4,7 @@ shaders.simpleLight = love.graphics.newShader[[
     extern number playerX = 0;
     extern number playerY = 0;
 
-    number radius = 250;
+    number radius = 400;
     vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ) {
         number distance = pow(pow(screen_coords.x - playerX, 2) + pow(screen_coords.y - playerY, 2), 0.5);
         if (distance < radius) {
@@ -20,7 +20,7 @@ shaders.trueLight = love.graphics.newShader[[
     extern number playerX = 0;
     extern number playerY = 0;
 
-    number radius = 300;
+    number radius = 400;
     vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ) {
         number distance = pow(pow(screen_coords.x - playerX, 2) + pow(screen_coords.y - playerY, 2), 0.5);
         number alpha = distance / radius;
@@ -31,9 +31,37 @@ shaders.trueLight = love.graphics.newShader[[
 function shaders:update(dt)
     if gameMap.dark then
         local px, py = player:getPosition()
-        shaders.simpleLight:send("playerX", px)
-        shaders.simpleLight:send("playerY", py)
-        shaders.trueLight:send("playerX", px)
-        shaders.trueLight:send("playerY", py)
+
+        -- Get width/height of background
+        local mapW = gameMap.width * gameMap.tilewidth
+        local mapH = gameMap.height * gameMap.tileheight
+
+        local lightX = (windowWidth/2)
+        local lightY = (windowHeight/2)
+
+        -- Left border
+        if cam.x < windowWidth/2 then
+            lightX = px * scale
+        end
+
+        -- Top border
+        if cam.y < windowHeight/2 then
+            lightY = py * scale
+        end
+
+        -- Right border
+        if cam.x > (mapW - windowWidth/2) then
+            lightX = (px - cam.x) * scale + (windowWidth/2)
+        end
+
+        -- Bottom border
+        if cam.y > (mapH - windowHeight/2) then
+            lightY = (py - cam.y) * scale + (windowHeight/2)
+        end
+
+        shaders.simpleLight:send("playerX", lightX)
+        shaders.simpleLight:send("playerY", lightY)
+        shaders.trueLight:send("playerX", lightX)
+        shaders.trueLight:send("playerY", lightY)
     end
 end
