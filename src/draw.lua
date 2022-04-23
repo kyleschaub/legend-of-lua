@@ -32,6 +32,13 @@ function drawCamera()
     effects:draw(1)
     particles:draw()
 
+    if gameMap.dark then
+        love.graphics.setShader(shaders.trueLight)
+        --love.graphics.setColor(0,0,0,1)
+        love.graphics.rectangle("fill", -10, -10, 10000, 10000)
+        love.graphics.setShader()
+    end
+
 end
 
 function drawAfterCamera()

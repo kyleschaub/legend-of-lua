@@ -2,6 +2,7 @@ function loadMap(mapName, destX, destY)
     destroyAll()
     loadedMap = mapName
     gameMap = sti("maps/" .. mapName .. ".lua")
+    gameMap.dark = true
 
     if gameMap.layers["Walls"] then
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
