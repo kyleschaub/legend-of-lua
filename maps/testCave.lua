@@ -8,8 +8,8 @@ return {
   height = 32,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 8,
-  nextobjectid = 63,
+  nextlayerid = 9,
+  nextobjectid = 64,
   properties = {
     ["dark"] = true
   },
@@ -307,6 +307,34 @@ return {
             ["destX"] = 232,
             ["destY"] = 138
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 8,
+      name = "Chests",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 63,
+          name = "test3",
+          type = "small",
+          shape = "rectangle",
+          x = 400,
+          y = 208,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },

@@ -85,6 +85,11 @@ function chests:spawnSmallLoot(x, y, id)
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 0))
+    elseif id == 'test3' then
+        spawnLoot(x, y, "coin2", true, nil, getJumpVec(-1, 0))
+        spawnLoot(x, y, "coin3", true, nil, getJumpVec(-1, 1))
+        spawnLoot(x, y, "coin3", true, nil, getJumpVec(1, 1))
+        spawnLoot(x, y, "coin2", true, nil, getJumpVec(1, 0))
     end
 end
 
