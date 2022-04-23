@@ -10,7 +10,7 @@ function spawnChest(x, y, id, size)
     chest.state = 0
     if size then chest.size = size end
 
-    -- if the id is in this list, chest has been opened
+    -- if the id is in this list, the chest was already opened
     if data.chests[id] then
         chest.state = 1
     end
@@ -77,7 +77,10 @@ function chests:spawnSmallLoot(x, y, id)
         return vector(dirX, dirY):normalized() * vecSpeed
     end
 
-    if id == 'test1' or id == 'test2' then
+    if id == 'test1' then
+        spawnLoot(x, y, "heart", true, nil, getJumpVec(-1, 0))
+        spawnLoot(x, y, "bomb", true, nil, getJumpVec(1, 0))
+    elseif id == 'test2' then
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 0))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 1))
@@ -87,6 +90,6 @@ end
 
 function chests:getBigLoot(id)
     if id == 'test2' then
-        return sprites.items.container
+        return sprites.items.boomerang
     end
 end
