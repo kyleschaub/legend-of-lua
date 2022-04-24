@@ -377,6 +377,8 @@ function player:interact()
     -- query for interactable walls
     local interactables = world:queryCircleArea(player:getX(), player:getY(), 12, {'Wall'})
     for _,i in ipairs(interactables) do
-        i.parent:interact()
+        if i.parent then
+            i.parent:interact()
+        end
     end
 end
