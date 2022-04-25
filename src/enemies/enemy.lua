@@ -14,6 +14,8 @@ function spawnEnemy(x, y, type, args)
     local init
     if type == "eye" then
         init = require("src/enemies/eye")
+    elseif type == "bat" then
+        init = require("src/enemies/bat")
     end
 
     enemy = init(enemy, x, y, args)

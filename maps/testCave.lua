@@ -9,9 +9,9 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 64,
+  nextobjectid = 68,
   properties = {
-    ["dark"] = true
+    ["dark"] = false
   },
   tilesets = {
     {
@@ -277,7 +277,68 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 64,
+          name = "bat",
+          type = "",
+          shape = "point",
+          x = 352,
+          y = 240,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 65,
+          name = "bat",
+          type = "",
+          shape = "point",
+          x = 336,
+          y = 208,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 66,
+          name = "bat",
+          type = "",
+          shape = "point",
+          x = 448,
+          y = 208,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 67,
+          name = "bat",
+          type = "",
+          shape = "point",
+          x = 480,
+          y = 208,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        }
+      }
     },
     {
       type = "objectgroup",

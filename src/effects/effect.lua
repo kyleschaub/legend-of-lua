@@ -96,11 +96,18 @@ function effects:spawn(type, x, y, args)
         end
     end
 
-    if type == "eyeDeath" then
-        effect.sprite = sprites.enemies.eyeDead1
+    if type:find("Death") then
         effect.alpha = 1
         effect.timer = 0.75
         effect.layer = -1
+
+        function effect:update(dt)
+            self.alpha = self.alpha - dt*1.5
+        end
+    end
+
+    if type == "eyeDeath" then
+        effect.sprite = sprites.enemies.eyeDead1
 
         if args and args.form == 2 then
             effect.sprite = sprites.enemies.eyeDead2
@@ -108,14 +115,21 @@ function effects:spawn(type, x, y, args)
             effect.sprite = sprites.enemies.eyeDead3
         end
 
-        function effect:update(dt)
-            self.alpha = self.alpha - dt*1.5
+        function effect:draw()
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(sprites.enemies.eyeShadow, self.x, self.y+7, nil, nil, nil, sprites.enemies.eyeShadow:getWidth()/2, sprites.enemies.eyeShadow:getHeight()/2)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, nil, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
         end
+    end
+
+    if type == "batDeath" then
+        effect.sprite = sprites.enemies.batDead
 
         function effect:draw()
             love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(sprites.enemies.shadow, self.x, self.y+7, nil, nil, nil, sprites.enemies.shadow:getWidth()/2, sprites.enemies.shadow:getHeight()/2)
             love.graphics.draw(self.sprite, self.x, self.y, nil, nil, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
-            love.graphics.draw(sprites.enemies.eyeShadow, self.x, self.y+7, nil, nil, nil, sprites.enemies.eyeShadow:getWidth()/2, sprites.enemies.eyeShadow:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
     end

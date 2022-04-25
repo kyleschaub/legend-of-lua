@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="64">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
  <editorsettings>
   <export target="testCave.lua" format="lua"/>
  </editorsettings>
  <properties>
-  <property name="dark" type="bool" value="true"/>
+  <property name="dark" type="bool" value="false"/>
  </properties>
  <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
   <image source="_tilesets/overworld.png" width="640" height="576"/>
@@ -60,7 +60,32 @@
   <object id="61" x="320" y="320" width="32" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Loot"/>
- <objectgroup id="6" name="Enemies"/>
+ <objectgroup id="6" name="Enemies">
+  <object id="64" name="bat" x="352" y="240">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="65" name="bat" x="336" y="208">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="66" name="bat" x="448" y="208">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="67" name="bat" x="480" y="208">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="7" name="Transitions">
   <object id="62" name="toTest4" x="400" y="404" width="16" height="16">
    <properties>
