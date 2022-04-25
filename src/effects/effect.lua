@@ -125,11 +125,12 @@ function effects:spawn(type, x, y, args)
 
     if type == "batDeath" then
         effect.sprite = sprites.enemies.batDead
+        effect.scaleX = args.scaleX
 
         function effect:draw()
             love.graphics.setColor(1, 1, 1, self.alpha)
             love.graphics.draw(sprites.enemies.shadow, self.x, self.y+7, nil, nil, nil, sprites.enemies.shadow:getWidth()/2, sprites.enemies.shadow:getHeight()/2)
-            love.graphics.draw(self.sprite, self.x, self.y, nil, nil, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, self.scaleX, 1, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
     end

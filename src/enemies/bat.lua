@@ -113,6 +113,7 @@ local function batInit(enemy, x, y, args)
     function enemy:die()
         local ex, ey = self.physics:getPosition()
         local args = {}
+        args.scaleX = self.scaleX
         args.form = self.form
         effects:spawn("batDeath", ex, ey+3, args)
     end
