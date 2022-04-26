@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="68">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="72">
  <editorsettings>
   <export target="testCave.lua" format="lua"/>
  </editorsettings>
@@ -61,28 +61,24 @@
  </objectgroup>
  <objectgroup id="5" name="Loot"/>
  <objectgroup id="6" name="Enemies">
-  <object id="64" name="bat" x="352" y="240">
+  <object id="67" name="bat" x="560" y="160">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>
    <point/>
   </object>
-  <object id="65" name="bat" x="336" y="208">
-   <properties>
-    <property name="form" type="int" value="1"/>
-   </properties>
+ </objectgroup>
+ <objectgroup id="9" name="Triggers">
+  <object id="68" name="batTrigger" x="336" y="208">
    <point/>
   </object>
-  <object id="66" name="bat" x="448" y="208">
-   <properties>
-    <property name="form" type="int" value="1"/>
-   </properties>
+  <object id="69" name="batTrigger" x="480" y="208">
    <point/>
   </object>
-  <object id="67" name="bat" x="480" y="208">
-   <properties>
-    <property name="form" type="int" value="1"/>
-   </properties>
+  <object id="70" name="batTrigger" x="480" y="256">
+   <point/>
+  </object>
+  <object id="71" name="batTrigger" x="368" y="256">
    <point/>
   </object>
  </objectgroup>

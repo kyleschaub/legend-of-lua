@@ -36,6 +36,7 @@ function requireAll()
     require("src/utilities/destroyAll")
     require("src/utilities/shaders")
     require("src/utilities/shake")
+    require("src/utilities/triggers")
     require("src/utilities/utils")
 
 end

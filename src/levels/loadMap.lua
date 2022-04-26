@@ -41,6 +41,12 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["Triggers"] then
+        for i, obj in pairs(gameMap.layers["Triggers"].objects) do
+            spawnTrigger(obj.x, obj.y, obj.name)
+        end
+    end
+
     if gameMap.properties.dark then
         gameMap.dark = gameMap.properties.dark
     else

@@ -8,8 +8,8 @@ return {
   height = 32,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 9,
-  nextobjectid = 68,
+  nextlayerid = 10,
+  nextobjectid = 72,
   properties = {
     ["dark"] = false
   },
@@ -279,12 +279,12 @@ return {
       properties = {},
       objects = {
         {
-          id = 64,
+          id = 67,
           name = "bat",
           type = "",
           shape = "point",
-          x = 352,
-          y = 240,
+          x = 560,
+          y = 160,
           width = 0,
           height = 0,
           rotation = 0,
@@ -292,10 +292,25 @@ return {
           properties = {
             ["form"] = 1
           }
-        },
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 9,
+      name = "Triggers",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
         {
-          id = 65,
-          name = "bat",
+          id = 68,
+          name = "batTrigger",
           type = "",
           shape = "point",
           x = 336,
@@ -304,28 +319,11 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {
-            ["form"] = 1
-          }
+          properties = {}
         },
         {
-          id = 66,
-          name = "bat",
-          type = "",
-          shape = "point",
-          x = 448,
-          y = 208,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["form"] = 1
-          }
-        },
-        {
-          id = 67,
-          name = "bat",
+          id = 69,
+          name = "batTrigger",
           type = "",
           shape = "point",
           x = 480,
@@ -334,9 +332,33 @@ return {
           height = 0,
           rotation = 0,
           visible = true,
-          properties = {
-            ["form"] = 1
-          }
+          properties = {}
+        },
+        {
+          id = 70,
+          name = "batTrigger",
+          type = "",
+          shape = "point",
+          x = 480,
+          y = 256,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 71,
+          name = "batTrigger",
+          type = "",
+          shape = "point",
+          x = 368,
+          y = 256,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },
