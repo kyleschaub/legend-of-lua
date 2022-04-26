@@ -61,7 +61,7 @@
  </objectgroup>
  <objectgroup id="5" name="Loot"/>
  <objectgroup id="6" name="Enemies">
-  <object id="67" name="bat" x="560" y="160">
+  <object id="67" name="bat" x="576" y="144">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>
@@ -69,16 +69,16 @@
   </object>
  </objectgroup>
  <objectgroup id="9" name="Triggers">
-  <object id="68" name="batTrigger" x="336" y="208">
+  <object id="68" name="batTrigger" x="336" y="224">
    <point/>
   </object>
-  <object id="69" name="batTrigger" x="480" y="208">
+  <object id="69" name="batTrigger" x="480" y="224">
    <point/>
   </object>
-  <object id="70" name="batTrigger" x="480" y="256">
+  <object id="70" name="batTrigger" x="480" y="288">
    <point/>
   </object>
-  <object id="71" name="batTrigger" x="368" y="256">
+  <object id="71" name="batTrigger" x="336" y="288">
    <point/>
   </object>
  </objectgroup>

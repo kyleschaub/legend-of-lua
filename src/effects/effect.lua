@@ -135,6 +135,31 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "batEntrance" then
+        effect.spriteSheet = sprites.enemies.bat
+        effect.width = 16
+        effect.height = 16
+        effect.scaleX = 1
+        effect.scaleY = 1
+        effect.alpha = 0
+        if x > player:getX() then effect.scaleX = -1 end
+        effect.grid = anim8.newGrid(16, 16, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
+        effect.anim = anim8.newAnimation(effect.grid('1-2', 1), 1.08)
+        effect.shadowX = effect.x
+        effect.shadowY = effect.y+10
+
+        local finalY = effect.y
+        effect.y = effect.y - 24
+        flux.to(effect, 0.3, {alpha = 1}):ease("sineout")
+        flux.to(effect, 0.3, {y = finalY}):ease("sineout"):oncomplete(function() effect.dead = true spawnEnemy(effect.x-5.5, effect.y-4.5, "bat") end)
+
+        function effect:draw()
+            love.graphics.setColor(1,1,1,self.alpha)
+            love.graphics.draw(sprites.enemies.shadow, self.shadowX, self.shadowY, nil, nil, nil, sprites.enemies.shadow:getWidth()/2, sprites.enemies.shadow:getHeight()/2)
+            self.anim:draw(self.spriteSheet, self.x, self.y, self.rot, self.scaleX, self.scaleY, self.width/2, self.height/2)
+        end
+    end
+
     if type == "fuseSmoke" then
         effect.rad = 1
         effect.alpha = 0.2
@@ -201,6 +226,7 @@ function effects:draw(layer)
     for _,e in ipairs(effects) do
         if e.layer == layer then
             if e.anim then
+                if e.alpha then love.graphics.setColor(1,1,1,e.alpha) end
                 e.anim:draw(e.spriteSheet, e.x, e.y, e.rot, e.scaleX, e.scaleY, e.width/2, e.height/2)
             end
             if e.draw then

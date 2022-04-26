@@ -12,7 +12,7 @@ function spawnTrigger(x, y, id)
         trigger.rad = 50
 
         function trigger:activate()
-            spawnEnemy(trigger.x, trigger.y, "bat")
+            effects:spawn("batEntrance", trigger.x, trigger.y)
         end
     end
 
@@ -20,7 +20,6 @@ function spawnTrigger(x, y, id)
         if distanceBetween(self.x, self.y, player:getX(), player:getY()) < self.rad and self.dead == false then
             self.dead = true
             self.activate()
-            d1 = d1 + 10
         end
     end
 
