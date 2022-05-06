@@ -1,4 +1,4 @@
-player = world:newBSGRectangleCollider(230, 358, 12, 15, 3)
+player = world:newBSGRectangleCollider(190, 160, 12, 15, 3)
 player.x = 0
 player.y = 0
 player.dir = "down"
@@ -384,11 +384,20 @@ function player:interact()
 end
 
 function player:switchItem()
-    -- Prevent the player from switching items while using the bow
-    if player.state == 3 then return end
+    max = table.getn(data.inventory)
+    checkedItem = data.item + 1
 
-    data.item = data.item + 1
-    if data.item > 3 then
-        data.item = 1
+    while checkedItem ~= data.item do
+        -- use the checkedItem if it is in the inventory
+        if data.inventory[checkedItem] == true then
+            data.item = checkedItem
+            break
+        end
+        
+        checkedItem = checkedItem + 1
+        
+        if checkedItem > max then 
+            checkedItem = 0 
+        end
     end
 end

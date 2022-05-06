@@ -41,6 +41,9 @@ function drawItemBox()
     setWhite()
     love.graphics.draw(sprites.hud.itemBox, bx, by, nil, scale)
 
+    -- stop drawing if nothing is held
+    if(data.item == 0) then return end
+
     local ammoCount = -1
     local maxed = false
     if data.item == 2 then

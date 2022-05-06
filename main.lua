@@ -9,9 +9,10 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test")
+    loadMap("test4")
  
     dj.volume("effect", 1)
+    love.window.setTitle("Legend of Lua")
 
 end
 

@@ -13,7 +13,14 @@ function createNewSave()
     -- 1 = boomerang
     -- 2 = bomb
     -- 3 = bow
-    data.item = 1
+    data.item = 0
+
+    data.inventory = {
+        [0] = true,
+        [1] = false,
+        [2] = true,
+        [3] = true,
+    }
 
     -- keep track of certain stackable items
     data.arrowCount = 25
