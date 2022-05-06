@@ -382,3 +382,13 @@ function player:interact()
         end
     end
 end
+
+function player:switchItem()
+    -- Prevent the player from switching items while using the bow
+    if player.state == 3 then return end
+
+    data.item = data.item + 1
+    if data.item > 3 then
+        data.item = 1
+    end
+end

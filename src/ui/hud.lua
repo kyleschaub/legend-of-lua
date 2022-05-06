@@ -1,7 +1,7 @@
 function drawHUD()
-    --drawHearts()
-    --drawItemBox()
-    --drawMoney()
+    drawHearts()
+    drawItemBox()
+    drawMoney()
 end
 
 function drawHearts()
@@ -62,7 +62,10 @@ function drawItemBox()
         love.graphics.draw(sprites.hud.ammoBox, bx+(2.5*scale), by+(19*scale), nil, scale)
 
         love.graphics.setFont(fonts.ammo)
-        if maxed then love.graphics.setColor(0,1,0,1) end
+
+        if maxed then love.graphics.setColor(0,1,0,1)
+        elseif ammoCount == 0 then love.graphics.setColor(1,0,0,1) end
+
         love.graphics.printf(ammoCount, bx+(4.5*scale), by+(20*scale), 9.5*scale, "center")
         --love.graphics.print(ammoCount, bx+(3*scale), by+(20*scale))
         setWhite()

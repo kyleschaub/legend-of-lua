@@ -74,10 +74,7 @@ function love.keypressed(key)
     end
 
     if key == 'lctrl' then
-        data.item = data.item + 1
-        if data.item > 3 then
-            data.item = 1
-        end
+        player:switchItem()
     end
 
     if key == 'lshift' or key == 'rshift' then
@@ -86,7 +83,7 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
-    if key == 'x' and data.item == 3 then
+    if key == 'x' and data.item == 3 and player.state == 3 then
         useItem()
     end
 end
