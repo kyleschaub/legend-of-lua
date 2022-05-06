@@ -22,4 +22,6 @@ function updateAll(dt)
     flux.update(dt)
     dj.cleanup()
 
+    if gameMap then gameMap:update(dt) end
+
 end

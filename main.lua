@@ -9,7 +9,7 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test6")
+    loadMap("test")
  
     dj.volume("effect", 1)
 
