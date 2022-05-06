@@ -17,11 +17,11 @@ end
 function debug:single()
 
     love.graphics.setColor(0, 0, 0, 0.7)
-    love.graphics.rectangle("fill", 16, 16, 1020, 140)
+    love.graphics.rectangle("fill", 16, 16, 1120, 165)
 
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.setFont(fonts.debug2)
-    love.graphics.print("curtain.rad: " .. math.floor(curtain.rad), 30, 22)
+    love.graphics.setFont(fonts.debug)
+    love.graphics.print("data.bombCount: " .. data.bombCount, 40, 22)
 
 end
 
