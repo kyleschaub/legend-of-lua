@@ -1,4 +1,4 @@
-player = world:newBSGRectangleCollider(190, 160, 12, 15, 3)
+player = world:newBSGRectangleCollider(0, 0, 12, 15, 3)
 player.x = 0
 player.y = 0
 player.dir = "down"
@@ -274,9 +274,23 @@ function player:hurt(damage, srcX, srcY)
     if player.invincible > 0 then return end
     --player.invincible = 1 TODO: uncomment to enable invincibility frames
     player.health = player.health - damage
+
+    if player.health <= 0 then
+        player:kill()
+        return
+    end
+
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
     player.stunTimer = 0.075
+end
+
+function player:kill()
+    newMapData = getMapData(loadedMap)
+
+    curtain:call(loadedMap, newMapData.x, newMapData.y)
+
+    player.health = data.maxHealth
 end
 
 function player:swingSword()

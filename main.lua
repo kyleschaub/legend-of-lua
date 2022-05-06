@@ -10,7 +10,11 @@ function love.load()
     createNewSave()
 
     loadMap("test4")
- 
+
+    mapData = getMapData(loadedMap)
+    player:setX(mapData.x)
+    player:setY(mapData.y)
+
     dj.volume("effect", 1)
     love.window.setTitle("Legend of Lua")
 
@@ -39,12 +43,17 @@ function love.draw()
 end
 
 function love.keypressed(key)
+
+    if key == "=" then
+        print(player:getX(), player:getY())
+    end
+
     if key == 'q' then
         colliderToggle = not (colliderToggle and true);
     end
 
     if key == 'm' then
-        curtain:call()
+        curtain:call(loadedMap, player:getX(), player:getY())
     end
 
     if key == 'o' then

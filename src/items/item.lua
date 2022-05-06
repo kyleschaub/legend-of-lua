@@ -21,6 +21,7 @@ function canUseItem(itemId)
         return data.bombCount > 0
     elseif itemId == 3 then
         return data.arrowCount > 0
-    else return true
+    else 
+        return true
     end
 end

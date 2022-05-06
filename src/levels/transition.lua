@@ -24,6 +24,10 @@ function triggerTransition(id, destX, destY)
         newMap = "testCave"
     elseif id == "toTest4" then
         newMap = "test4"
+
+    -- if the id is the name of a map, use it
+    elseif(fileExists("maps/" .. id .. ".lua")) then
+            newMap = id
     end
 
     player:setPosition(destX, destY)
