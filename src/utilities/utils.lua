@@ -113,3 +113,71 @@ end
 string.startswith = function(self, str) 
     return self:find('^' .. str) ~= nil
 end
+
+-- Returns informations about a map
+function getMapData(mapName)
+    mapData = {name = "test", x = 230, y = 358}
+
+    if mapName == "test" then 
+        mapData.name = "test"
+        mapData.x = 185
+        mapData.y = 130
+
+    elseif mapName == "test2" then 
+        mapData.name = "test2"
+        mapData.x = 240
+        mapData.y = 280
+
+    elseif mapName == "test3" then 
+        mapData.name = "test3"
+        mapData.x = 320
+        mapData.y = 30
+
+    elseif mapName == "test4" then 
+        mapData.name = "test4"
+        mapData.x = 190
+        mapData.y = 160
+
+    elseif mapName == "test5" then 
+        mapData.name = "test5"
+        mapData.x = 130
+        mapData.y = 180
+
+    elseif mapName == "test6" then 
+        mapData.name = "test6"
+        mapData.x = 230
+        mapData.y = 250 
+
+    elseif mapName == "testShop" then 
+        mapData.name = "testShop"
+        mapData.x = 240
+        mapData.y = 224
+
+    elseif mapName == "testCave" then 
+        mapData.name = "testCave"
+        mapData.x = 408
+        mapData.y = 388
+
+    elseif mapName == "testCave2" then 
+        mapData.name = "testCave2"
+        mapData.x = 233
+        mapData.y = 355
+
+    elseif mapName == "empty" then 
+        mapData.name = "empty"
+        mapData.x = 300
+        mapData.y = 215
+    end
+
+    return mapData
+end
+
+function fileExists(name)
+    local f=io.open(name,"r")
+    if f~=nil then
+        io.close(f)
+        return true
+    else
+        return false
+    end
+end

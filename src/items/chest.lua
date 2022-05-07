@@ -95,6 +95,8 @@ end
 
 function chests:getBigLoot(id)
     if id == 'test2' then
+        -- add the boomerang to the inventory
+        data.inventory[1] = true
         return sprites.items.boomerang
     end
 end

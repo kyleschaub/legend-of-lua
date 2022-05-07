@@ -9,9 +9,14 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test")
- 
+    loadMap("test4")
+
+    mapData = getMapData(loadedMap)
+    player:setX(mapData.x)
+    player:setY(mapData.y)
+
     dj.volume("effect", 1)
+    love.window.setTitle("Legend of Lua")
 
 end
 
@@ -38,12 +43,17 @@ function love.draw()
 end
 
 function love.keypressed(key)
+
+    if key == "=" then
+        print(player:getX(), player:getY())
+    end
+
     if key == 'q' then
         colliderToggle = not (colliderToggle and true);
     end
 
     if key == 'm' then
-        curtain:call()
+        curtain:call(loadedMap, player:getX(), player:getY())
     end
 
     if key == 'o' then
@@ -75,10 +85,7 @@ function love.keypressed(key)
     end
 
     if key == 'lctrl' then
-        data.item = data.item + 1
-        if data.item > 3 then
-            data.item = 1
-        end
+        player:switchItem()
     end
 
     if key == 'lshift' or key == 'rshift' then
@@ -87,7 +94,7 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
-    if key == 'x' and data.item == 3 then
+    if key == 'x' and data.item == 3 and player.state == 3 then
         useItem()
     end
 end
