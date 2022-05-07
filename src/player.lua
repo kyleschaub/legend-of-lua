@@ -398,6 +398,9 @@ function player:interact()
 end
 
 function player:switchItem()
+
+    if player.state == 3 then return end
+
     max = table.getn(data.inventory)
     checkedItem = data.item + 1
 
