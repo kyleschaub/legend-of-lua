@@ -15,6 +15,7 @@ function updateAll(dt)
     shake:update(dt)
     shaders:update(dt)
     triggers:update(dt)
+    pause:update(dt)
 
     particles:update(dt)
     particleWorld:update(dt)

@@ -47,4 +47,5 @@ end
 function drawAfterCamera()
     curtain:draw()
     drawHUD()
+    pause:draw()
 end

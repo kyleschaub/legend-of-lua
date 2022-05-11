@@ -39,6 +39,7 @@ sprites.items.coin3 = love.graphics.newImage('sprites/items/coin3Sheet.png')
 sprites.items.heart = love.graphics.newImage('sprites/items/heart.png')
 sprites.items.container = love.graphics.newImage('sprites/items/container.png')
 sprites.items.quiver = love.graphics.newImage('sprites/items/quiver.png')
+sprites.items.lantern = love.graphics.newImage('sprites/items/lantern.png')
 sprites.items.lootShadow = love.graphics.newImage('sprites/items/lootShadow.png')
 sprites.items.lootShadow2 = love.graphics.newImage('sprites/items/lootShadow2.png')
 sprites.items.chestClosed = love.graphics.newImage('sprites/environment/chestClosed.png')
@@ -52,6 +53,9 @@ sprites.hud.emptyHeart = love.graphics.newImage('sprites/ui/heart-empty.png')
 sprites.hud.itemBox = love.graphics.newImage('sprites/ui/itemBox.png')
 sprites.hud.ammoBox = love.graphics.newImage('sprites/ui/ammoBox.png')
 sprites.hud.coin = love.graphics.newImage('sprites/items/coinIcon.png')
+sprites.sprites = {}
+sprites.hud.equipBox = love.graphics.newImage('sprites/ui/pause/equipBox.png')
+sprites.hud.wideBox = love.graphics.newImage('sprites/ui/pause/wideBox.png')
 sprites.npc = {}
 sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 
@@ -61,5 +65,8 @@ fonts.debug2 = love.graphics.newFont(10*scale)
 fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
 fonts.coins = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 6.5*scale)
 fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
+fonts.pauseZX = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
+fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 13*scale)
+fonts.pause2 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
 
 sounds = {}

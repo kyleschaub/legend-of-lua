@@ -84,6 +84,10 @@ function love.keypressed(key)
     if key == 'lshift' or key == 'rshift' then
         player:interact()
     end
+
+    if key == 'return' then
+        pause:toggle()
+    end
 end
 
 function love.keyreleased(key)
