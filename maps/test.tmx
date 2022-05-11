@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="test.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
-  <image source="_tilesets/overworld.png" width="640" height="576"/>
+ <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1480" columns="40">
+  <image source="_tilesets/overworld.png" width="640" height="592"/>
   <tile id="40">
    <animation>
     <frame tileid="40" duration="100"/>
@@ -15,6 +15,38 @@
     <frame tileid="81" duration="100"/>
     <frame tileid="82" duration="100"/>
     <frame tileid="83" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="1440">
+   <animation>
+    <frame tileid="1440" duration="400"/>
+    <frame tileid="1441" duration="400"/>
+    <frame tileid="1442" duration="400"/>
+    <frame tileid="1443" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="1441">
+   <animation>
+    <frame tileid="1441" duration="400"/>
+    <frame tileid="1442" duration="400"/>
+    <frame tileid="1443" duration="400"/>
+    <frame tileid="1440" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="1442">
+   <animation>
+    <frame tileid="1442" duration="400"/>
+    <frame tileid="1443" duration="400"/>
+    <frame tileid="1440" duration="400"/>
+    <frame tileid="1441" duration="400"/>
+   </animation>
+  </tile>
+  <tile id="1443">
+   <animation>
+    <frame tileid="1443" duration="400"/>
+    <frame tileid="1440" duration="400"/>
+    <frame tileid="1441" duration="400"/>
+    <frame tileid="1442" duration="400"/>
    </animation>
   </tile>
  </tileset>

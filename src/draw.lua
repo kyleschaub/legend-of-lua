@@ -14,6 +14,10 @@ function drawCamera()
         gameMap:drawLayer(gameMap.layers["Objects"])
     end
 
+    if gameMap.layers["Objects2"] then
+        gameMap:drawLayer(gameMap.layers["Objects2"])
+    end
+
     if gameMap.layers["Test"] then
         --gameMap:drawLayer(gameMap.layers["Test"])
     end
