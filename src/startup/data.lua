@@ -10,10 +10,15 @@ function createNewSave()
 
     -- equipped (secondary) item
     -- 0 = nothing
-    -- 1 = boomerang
-    -- 2 = bomb
-    -- 3 = bow
-    data.item = 1
+    -- 1 = sword
+    -- 2 = boomerang
+    -- 3 = bomb
+    -- 4 = bow
+    data.item = {}
+
+    -- New setup: one for Z, one for X
+    data.item.z = 0
+    data.item.x = 0
 
     -- keep track of certain stackable items
     data.arrowCount = 25

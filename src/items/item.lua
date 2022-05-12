@@ -1,9 +1,11 @@
-function useItem()
-    if data.item == 1 then
+function useItem(key)
+    if data.item[key] == 1 then
+        player:swingSword()
+    elseif data.item[key] == 2 then
         player:useBoomerang()
-    elseif data.item == 2 then
+    elseif data.item[key] == 3 then
         player:useBomb()
-    elseif data.item == 3 then
+    elseif data.item[key] == 4 then
         player:useBow()
     end
 end

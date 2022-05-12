@@ -53,9 +53,10 @@ sprites.hud.emptyHeart = love.graphics.newImage('sprites/ui/heart-empty.png')
 sprites.hud.itemBox = love.graphics.newImage('sprites/ui/itemBox.png')
 sprites.hud.ammoBox = love.graphics.newImage('sprites/ui/ammoBox.png')
 sprites.hud.coin = love.graphics.newImage('sprites/items/coinIcon.png')
-sprites.sprites = {}
-sprites.hud.equipBox = love.graphics.newImage('sprites/ui/pause/equipBox.png')
-sprites.hud.wideBox = love.graphics.newImage('sprites/ui/pause/wideBox.png')
+sprites.pause = {}
+sprites.pause.equipBox = love.graphics.newImage('sprites/ui/pause/equipBox.png')
+sprites.pause.wideBox = love.graphics.newImage('sprites/ui/pause/wideBox.png')
+sprites.pause.cursor = love.graphics.newImage('sprites/ui/pause/cursor.png')
 sprites.npc = {}
 sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 

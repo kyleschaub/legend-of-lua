@@ -6,6 +6,23 @@ pause.width = 130 * pause.scale
 pause.x = love.graphics.getWidth()/2 - (pause.width/2)
 pause.y = 28 * pause.scale
 
+pause.cursor = {}
+pause.gridX = 0
+pause.gridY = 0
+pause.cursor.grid = anim8.newGrid(24, 24, sprites.pause.cursor:getWidth(), sprites.pause.cursor:getHeight(), nil, nil, 1)
+pause.cursor.anim = anim8.newAnimation(pause.cursor.grid('1-2', 1), 0.35)
+
+pause.textTitle = ""
+pause.textSubtitle = ""
+pause.spriteZ = nil
+pause.spriteX = nil
+pause.spriteZrot = 0
+pause.spriteXrot = 0
+pause.spriteZscale = 1
+pause.spriteXscale = 1
+pause.spriteZoffY = 0
+pause.spriteXoffY = 0
+
 function pause:open()
     self.active = true
 end
@@ -22,8 +39,91 @@ function pause:toggle()
     end
 end
 
-function pause:update(dt)
+function pause:equip(key)
+    if key == 'z' then
+        data.item.z = pause:getItemNumber()
+    elseif key == 'x' then
+        data.item.x = pause:getItemNumber()
+    end
+end
 
+function pause:getItemNumber()
+    if pause.gridY == 1 then return 0 end
+    return pause.gridX + 1
+end
+
+function pause:getSprite(key)
+    local item = data.item[key]
+    local spr = nil
+    local rot = 0
+    local sprScale = 1
+    local offY = 0
+    
+    if item == 1 then
+        spr = sprites.sword
+        rot = math.pi/-2
+        sprScale = 1.35
+    elseif item == 2 then
+        spr = sprites.items.boomerang
+        sprScale = 1.8
+    elseif item == 3 then
+        spr = sprites.items.bomb
+        sprScale = 1.5
+        offY = 1
+    elseif item == 4 then
+        spr = sprites.items.bowIcon
+        sprScale = 0.25
+    end
+
+    if key == 'z' then
+        pause.spriteZ = spr
+        pause.spriteZrot = rot
+        pause.spriteZscale = sprScale
+        pause.spriteZoffY = offY
+    elseif key == 'x' then
+        pause.spriteX = spr
+        pause.spriteXrot = rot
+        pause.spriteXscale = sprScale
+        pause.spriteXoffY = offY
+    end
+end
+
+function pause:update(dt)
+    pause.cursor.anim:update(dt)
+
+    pause.textTitle = ""
+    pause.textSubtitle = ""
+    pause.spriteZ = nil
+    pause.spriteX = nil
+
+    if pause.gridY == 0 then
+        if pause.gridX == 0 then
+            pause.textTitle = "Sword"
+            pause.textSubtitle = "Slash at enemies to deal damage"
+        elseif pause.gridX == 1 then
+            pause.textTitle = "Boomerang"
+            pause.textSubtitle = "Throw at enemies to stun them"
+        elseif pause.gridX == 2 then
+            pause.textTitle = "Bombs"
+            pause.textSubtitle = "Place on the ground to destroy obstacles"
+        elseif pause.gridX == 3 then
+            pause.textTitle = "Bow and Arrows"
+            pause.textSubtitle = "Shoot arrows at enemies to deal damage"
+        end
+    end
+
+    if pause.gridY == 1 then
+        if pause.gridX == 0 then
+            pause.textTitle = "Lantern"
+            pause.textSubtitle = "Improves visibility in dark areas"
+        elseif pause.gridX == 1 then
+            pause.textTitle = "Quiver"
+            pause.textSubtitle = "Increases the maximum number of arrows you can carry"
+        end
+    end
+
+    pause:getSprite('z')
+    pause:getSprite('x')
 end
 
 function pause:draw()
@@ -33,10 +133,18 @@ function pause:draw()
 
         -- Draw all boxes
         love.graphics.setColor(1,1,1,1)
-        love.graphics.draw(sprites.hud.equipBox, love.graphics.getWidth()/2 - (self.width/6), self.y, nil, pause.scale, nil, sprites.hud.equipBox:getWidth()/2, sprites.hud.equipBox:getHeight()/2)
-        love.graphics.draw(sprites.hud.equipBox, love.graphics.getWidth()/2 + (self.width/6), self.y, nil, pause.scale, nil, sprites.hud.equipBox:getWidth()/2, sprites.hud.equipBox:getHeight()/2)
-        love.graphics.draw(sprites.hud.wideBox, love.graphics.getWidth()/2, self.y + (33 * pause.scale), nil, pause.scale, nil, sprites.hud.wideBox:getWidth()/2, sprites.hud.wideBox:getHeight()/2)
-        love.graphics.draw(sprites.hud.wideBox, love.graphics.getWidth()/2, self.y + (63 * pause.scale), nil, pause.scale, nil, sprites.hud.wideBox:getWidth()/2, sprites.hud.wideBox:getHeight()/2)
+        love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 - (self.width/6), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
+        love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 + (self.width/6), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
+        love.graphics.draw(sprites.pause.wideBox, love.graphics.getWidth()/2, self.y + (33 * pause.scale), nil, pause.scale, nil, sprites.pause.wideBox:getWidth()/2, sprites.pause.wideBox:getHeight()/2)
+        love.graphics.draw(sprites.pause.wideBox, love.graphics.getWidth()/2, self.y + (63 * pause.scale), nil, pause.scale, nil, sprites.pause.wideBox:getWidth()/2, sprites.pause.wideBox:getHeight()/2)
+
+        -- Draw equipped items
+        if pause.spriteZ then
+            love.graphics.draw(pause.spriteZ, love.graphics.getWidth()/2 - (self.width/6), self.y + (pause.spriteZoffY * pause.scale), pause.spriteZrot, pause.scale * pause.spriteZscale, nil, pause.spriteZ:getWidth()/2, pause.spriteZ:getHeight()/2)
+        end
+        if pause.spriteX then
+            love.graphics.draw(pause.spriteX, love.graphics.getWidth()/2 + (self.width/6), self.y + (pause.spriteXoffY * pause.scale), pause.spriteXrot, pause.scale * pause.spriteXscale, nil, pause.spriteX:getWidth()/2, pause.spriteX:getHeight()/2)
+        end
 
         -- Draw all items
         love.graphics.draw(sprites.sword, love.graphics.getWidth()/2 - (56 * scale), self.y + (33 * pause.scale), math.pi/-2, pause.scale*1.35, nil, sprites.sword:getWidth()/2, sprites.sword:getHeight()/2)
@@ -53,9 +161,14 @@ function pause:draw()
 
         -- Text at the bottom
         love.graphics.setFont(fonts.pause1)
-        love.graphics.printf("Sword", love.graphics.getWidth()/2 - 4000, self.y + (80 * pause.scale), 8000, "center")
+        love.graphics.printf(pause.textTitle, love.graphics.getWidth()/2 - 4000, self.y + (80 * pause.scale), 8000, "center")
         love.graphics.setFont(fonts.pause2)
-        love.graphics.printf("Slash at enemies to deal damage", love.graphics.getWidth()/2 - 4000, self.y + (92 * pause.scale), 8000, "center")
+        love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (92 * pause.scale), 8000, "center")
+
+        -- Cursor
+        local cx = (love.graphics.getWidth()/2 - (56 * scale)) + (22 * pause.gridX * scale)
+        local cy = (self.y + (33 * pause.scale)) + (30 * pause.gridY * scale)
+        pause.cursor.anim:draw(sprites.pause.cursor, cx, cy, nil, pause.scale*0.95, nil, 12, 12)
 
         --love.graphics.rectangle("line", self.x, self.y, self.width, 24 * pause.scale)
     end

@@ -66,6 +66,8 @@ function player:update(dt)
         local dirX = 0
         local dirY = 0
 
+        if pause.active then return end
+
         if love.keyboard.isDown("right") then
             dirX = 1
             player.anim = player.animations.right

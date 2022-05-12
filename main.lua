@@ -63,11 +63,19 @@ function love.keypressed(key)
     end
 
     if key == 'z' then
-        player:swingSword()
+        if pause.active then
+            pause:equip('z')
+        else
+            useItem('z')
+        end
     end
 
     if key == 'x' then
-        useItem()
+        if pause.active then
+            pause:equip('x')
+        else
+            useItem('x')
+        end
     end
 
     if key == 'c' then
@@ -87,6 +95,22 @@ function love.keypressed(key)
 
     if key == 'return' then
         pause:toggle()
+    end
+
+    if key == 'right' and pause.active then
+        pause.gridX = pause.gridX + 1
+    end
+
+    if key == 'left' and pause.active then
+        pause.gridX = pause.gridX - 1
+    end
+
+    if key == 'up' and pause.active then
+        pause.gridY = pause.gridY - 1
+    end
+
+    if key == 'down' and pause.active then
+        pause.gridY = pause.gridY + 1
     end
 end
 
