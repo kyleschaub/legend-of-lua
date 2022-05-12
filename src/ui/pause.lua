@@ -160,6 +160,7 @@ function pause:draw()
         love.graphics.draw(sprites.items.bowIcon, love.graphics.getWidth()/2 - (-10 * scale), self.y + (33 * pause.scale), nil, pause.scale*0.25, nil, sprites.items.bowIcon:getWidth()/2, sprites.items.bowIcon:getHeight()/2)
 
         love.graphics.draw(sprites.items.lantern, love.graphics.getWidth()/2 - (56 * scale), self.y + (63 * pause.scale), nil, pause.scale*1.5, nil, sprites.items.lantern:getWidth()/2, sprites.items.lantern:getHeight()/2)
+        love.graphics.draw(sprites.items.quiver, love.graphics.getWidth()/2 - (34 * scale), self.y + (62 * pause.scale), nil, pause.scale*1.25, nil, sprites.items.quiver:getWidth()/2, sprites.items.quiver:getHeight()/2)
 
         -- Draw the Z and X box labels
         love.graphics.setFont(fonts.pauseZX)
