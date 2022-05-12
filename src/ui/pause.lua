@@ -4,7 +4,10 @@ pause.scale = scale
 pause.alpha = 0
 pause.width = 130 * pause.scale
 pause.x = love.graphics.getWidth()/2 - (pause.width/2)
-pause.y = 28 * pause.scale
+pause.y = 40 * pause.scale
+
+pause.trueY = 28 * pause.scale
+pause.fadeY = 40 * pause.scale
 
 pause.cursor = {}
 pause.gridX = 0
@@ -25,10 +28,14 @@ pause.spriteXoffY = 0
 
 function pause:open()
     self.active = true
+    flux.to(pause, 0.25, {alpha = 1}):ease("quadout")
+    flux.to(pause, 0.25, {y = pause.trueY}):ease("quadout")
 end
 
 function pause:close()
-    self.active = false
+    --self.active = false
+    flux.to(pause, 0.25, {alpha = 0}):ease("quadout"):oncomplete(function() pause.active = false end)
+    flux.to(pause, 0.25, {y = pause.fadeY}):ease("quadout")
 end
 
 function pause:toggle()
@@ -128,11 +135,11 @@ end
 
 function pause:draw()
     if self.active then
-        love.graphics.setColor(0,0,0,0.7)
+        love.graphics.setColor(0,0,0,0.7 * pause.alpha)
         love.graphics.rectangle("fill", -10, -10, love.graphics.getWidth() + 20, love.graphics.getHeight() + 20)
 
         -- Draw all boxes
-        love.graphics.setColor(1,1,1,1)
+        love.graphics.setColor(1,1,1,pause.alpha)
         love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 - (self.width/6), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
         love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 + (self.width/6), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
         love.graphics.draw(sprites.pause.wideBox, love.graphics.getWidth()/2, self.y + (33 * pause.scale), nil, pause.scale, nil, sprites.pause.wideBox:getWidth()/2, sprites.pause.wideBox:getHeight()/2)
