@@ -22,7 +22,7 @@ return {
       columns = 40,
       image = "_tilesets/overworld.png",
       imagewidth = 640,
-      imageheight = 576,
+      imageheight = 592,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -35,7 +35,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 1440,
+      tilecount = 1480,
       tiles = {}
     }
   },
@@ -227,21 +227,6 @@ return {
       parallaxy = 1,
       properties = {},
       objects = {
-        {
-          id = 46,
-          name = "eye",
-          type = "",
-          shape = "point",
-          x = 192,
-          y = 96,
-          width = 0,
-          height = 0,
-          rotation = 0,
-          visible = true,
-          properties = {
-            ["form"] = 1
-          }
-        },
         {
           id = 47,
           name = "eye",
