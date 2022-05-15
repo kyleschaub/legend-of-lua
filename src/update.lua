@@ -1,5 +1,17 @@
 function updateAll(dt)
 
+    if pause.active == false then
+        updateGame(dt)
+    end
+    
+    pause:update(dt)
+    flux.update(dt)
+    dj.cleanup()
+    if gameMap then gameMap:update(dt) end
+
+end
+
+function updateGame(dt)
     player:update(dt)
     world:update(dt)
     walls:update(dt)
@@ -15,14 +27,6 @@ function updateAll(dt)
     shake:update(dt)
     shaders:update(dt)
     triggers:update(dt)
-    pause:update(dt)
-
     particles:update(dt)
     particleWorld:update(dt)
-
-    flux.update(dt)
-    dj.cleanup()
-
-    if gameMap then gameMap:update(dt) end
-
 end
