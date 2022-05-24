@@ -17,8 +17,8 @@ function createNewSave()
     data.item = {}
 
     -- New setup: one for Z, one for X
-    data.item.z = 0
-    data.item.x = 0
+    data.item.z = 1
+    data.item.x = 2
 
     -- keep track of certain stackable items
     data.arrowCount = 25

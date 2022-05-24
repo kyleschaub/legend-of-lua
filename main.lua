@@ -9,7 +9,7 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test7")
+    loadMap("test")
  
     dj.volume("effect", 1)
 
@@ -83,9 +83,9 @@ function love.keypressed(key)
     end
 
     if key == 'lctrl' then
-        data.item = data.item + 1
-        if data.item > 3 then
-            data.item = 1
+        data.item.x = data.item.x + 1
+        if data.item.x > 3 then
+            data.item.x = 1
         end
     end
 

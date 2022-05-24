@@ -43,12 +43,12 @@ function drawItemBox()
 
     local ammoCount = -1
     local maxed = false
-    if data.item == 2 then
+    if data.item.x == 2 then
         ammoCount = data.bombCount
         if data.bombCount == data.maxBombCount then
             maxed = true
         end
-    elseif data.item == 3 then
+    elseif data.item.x == 3 then
         ammoCount = data.arrowCount
         if data.arrowCount == data.maxArrowCount then
             maxed = true
@@ -72,14 +72,14 @@ function drawItemBox()
     local offX = -1.5
     local offY = -1.5
     local scaleMod = 1.25
-    if data.item == 1 then -- boomerang
+    if data.item.x == 1 then -- boomerang
         spr = sprites.items.boomerang
-    elseif data.item == 2 then -- bomb
+    elseif data.item.x == 2 then -- bomb
         spr = sprites.items.bomb
         offX = 2.3
         offY = 2.8
         scaleMod = 1.1
-    elseif data.item == 3 then -- bow
+    elseif data.item.x == 3 then -- bow
         spr = sprites.items.bowIcon
         offX = 4.2
         offY = 2.3
