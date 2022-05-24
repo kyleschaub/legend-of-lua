@@ -28,6 +28,6 @@ function menu:select(key)
 
     -- Testing destinations (be sure to remove!)
     if key == "1" then
-        --loadMap("test/flat-level")
+        loadMap("test7")
     end
 end
