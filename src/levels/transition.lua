@@ -28,8 +28,11 @@ function triggerTransition(id, destX, destY)
         newMap = "playerHouse"
     elseif id == "toTest7" then
         newMap = "test7"
+    else
+        newMap = id
     end
 
+    gamestate = 1
     player:setPosition(destX, destY)
 
     loadMap(newMap)

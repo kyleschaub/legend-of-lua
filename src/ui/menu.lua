@@ -20,6 +20,12 @@ function menu:select(key)
             loadGame(2)
         elseif key == "3" then
             loadGame(3)
+        else
+            return
+        end
+
+        if data.map and string.len(data.map) > 0 then
+            curtain:call(data.map, data.playerX, data.playerY, "fade")
         end
 
         return

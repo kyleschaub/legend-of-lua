@@ -46,8 +46,8 @@ function drawCamera()
 end
 
 function drawAfterCamera()
-    if gamestate == 0 then return end
     curtain:draw()
+    if gamestate == 0 then return end
     drawHUD()
     pause:draw()
 end

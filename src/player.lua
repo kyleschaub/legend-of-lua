@@ -1,4 +1,4 @@
-player = world:newBSGRectangleCollider(330, 140, 12, 15, 3)
+player = world:newBSGRectangleCollider(234, 184, 12, 15, 3)
 player.x = 0
 player.y = 0
 player.dir = "down"
@@ -42,8 +42,6 @@ player.animations.useLeft = anim8.newAnimation(player.grid(3, 8), player.animSpe
 player.animations.hold = anim8.newAnimation(player.grid(1, 9), player.animSpeed)
 
 player.anim = player.animations.down
-
-player:setLinearVelocity(-100, 0)
 
 function player:update(dt)
     if player.state == -1 or gamestate == 0 then return end

@@ -1,4 +1,4 @@
-function createNewSave()
+function createNewSave(fileNumber)
     -- This represents the save data
     data = {}
     data.saveCount = 0 -- how many times has the game saved
@@ -20,7 +20,7 @@ function createNewSave()
     -- keep track of certain stackable items
     data.arrowCount = 25
     data.maxArrowCount = 30
-    data.bombCount = 18
+    data.bombCount = 10
     data.maxBombCount = 20
 
     -- table that keeps track of all breakables that have been destroyed
@@ -72,16 +72,19 @@ function loadGame(fileNumber)
         end
     end
 
-    loadMap(data.map, data.playerX, data.playerY)
+    --loadMap(data.map, data.playerX, data.playerY)
     player.direction = "down"
-    player.state = 0
-    gamestate = 1
+    --player.state = 0
+    --gamestate = 1
 end
 
 function startFresh(fileNumber)
     createNewSave(fileNumber)
-    loadMap("test")
+    --loadMap("playerHouse")
+    data.map = "playerHouse"
+    data.playerX = 240
+    data.playerY = 190
     player.state = 0
-    gamestate = 1
+    --gamestate = 1
     --saveGame()
 end
