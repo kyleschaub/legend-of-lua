@@ -8,15 +8,12 @@ function createNewSave()
     data.maxHealth = 4 -- maximum number of hearts
     data.money = 0 -- amount of currency
 
-    -- equipped (secondary) item
-    -- 0 = nothing
-    -- 1 = sword
-    -- 2 = boomerang
-    -- 3 = bomb
-    -- 4 = bow
-    data.item = {}
+    data.map = "" -- currently loaded map
+    if fileNumber == nil then fileNumber = 1 end
+    data.fileNumber = fileNumber -- which file are we using
 
-    -- New setup: one for Z, one for X
+    -- Currently, can equip an item to Z and X
+    data.item = {}
     data.item.z = 1
     data.item.x = 2
 
@@ -31,4 +28,60 @@ function createNewSave()
 
     -- table that keeps track of chests that have been opened
     data.chests = {}
+end
+
+function saveGame()
+    data.saveCount = data.saveCount + 1
+    data.playerX = player:getX()
+    data.playerY = player:getY()
+    data.map = loadedMap
+
+    if data.fileNumber == 1 then
+        love.filesystem.write("file1.lua", table.show(data, "data"))
+    elseif data.fileNumber == 2 then
+        love.filesystem.write("file2.lua", table.show(data, "data"))
+    elseif data.fileNumber == 3 then
+        love.filesystem.write("file3.lua", table.show(data, "data"))
+    end
+end
+  
+function loadGame(fileNumber)
+    if fileNumber == 1 then
+        if love.filesystem.getInfo("file1.lua") ~= nil then
+            local data = love.filesystem.load("file1.lua")
+            data()
+        else
+            startFresh(1)
+            return "No data found for save file #1"
+        end
+    elseif fileNumber == 2 then
+        if love.filesystem.getInfo("file2.lua") ~= nil then
+            local data = love.filesystem.load("file2.lua")
+            data()
+        else
+            startFresh(2)
+            return "No data found for save file #2"
+        end
+    elseif fileNumber == 3 then
+        if love.filesystem.getInfo("file3.lua") ~= nil then
+            local data = love.filesystem.load("file3.lua")
+            data()
+        else
+            startFresh(3)
+            return "No data found for save file #3"
+        end
+    end
+
+    loadMap(data.map, data.playerX, data.playerY)
+    player.direction = "down"
+    player.state = 0
+    gamestate = 1
+end
+
+function startFresh(fileNumber)
+    createNewSave(fileNumber)
+    loadMap("test")
+    player.state = 0
+    gamestate = 1
+    --saveGame()
 end

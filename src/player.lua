@@ -19,7 +19,7 @@ player.holdSprite = sprites.items.heart
 -- 10 = Damage stun
 -- 11 = Hold item
 -- 12 = Transition
-player.state = 0
+player.state = -1
 
 player:setCollisionClass("Player")
 player:setFixedRotation(true)
@@ -46,6 +46,7 @@ player.anim = player.animations.down
 player:setLinearVelocity(-100, 0)
 
 function player:update(dt)
+    if player.state == -1 or gamestate == 0 then return end
 
     if player.stunTimer > 0 then
         player.stunTimer = player.stunTimer - dt

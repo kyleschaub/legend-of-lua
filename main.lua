@@ -9,7 +9,7 @@ function love.load()
     gameStart()
     createNewSave()
 
-    loadMap("test")
+    loadMap("menu")
  
     dj.volume("effect", 1)
 
@@ -112,6 +112,12 @@ function love.keypressed(key)
     if key == 'down' and pause.active then
         pause.gridY = pause.gridY + 1
     end
+
+    if key == 's' then
+        saveGame()
+    end
+
+    menu:select(key)
 end
 
 function love.keyreleased(key)

@@ -1,9 +1,10 @@
 function drawBeforeCamera()
-
+    menu:draw()
 end
 
 function drawCamera()
 
+    if gamestate == 0 then return end
     setWhite()
 
     if gameMap.layers["Base"] then
@@ -45,6 +46,7 @@ function drawCamera()
 end
 
 function drawAfterCamera()
+    if gamestate == 0 then return end
     curtain:draw()
     drawHUD()
     pause:draw()

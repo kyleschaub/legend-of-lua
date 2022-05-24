@@ -53,4 +53,8 @@ function loadMap(mapName, destX, destY)
         gameMap.dark = false
     end
 
+    if destX and destY then
+        player:setPosition(destX, destY)
+    end
+
 end

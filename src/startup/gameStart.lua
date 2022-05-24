@@ -55,6 +55,11 @@ end
 
 function initGlobals()
     data = {} -- save data, will be loaded after game begins
+
+    -- game state
+    -- 0: main menu
+    -- 1: gameplay
+    gamestate = 0
 end
 
 function setScale(input)

@@ -31,6 +31,7 @@ function requireAll()
     require("src/levels/wall")
 
     require("src/ui/hud")
+    require("src/ui/menu")
     require("src/ui/pause")
 
     require("src/utilities/cam")
