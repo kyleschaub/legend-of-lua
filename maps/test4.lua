@@ -22,7 +22,7 @@ return {
       columns = 40,
       image = "_tilesets/overworld.png",
       imagewidth = 640,
-      imageheight = 576,
+      imageheight = 592,
       objectalignment = "unspecified",
       tileoffset = {
         x = 0,
@@ -35,7 +35,7 @@ return {
       },
       properties = {},
       wangsets = {},
-      tilecount = 1440,
+      tilecount = 1480,
       tiles = {}
     }
   },
@@ -212,34 +212,7 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {
-        {
-          id = 33,
-          name = "test1",
-          type = "small",
-          shape = "rectangle",
-          x = 288,
-          y = 144,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 34,
-          name = "test2",
-          type = "big",
-          shape = "rectangle",
-          x = 320,
-          y = 144,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
+      objects = {}
     },
     {
       type = "objectgroup",

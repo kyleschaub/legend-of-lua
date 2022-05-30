@@ -1,6 +1,7 @@
 function gameStart()
 
     math.randomseed(os.time())
+    love.graphics.setBackgroundColor(0.3, 0.3, 0.3)
 
     -- Initialize all global variables for the game
     initGlobals()
@@ -10,7 +11,7 @@ function gameStart()
 
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
-    setWindowSize(false, 1920, 1080)
+    setWindowSize(false, 1360, 1920)
 
     -- The game's graphics scale up, this method finds the right ratio
     setScale()
@@ -63,7 +64,7 @@ function initGlobals()
 end
 
 function setScale(input)
-    scale = (10 / 1200) * windowHeight
+    scale = (8 / 1200) * windowHeight
 
     if input == "zone" then -- 12 tiles high
         scale = (6.25 / 1200) * windowHeight

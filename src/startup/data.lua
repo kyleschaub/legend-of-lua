@@ -1,14 +1,15 @@
 function createNewSave(fileNumber)
+
     -- This represents the save data
     data = {}
-    data.saveCount = 0 -- how many times has the game saved
+    data.saveCount = 0 -- times the game was saved
     data.progress = 0 -- milestone tracker
     data.playerX = 0 -- player's X position
     data.playerY = 0 -- player's Y position
     data.maxHealth = 4 -- maximum number of hearts
     data.money = 0 -- amount of currency
-
     data.map = "" -- currently loaded map
+
     if fileNumber == nil then fileNumber = 1 end
     data.fileNumber = fileNumber -- which file are we using
 

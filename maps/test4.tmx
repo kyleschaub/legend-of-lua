@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="test4.lua" format="lua"/>
  </editorsettings>
- <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1440" columns="40">
-  <image source="_tilesets/overworld.png" width="640" height="576"/>
+ <tileset firstgid="1" name="overworld" tilewidth="16" tileheight="16" tilecount="1480" columns="40">
+  <image source="_tilesets/overworld.png" width="640" height="592"/>
  </tileset>
  <layer id="1" name="Base" width="30" height="22">
   <data encoding="csv">
@@ -42,10 +42,7 @@
   <object id="31" x="211.545" y="52.4545" width="10.8182" height="7.63636"/>
   <object id="32" x="276.455" y="41.6364" width="23.8182" height="20.3636"/>
  </objectgroup>
- <objectgroup id="7" name="Chests">
-  <object id="33" name="test1" type="small" x="288" y="144" width="16" height="16"/>
-  <object id="34" name="test2" type="big" x="320" y="144" width="16" height="16"/>
- </objectgroup>
+ <objectgroup id="7" name="Chests"/>
  <objectgroup id="5" name="Enemies"/>
  <objectgroup id="6" name="Transitions">
   <object id="30" name="toTestCave" x="224" y="100" width="16" height="16">
