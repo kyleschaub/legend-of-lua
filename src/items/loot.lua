@@ -1,6 +1,7 @@
 loots = {}
 
 function spawnLoot(x, y, type, bounce, price, dir)
+    
     local loot = {}
     loot.x = x
     loot.y = y
@@ -11,9 +12,12 @@ function spawnLoot(x, y, type, bounce, price, dir)
     loot.bounceY = 0 -- used for bounce animation when spawned
     loot.shadowSpr = sprites.items.lootShadow
     loot.shop = shop
-    loot.price = 0
     loot.dir = dir
-    if price and price > 0 then loot.price = price end
+
+    loot.price = 0
+    if price and price > 0 then
+        loot.price = price
+    end
 
     if loot.type == "arrow" then
         loot.spr = sprites.items.arrow
@@ -70,6 +74,14 @@ function spawnLoot(x, y, type, bounce, price, dir)
             self.y = self.y + self.dir.y * dt
         end
         if distanceBetween(self.x, self.y, player:getX(), player:getY()) < 10 and self.dead == false and self.bouncing == false then
+            if self.price > 0 then
+                if data.money >= self.price then
+                    data.money = data.money - self.price
+                else
+                    return nil
+                end
+            end
+
             self.dead = true
             if self.type == "arrow" then
                 data.arrowCount = data.arrowCount + 1
@@ -80,9 +92,9 @@ function spawnLoot(x, y, type, bounce, price, dir)
             elseif self.type == "coin1" then
                 data.money = data.money + 1
             elseif self.type == "coin2" then
-                data.money = data.money + 3
-            elseif self.type == "coin3" then
                 data.money = data.money + 5
+            elseif self.type == "coin3" then
+                data.money = data.money + 10
             elseif self.type == "heart" then
                 player.health = player.health + 1
                 if player.health > data.maxHealth then player.health = data.maxHealth end

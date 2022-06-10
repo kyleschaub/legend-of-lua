@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 8,
-  nextobjectid = 38,
+  nextobjectid = 39,
   properties = {},
   tilesets = {
     {
@@ -161,7 +161,23 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 38,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 336,
+          y = 224,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
