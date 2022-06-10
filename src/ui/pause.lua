@@ -94,6 +94,9 @@ function pause:getSprite(key)
     elseif item == 4 then
         spr = sprites.items.bowIcon
         sprScale = 0.25
+    elseif item == 5 then
+        spr = sprites.items.hookshot
+        sprScale = 1.8
     end
 
     if key == 'z' then
@@ -173,6 +176,7 @@ function pause:draw()
         love.graphics.draw(sprites.items.boomerang, pause.leftX + (22 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*1.8, nil, sprites.items.boomerang:getWidth()/2, sprites.items.boomerang:getHeight()/2)
         love.graphics.draw(sprites.items.bomb, pause.leftX + (44 * pause.scale), self.y + (34 * pause.scale), nil, pause.scale*1.5, nil, sprites.items.bomb:getWidth()/2, sprites.items.bomb:getHeight()/2)
         love.graphics.draw(sprites.items.bowIcon, pause.leftX + (66 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*0.25, nil, sprites.items.bowIcon:getWidth()/2, sprites.items.bowIcon:getHeight()/2)
+        love.graphics.draw(sprites.items.hookshot, pause.leftX + (88 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*1.8, nil, sprites.items.hookshot:getWidth()/2, sprites.items.hookshot:getHeight()/2)
 
         love.graphics.draw(sprites.items.lantern, pause.leftX, self.y + (63 * pause.scale), nil, pause.scale*1.5, nil, sprites.items.lantern:getWidth()/2, sprites.items.lantern:getHeight()/2)
         love.graphics.draw(sprites.items.quiver, pause.leftX + (22 * pause.scale), self.y + (62 * pause.scale), nil, pause.scale*1.25, nil, sprites.items.quiver:getWidth()/2, sprites.items.quiver:getHeight()/2)

@@ -354,6 +354,17 @@ function player:useBow()
     end
 end
 
+function player:useHookshot()
+    if player.state == 0 then
+        player.state = 3
+        player:setLinearVelocity(0, 0)
+    elseif player.state == 3 then
+        player.state = 3.1
+        spawnArrow(player.dir)
+        player.animTimer = player.bowRecoveryTime
+    end
+end
+
 function player:resetAnimation(direction)
     player.anim = player.animations[direction]
     player.anim:gotoFrame(1)
