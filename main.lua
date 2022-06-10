@@ -121,7 +121,10 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
-    if key == 'x' and data.item == 3 then
-        useItem()
+    if pause.active then return end
+    if key == 'z' then
+        useItem('z', true)
+    elseif key == 'x' then
+        useItem('x', true)
     end
 end
