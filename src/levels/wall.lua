@@ -1,6 +1,6 @@
 walls = {}
 
-function spawnWall(x, y, width, height, name, parent)
+function spawnWall(x, y, width, height, name, type, parent)
 
     -- name is used to identify special types of walls (ex. breakable walls)
     -- also used to identify walls that might not need to be spawned
@@ -13,6 +13,7 @@ function spawnWall(x, y, width, height, name, parent)
     wall.offY = 0
     wall.name = name
     wall.parent = parent
+    wall.type = type
 
     if name and name:startswith('break') then
         wall.breakable = true
@@ -31,6 +32,12 @@ function spawnWall(x, y, width, height, name, parent)
                 data.breakables[self.name] = true
                 particleEvent("rockBreak", x+width/2, y+height/2)
             end
+        end
+    end
+
+    if wall.type then
+        if wall.type == 'ground' then
+            wall:setCollisionClass('Ground')
         end
     end
 

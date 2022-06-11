@@ -6,6 +6,13 @@ function requireAll()
     -- Load assets, resources, data
     require("src/startup/resources")
     require("src/startup/data")
+    
+    require("src/utilities/cam")
+    require("src/utilities/destroyAll")
+    require("src/utilities/shaders")
+    require("src/utilities/shake")
+    require("src/utilities/triggers")
+    require("src/utilities/utils")
 
     require("src/player")
     require("src/update")
@@ -22,6 +29,7 @@ function requireAll()
     require("src/items/arrow")
     require("src/items/bomb")
     require("src/items/boomerang")
+    require("src/items/hookshot")
     require("src/items/chest")
     
     require("src/levels/curtain")
@@ -33,12 +41,5 @@ function requireAll()
     require("src/ui/hud")
     require("src/ui/menu")
     require("src/ui/pause")
-
-    require("src/utilities/cam")
-    require("src/utilities/destroyAll")
-    require("src/utilities/shaders")
-    require("src/utilities/shake")
-    require("src/utilities/triggers")
-    require("src/utilities/utils")
 
 end

@@ -16,6 +16,7 @@ player.holdSprite = sprites.items.heart
 -- 1 = Sword swing
 -- 2 = Use (bomb)
 -- 3 = Bow (3: bow drawn, 3.1: recover)
+-- 4 = Hookshot (4: armed, 4.1: launching, 4.2: moving)
 -- 10 = Damage stun
 -- 11 = Hold item
 -- 12 = Transition
@@ -141,6 +142,24 @@ function player:update(dt)
 
         -- while drawing the bow back, always 'use' the item
         player:useItem(player.bowRecoveryTime)
+    
+    elseif player.state == 4 or player.state == 4.1 then
+
+        -- while arming the hookshot, always 'use' the item
+        player:useItem(1)
+
+        if player.state == 4.1 and hookshot.state == -1 then
+            if distanceBetween(player:getX(), player:getY(), hookshot.x, hookshot.y) < 12 then
+                hookshot.state = 0
+                player.state = 0
+                player:resetAnimation(player.dir)
+            end
+        end
+
+    elseif player.state == 4.2 then
+
+        player:setX( player:getX() + (hookshot.dirVec.x * hookshot.speed * dt) )
+        player:setY( player:getY() + (hookshot.dirVec.y * hookshot.speed * dt) )
 
     elseif player.state == 11 then -- got an item
 
@@ -180,7 +199,9 @@ function player:draw()
     local swSpr = sprites.sword
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
+    local hookSpr = sprites.items.hookshotArmed
     if player.state == 3.1 or data.arrowCount < 1 then bowSpr = sprites.items.bow2 end
+    if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
 
     local px = player:getX()+1
     local py = player:getY()-5
@@ -251,6 +272,21 @@ function player:draw()
         if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
+    -- Hookshot 'right'
+    if player.dir == "right" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
+        love.graphics.draw(hookSpr, px+8, py+7, nil, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
+    end
+
+    -- Hookshot 'left'
+    if player.dir == "left" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
+        love.graphics.draw(hookSpr, px-10, py+7, math.pi, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
+    end
+
+    -- Hookshot 'down'
+    if player.dir == "down" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
+        love.graphics.draw(hookSpr, px+2, py+13, math.pi/2, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
+    end
+
     if player.state == 11 then
         love.graphics.draw(player.holdSprite, player:getX(), player:getY()-18, nil, nil, nil, player.holdSprite:getWidth()/2, player.holdSprite:getHeight()/2)
     end
@@ -314,7 +350,7 @@ end
 
 function player:useItem(duration)
 
-    if player.state ~= 3 and player.state ~= 3.1 then
+    if player.state ~= 3 and player.state ~= 3.1 and player.state ~= 4 and player.state ~= 4.1 then
         player.state = 2
     end
 
@@ -356,11 +392,11 @@ end
 
 function player:useHookshot()
     if player.state == 0 then
-        player.state = 3
+        player.state = 4
         player:setLinearVelocity(0, 0)
-    elseif player.state == 3 then
-        player.state = 3.1
-        spawnArrow(player.dir)
+    elseif player.state == 4 then
+        player.state = 4.1
+        hookshot:shoot(player.dir)
         player.animTimer = player.bowRecoveryTime
     end
 end

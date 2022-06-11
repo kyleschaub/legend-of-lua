@@ -16,7 +16,7 @@ function createNewSave(fileNumber)
     -- Currently, can equip an item to Z and X
     data.item = {}
     data.item.z = 1
-    data.item.x = 2
+    data.item.x = 5
 
     -- keep track of certain stackable items
     data.arrowCount = 25

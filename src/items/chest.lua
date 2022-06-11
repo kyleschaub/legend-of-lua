@@ -24,7 +24,7 @@ function spawnChest(x, y, id, size)
     end
 
     -- Wall spawned overtop of the chest, passed chest as parent
-    spawnWall(chest.x, chest.y, chest.width, chest.height, nil, chest)
+    spawnWall(chest.x, chest.y, chest.width, chest.height, nil, nil, chest)
 
     if chest.size == "small" then
         chest.x = chest.x + 1

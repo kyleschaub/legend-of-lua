@@ -5,7 +5,7 @@ function loadMap(mapName, destX, destY)
 
     if gameMap.layers["Walls"] then
         for i, obj in pairs(gameMap.layers["Walls"].objects) do
-            spawnWall(obj.x, obj.y, obj.width, obj.height, obj.name)
+            spawnWall(obj.x, obj.y, obj.width, obj.height, obj.name, obj.type)
         end
     end
 
