@@ -86,6 +86,16 @@ function hookshot:update(dt)
             player:setCollisionClass('Ignore')
         end
 
+        -- Query for enemies
+        local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
+        for _,e in ipairs(hitEnemies) do
+            if e.parent.hookable then
+                e.parent.dizzyTimer = 2
+                e.parent.hookVec = getDirectionVector(hookshot.dir)
+            end
+            hookshot.state = -1
+        end
+
         for _,l in ipairs(loots) do
             if distanceBetween(l.x, l.y, hookshot.x, hookshot.y) < 10 then
                 self.state = -1

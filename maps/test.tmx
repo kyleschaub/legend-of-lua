@@ -117,7 +117,7 @@
   <object id="55" name="test2" type="small" x="104" y="234" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="Enemies">
-  <object id="23" name="eye" x="480" y="80">
+  <object id="23" name="eye" x="359.25" y="156.75">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>

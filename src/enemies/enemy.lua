@@ -10,6 +10,9 @@ function spawnEnemy(x, y, type, args)
     enemy.health = 3
     enemy.flashTimer = 0
 
+    enemy.hookable = true
+    enemy.hookVec = nil
+
     -- Function that sets the properties of the new enemy
     local init
     if type == "eye" then
@@ -27,6 +30,12 @@ function spawnEnemy(x, y, type, args)
             if self.flashTimer < 0 then
                 self.flashTimer = 0
             end
+        end
+
+        if self.hookVec and self.dizzyTimer > 0 and hookshot.state == -1 then
+            self.physics:setLinearVelocity(0, 0)
+            self.physics:setX( self.physics:getX() + (self.hookVec.x * hookshot.speed * -1 * dt) )
+            self.physics:setY( self.physics:getY() + (self.hookVec.y * hookshot.speed * -1 * dt) )
         end
     end
 
