@@ -13,6 +13,7 @@ function spawnLoot(x, y, type, bounce, price, dir)
     loot.shadowSpr = sprites.items.lootShadow
     loot.shop = shop
     loot.dir = dir
+    loot.hookVec = nil
 
     loot.price = 0
     if price and price > 0 then
@@ -103,6 +104,11 @@ function spawnLoot(x, y, type, bounce, price, dir)
             if self.price > 0 then
                 player:gotItem(self.spr)
             end
+        end
+
+        if self.hookVec and hookshot.state == -1 then
+            self.x = self.x + (self.hookVec.x * hookshot.speed * -1 * dt)
+            self.y = self.y + (self.hookVec.y * hookshot.speed * -1 * dt)
         end
     end
 

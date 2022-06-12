@@ -85,6 +85,13 @@ function hookshot:update(dt)
             player.state = 4.2
             player:setCollisionClass('Ignore')
         end
+
+        for _,l in ipairs(loots) do
+            if distanceBetween(l.x, l.y, hookshot.x, hookshot.y) < 10 then
+                self.state = -1
+                l.hookVec = getDirectionVector(hookshot.dir)
+            end
+        end
     end
 
 end

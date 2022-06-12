@@ -100,7 +100,7 @@
   <object id="20" type="arrow" x="48" y="112">
    <point/>
   </object>
-  <object id="21" type="bomb" x="416" y="336">
+  <object id="21" type="bomb" x="177" y="277.75">
    <point/>
   </object>
   <object id="43" type="coin2" x="448" y="304">
