@@ -14,6 +14,7 @@ function spawnLoot(x, y, type, bounce, price, dir)
     loot.shop = shop
     loot.dir = dir
     loot.hookVec = nil
+    loot.boomeranged = false
 
     loot.price = 0
     if price and price > 0 then
@@ -109,6 +110,11 @@ function spawnLoot(x, y, type, bounce, price, dir)
         if self.hookVec and hookshot.state == -1 then
             self.x = self.x + (self.hookVec.x * hookshot.speed * -1 * dt)
             self.y = self.y + (self.hookVec.y * hookshot.speed * -1 * dt)
+        end
+
+        if self.boomeranged then
+            self.x = boomerang.x
+            self.y = boomerang.y - 4
         end
     end
 

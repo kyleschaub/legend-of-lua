@@ -48,6 +48,12 @@ function boomerang:update(dt)
         end
     end
 
+    for _,l in ipairs(loots) do
+        if distanceBetween(l.x, l.y, self.x, self.y) < 10 then
+            l.boomeranged = true
+        end
+    end
+
     self.x = self.x + self.dir.x * dt
     self.y = self.y + self.dir.y * dt
 end
