@@ -22,6 +22,8 @@ function triggerTransition(id, destX, destY)
         newMap = "test"
     elseif id == "toTestCave" then
         newMap = "testCave"
+    elseif id == "toTestCave2" then
+        newMap = "testCave2"
     elseif id == "toTest4" then
         newMap = "test4"
     elseif id == "toPlayerHouse" then

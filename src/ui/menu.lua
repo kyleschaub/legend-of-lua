@@ -36,6 +36,6 @@ function menu:select(key)
     if key == "1" then
         loadMap("test")
     elseif key == "2" then
-        loadMap("test5")
+        loadMap("test4")
     end
 end
