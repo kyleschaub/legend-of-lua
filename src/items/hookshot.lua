@@ -90,7 +90,7 @@ function hookshot:update(dt)
         local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
         for _,e in ipairs(hitEnemies) do
             if e.parent.hookable then
-                e.parent.dizzyTimer = 2
+                e.parent.dizzyTimer = 1
                 e.parent.hookVec = getDirectionVector(hookshot.dir)
             end
             hookshot.state = -1

@@ -100,16 +100,16 @@
   <object id="20" type="arrow" x="48" y="112">
    <point/>
   </object>
-  <object id="21" type="bomb" x="177" y="277.75">
+  <object id="21" type="heart" x="205.75" y="170.25">
    <point/>
   </object>
-  <object id="43" type="coin2" x="448" y="304">
+  <object id="43" type="coin2" x="376.25" y="187.5">
    <point/>
   </object>
-  <object id="44" type="coin1" x="432" y="304">
+  <object id="44" type="coin1" x="360.25" y="187.5">
    <point/>
   </object>
-  <object id="45" type="coin3" x="464" y="304">
+  <object id="45" type="coin3" x="392.25" y="187.5">
    <point/>
   </object>
  </objectgroup>
@@ -117,7 +117,7 @@
   <object id="55" name="test2" type="small" x="104" y="234" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="Enemies">
-  <object id="23" name="eye" x="359.25" y="156.75">
+  <object id="23" name="eye" x="475.75" y="79.25">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>
