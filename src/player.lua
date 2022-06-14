@@ -304,6 +304,7 @@ function player:checkTransition()
     if player:enter('Transition') then
         local t = player:getEnterCollisionData('Transition')
         curtain:call(t.collider.id, t.collider.destX, t.collider.destY)
+        --triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
     end
 end
 

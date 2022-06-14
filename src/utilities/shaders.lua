@@ -7,7 +7,7 @@ shaders.simpleLight = love.graphics.newShader[[
     extern number playerX = 0;
     extern number playerY = 0;
 
-    number radius = 500;
+    number radius = 400;
     vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ) {
         number distance = pow(pow(screen_coords.x - playerX, 2) + pow(screen_coords.y - playerY, 2), 0.5);
         if (distance < radius) {
@@ -24,7 +24,7 @@ shaders.trueLight = love.graphics.newShader[[
     extern number playerX = 0;
     extern number playerY = 0;
 
-    number radius = 950;
+    number radius = 900;
     vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ) {
         number distance = pow(pow(screen_coords.x - playerX, 2) + pow(screen_coords.y - playerY, 2), 0.5);
         number alpha = distance / radius;

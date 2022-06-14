@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 10,
-  nextobjectid = 98,
+  nextobjectid = 100,
   properties = {
     ["dark"] = true
   },
