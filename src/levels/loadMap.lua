@@ -1,5 +1,10 @@
 function loadMap(mapName, destX, destY)
     destroyAll()
+
+    if destX and destY then
+        player:setPosition(destX, destY)
+    end
+
     loadedMap = mapName
     gameMap = sti("maps/" .. mapName .. ".lua")
 
@@ -51,10 +56,6 @@ function loadMap(mapName, destX, destY)
         gameMap.dark = gameMap.properties.dark
     else
         gameMap.dark = false
-    end
-
-    if destX and destY then
-        player:setPosition(destX, destY)
     end
 
 end
