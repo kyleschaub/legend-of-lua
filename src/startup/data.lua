@@ -24,7 +24,7 @@ function createNewSave(fileNumber)
     data.bombCount = 10
     data.maxBombCount = 20
 
-    -- table that keeps track of all breakables that have been destroyed
+    -- table that keeps track of breakables that have been destroyed
     data.breakables = {}
 
     -- table that keeps track of chests that have been opened
