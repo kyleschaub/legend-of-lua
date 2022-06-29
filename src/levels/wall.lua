@@ -2,6 +2,7 @@ walls = {}
 
 function spawnWall(x, y, width, height, name, type, parent)
 
+    -- Do not spawn the wall if the name is in data.breakables
     if data.breakables[name] then return end
 
     local wall = world:newRectangleCollider(x, y, width, height, {collision_class = "Wall"})
