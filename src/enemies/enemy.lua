@@ -13,6 +13,21 @@ function spawnEnemy(x, y, type, args)
     enemy.hookable = true
     enemy.hookVec = nil
 
+    -- Enemy states:
+    -- 0: idle, standing
+    -- 1: wander, stopped
+    -- 1.1: wander, moving
+    -- 5: attacking
+    enemy.state = 1
+
+    enemy.startX = x
+    enemy.startY = y
+    enemy.wanderRadius = 30
+    enemy.wanderSpeed = 15
+    enemy.wanderTimer = 1
+    enemy.wanderBufferTimer = 0
+    enemy.wanderDir = vector(1,1)
+
     -- Function that sets the properties of the new enemy
     local init
     if type == "eye" then
@@ -22,6 +37,43 @@ function spawnEnemy(x, y, type, args)
     end
 
     enemy = init(enemy, x, y, args)
+
+    -- Used to make enemies move within a circular area
+    function enemy:wanderUpdate(dt)
+        if self.state < 1 or self.state >= 2 then return end
+        if self.wanderTimer > 0 then self.wanderTimer = self.wanderTimer - dt end
+        if self.wanderBufferTimer > 0 then self.wanderBufferTimer = self.wanderBufferTimer - dt end
+        if self.wanderTimer < 0 then
+            self.state = 1.1
+            self.wanderTimer = 0
+
+            local ex = self.physics:getX()
+            local ey = self.physics:getY()
+
+            if ex < self.startX and ey < self.startY then
+                self.wanderDir = vector(0, 1)
+            elseif ex > self.startX and ey < self.startY then
+                self.wanderDir = vector(-1, 0)
+            elseif ex < self.startX and ey > self.startY then
+                self.wanderDir = vector(1, 0)
+            else
+                self.wanderDir = vector(0, -1)
+            end
+
+            self.wanderBufferTimer = 0.2
+            self.wanderDir:rotateInplace(math.pi/-2 * math.random())
+        end
+
+        if self.state == 1.1 and self.physics then
+            self.physics:setX(self.physics:getX() + self.wanderDir.x * self.wanderSpeed * dt)
+            self.physics:setY(self.physics:getY() + self.wanderDir.y * self.wanderSpeed * dt)
+
+            if distanceBetween(self.physics:getX(), self.physics:getY(), self.startX, self.startY) > self.wanderRadius and self.wanderBufferTimer <= 0 then
+                self.state = 1
+                self.wanderTimer = 1
+            end
+        end
+    end
 
     -- This update function is the same for all enemies, regardless of type
     function enemy:genericUpdate(dt)
@@ -37,6 +89,8 @@ function spawnEnemy(x, y, type, args)
             self.physics:setX( self.physics:getX() + (self.hookVec.x * hookshot.speed * -1 * dt) )
             self.physics:setY( self.physics:getY() + (self.hookVec.y * hookshot.speed * -1 * dt) )
         end
+
+        self:wanderUpdate(dt)
     end
 
     table.insert(enemies, enemy)

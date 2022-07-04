@@ -79,7 +79,7 @@ local function eyeInit(enemy, x, y, args)
             self.dizzyTimer = 0
         end
 
-        if self.stunTimer == 0 and self.dizzyTimer == 0 then
+        if self.stunTimer == 0 and self.dizzyTimer == 0 and self.state == 3 then
             self.anim:update(dt)
             local px, py = player:getPosition()
             local ex, ey = self.physics:getPosition()
