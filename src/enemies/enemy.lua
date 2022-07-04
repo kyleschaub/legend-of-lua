@@ -38,6 +38,32 @@ function spawnEnemy(x, y, type, args)
 
     enemy = init(enemy, x, y, args)
 
+    function enemy:lookForPlayer()
+        if self.physics == nil then return false end
+        local ex = self.physics:getX()
+        local ey = self.physics:getY()
+        local toPlayerVec = getPlayerToSelfVector(ex, ey):rotateInplace(math.pi)
+
+        -- line of queries going towards the player
+        for i=1,32 do
+            local qRad = 3
+            local qx = ex + toPlayerVec.x * i * qRad
+            local qy = ey + toPlayerVec.y * i * qRad
+
+            local hitPlayer = world:queryCircleArea(qx, qy, qRad, {'Player'})
+            if #hitPlayer > 0 then
+                return true
+            end
+
+            local obstacles = world:queryCircleArea(qx, qy, qRad, {'Wall'})
+            if #obstacles > 0 then
+                return false
+            end
+        end
+
+        return false
+    end
+
     -- Used to make enemies move within a circular area
     function enemy:wanderUpdate(dt)
         if self.state < 1 or self.state >= 2 then return end
@@ -70,9 +96,10 @@ function spawnEnemy(x, y, type, args)
 
             if distanceBetween(self.physics:getX(), self.physics:getY(), self.startX, self.startY) > self.wanderRadius and self.wanderBufferTimer <= 0 then
                 self.state = 1
-                self.wanderTimer = 1
+                self.wanderTimer = 1 + math.random(0.1, 0.8)
             end
         end
+        self:lookForPlayer()
     end
 
     -- This update function is the same for all enemies, regardless of type
