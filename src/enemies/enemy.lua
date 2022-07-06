@@ -11,6 +11,7 @@ function spawnEnemy(x, y, type, args)
     enemy.flashTimer = 0
     enemy.stunTimer = 0
     enemy.dizzyTimer = 0
+    enemy.animTimer = 0
     enemy.moving = 1
 
     enemy.hookable = true
@@ -20,6 +21,7 @@ function spawnEnemy(x, y, type, args)
     -- 0: idle, standing
     -- 1: wander, stopped
     -- 1.1: wander, moving
+    -- 99: alert
     -- 100: attacking
     enemy.state = 1
 
@@ -138,9 +140,10 @@ function spawnEnemy(x, y, type, args)
             local px, py = player:getPosition()
             local ex, ey = self.physics:getPosition()
 
-            if self.state < 100 then
+            if self.state < 99 then
                 if self:lookForPlayer() then
-                    self.state = 100 -- attacking state
+                    self.state = 99 -- attacking state
+                    self.animTimer = 0.5
                 end
             end
 
@@ -171,6 +174,14 @@ function spawnEnemy(x, y, type, args)
             self.flashTimer = self.flashTimer - dt
             if self.flashTimer < 0 then
                 self.flashTimer = 0
+            end
+        end
+
+        if self.animTimer > 0 then
+            self.animTimer = self.animTimer - dt
+            if self.animTimer < 0 then
+                if self.state == 99 then self.state = 100 end -- Begin attacking
+                self.animTimer = 0
             end
         end
 

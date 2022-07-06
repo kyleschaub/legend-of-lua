@@ -39,7 +39,7 @@ local function skeletonInit(enemy, x, y, args)
             self.scaleX = 1
         end
 
-        if self.state == 1 then
+        if self.state == 1 or self.state == 99 then
             self.moving = 0
         elseif self.state == 1.1 then
             self.moving = 1
@@ -64,6 +64,9 @@ local function skeletonInit(enemy, x, y, args)
             love.graphics.draw(sprites.enemies.batDead, ex, ey+3, nil, self.scaleX, 1, 8, 8)
         end
         setWhite()
+        if self.state == 99 then
+            love.graphics.draw(sprites.enemies.alert, ex, ey-14.5, nil, nil, nil, sprites.enemies.alert:getWidth()/2, sprites.enemies.alert:getHeight()/2)
+        end
     end
 
     function enemy:die()
