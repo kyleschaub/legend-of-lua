@@ -17,7 +17,7 @@ function spawnEnemy(x, y, type, args)
     -- 0: idle, standing
     -- 1: wander, stopped
     -- 1.1: wander, moving
-    -- 5: attacking
+    -- 100: attacking
     enemy.state = 1
 
     enemy.startX = x
@@ -100,6 +100,49 @@ function spawnEnemy(x, y, type, args)
             end
         end
         self:lookForPlayer()
+    end
+
+    function enemy:moveLogic(dt)
+        if self.stunTimer > 0 then
+            self.stunTimer = self.stunTimer - dt
+        end
+        if self.stunTimer < 0 then
+            self.stunTimer = 0
+            self.physics:setLinearVelocity(0, 0)
+        end
+
+        if self.dizzyTimer > 0 then
+            self.dizzyTimer = self.dizzyTimer - dt
+        end
+        if self.dizzyTimer < 0 then
+            self.dizzyTimer = 0
+        end
+
+        if self.stunTimer == 0 and self.dizzyTimer == 0 then
+            self.anim:update(dt)
+            local px, py = player:getPosition()
+            local ex, ey = self.physics:getPosition()
+
+            if self.state < 100 then
+                if self:lookForPlayer() then
+                    self.state = 100 -- attacking state
+                end
+            end
+
+            if self.state >= 100 then
+                self.dir = vector(px - ex, py - ey):normalized() * self.magnitude
+                if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
+                    self.physics:applyForce(self.dir:unpack())
+                end
+            end
+
+            if self.health <= 0 then
+                self.dead = true
+                self:die()
+            end
+        else
+
+        end
     end
 
     -- This update function is the same for all enemies, regardless of type

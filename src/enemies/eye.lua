@@ -64,39 +64,7 @@ local function eyeInit(enemy, x, y, args)
     enemy:floatUp(enemy.floatMax, true)
 
     function enemy:update(dt)
-        if self.stunTimer > 0 then
-            self.stunTimer = self.stunTimer - dt
-        end
-        if self.stunTimer < 0 then
-            self.stunTimer = 0
-            self.physics:setLinearVelocity(0, 0)
-        end
-
-        if self.dizzyTimer > 0 then
-            self.dizzyTimer = self.dizzyTimer - dt
-        end
-        if self.dizzyTimer < 0 then
-            self.dizzyTimer = 0
-        end
-
-        if self.stunTimer == 0 and self.dizzyTimer == 0 and self.state == 3 then
-            self.anim:update(dt)
-            local px, py = player:getPosition()
-            local ex, ey = self.physics:getPosition()
-            if distanceBetween(px, py, ex, ey) < self.viewDistance then
-                self.dir = vector(px - ex, py - ey):normalized() * self.magnitude
-                if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
-                    self.physics:applyForce(self.dir:unpack())
-                end
-            end
-
-            if self.health <= 0 then
-                self.dead = true
-                self:die()
-            end
-        else
-
-        end
+        enemy:moveLogic(dt)
     end
 
     function enemy:draw()
