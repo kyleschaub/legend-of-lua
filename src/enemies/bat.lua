@@ -20,9 +20,6 @@ local function batInit(enemy, x, y, args)
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
-    enemy.stunTimer = 0
-    enemy.dizzyTimer = 0
-
     enemy.grid = anim8.newGrid(16, 16, enemy.sprite:getWidth(), enemy.sprite:getHeight())
     enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.15)
 
@@ -32,25 +29,6 @@ local function batInit(enemy, x, y, args)
 
     enemy.scaleX = 1
     if math.random() < 0.5 then enemy.scaleX = -1 end
-
-    function enemy:floatDown(dest)
-        self.tween = flux.to(self, self.floatTime, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatUp(self.floatMax) end)
-    end
-
-    function enemy:floatUp(dest, start)
-        local time = self.floatTime
-        if start then time = math.random() end
-        self.tween = flux.to(self, time, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatDown(self.floatMax*-1) end)
-    end
-
-    function enemy:hit(damage, dir, stun, dizziness)
-        self.health = self.health - damage
-        self.physics:applyLinearImpulse((dir:normalized()*300):unpack())
-        self.stunTimer = stun
-        self.flashTimer = 0.15
-        if damage == 0 then self.flashTimer = 0 end
-        self.dizzyTimer = dizziness or 0
-    end
 
     enemy:floatUp(enemy.floatMax, true)
 

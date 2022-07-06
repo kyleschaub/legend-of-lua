@@ -9,6 +9,8 @@ function spawnEnemy(x, y, type, args)
     enemy.stamp = "enemy"
     enemy.health = 3
     enemy.flashTimer = 0
+    enemy.stunTimer = 0
+    enemy.dizzyTimer = 0
 
     enemy.hookable = true
     enemy.hookVec = nil
@@ -27,6 +29,16 @@ function spawnEnemy(x, y, type, args)
     enemy.wanderTimer = 1
     enemy.wanderBufferTimer = 0
     enemy.wanderDir = vector(1,1)
+
+    function enemy:floatDown(dest)
+        self.tween = flux.to(self, self.floatTime, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatUp(self.floatMax) end)
+    end
+
+    function enemy:floatUp(dest, start)
+        local time = self.floatTime
+        if start then time = math.random() end
+        self.tween = flux.to(self, time, {floatY = dest}):ease("sineinout"):oncomplete(function() self:floatDown(self.floatMax*-1) end)
+    end
 
     -- Function that sets the properties of the new enemy
     local init
@@ -161,6 +173,15 @@ function spawnEnemy(x, y, type, args)
         end
 
         self:wanderUpdate(dt)
+    end
+
+    function enemy:hit(damage, dir, stun, dizziness)
+        self.health = self.health - damage
+        self.physics:applyLinearImpulse((dir:normalized()*300):unpack())
+        self.stunTimer = stun
+        self.flashTimer = 0.15
+        if damage == 0 then self.flashTimer = 0 end
+        self.dizzyTimer = dizziness or 0
     end
 
     table.insert(enemies, enemy)
