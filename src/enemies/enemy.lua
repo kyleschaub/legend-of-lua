@@ -11,6 +11,7 @@ function spawnEnemy(x, y, type, args)
     enemy.flashTimer = 0
     enemy.stunTimer = 0
     enemy.dizzyTimer = 0
+    enemy.moving = 1
 
     enemy.hookable = true
     enemy.hookVec = nil
@@ -46,6 +47,8 @@ function spawnEnemy(x, y, type, args)
         init = require("src/enemies/eye")
     elseif type == "bat" then
         init = require("src/enemies/bat")
+    elseif type == "skeleton" then
+        init = require("src/enemies/skeleton")
     end
 
     enemy = init(enemy, x, y, args)
@@ -114,7 +117,7 @@ function spawnEnemy(x, y, type, args)
         self:lookForPlayer()
     end
 
-    function enemy:moveLogic(dt)
+    function enemy:moveLogic(dt, stiff)
         if self.stunTimer > 0 then
             self.stunTimer = self.stunTimer - dt
         end
@@ -131,7 +134,7 @@ function spawnEnemy(x, y, type, args)
         end
 
         if self.stunTimer == 0 and self.dizzyTimer == 0 then
-            self.anim:update(dt)
+            self.anim:update(dt * self.moving)
             local px, py = player:getPosition()
             local ex, ey = self.physics:getPosition()
 
@@ -143,8 +146,13 @@ function spawnEnemy(x, y, type, args)
 
             if self.state >= 100 then
                 self.dir = vector(px - ex, py - ey):normalized() * self.magnitude
-                if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
-                    self.physics:applyForce(self.dir:unpack())
+                if stiff then -- Stiff (grounded) movement
+                    self.physics:setX(self.physics:getX() + self.dir.x * dt)
+                    self.physics:setY(self.physics:getY() + self.dir.y * dt)
+                else -- Floaty movement
+                    if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
+                        self.physics:applyForce(self.dir:unpack())
+                    end
                 end
             end
 

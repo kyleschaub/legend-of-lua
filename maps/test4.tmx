@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="39">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="40">
  <editorsettings>
   <export target="test4.lua" format="lua"/>
  </editorsettings>
@@ -48,10 +48,16 @@
  <objectgroup id="7" name="Chests"/>
  <objectgroup id="5" name="Enemies"/>
  <objectgroup id="6" name="Transitions">
-  <object id="30" name="toTestCave2" x="224" y="100" width="16" height="16">
+  <object id="30" name="toTestCave2" x="224" y="80" width="16" height="16">
    <properties>
     <property name="destX" type="int" value="232"/>
     <property name="destY" type="int" value="374"/>
+   </properties>
+  </object>
+  <object id="39" name="toTestCave" x="224" y="100" width="16" height="16">
+   <properties>
+    <property name="destX" type="int" value="408"/>
+    <property name="destY" type="int" value="390"/>
    </properties>
   </object>
  </objectgroup>

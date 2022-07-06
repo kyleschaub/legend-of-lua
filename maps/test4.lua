@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 9,
-  nextobjectid = 39,
+  nextobjectid = 40,
   properties = {},
   tilesets = {
     {
@@ -286,7 +286,7 @@ return {
           type = "",
           shape = "rectangle",
           x = 224,
-          y = 100,
+          y = 80,
           width = 16,
           height = 16,
           rotation = 0,
@@ -294,6 +294,22 @@ return {
           properties = {
             ["destX"] = 232,
             ["destY"] = 374
+          }
+        },
+        {
+          id = 39,
+          name = "toTestCave",
+          type = "",
+          shape = "rectangle",
+          x = 224,
+          y = 100,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["destX"] = 408,
+            ["destY"] = 390
           }
         }
       }
