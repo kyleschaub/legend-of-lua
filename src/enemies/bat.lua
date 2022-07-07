@@ -36,11 +36,7 @@ local function batInit(enemy, x, y, args)
         enemy:moveLogic(dt)
         local px, py = player:getPosition()
         local ex, ey = self.physics:getPosition()
-        if px < ex then
-            self.scaleX = -1
-        else
-            self.scaleX = 1
-        end
+        self:setScaleX()
     end
 
     function enemy:draw()

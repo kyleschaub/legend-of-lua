@@ -59,10 +59,17 @@ function spawnEnemy(x, y, type, args)
         if self.physics == nil then return false end
         local ex = self.physics:getX()
         local ey = self.physics:getY()
+
+        -- Only look at player if they are in the direction enemy is facing
+        if self.state >= 1 and self.state < 2 then
+            if self.scaleX == 1 and ex > player:getX() then return false end
+            if self.scaleX == -1 and ex < player:getX() then return false end
+        end
+
         local toPlayerVec = getPlayerToSelfVector(ex, ey):rotateInplace(math.pi)
 
         -- line of queries going towards the player
-        for i=1,32 do
+        for i=1,12 do
             local qRad = 3
             local qx = ex + toPlayerVec.x * i * qRad
             local qy = ey + toPlayerVec.y * i * qRad
@@ -117,6 +124,25 @@ function spawnEnemy(x, y, type, args)
             end
         end
         self:lookForPlayer()
+    end
+
+    function enemy:setScaleX()
+        local px, py = player:getPosition()
+        local ex, ey = self.physics:getPosition()
+
+        if self.state >= 99 then
+            if px < ex then
+                self.scaleX = -1
+            else
+                self.scaleX = 1
+            end
+        elseif self.state >= 1 and self.state < 2 then
+            if self.wanderDir.x < 0 then
+                self.scaleX = -1
+            else
+                self.scaleX = 1
+            end
+        end
     end
 
     function enemy:moveLogic(dt, stiff)

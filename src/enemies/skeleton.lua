@@ -18,8 +18,13 @@ local function skeletonInit(enemy, x, y, args)
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
+    if enemy.form == 1 then -- Mage
+        enemy.sprite = sprites.enemies.skeletonMage
+    end
+
     enemy.grid = anim8.newGrid(20, 24, enemy.sprite:getWidth(), enemy.sprite:getHeight())
     enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.4)
+
     enemy.scaleX = 1
     if math.random() < 0.5 then enemy.scaleX = -1 end
 
@@ -33,11 +38,8 @@ local function skeletonInit(enemy, x, y, args)
         enemy:moveLogic(dt, true) -- Stiff movement
         local px, py = player:getPosition()
         local ex, ey = self.physics:getPosition()
-        if px < ex then
-            self.scaleX = -1
-        else
-            self.scaleX = 1
-        end
+        
+        self:setScaleX()
 
         if self.state == 1 or self.state == 99 then
             self.moving = 0
