@@ -43,6 +43,7 @@ local function eyeInit(enemy, x, y, args)
 
     function enemy:update(dt)
         enemy:moveLogic(dt)
+        self:setScaleX()
     end
 
     function enemy:draw()
@@ -54,6 +55,9 @@ local function eyeInit(enemy, x, y, args)
         end
         if self.dizzyTimer == 0 then
             local irisOffset = getFromToVector(ex, ey, player:getX(), player:getY()) * 1.2
+            if self.state >= 1 and self.state < 2 then
+                irisOffset = self.wanderDir * 1.2
+            end
             local irisX, irisY = irisOffset:unpack()
 
             self.anim:draw(self.sprite, ex, ey-self.floatY, nil, nil, nil, 10, 10)
@@ -62,6 +66,9 @@ local function eyeInit(enemy, x, y, args)
             love.graphics.draw(sprites.enemies["eyeDead" .. self.form], ex, ey+3, nil, nil, nil, 10, 10)
         end
         setWhite()
+        if self.state == 99 then
+            love.graphics.draw(sprites.enemies.alert, ex, ey-14.5, nil, nil, nil, sprites.enemies.alert:getWidth()/2, sprites.enemies.alert:getHeight()/2)
+        end
     end
 
     function enemy:die()

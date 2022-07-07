@@ -280,7 +280,7 @@ return {
       objects = {
         {
           id = 67,
-          name = "skeleton",
+          name = "eye",
           type = "",
           shape = "point",
           x = 400,
