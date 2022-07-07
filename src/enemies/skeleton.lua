@@ -18,7 +18,7 @@ local function skeletonInit(enemy, x, y, args)
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
-    if enemy.form == 1 then -- Mage
+    if enemy.form == 2 then -- Mage
         enemy.sprite = sprites.enemies.skeletonMage
     end
 
