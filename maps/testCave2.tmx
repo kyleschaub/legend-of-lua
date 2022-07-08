@@ -87,7 +87,7 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="Chests">
-  <object id="88" name="test1" type="small" x="368" y="144" width="16" height="16"/>
+  <object id="88" name="test2" type="small" x="368" y="144" width="16" height="16"/>
  </objectgroup>
  <layer id="2" name="Objects" width="50" height="32">
   <data encoding="csv">

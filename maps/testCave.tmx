@@ -61,7 +61,7 @@
  </objectgroup>
  <objectgroup id="5" name="Loot"/>
  <objectgroup id="6" name="Enemies">
-  <object id="67" name="eye" x="400" y="240">
+  <object id="67" name="eye" x="408" y="266">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>

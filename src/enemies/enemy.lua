@@ -123,7 +123,7 @@ function spawnEnemy(x, y, type, args)
                 self.wanderTimer = 1 + math.random(0.1, 0.8)
             end
         end
-        self:lookForPlayer()
+        --self:lookForPlayer()
     end
 
     function enemy:setScaleX()
@@ -168,7 +168,7 @@ function spawnEnemy(x, y, type, args)
 
             if self.state < 99 then
                 if self:lookForPlayer() then
-                    self.state = 99 -- attacking state
+                    self.state = 99 -- alerted state
                     self.animTimer = 0.5
                 end
             end

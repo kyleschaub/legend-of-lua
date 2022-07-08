@@ -457,7 +457,7 @@ return {
       objects = {
         {
           id = 88,
-          name = "test1",
+          name = "test2",
           type = "small",
           shape = "rectangle",
           x = 368,

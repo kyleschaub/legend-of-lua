@@ -43,6 +43,7 @@ local function skeletonInit(enemy, x, y, args)
 
         if self.state == 1 or self.state == 99 then
             self.moving = 0
+            if self.anim then self.anim:gotoFrame(1) end
         elseif self.state == 1.1 then
             self.moving = 1
         else
