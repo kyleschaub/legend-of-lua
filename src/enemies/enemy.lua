@@ -13,6 +13,7 @@ function spawnEnemy(x, y, type, args)
     enemy.dizzyTimer = 0
     enemy.animTimer = 0
     enemy.moving = 1
+    enemy.debugRad = 70
 
     enemy.hookable = true
     enemy.hookVec = nil
@@ -68,11 +69,17 @@ function spawnEnemy(x, y, type, args)
 
         local toPlayerVec = getPlayerToSelfVector(ex, ey):rotateInplace(math.pi)
 
+        debug.lineX1 = ex
+        debug.lineY1 = ey
+
         -- line of queries going towards the player
-        for i=1,12 do
+        for i=1,18 do
             local qRad = 3
             local qx = ex + toPlayerVec.x * i * qRad
             local qy = ey + toPlayerVec.y * i * qRad
+
+            debug.lineX2 = qx
+            debug.lineY2 = qy
 
             local hitPlayer = world:queryCircleArea(qx, qy, qRad, {'Player'})
             if #hitPlayer > 0 then
@@ -227,6 +234,19 @@ function spawnEnemy(x, y, type, args)
         self.flashTimer = 0.15
         if damage == 0 then self.flashTimer = 0 end
         self.dizzyTimer = dizziness or 0
+    end
+
+    function enemy:debugRadius()
+        if distanceBetween(player:getX(), player:getY(), self.physics:getX(), self.physics:getY()) < self.debugRad then
+            d1 = "Detected"
+        else
+            d1 = "Not detected"
+        end
+    end
+
+    function enemy:drawDebugRadius()
+        love.graphics.setColor(0, 0, 1, 0.25)
+        love.graphics.circle('fill', self.physics:getX(), self.physics:getY(), self.debugRad)
     end
 
     table.insert(enemies, enemy)

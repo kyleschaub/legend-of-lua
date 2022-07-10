@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 8,
-  nextobjectid = 39,
+  nextobjectid = 44,
   properties = {},
   tilesets = {
     {
@@ -93,7 +93,60 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 39,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 288,
+          y = 160,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 40,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 176,
+          y = 192,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 41,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 112,
+          y = 144,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 42,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128,
+          y = 224,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -113,8 +166,8 @@ return {
           name = "test1",
           type = "small",
           shape = "rectangle",
-          x = 192,
-          y = 128,
+          x = 432,
+          y = 336,
           width = 16,
           height = 16,
           rotation = 0,
@@ -126,8 +179,8 @@ return {
           name = "test2",
           type = "small",
           shape = "rectangle",
-          x = 240,
-          y = 128,
+          x = 480,
+          y = 336,
           width = 16,
           height = 16,
           rotation = 0,
@@ -164,11 +217,11 @@ return {
       objects = {
         {
           id = 38,
-          name = "eye",
+          name = "skeleton",
           type = "",
           shape = "point",
-          x = 336,
-          y = 224,
+          x = 271,
+          y = 153.75,
           width = 0,
           height = 0,
           rotation = 0,

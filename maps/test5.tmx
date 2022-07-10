@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="36" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="39">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="36" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="44">
  <editorsettings>
   <export target="test5.lua" format="lua"/>
  </editorsettings>
@@ -32,14 +32,19 @@
 1,1,1,1,1,1,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1202,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="3" name="Walls"/>
+ <objectgroup id="3" name="Walls">
+  <object id="39" x="288" y="160" width="32" height="32"/>
+  <object id="40" x="176" y="192" width="16" height="16"/>
+  <object id="41" x="112" y="144" width="32" height="32"/>
+  <object id="42" x="128" y="224" width="32" height="32"/>
+ </objectgroup>
  <objectgroup id="7" name="Chests">
-  <object id="35" name="test1" type="small" x="192" y="128" width="16" height="16"/>
-  <object id="36" name="test2" type="small" x="240" y="128" width="16" height="16"/>
+  <object id="35" name="test1" type="small" x="432" y="336" width="16" height="16"/>
+  <object id="36" name="test2" type="small" x="480" y="336" width="16" height="16"/>
   <object id="37" name="test2" type="big" x="456" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Enemies">
-  <object id="38" name="eye" x="336" y="224">
+  <object id="38" name="skeleton" x="271" y="153.75">
    <properties>
     <property name="form" type="int" value="1"/>
    </properties>
