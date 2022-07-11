@@ -20,10 +20,42 @@ local function skeletonInit(enemy, x, y, args)
 
     if enemy.form == 2 then -- Mage
         enemy.sprite = sprites.enemies.skeletonMage
+        enemy.chase = false
+        enemy.projTimer = 0
+
+        function enemy:aggro(dt)
+            self.projTimer = self.projTimer - dt
+            if self.projTimer < 0 then
+                if self.state == 100 then
+                    self.state = 101
+                    self.projTimer = 1.2
+                    enemy.anim = enemy.animations.walk
+                elseif self.state == 101 then
+                    self.state = 100
+                    self.projTimer = 0.4
+                    enemy.anim = enemy.animations.staff
+                    spawnProjectile('test', self.physics:getX(), self.physics:getY())
+                end
+            end
+
+            if self.state == 101 then
+                self.dir = getSelfToPlayerVector(self.physics:getX(), self.physics:getY())*10
+                self.physics:setX(self.physics:getX() + self.dir.x * dt)
+                self.physics:setY(self.physics:getY() + self.dir.y * dt)
+            end
+        end
     end
 
     enemy.grid = anim8.newGrid(20, 24, enemy.sprite:getWidth(), enemy.sprite:getHeight())
-    enemy.anim = anim8.newAnimation(enemy.grid('1-2', 1), 0.4)
+
+    enemy.animations = {}
+    enemy.animations.walk = anim8.newAnimation(enemy.grid('1-2', 1), 0.4)
+
+    if enemy.form == 2 then
+        enemy.animations.staff = anim8.newAnimation(enemy.grid(3, 1), 1)
+    end
+
+    enemy.anim = enemy.animations.walk
 
     enemy.scaleX = 1
     if math.random() < 0.5 then enemy.scaleX = -1 end
@@ -47,7 +79,11 @@ local function skeletonInit(enemy, x, y, args)
         elseif self.state == 1.1 then
             self.moving = 1
         else
-            self.moving = 2
+            if self.form == 2 then
+                self.moving = 1
+            else
+                self.moving = 2
+            end
         end
 
     end

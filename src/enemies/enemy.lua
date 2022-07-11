@@ -13,6 +13,7 @@ function spawnEnemy(x, y, type, args)
     enemy.dizzyTimer = 0
     enemy.animTimer = 0
     enemy.moving = 1
+    enemy.chase = true
     enemy.debugRad = 70
 
     enemy.hookable = true
@@ -182,13 +183,18 @@ function spawnEnemy(x, y, type, args)
 
             if self.state >= 100 then
                 self.dir = vector(px - ex, py - ey):normalized() * self.magnitude
-                if stiff then -- Stiff (grounded) movement
-                    self.physics:setX(self.physics:getX() + self.dir.x * dt)
-                    self.physics:setY(self.physics:getY() + self.dir.y * dt)
-                else -- Floaty movement
-                    if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
-                        self.physics:applyForce(self.dir:unpack())
+
+                if self.chase then
+                    if stiff then -- Stiff (grounded) movement
+                        self.physics:setX(self.physics:getX() + self.dir.x * dt)
+                        self.physics:setY(self.physics:getY() + self.dir.y * dt)
+                    else -- Floaty movement
+                        if distanceBetween(0, 0, self.physics:getLinearVelocity()) < self.maxSpeed then
+                            self.physics:applyForce(self.dir:unpack())
+                        end
                     end
+                elseif self.aggro then
+                    self:aggro(dt)
                 end
             end
 

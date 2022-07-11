@@ -58,6 +58,10 @@ function getPlayerToSelfVector(x, y)
     return vector(x - player:getX(), y - player:getY()):normalized()
 end
 
+function getSelfToPlayerVector(x, y)
+    return vector(player:getX() - x, player:getY() - y):normalized()
+end
+
 function getFromToVector(fromX, fromY, toX, toY)
     return vector(toX - fromX, toY - fromY):normalized()
 end
