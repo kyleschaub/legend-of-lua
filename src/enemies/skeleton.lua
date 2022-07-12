@@ -34,7 +34,7 @@ local function skeletonInit(enemy, x, y, args)
                     self.state = 100
                     self.projTimer = 0.4
                     enemy.anim = enemy.animations.staff
-                    spawnProjectile('test', self.physics:getX(), self.physics:getY())
+                    spawnProjectile('mage', self.physics:getX(), self.physics:getY())
                 end
             end
 

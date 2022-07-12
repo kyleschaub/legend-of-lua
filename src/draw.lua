@@ -36,6 +36,8 @@ function drawCamera()
     hookshot:draw(1)
     npcs:draw()
     enemies:draw()
+    effects:drawDarkMagic()
+    projectiles:draw()
     effects:draw(1)
     particles:draw()
 

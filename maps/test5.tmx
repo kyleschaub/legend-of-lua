@@ -44,9 +44,9 @@
   <object id="37" name="test2" type="big" x="456" y="112" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="5" name="Enemies">
-  <object id="38" name="skeleton" x="271" y="153.75">
+  <object id="38" name="skeleton" x="208" y="128">
    <properties>
-    <property name="form" type="int" value="1"/>
+    <property name="form" type="int" value="2"/>
    </properties>
    <point/>
   </object>

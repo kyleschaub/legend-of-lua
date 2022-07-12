@@ -190,6 +190,24 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "darkMagicSpec" then
+        effect.scaleX = 0.75
+        effect.x = effect.x + math.random(-1,1)
+        effect.y = effect.y + math.random(-1,1)
+
+        function effect:update(dt)
+            self.scaleX = self.scaleX - (dt*2)
+
+            if self.scaleX <= 0 then
+                self.dead = true
+            end
+        end
+        
+        function effect:draw()
+            
+        end
+    end
+
     table.insert(effects, effect)
 
 end
@@ -231,6 +249,26 @@ function effects:draw(layer)
             end
             if e.draw then
                 e:draw()
+            end
+        end
+    end
+end
+
+function effects:drawDarkMagic()
+    -- Dark magic draws a white circle first, and then draws dark circles overtop
+    setWhite()
+    local circleSpr = sprites.effects.darkMagicW
+    for i=1,2 do
+        if i == 2 then circleSpr = sprites.effects.darkMagicB end
+        for _,e in ipairs(effects) do
+            if e.type == "darkMagicSpec" then
+                love.graphics.draw(circleSpr, e.x, e.y, nil, e.scaleX, nil, circleSpr:getWidth()/2, circleSpr:getHeight()/2)
+            end
+        end
+
+        for _,p in ipairs(projectiles) do
+            if p.type == "mage" then
+                love.graphics.draw(circleSpr, p:getX(), p:getY(), nil, 1, nil, circleSpr:getWidth()/2, circleSpr:getHeight()/2)
             end
         end
     end

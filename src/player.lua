@@ -298,6 +298,12 @@ function player:checkDamage()
         local e = player:getEnterCollisionData('Enemy')
         player:hurt(0.5, e.collider:getX(), e.collider:getY())
     end
+
+    if player:enter('Projectile') then
+        local e = player:getEnterCollisionData('Projectile')
+        e.collider.dead = true
+        player:hurt(0.5, e.collider:getX(), e.collider:getY())
+    end
 end
 
 function player:checkTransition()

@@ -23,6 +23,7 @@ function updateGame(dt)
     loots:update(dt)
     enemies:update(dt)
     enemies:destroyDead()
+    projectiles:update(dt)
 
     cam:update(dt)
     shake:update(dt)

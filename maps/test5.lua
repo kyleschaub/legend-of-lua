@@ -220,14 +220,14 @@ return {
           name = "skeleton",
           type = "",
           shape = "point",
-          x = 271,
-          y = 153.75,
+          x = 208,
+          y = 128,
           width = 0,
           height = 0,
           rotation = 0,
           visible = true,
           properties = {
-            ["form"] = 1
+            ["form"] = 2
           }
         }
       }
