@@ -62,6 +62,11 @@ function spawnEnemy(x, y, type, args)
         local ex = self.physics:getX()
         local ey = self.physics:getY()
 
+        -- the 'listening' threshold
+        if distanceBetween(ex, ey, player:getX(), player:getY()) < 30 then
+            return true
+        end
+
         -- Only look at player if they are in the direction enemy is facing
         if self.state >= 1 and self.state < 2 then
             if self.scaleX == 1 and ex > player:getX() then return false end
