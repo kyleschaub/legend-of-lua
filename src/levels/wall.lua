@@ -30,6 +30,15 @@ function spawnWall(x, y, width, height, name, type, parent)
                 data.breakables[self.name] = true
                 particleEvent("rockBreak", x+width/2, y+height/2)
             end
+        elseif name:find("Door") then
+            wall.sprite = sprites.environment.lockedDoor
+            wall.offY = -4
+            wall.type = "lockedDoor"
+
+            function wall:onBreak()
+                data.breakables[self.name] = true
+                shake:start(0.1, 1, 0.03)
+            end
         end
     end
 

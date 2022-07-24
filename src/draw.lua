@@ -7,6 +7,10 @@ function drawCamera()
     if gamestate == 0 then return end
     setWhite()
 
+    if gameMap.layers["Background"] then
+        gameMap:drawLayer(gameMap.layers["Background"])
+    end
+
     if gameMap.layers["Base"] then
         gameMap:drawLayer(gameMap.layers["Base"])
     end

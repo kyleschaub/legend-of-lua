@@ -1,6 +1,6 @@
 transitions = {}
 
-function spawnTransition(x, y, width, height, id, destX, destY)
+function spawnTransition(x, y, width, height, id, destX, destY, transitionType)
 
     local transition = world:newRectangleCollider(x, y, width, height, {collision_class = "Transition"})
     transition:setType('static')
@@ -8,6 +8,9 @@ function spawnTransition(x, y, width, height, id, destX, destY)
     transition.id = id
     transition.destX = destX
     transition.destY = destY
+    transition.type = "standard"
+
+    if transitionType then transition.type = transitionType end
 
     table.insert(transitions, transition)
 
@@ -30,6 +33,10 @@ function triggerTransition(id, destX, destY)
         newMap = "playerHouse"
     elseif id == "toTest7" then
         newMap = "test7"
+    elseif id == "toDungeon2" then
+        newMap = "testDungeon2"
+    elseif id == "toDungeon2-2" then
+        newMap = "testDungeon2-2"
     else
         newMap = id
     end

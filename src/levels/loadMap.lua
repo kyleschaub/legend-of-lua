@@ -42,7 +42,7 @@ function loadMap(mapName, destX, destY)
 
     if gameMap.layers["Transitions"] then
         for i, obj in pairs(gameMap.layers["Transitions"].objects) do
-            spawnTransition(obj.x, obj.y, obj.width, obj.height, obj.name, obj.properties.destX, obj.properties.destY)
+            spawnTransition(obj.x, obj.y, obj.width, obj.height, obj.name, obj.properties.destX, obj.properties.destY, obj.type)
         end
     end
 

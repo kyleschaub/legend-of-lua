@@ -109,6 +109,15 @@ function player:update(dt)
         player:checkDamage()
         player:checkTransition()
 
+        if data.keys and data.keys > 0 then
+            if player:enter('Wall') then
+                local w = player:getEnterCollisionData('Wall')
+                if w.collider.type == "lockedDoor" then
+                    w.collider.dead = true
+                end
+            end
+        end
+
     elseif player.state >= 1 and player.state < 2 then
 
         player:setLinearVelocity(0, 0)
@@ -309,7 +318,11 @@ end
 function player:checkTransition()
     if player:enter('Transition') then
         local t = player:getEnterCollisionData('Transition')
-        curtain:call(t.collider.id, t.collider.destX, t.collider.destY)
+        if t.collider.type == "instant" then
+            triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
+        else
+            curtain:call(t.collider.id, t.collider.destX, t.collider.destY)
+        end
         --triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
     end
 end

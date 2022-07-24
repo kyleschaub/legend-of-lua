@@ -39,5 +39,7 @@ function menu:select(key)
         loadMap("test5")
     elseif key == "3" then
         loadMap("test2")
+    elseif key == "4" then
+        loadMap("testDungeon2", 408, 494)
     end
 end

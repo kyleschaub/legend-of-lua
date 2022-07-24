@@ -26,6 +26,8 @@ function spawnLoot(x, y, type, bounce, price, dir)
         loot.rot = math.pi/-2
     elseif loot.type == "bomb" then
         loot.spr = sprites.items.bomb
+    elseif loot.type == "key" then
+        loot.spr = sprites.items.key
     elseif loot.type == "coin1" then
         loot.spr = sprites.items.coin1
         loot.frameW = 8
@@ -91,6 +93,8 @@ function spawnLoot(x, y, type, bounce, price, dir)
             elseif self.type == "bomb" then
                 data.bombCount = data.bombCount + 1
                 if data.bombCount > data.maxBombCount then data.bombCount = data.maxBombCount end
+            elseif self.type == "key" then
+                data.keys = data.keys + 1
             elseif self.type == "coin1" then
                 data.money = data.money + 1
             elseif self.type == "coin2" then
@@ -124,6 +128,7 @@ function spawnLoot(x, y, type, bounce, price, dir)
         love.graphics.draw(self.shadowSpr, self.x, self.y+4.5, nil, nil, nil, self.shadowSpr:getWidth()/2, self.shadowSpr:getHeight()/2)
         local offY = 0
         if self.type == "arrow" then offY = -2 end
+        if self.type == "key" then offY = -1.5 end
         if self.type == "coin1" or self.type == "coin2" or self.type == "coin3" then offY = 2 end
         if self.type == "sword2" then offY = -2.5 end
         if self.type == "container" then offY = -0.5 end

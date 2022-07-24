@@ -322,5 +322,6 @@ function spawnEnemyLoot(x, y)
             lootType = "bomb"
         end
     end
-    spawnLoot(x, y, lootType, true)
+    -- disable enemy spawn loot for now
+    --spawnLoot(x, y, lootType, true)
 end

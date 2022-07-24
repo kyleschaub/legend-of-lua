@@ -8,6 +8,7 @@ function createNewSave(fileNumber)
     data.playerY = 0 -- player's Y position
     data.maxHealth = 4 -- maximum number of hearts
     data.money = 0 -- amount of currency
+    data.keys = 0 -- number of keys
     data.map = "" -- currently loaded map
 
     if fileNumber == nil then fileNumber = 1 end
