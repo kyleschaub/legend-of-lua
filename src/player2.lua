@@ -457,7 +457,7 @@ function player:useItem(duration)
         player.state = 2
     end
 
-    if player.dir == "down" then
+    --[[if player.dir == "down" then
         player.anim = player.animations.useDown
     elseif player.dir == "up" then
         player.anim = player.animations.useUp
@@ -465,6 +465,20 @@ function player:useItem(duration)
         player.anim = player.animations.useRight
     elseif player.dir == "left" then
         player.anim = player.animations.useLeft
+    end]]
+
+    if player.dirX == 1 then
+        if player.dirY == 1 then
+            player.anim = player.animations.useDownRight
+        else
+            player.anim = player.animations.useUpRight
+        end
+    else
+        if player.dirY == 1 then
+            player.anim = player.animations.useDownLeft
+        else
+            player.anim = player.animations.useUpLeft
+        end
     end
 
     player.anim:gotoFrame(1)
@@ -591,5 +605,24 @@ function player:setDirFromVector(vec)
     else
         player.dirX = -1
         player.dirY = -1
+    end
+end
+
+function player:useSet()
+    local newDir = toMouseVector(player:getX(), player:getY())
+    player:setDirFromVector(newDir)
+
+    if player.dirX == 1 then
+        if player.dirY == 1 then
+            player.anim = player.animations.useDownRight
+        else
+            player.anim = player.animations.useUpRight
+        end
+    else
+        if player.dirY == 1 then
+            player.anim = player.animations.useDownLeft
+        else
+            player.anim = player.animations.useUpLeft
+        end
     end
 end

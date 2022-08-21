@@ -70,5 +70,7 @@ function boomerang:throw(dir)
     self.y = player:getY()
     self.state = 1
     self.timer = 0.65
-    self.dir = getDirectionVector(dir) * self.speed
+    self.dir = toMouseVector(self.x, self.y) * self.speed
+
+    player:useSet()
 end

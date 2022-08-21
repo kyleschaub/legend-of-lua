@@ -2,7 +2,7 @@ bombs = {}
 
 function spawnBomb()
     if data.bombCount < 1 then
-        return
+        --return
     end
     
     data.bombCount = data.bombCount - 1
@@ -21,16 +21,11 @@ function spawnBomb()
     bomb.anim2 = anim8.newAnimation(bomb.grid('1-2', 1), 0.13)
     bomb.anim = bomb.anim1
 
-    -- put bomb in front of the player
-    if player.dir == "up" then
-        bomb.y = bomb.y - 16
-    elseif player.dir == "down" then
-        bomb.y = bomb.y + 16
-    elseif player.dir == "left" then
-        bomb.x = bomb.x - 14
-    elseif player.dir == "right" then
-        bomb.x = bomb.x + 14
-    end
+    player:useSet()
+
+    local offVec = toMouseVector(bomb.x, bomb.y)*14
+    bomb.x = bomb.x + offVec.x
+    bomb.y = bomb.y + offVec.y
 
     function bomb:explode()
         effects:spawn("explosion", self.x, self.y)
