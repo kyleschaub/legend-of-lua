@@ -240,7 +240,7 @@ function spawnEnemy(x, y, type, args)
 
     function enemy:hit(damage, dir, stun, dizziness)
         self.health = self.health - damage
-        self.physics:applyLinearImpulse((dir:normalized()*300):unpack())
+        self.physics:applyLinearImpulse((dir:normalized()*200):unpack())
         self.stunTimer = stun
         self.flashTimer = 0.15
         if damage == 0 then self.flashTimer = 0 end

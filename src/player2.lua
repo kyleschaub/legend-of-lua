@@ -15,6 +15,7 @@ player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
 player.holdSprite = sprites.items.heart
 player.attackDir = vector(1, 0)
+player.comboCount = 0
 
 -- 0 = Normal gameplay
 -- 1 = Sword swing
@@ -374,6 +375,8 @@ function player:swingSword()
     -- The player can only swing their sword if the player.state is 0 (regular gameplay)
     if player.state ~= 0 then return end
 
+    player.comboCount = player.comboCount + 1
+
     player.attackDir = toMouseVector(player:getX(), player:getY())
     player:setDirFromVector(player.attackDir)
 
@@ -404,7 +407,7 @@ function player:swordDamage()
     local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
     for _,e in ipairs(hitEnemies) do
         local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
-        e.parent:hit(1, knockbackDir, 0.2)
+        e.parent:hit(1, knockbackDir, 0.1)
     end
 end
 

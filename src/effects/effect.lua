@@ -22,7 +22,7 @@ function effects:spawn(type, x, y, args)
 
         if args then
             effect.rot = math.atan2(args.y, args.x)
-            if args.x > 0 then
+            if player.comboCount % 2 == 0 then
                 effect.scaleY = -1
             end
         end
