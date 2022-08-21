@@ -1,5 +1,6 @@
 sprites = {}
-sprites.playerSheet = love.graphics.newImage('sprites/playerSheet.png')
+sprites.playerSheet = love.graphics.newImage('sprites/player/playerSheet.png')
+sprites.playerShadow = love.graphics.newImage('sprites/player/playerShadow.png')
 sprites.sword = love.graphics.newImage('sprites/sword.png')
 sprites.sword2 = love.graphics.newImage('sprites/sword2.png')
 sprites.effects = {}
