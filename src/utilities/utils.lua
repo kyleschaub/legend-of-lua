@@ -66,6 +66,11 @@ function getFromToVector(fromX, fromY, toX, toY)
     return vector(toX - fromX, toY - fromY):normalized()
 end
 
+function toMouseVector(px, py)
+    local mx, my = cam:mousePosition()
+    return vector.new(mx-px, my-py):normalized()
+end
+
 function setWhite()
     love.graphics.setColor(1, 1, 1, 1)
 end

@@ -42,22 +42,6 @@ function love.keypressed(key)
         colliderToggle = not (colliderToggle and true);
     end
 
-    if key == 'm' then
-        curtain:call()
-    end
-
-    if key == 'o' then
-        player.health = player.health - 0.5
-    end
-
-    if key == 'p' then
-        player.health = player.health + 0.5
-    end
-
-    if key == 'l' then
-        data.maxHealth = data.maxHealth + 1
-    end
-
     if key == 'escape' then
         love.event.quit()
     end
@@ -126,5 +110,21 @@ function love.keyreleased(key)
         useItem('z', true)
     elseif key == 'x' then
         useItem('x', true)
+    end
+end
+
+function love.mousepressed( x, y, button )
+    if button == 1 then
+        if pause.active then
+            pause:equip('z')
+        else
+            useItem('z')
+        end
+    elseif button == 2 then
+        if pause.active then
+            pause:equip('x')
+        else
+            useItem('x')
+        end
     end
 end

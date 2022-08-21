@@ -18,7 +18,19 @@ function effects:spawn(type, x, y, args)
         effect.height = 39
         effect.grid = anim8.newGrid(23, 39, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
         effect.anim = anim8.newAnimation(effect.grid(1, 1), 0.12, function() effect.dead = true end)
+        effect.rot = 0
 
+        if args then
+            effect.rot = math.atan2(args.y, args.x)
+            if args.x > 0 then
+                effect.scaleY = -1
+            end
+        end
+
+        effect.x = effect.x + args.x*12
+        effect.y = effect.y + args.y*12
+
+        --[[
         if player.dir == "down" then
             effect.x = effect.x + 1
             effect.y = effect.y + 13.5
@@ -35,6 +47,7 @@ function effects:spawn(type, x, y, args)
             effect.y = effect.y - 2
             effect.scaleX = -1
         end
+        ]]
     end
 
     if type == "explosion" then

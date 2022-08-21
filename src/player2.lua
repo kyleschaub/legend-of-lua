@@ -14,6 +14,7 @@ player.stunTimer = 0
 player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
 player.holdSprite = sprites.items.heart
+player.attackDir = vector(1, 0)
 
 -- 0 = Normal gameplay
 -- 1 = Sword swing
@@ -71,28 +72,28 @@ function player:update(dt)
 
         if pause.active then return end
 
-        if love.keyboard.isDown("right") then
+        if love.keyboard.isDown("d") then
             dirX = 1
             player.dirX = 1
             --player.anim = player.animations.right
             player.dir = "right"
         end
 
-        if love.keyboard.isDown("left") then
+        if love.keyboard.isDown("a") then
             dirX = -1
             player.dirX = -1
             --player.anim = player.animations.left
             player.dir = "left"
         end
 
-        if love.keyboard.isDown("down") then
+        if love.keyboard.isDown("s") then
             dirY = 1
             player.dirY = 1
             --player.anim = player.animations.down
             player.dir = "down"
         end
 
-        if love.keyboard.isDown("up") then
+        if love.keyboard.isDown("w") then
             dirY = -1
             player.dirY = -1
             --player.anim = player.animations.up
@@ -145,8 +146,13 @@ function player:update(dt)
 
     elseif player.state >= 1 and player.state < 2 then
 
-        player:setLinearVelocity(0, 0)
         player.animTimer = player.animTimer - dt
+
+        if player.state == 1 then
+            player:setLinearVelocity((player.attackDir*120):unpack())
+        elseif player.state == 1.1 then
+            player:setLinearVelocity(0, 0)
+        end
 
         if player.animTimer < 0 then
             if player.state == 1 then
@@ -154,7 +160,7 @@ function player:update(dt)
                 player.anim:gotoFrame(2)
                 -- animTimer for finished sword swing stance
                 player.animTimer = 0.25
-                effects:spawn("slice", player:getX(), player:getY())
+                effects:spawn("slice", player:getX(), player:getY(), player.attackDir)
                 player:swordDamage()
             elseif player.state == 1.1 then
                 player.state = 0
@@ -244,27 +250,27 @@ function player:draw()
 
     -- Sword 'down' finished
     if player.dir == "down" and player.state == 1.1 then
-        love.graphics.draw(swSpr, px+12.5, py+7, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px+12.5, py+7, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'up' windup
     if player.dir == "up" and player.state == 1 then
-        love.graphics.draw(swSpr, px+9.5, py+6.5, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px+9.5, py+6.5, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'up' finished
     if player.dir == "up" and player.state == 1.1 then
-        love.graphics.draw(swSpr, px-14, py+7, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px-14, py+7, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'right' finished
     if player.dir == "right" and player.state == 1.1 then
-        love.graphics.draw(swSpr, px+1, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px+1, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'left' finished
     if player.dir == "left" and player.state == 1.1 then
-        love.graphics.draw(swSpr, px-3, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px-3, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Bow 'up'
@@ -277,17 +283,17 @@ function player:draw()
 
     -- Sword 'down' windup
     if player.dir == "down" and player.state == 1 then
-        love.graphics.draw(swSpr, px-7.5, py+6, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px-7.5, py+6, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'right' windup
     if player.dir == "right" and player.state == 1 then
-        love.graphics.draw(swSpr, px+1, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px+1, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Sword 'left' windup
     if player.dir == "left" and player.state == 1 then
-        love.graphics.draw(swSpr, px-3, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+        --love.graphics.draw(swSpr, px-3, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
     -- Bow 'right'
@@ -368,19 +374,26 @@ function player:swingSword()
     -- The player can only swing their sword if the player.state is 0 (regular gameplay)
     if player.state ~= 0 then return end
 
+    player.attackDir = toMouseVector(player:getX(), player:getY())
+    player:setDirFromVector(player.attackDir)
+
     player.state = 1
 
-    if player.dir == "down" then
-        player.anim = player.animations.swordDown
-    elseif player.dir == "up" then
-        player.anim = player.animations.swordUp
-    elseif player.dir == "right" then
-        player.anim = player.animations.swordRight
-    elseif player.dir == "left" then
-        player.anim = player.animations.swordLeft
+    if player.dirX == 1 then
+        if player.dirY == 1 then
+            player.anim = player.animations.swordDownRight
+        else
+            player.anim = player.animations.swordUpRight
+        end
+    else
+        if player.dirY == 1 then
+            player.anim = player.animations.swordDownLeft
+        else
+            player.anim = player.animations.swordUpLeft
+        end
     end
 
-    player.anim:gotoFrame(1)
+    --player.anim:gotoFrame(1)
     -- animTimer for sword wind-up
     player.animTimer = 0.1
 
@@ -450,7 +463,19 @@ end
 
 function player:resetAnimation(direction)
     --player.anim = player.animations[direction]
-    player.anim = player.animations.downRight
+    if player.dirX == 1 then
+        if player.dirY == 1 then
+            player.anim = player.animations.downRight
+        else
+            player.anim = player.animations.upRight
+        end
+    else
+        if player.dirY == 1 then
+            player.anim = player.animations.downLeft
+        else
+            player.anim = player.animations.upLeft
+        end
+    end
     player.anim:gotoFrame(1)
 end
 
@@ -476,5 +501,23 @@ function player:interact()
         if i.parent then
             i.parent:interact()
         end
+    end
+end
+
+function player:setDirFromVector(vec)
+    local rad = math.atan2(vec.y, vec.x)
+    d1 = rad
+    if rad >= 0 and rad < math.pi/2 then
+        player.dirX = 1
+        player.dirY = 1
+    elseif rad >= math.pi/2 and rad < math.pi then
+        player.dirX = -1
+        player.dirY = 1
+    elseif rad < 0 and rad > math.pi/-2 then
+        player.dirX = 1
+        player.dirY = -1
+    else
+        player.dirX = -1
+        player.dirY = -1
     end
 end
