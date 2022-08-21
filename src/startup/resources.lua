@@ -5,6 +5,7 @@ sprites.sword = love.graphics.newImage('sprites/sword.png')
 sprites.sword2 = love.graphics.newImage('sprites/sword2.png')
 sprites.effects = {}
 sprites.effects.slice = love.graphics.newImage('sprites/effects/slice.png')
+sprites.effects.sliceAnim = love.graphics.newImage('sprites/effects/sliceAnim.png')
 sprites.effects.explosion = love.graphics.newImage('sprites/effects/explosion.png')
 sprites.effects.rock = love.graphics.newImage('sprites/effects/rock.png')
 sprites.effects.fuseSmoke = love.graphics.newImage('sprites/effects/fuseSmoke.png')

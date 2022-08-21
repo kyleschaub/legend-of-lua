@@ -13,11 +13,11 @@ function effects:spawn(type, x, y, args)
     effect.type = type
 
     if type == "slice" then
-        effect.spriteSheet = sprites.effects.slice
+        effect.spriteSheet = sprites.effects.sliceAnim
         effect.width = 23
         effect.height = 39
         effect.grid = anim8.newGrid(23, 39, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
-        effect.anim = anim8.newAnimation(effect.grid(1, 1), 0.12, function() effect.dead = true end)
+        effect.anim = anim8.newAnimation(effect.grid('1-2', 1), 0.06, function() effect.dead = true end)
         effect.rot = 0
 
         if args then
