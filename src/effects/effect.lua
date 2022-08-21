@@ -19,6 +19,7 @@ function effects:spawn(type, x, y, args)
         effect.grid = anim8.newGrid(23, 39, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
         effect.anim = anim8.newAnimation(effect.grid('1-2', 1), 0.06, function() effect.dead = true end)
         effect.rot = 0
+        effect.layer = 0
 
         if args then
             effect.rot = math.atan2(args.y, args.x)
@@ -27,8 +28,8 @@ function effects:spawn(type, x, y, args)
             end
         end
 
-        effect.x = effect.x + args.x*12
-        effect.y = effect.y + args.y*12
+        effect.x = effect.x + args.x*11
+        effect.y = effect.y + args.y*11
 
         --[[
         if player.dir == "down" then

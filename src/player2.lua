@@ -161,7 +161,7 @@ function player:update(dt)
                 player.anim:gotoFrame(2)
                 -- animTimer for finished sword swing stance
                 player.animTimer = 0.25
-                effects:spawn("slice", player:getX(), player:getY(), player.attackDir)
+                effects:spawn("slice", player:getX(), player:getY()+1, player.attackDir)
                 player:swordDamage()
             elseif player.state == 1.1 then
                 player.state = 0
@@ -238,16 +238,36 @@ function player:draw()
 
     -- Sword sprite
     local swSpr = sprites.sword
+    local swX = 0
+    local swY = 0
+    local swLayer = -1
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
     local hookSpr = sprites.items.hookshotArmed
     if player.state == 3.1 or data.arrowCount < 1 then bowSpr = sprites.items.bow2 end
     if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
 
-    local px = player:getX()+1
-    local py = player:getY()-5
+    local swordRot = 0
+    if player.state == 1.1 then
+        local tempVec = 0
+        if player.comboCount % 2 == 0 then
+            tempVec = player.attackDir:rotated(math.pi/2)
+        else
+            tempVec = player.attackDir:rotated(math.pi/-2)
+        end
+        swordRot = math.atan2(tempVec.y, tempVec.x)
+        swX = tempVec.x * 12
+        swY = tempVec.y * 12
 
-    love.graphics.draw(sprites.playerShadow, px-1, py+11, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
+        if swY > 0 then
+            swLayer = 1
+        end
+    end
+
+    local px = player:getX()
+    local py = player:getY()+1
+
+    love.graphics.draw(sprites.playerShadow, px, py+6, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
 
     -- Sword 'down' finished
     if player.dir == "down" and player.state == 1.1 then
@@ -280,7 +300,15 @@ function player:draw()
         if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px-1, py-3, math.pi/-2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
+    if player.state == 1.1 and swLayer == -1 then
+        love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
+
     player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, player.dirX, 1, 9.5, 10.5)
+
+    if player.state == 1.1 and swLayer == 1 then
+        love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
 
     -- Sword 'down' windup
     if player.dir == "down" and player.state == 1 then
