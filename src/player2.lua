@@ -267,7 +267,7 @@ function player:draw()
     local px = player:getX()
     local py = player:getY()+1
 
-    love.graphics.draw(sprites.playerShadow, px, py+6, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
+    love.graphics.draw(sprites.playerShadow, px, py+5, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
 
     -- Sword 'down' finished
     if player.dir == "down" and player.state == 1.1 then

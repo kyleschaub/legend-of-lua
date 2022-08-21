@@ -1,5 +1,6 @@
 Camera = require "libraries/hump/camera"
 cam = Camera(0, 0, scale)
+cam.smoother = Camera.smooth.damped(8)
 
 function cam:update(dt)
 
@@ -33,7 +34,7 @@ function cam:update(dt)
         camY = (mapH - h/2)
     end
 
-    cam:lookAt(camX, camY)
+    cam:lockPosition(camX, camY)
   
     -- cam.x and cam.y keep track of where the camera is located
     -- the lookAt value may be moved if a screenshake is happening, so these
