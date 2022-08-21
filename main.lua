@@ -81,6 +81,10 @@ function love.keypressed(key)
         pause:toggle()
     end
 
+    if key == 'space' then
+        player:roll()
+    end
+
     if key == 'right' and pause.active then
         pause.gridX = pause.gridX + 1
     end

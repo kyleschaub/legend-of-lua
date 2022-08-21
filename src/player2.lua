@@ -5,7 +5,7 @@ player.dir = "down"
 player.dirX = 1
 player.dirY = 1
 player.scaleX = 1
-player.speed = 90
+player.speed = 80
 player.animSpeed = 0.14
 player.walking = false
 player.animTimer = 0
@@ -18,6 +18,7 @@ player.attackDir = vector(1, 0)
 player.comboCount = 0
 
 -- 0 = Normal gameplay
+-- 0.5 = Rolling
 -- 1 = Sword swing
 -- 2 = Use (bomb)
 -- 3 = Bow (3: bow drawn, 3.1: recover)
@@ -46,6 +47,7 @@ player.animations.useDownLeft = anim8.newAnimation(player.grid(2, 1), player.ani
 player.animations.useUpRight = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.useUpLeft = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.hold = anim8.newAnimation(player.grid(1, 1), player.animSpeed)
+player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.1)
 
 player.anim = player.animations.upLeft
 
@@ -143,6 +145,16 @@ function player:update(dt)
                     w.collider.dead = true
                 end
             end
+        end
+
+    elseif player.state == 0.5 then
+
+        player.anim:update(dt)
+
+        player.animTimer = player.animTimer - dt
+        if player.animTimer < 0 then
+            player.state = 0
+            player.animTimer = 0
         end
 
     elseif player.state >= 1 and player.state < 2 then
@@ -533,6 +545,35 @@ function player:interact()
             i.parent:interact()
         end
     end
+end
+
+function player:roll()
+    player.state = 0.5
+    player.animTimer = 0.3
+    player.anim = player.animations.roll
+    player.anim:gotoFrame(1)
+
+    local dirX = 0
+    local dirY = 0
+
+    if love.keyboard.isDown("d") then
+        dirX = 1
+    end
+
+    if love.keyboard.isDown("a") then
+        dirX = -1
+    end
+
+    if love.keyboard.isDown("s") then
+        dirY = 1
+    end
+
+    if love.keyboard.isDown("w") then
+        dirY = -1
+    end
+
+    local dirVec = vector(dirX, dirY):normalized()*120
+    player:setLinearVelocity(dirVec.x, dirVec.y)
 end
 
 function player:setDirFromVector(vec)
