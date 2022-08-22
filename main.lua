@@ -32,14 +32,15 @@ function love.draw()
 
     drawAfterCamera()
 
-    --local debug = require "src/debug"
-    --debug:d()
+    local debug = require "src/debug"
+    debug:d()
     --debug:single()
 end
 
 function love.keypressed(key)
     if key == 'q' then
         colliderToggle = not (colliderToggle and true);
+        data.arrowCount = 100
     end
 
     if key == 'escape' then
@@ -129,6 +130,22 @@ function love.mousepressed( x, y, button )
             pause:equip('x')
         else
             useItem('x')
+        end
+    end
+end
+
+function love.mousereleased( x, y, button )
+    if button == 1 then
+        if pause.active then
+            --pause:equip('z')
+        else
+            useItem('z', true)
+        end
+    elseif button == 2 then
+        if pause.active then
+            --pause:equip('x')
+        else
+            useItem('x', true)
         end
     end
 end

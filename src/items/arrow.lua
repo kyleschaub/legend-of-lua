@@ -1,36 +1,23 @@
 arrows = {}
 
-function spawnArrow(dir)
+function spawnArrow(x, y)
     if data.arrowCount < 1 then
         return
     end
     
     data.arrowCount = data.arrowCount - 1
+    local direction = toMouseVector(x, y)
 
     local arrow = {}
-    arrow.x = player:getX()
-    arrow.y = player:getY()
+    arrow.x = x
+    arrow.y = y
     arrow.timer = 4
     arrow.dead = false
-    arrow.dir = dir
-    arrow.dirVec = getDirectionVector(dir)
-    arrow.rot = getRotationFromDir(dir)
+    arrow.dir = direction
+    arrow.dirVec = direction
+    arrow.rot = math.atan2(direction.y, direction.x)
     arrow.rad = 3
     arrow.speed = 180
-
-    -- offset based on direction
-    if arrow.dir == "right" then
-        arrow.x = arrow.x + 4
-        arrow.y = arrow.y + 1.5
-    elseif arrow.dir == "left" then
-        arrow.x = arrow.x - 4
-        arrow.y = arrow.y + 1.5
-    elseif arrow.dir == "down" then
-        arrow.x = arrow.x + 1
-        arrow.y = arrow.y + 6
-    elseif arrow.dir == "up" then
-        arrow.y = arrow.y - 8
-    end
 
     function arrow:update(dt)
         self.timer = self.timer - dt
@@ -38,7 +25,7 @@ function spawnArrow(dir)
             self.dead = true
         end
 
-        effects:spawn("arrowTrail", self.x, self.y, self.dir)
+        --effects:spawn("arrowTrail", self.x, self.y, self.dir)
 
         self.x = self.x + (self.dirVec.x * self.speed * dt)
         self.y = self.y + (self.dirVec.y * self.speed * dt)

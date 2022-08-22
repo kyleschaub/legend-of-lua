@@ -16,6 +16,10 @@ player.bowRecoveryTime = 0.3
 player.holdSprite = sprites.items.heart
 player.attackDir = vector(1, 0)
 player.comboCount = 0
+player.aiming = false
+player.arrowOffX = 0
+player.arrowOffX = 0
+player.bowVec = vector(1, 0)
 
 -- 0 = Normal gameplay
 -- 0.5 = Rolling
@@ -107,6 +111,10 @@ function player:update(dt)
             player.dirY = 1
         end
 
+        if player.aiming then
+            player:setDirFromVector(player.bowVec)
+        end
+
         if player.dirX == 1 then
             if player.dirY == 1 then
                 player.anim = player.animations.downRight
@@ -144,6 +152,14 @@ function player:update(dt)
                 if w.collider.type == "lockedDoor" then
                     w.collider.dead = true
                 end
+            end
+        end
+
+        if player.animTimer > 0 then
+            player.animTimer = player.animTimer - dt
+            if player.animTimer < 0 then
+                player.aiming = false
+                player.animTimer = 0
             end
         end
 
@@ -256,7 +272,7 @@ function player:draw()
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
     local hookSpr = sprites.items.hookshotArmed
-    if player.state == 3.1 or data.arrowCount < 1 then bowSpr = sprites.items.bow2 end
+    if player.aiming and (player.animTimer > 0 or data.arrowCount < 1) then bowSpr = sprites.items.bow2 end
     if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
 
     local swordRot = 0
@@ -278,6 +294,18 @@ function player:draw()
 
     local px = player:getX()
     local py = player:getY()+1
+
+    local bowLayer = -1
+    player.bowVec = toMouseVector(px, py)
+    local bowRot = math.atan2(player.bowVec.y, player.bowVec.x)
+    local bowOffX = player.bowVec.x*6
+    local bowOffY = player.bowVec.y*6
+    player.arrowOffX = player.bowVec.x*6
+    player.arrowOffY = player.bowVec.y*6
+
+    if bowRot > 0 then
+        bowLayer = 1
+    end
 
     love.graphics.draw(sprites.playerShadow, px, py+5, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
 
@@ -316,10 +344,20 @@ function player:draw()
         love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
 
+    if player.aiming and bowLayer == -1 then
+        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
+        if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+    end
+
     player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, player.dirX, 1, 9.5, 10.5)
 
     if player.state == 1.1 and swLayer == 1 then
         love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
+    end
+
+    if player.aiming and bowLayer == 1 then
+        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
+        if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
     -- Sword 'down' windup
@@ -498,12 +536,16 @@ end
 
 function player:useBow()
     if player.state == 0 then
-        player.state = 3
-        player:setLinearVelocity(0, 0)
+        if player.aiming and player.animTimer <= 0 then
+            spawnArrow(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
+            player.animTimer = player.bowRecoveryTime
+            --player.aiming = false
+        else
+            player.aiming = true
+            player.animTimer = 0
+        end
     elseif player.state == 3 then
         player.state = 3.1
-        spawnArrow(player.dir)
-        player.animTimer = player.bowRecoveryTime
     end
 end
 
@@ -592,7 +634,6 @@ end
 
 function player:setDirFromVector(vec)
     local rad = math.atan2(vec.y, vec.x)
-    d1 = rad
     if rad >= 0 and rad < math.pi/2 then
         player.dirX = 1
         player.dirY = 1
