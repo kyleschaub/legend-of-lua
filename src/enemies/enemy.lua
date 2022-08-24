@@ -245,6 +245,7 @@ function spawnEnemy(x, y, type, args)
         self.flashTimer = 0.175
         if damage == 0 then self.flashTimer = 0 end
         self.dizzyTimer = dizziness or 0
+        globalStun = 0.05
 
         for i=1,14 do
             effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})

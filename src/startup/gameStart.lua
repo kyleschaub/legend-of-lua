@@ -61,6 +61,7 @@ function initGlobals()
     -- 0: main menu
     -- 1: gameplay
     gamestate = 0
+    globalStun = 0
 end
 
 function setScale(input)
