@@ -51,7 +51,7 @@ player.animations.useDownLeft = anim8.newAnimation(player.grid(2, 1), player.ani
 player.animations.useUpRight = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.useUpLeft = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.hold = anim8.newAnimation(player.grid(1, 1), player.animSpeed)
-player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.1)
+player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.11)
 
 player.anim = player.animations.upLeft
 
