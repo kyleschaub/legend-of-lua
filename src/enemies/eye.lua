@@ -13,7 +13,7 @@ local function eyeInit(enemy, x, y, args)
         enemy.form = args.form
     end
 
-    enemy.health = 2
+    enemy.health = 10
     enemy.speed = 0
     enemy.maxSpeed = 60
     enemy.magnitude = 400

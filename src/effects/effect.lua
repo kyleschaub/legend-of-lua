@@ -222,6 +222,41 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "damage" then
+        effect.rad = 1
+        effect.alpha = 1
+        effect.timer = 0.75
+        effect.sprite = sprites.effects.fuseSmoke
+        effect.scaleX = 0.8
+        
+        -- Define the path that the smoke rises
+        local vec = args.dir:normalized()
+        local pos = math.random()
+        if pos > 0.5 then pos = 1 else pos = -1 end
+        local mag = math.random()/2.5
+
+        local distance = 30 + math.random() * 12
+        effect.vec = vec:rotateInplace(mag * pos)*distance
+        local newX = effect.x + effect.vec.x
+        local newY = effect.y + effect.vec.y
+        local time = 0.25 + math.random()*0.2
+        flux.to(effect, time, {x = newX}):ease("expoout")
+        flux.to(effect, time, {y = newY}):ease("expoout")
+        --flux.to(effect, time, {alpha = 0}):ease("quadin")
+        flux.to(effect, time, {scaleX = 0}):ease("quadin")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX + (dt)
+            --self.alpha = self.timer / 0.75
+        end
+
+        function effect:draw()
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y, nil, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
     table.insert(effects, effect)
 
 end

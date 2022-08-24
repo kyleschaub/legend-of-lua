@@ -242,9 +242,13 @@ function spawnEnemy(x, y, type, args)
         self.health = self.health - damage
         self.physics:applyLinearImpulse((dir:normalized()*200):unpack())
         self.stunTimer = stun
-        self.flashTimer = 0.15
+        self.flashTimer = 0.175
         if damage == 0 then self.flashTimer = 0 end
         self.dizzyTimer = dizziness or 0
+
+        for i=1,14 do
+            effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})
+        end
     end
 
     function enemy:debugRadius()
@@ -287,7 +291,9 @@ end
 -- Draw all enemies
 function enemies:draw()
     for i,e in ipairs(self) do
+        if e.flashTimer > 0 then love.graphics.setShader(shaders.whiteout) end
         e:draw()
+        love.graphics.setShader()
     end
 end
 
