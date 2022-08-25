@@ -64,7 +64,7 @@ function love.keypressed(key)
     end
 
     if key == 'c' then
-        spawnLoot(player:getX() + 16, player:getY(), "heart", true)
+        particleEvent("death", player:getX(), player:getY())
     end
 
     if key == 'lctrl' then

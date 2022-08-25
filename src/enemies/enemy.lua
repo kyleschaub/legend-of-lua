@@ -205,7 +205,9 @@ function spawnEnemy(x, y, type, args)
 
             if self.health <= 0 then
                 self.dead = true
-                self:die()
+                --self:die()
+                local ex, ey = self.physics:getPosition()
+                particleEvent("death", ex, ey)
             end
         else
 
@@ -242,6 +244,9 @@ function spawnEnemy(x, y, type, args)
         self.health = self.health - damage
         self.physics:applyLinearImpulse((dir:normalized()*200):unpack())
         self.stunTimer = stun
+        if self.health <= 0 then
+            self.stunTimer = -1
+        end
         self.flashTimer = 0.175
         if damage == 0 then self.flashTimer = 0 end
         self.dizzyTimer = dizziness or 0
