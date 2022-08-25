@@ -8,13 +8,13 @@ local function deathInit(particle, x, y, args)
     particle.sprite = sprites.effects.fuseSmoke
     particle.timer = 3
     particle.alpha = 1
-    particle.scaleX = 0.6
+    particle.scaleX = 1
 
     local mag = 80 + math.random()*80
     particle.physics:setLinearVelocity(((args.dir):normalized()*mag):unpack())
 
     function particle:update(dt)
-        self.scaleX = self.scaleX - dt
+        self.scaleX = self.scaleX - dt*1.5
         if self.scaleX <= 0 then
             self.alpha = 0
         end
