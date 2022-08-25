@@ -535,7 +535,7 @@ function player:useBoomerang()
 end
 
 function player:useBow()
-    if player.state == 0 then
+    if player.state == 0 and data.arrowCount > 0 then
         if player.aiming and player.animTimer <= 0 then
             spawnArrow(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
             player.animTimer = player.bowRecoveryTime
