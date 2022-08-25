@@ -5,7 +5,7 @@ local function deathInit(particle, x, y, args)
     particle.physics:setCollisionClass("Particle")
     particle.physics.parent = particle
 
-    particle.sprite = sprites.effects.fuseSmoke
+    particle.sprite = sprites.effects.death
     particle.timer = 3
     particle.alpha = 1
     particle.scaleX = 1

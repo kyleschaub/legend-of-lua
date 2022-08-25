@@ -226,7 +226,7 @@ function effects:spawn(type, x, y, args)
         effect.rad = 1
         effect.alpha = 1
         effect.timer = 0.75
-        effect.sprite = sprites.effects.fuseSmoke
+        effect.sprite = sprites.effects.death
         effect.scaleX = 0.8
         
         -- Define the path that the smoke rises
