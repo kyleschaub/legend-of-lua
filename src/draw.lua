@@ -27,6 +27,7 @@ function drawCamera()
         --gameMap:drawLayer(gameMap.layers["Test"])
     end
 
+    drawShadows()
     effects:draw(-1) -- two layers of effects
     walls:draw()
     chests:draw()

@@ -21,6 +21,7 @@ function requireAll()
 
     require("src/effects/blast")
     require("src/effects/effect")
+    require("src/effects/shadows")
     require("src/effects/particles/particle")
     require("src/effects/particles/particleEvent")
 

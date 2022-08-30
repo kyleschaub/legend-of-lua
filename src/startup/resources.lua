@@ -13,6 +13,7 @@ sprites.effects.scorch = love.graphics.newImage('sprites/effects/scorch3.png')
 sprites.effects.darkMagicB = love.graphics.newImage('sprites/effects/darkMagicB.png')
 sprites.effects.darkMagicW = love.graphics.newImage('sprites/effects/darkMagicW.png')
 sprites.effects.death = love.graphics.newImage('sprites/effects/death.png')
+sprites.effects.treeShadow = love.graphics.newImage('sprites/effects/shadows/treeShadow.png')
 sprites.environment = {}
 sprites.environment.breakableRock = love.graphics.newImage('sprites/environment/breakableRock.png')
 sprites.environment.breakableWall = love.graphics.newImage('sprites/environment/breakableWall.png')
