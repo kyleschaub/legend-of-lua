@@ -52,6 +52,12 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["Trees"] then
+        for i, obj in pairs(gameMap.layers["Trees"].objects) do
+            spawnTree(obj.x, obj.y, obj.type, obj.name)
+        end
+    end
+
     if gameMap.properties.dark then
         gameMap.dark = gameMap.properties.dark
     else

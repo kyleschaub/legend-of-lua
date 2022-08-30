@@ -7,6 +7,7 @@ function destroyAll()
     removeTable(npcs)
     removeTable(chests)
     removeTable(triggers)
+    removeTable(trees)
 
     -- Remove enemies
     for i=#enemies,1,-1 do

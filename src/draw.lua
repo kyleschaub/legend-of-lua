@@ -46,6 +46,8 @@ function drawCamera()
     projectiles:draw()
     effects:draw(1)
     particles:draw()
+    --love.graphics.draw(sprites.environment.tree, 150, 150)
+    trees:draw()
 
     if gameMap.dark then
         love.graphics.setShader(shaders.trueLight)

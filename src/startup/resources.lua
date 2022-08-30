@@ -17,6 +17,7 @@ sprites.environment = {}
 sprites.environment.breakableRock = love.graphics.newImage('sprites/environment/breakableRock.png')
 sprites.environment.breakableWall = love.graphics.newImage('sprites/environment/breakableWall.png')
 sprites.environment.lockedDoor = love.graphics.newImage('sprites/environment/lockedDoor.png')
+sprites.environment.tree = love.graphics.newImage('sprites/environment/tree.png')
 sprites.enemies = {}
 sprites.enemies.alert = love.graphics.newImage('sprites/enemies/alert.png')
 sprites.enemies.shadow = love.graphics.newImage('sprites/enemies/shadow.png')
