@@ -12,6 +12,8 @@ player.animTimer = 0
 player.health = 4
 player.stunTimer = 0
 player.damagedTimer = 0
+player.damagedBool = 1
+player.damagedFlashTime = 0.05
 player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
 player.holdSprite = sprites.items.heart
@@ -72,6 +74,11 @@ function player:update(dt)
     
     if player.damagedTimer > 0 then
         player.damagedTimer = player.damagedTimer - dt
+        player.damagedFlashTime = player.damagedFlashTime - dt
+        if player.damagedFlashTime < 0 then
+            player.damagedFlashTime = 0.05
+            player.damagedBool = player.damagedBool * -1
+        end
     end
     if player.damagedTimer < 0 then
         player.damagedTimer = 0
@@ -267,6 +274,10 @@ function player:draw()
 
     if player.stunTimer > 0 then
         love.graphics.setColor(223/255,106/255,106/255,1)
+    elseif player.damagedTimer > 0 then
+        local alpha = 0.8
+        if player.damagedBool < 0 then alpha = 0.55 end
+        love.graphics.setColor(1,1,1,alpha)
     else
         love.graphics.setColor(1,1,1,1)
     end
