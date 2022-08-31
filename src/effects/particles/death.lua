@@ -10,6 +10,8 @@ local function deathInit(particle, x, y, args)
     particle.alpha = 1
     particle.scaleX = 1
 
+    if args.scl then particle.scaleX = args.scl end
+
     local mag = 80 + math.random()*80
     particle.physics:setLinearVelocity(((args.dir):normalized()*mag):unpack())
 

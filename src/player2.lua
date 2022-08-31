@@ -367,7 +367,11 @@ function player:draw()
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
+    if player.stunTimer > 0 then love.graphics.setShader(shaders.whiteout) end
+
     player.anim:draw(sprites.playerSheet, player:getX(), player:getY()-2, nil, player.dirX, 1, 9.5, 10.5)
+
+    love.graphics.setShader()
 
     if player.state == 1.1 and swLayer == 1 then
         love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
@@ -463,7 +467,8 @@ end
 function player:hurt(damage, srcX, srcY)
     if player.damagedTimer > 0 then return end
     player.damagedTimer = 2
-    particleEvent("death", player:getX(), player:getY())
+    shake:start(0.1, 2, 0.03)
+    particleEvent("playerHit", player:getX(), player:getY())
     player.health = player.health - damage
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
@@ -505,6 +510,7 @@ end
 function player:swordDamage()
     -- Query for enemies to hit with the sword
     local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
+    if #hitEnemies > 0 then shake:start(0.1, 1, 0.02) end
     for _,e in ipairs(hitEnemies) do
         local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
         e.parent:hit(1, knockbackDir, 0.1)
