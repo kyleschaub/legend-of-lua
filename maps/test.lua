@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 10,
-  nextobjectid = 65,
+  nextobjectid = 66,
   properties = {},
   tilesets = {
     {
@@ -275,8 +275,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 160,
-          y = 128,
+          x = 157,
+          y = 124.75,
           width = 16,
           height = 16,
           rotation = 0,
@@ -288,34 +288,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 224,
-          y = 160,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 58,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 256,
-          y = 208,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 59,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 142,
-          y = 207.75,
+          x = 218.75,
+          y = 166,
           width = 16,
           height = 16,
           rotation = 0,
@@ -342,19 +316,6 @@ return {
           shape = "rectangle",
           x = 432,
           y = 256,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
-          id = 62,
-          name = "",
-          type = "",
-          shape = "rectangle",
-          x = 285.5,
-          y = 170.5,
           width = 16,
           height = 16,
           rotation = 0,
@@ -402,7 +363,21 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 65,
+          name = "eye",
+          type = "",
+          shape = "rectangle",
+          x = 160,
+          y = 176,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
