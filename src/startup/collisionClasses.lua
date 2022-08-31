@@ -4,8 +4,8 @@ function createCollisionClasses()
     world:addCollisionClass('Player', {ignores = {'Ignore'}})
     world:addCollisionClass('Wall', {ignores = {'Ignore'}})
     world:addCollisionClass('Transition', {ignores = {'Ignore'}})
-    world:addCollisionClass('Enemy', {ignores = {'Ignore'}})
-    world:addCollisionClass('Projectile', {ignores = {'Ignore', 'Enemy'}})
+    world:addCollisionClass('Enemy', {ignores = {'Ignore', 'Player'}})
+    world:addCollisionClass('Projectile', {ignores = {'Ignore', 'Enemy', 'Player'}})
 
     particleWorld:addCollisionClass('Particle', {ignores = {'Particle'}})
 end

@@ -304,8 +304,8 @@ end
 
 function player:checkDamage()
     if player:enter('Enemy') then
-        local e = player:getEnterCollisionData('Enemy')
-        player:hurt(0.5, e.collider:getX(), e.collider:getY())
+        --local e = player:getEnterCollisionData('Enemy')
+        --player:hurt(0.5, e.collider:getX(), e.collider:getY())
     end
 
     if player:enter('Projectile') then

@@ -11,6 +11,7 @@ player.walking = false
 player.animTimer = 0
 player.health = 4
 player.stunTimer = 0
+player.damagedTimer = 0
 player.invincible = 0 -- timer
 player.bowRecoveryTime = 0.3
 player.holdSprite = sprites.items.heart
@@ -68,8 +69,14 @@ function player:update(dt)
             player:setLinearVelocity(0, 0)
         end
     end
-    if player.invincible > 0 then
-        player.invincible = player.invincible - dt
+    
+    if player.damagedTimer > 0 then
+        player.damagedTimer = player.damagedTimer - dt
+    end
+    if player.damagedTimer < 0 then
+        player.damagedTimer = 0
+        --world:collisionClear()
+        world:collisionEventsClear()
     end
 
     if player.state == 0 then
@@ -415,7 +422,7 @@ function player:draw()
 end
 
 function player:checkDamage()
-    if player:enter('Enemy') then
+    if player:enter('Enemy') or player:stay('Enemy') then
         local e = player:getEnterCollisionData('Enemy')
         player:hurt(0.5, e.collider:getX(), e.collider:getY())
     end
@@ -440,8 +447,8 @@ function player:checkTransition()
 end
 
 function player:hurt(damage, srcX, srcY)
-    if player.invincible > 0 then return end
-    --player.invincible = 1 TODO: uncomment to enable invincibility frames
+    if player.damagedTimer > 0 then return end
+    player.damagedTimer = 2
     player.health = player.health - damage
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
