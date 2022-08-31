@@ -422,9 +422,12 @@ function player:draw()
 end
 
 function player:checkDamage()
-    if player:enter('Enemy') or player:stay('Enemy') then
-        local e = player:getEnterCollisionData('Enemy')
-        player:hurt(0.5, e.collider:getX(), e.collider:getY())
+    if player.damagedTimer > 0 then return end
+
+    local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 5, {'Enemy'})
+    if #hitEnemies > 0 then
+        local e = hitEnemies[1]
+        player:hurt(0.5, e:getX(), e:getY())
     end
 
     if player:enter('Projectile') then
@@ -449,6 +452,7 @@ end
 function player:hurt(damage, srcX, srcY)
     if player.damagedTimer > 0 then return end
     player.damagedTimer = 2
+    particleEvent("death", player:getX(), player:getY())
     player.health = player.health - damage
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
