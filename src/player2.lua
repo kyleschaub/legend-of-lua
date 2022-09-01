@@ -241,8 +241,8 @@ function player:update(dt)
 
     elseif player.state == 4.2 then
 
-        player:setX( player:getX() + (hookshot.dirVec.x * hookshot.speed * dt) )
-        player:setY( player:getY() + (hookshot.dirVec.y * hookshot.speed * dt) )
+        player:setX( player:getX() + (hookshot.dir.x * hookshot.speed * dt) )
+        player:setY( player:getY() + (hookshot.dir.y * hookshot.speed * dt) )
 
     elseif player.state == 11 then -- got an item
 
@@ -289,9 +289,9 @@ function player:draw()
     local swLayer = -1
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
-    local hookSpr = sprites.items.hookshotArmed
+    --local hookSpr = sprites.items.hookshotArmed
     if player.aiming and (player.animTimer > 0 or data.arrowCount < 1) then bowSpr = sprites.items.bow2 end
-    if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
+    --if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
 
     local swordRot = 0
     if player.state == 1.1 then
@@ -417,21 +417,6 @@ function player:draw()
     if player.dir == "down" and (player.state == 3 or player.state == 3.1) then
         love.graphics.draw(bowSpr, px, py+10.5, math.pi/2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
-    end
-
-    -- Hookshot 'right'
-    if player.dir == "right" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
-        love.graphics.draw(hookSpr, px+8, py+7, nil, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
-    end
-
-    -- Hookshot 'left'
-    if player.dir == "left" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
-        love.graphics.draw(hookSpr, px-10, py+7, math.pi, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
-    end
-
-    -- Hookshot 'down'
-    if player.dir == "down" and (player.state == 4 or player.state == 4.1 or player.state == 4.2) then
-        love.graphics.draw(hookSpr, px+2, py+13, math.pi/2, nil, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
     end
 
     if player.state == 11 then
@@ -611,15 +596,12 @@ end
 
 function player:useHookshot()
     if player.state == 0 then
-        if player.aiming then
-            player.state = 4.1
-            player.attackDir = toMouseVector(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
-            hookshot:shoot(player.attackDir)
-            player:setLinearVelocity(0, 0)
-            player:setDirFromVector(player.attackDir)
-        else
-            player.aiming = true
-        end
+        player.state = 4.1
+        player.attackDir = toMouseVector(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
+        player:useSet()
+        hookshot:shoot(player.attackDir)
+        player:setLinearVelocity(0, 0)
+        player:setDirFromVector(player.attackDir)
     end
 end
 

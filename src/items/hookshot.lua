@@ -4,11 +4,11 @@ hookshot.y = 0
 hookshot.handleX = 0
 hookshot.handleY = 0
 hookshot.timer = 0
-hookshot.maxTimer = 0.5
+hookshot.maxTimer = 0.4
 hookshot.dirVec = getDirectionVector('down')
 hookshot.rot = getRotationFromDir('down')
 hookshot.rad = 3
-hookshot.speed = 160
+hookshot.speed = 200
 hookshot.chainCount = 10
 
 -- 0: inactive
@@ -92,6 +92,7 @@ function hookshot:draw(layer)
     -- Always draw the chains in layer -1
     local chainSpr = sprites.items.hookshotChain
     if layer == -1 then
+        --[[
         local dist = distanceBetween(hookshot.handleX, hookshot.handleY, hookshot.x, hookshot.y)
         local interval = dist / hookshot.chainCount
         for i = 1, hookshot.chainCount do
@@ -99,6 +100,16 @@ function hookshot:draw(layer)
             local offY = interval * i * hookshot.dir.y
             love.graphics.draw(chainSpr, self.handleX + offX, self.handleY + offY, self.rot, nil, nil, chainSpr:getWidth()/2, chainSpr:getHeight()/2)
         end
+        ]]
+
+        --love.graphics.setColor(115/255, 95/255, 75/255)
+        love.graphics.setColor(26/255,26/255,26/255,1)
+        love.graphics.setLineWidth(2)
+        love.graphics.line(hookshot.handleX, hookshot.handleY, hookshot.x, hookshot.y)
+        love.graphics.setColor(179/255, 147/255, 116/255)
+        love.graphics.setLineWidth(0.6)
+        love.graphics.line(hookshot.handleX, hookshot.handleY, hookshot.x, hookshot.y)
+        setWhite()
     end
 
     local hookSpr = sprites.items.hookshotHead
