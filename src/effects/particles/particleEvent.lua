@@ -31,6 +31,7 @@ function particleEvent(type, x, y, arg)
             local newDir = vector(1, 0):rotated(angle)
             spawnParticle("death", x, y, {dir = newDir})
         end
+        shake:start(0.1, 1, 0.02)
     end
 
     if type == "playerHit" then
