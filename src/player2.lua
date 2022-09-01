@@ -509,7 +509,35 @@ end
 
 function player:swordDamage()
     -- Query for enemies to hit with the sword
-    local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
+    --local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 24, {'Enemy'})
+
+    local px, py = player:getPosition()
+    local dir = player.attackDir:normalized()
+    local rightDir = dir:rotated(math.pi/2)
+    local leftDir = dir:rotated(math.pi/-2)
+    local polygon = {
+        px + dir.x*20,
+        py + dir.y*20,
+        px + dir:rotated(math.pi/8).x*20,
+        py + dir:rotated(math.pi/8).y*20,
+        px + dir:rotated(math.pi/4).x*20,
+        py + dir:rotated(math.pi/4).y*20,
+        px + dir:rotated(3*math.pi/8).x*20,
+        py + dir:rotated(3*math.pi/8).y*20,
+        px + rightDir.x*22,
+        py + rightDir.y*22,
+        px + leftDir.x*22,
+        py + leftDir.y*22,
+        px + dir:rotated(3*math.pi/-8).x*20,
+        py + dir:rotated(3*math.pi/-8).y*20,
+        px + dir:rotated(math.pi/-4).x*20,
+        py + dir:rotated(math.pi/-4).y*20,
+        px + dir:rotated(math.pi/-8).x*20,
+        py + dir:rotated(math.pi/-8).y*20,
+    }
+
+    local hitEnemies = world:queryPolygonArea(polygon, {'Enemy'})
+
     if #hitEnemies > 0 then shake:start(0.1, 1, 0.02) end
     for _,e in ipairs(hitEnemies) do
         local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
