@@ -22,33 +22,13 @@ function hookshot:shoot(dir)
     hookshot.state = 1
     hookshot.timer = hookshot.maxTimer
     hookshot.dir = dir
-    hookshot.dirVec = getDirectionVector(dir)
-    hookshot.rot = getRotationFromDir(dir)
+    hookshot.rot = getRotationFromVector(dir)
 
     hookshot.x = player:getX()
     hookshot.y = player:getY()
 
-    -- offset based on direction
-    if hookshot.dir == "right" then
-        hookshot.x = hookshot.x + 10
-        hookshot.y = hookshot.y + 2
-        hookshot.handleX = hookshot.x - 4
-        hookshot.handleY = hookshot.y
-    elseif hookshot.dir == "left" then
-        hookshot.x = hookshot.x - 10
-        hookshot.y = hookshot.y + 2
-        hookshot.handleX = hookshot.x + 4
-        hookshot.handleY = hookshot.y
-    elseif hookshot.dir == "down" then
-        hookshot.x = hookshot.x + 3
-        hookshot.y = hookshot.y + 9
-        hookshot.handleX = hookshot.x
-        hookshot.handleY = hookshot.y - 3
-    elseif hookshot.dir == "up" then
-        hookshot.y = hookshot.y - 8
-        hookshot.handleX = hookshot.x
-        hookshot.handleY = hookshot.y + 2
-    end
+    hookshot.handleX = hookshot.x + dir.x*3
+    hookshot.handleY = hookshot.y + dir.y*3
 
 end
 
@@ -61,13 +41,13 @@ function hookshot:update(dt)
     end
 
     if self.state == 1 or self.state == -1 then
-        self.x = self.x + (self.dirVec.x * self.speed * dt) * self.state
-        self.y = self.y + (self.dirVec.y * self.speed * dt) * self.state
+        self.x = self.x + (self.dir.x * self.speed * dt) * self.state
+        self.y = self.y + (self.dir.y * self.speed * dt) * self.state
     end
 
     if self.state == 2 then
-        self.handleX = self.handleX + (self.dirVec.x * self.speed * dt)
-        self.handleY = self.handleY + (self.dirVec.y * self.speed * dt)
+        self.handleX = self.handleX + (self.dir.x * self.speed * dt)
+        self.handleY = self.handleY + (self.dir.y * self.speed * dt)
 
         if distanceBetween(player:getX(), player:getY(), hookshot.x, hookshot.y) < 12 then
             hookshot.state = 0
@@ -91,7 +71,7 @@ function hookshot:update(dt)
         for _,e in ipairs(hitEnemies) do
             if e.parent.hookable then
                 e.parent.dizzyTimer = 1
-                e.parent.hookVec = getDirectionVector(hookshot.dir)
+                e.parent.hookVec = hookshot.dir
             end
             hookshot.state = -1
         end
@@ -99,7 +79,7 @@ function hookshot:update(dt)
         for _,l in ipairs(loots) do
             if distanceBetween(l.x, l.y, hookshot.x, hookshot.y) < 10 then
                 self.state = -1
-                l.hookVec = getDirectionVector(hookshot.dir)
+                l.hookVec = hookshot.dir
             end
         end
     end
@@ -115,8 +95,8 @@ function hookshot:draw(layer)
         local dist = distanceBetween(hookshot.handleX, hookshot.handleY, hookshot.x, hookshot.y)
         local interval = dist / hookshot.chainCount
         for i = 1, hookshot.chainCount do
-            local offX = interval * i * hookshot.dirVec.x
-            local offY = interval * i * hookshot.dirVec.y
+            local offX = interval * i * hookshot.dir.x
+            local offY = interval * i * hookshot.dir.y
             love.graphics.draw(chainSpr, self.handleX + offX, self.handleY + offY, self.rot, nil, nil, chainSpr:getWidth()/2, chainSpr:getHeight()/2)
         end
     end

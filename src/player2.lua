@@ -229,7 +229,7 @@ function player:update(dt)
     elseif player.state == 4 or player.state == 4.1 then
 
         -- while arming the hookshot, always 'use' the item
-        player:useItem(1)
+        -- player:useItem(1)
 
         if player.state == 4.1 and hookshot.state == -1 then
             if distanceBetween(player:getX(), player:getY(), hookshot.x, hookshot.y) < 12 then
@@ -318,6 +318,8 @@ function player:draw()
     local bowRot = math.atan2(player.bowVec.y, player.bowVec.x)
     local bowOffX = player.bowVec.x*6
     local bowOffY = player.bowVec.y*6
+    local hookOffX = player.bowVec.x*6
+    local hookOffY = player.bowVec.y*6
     player.arrowOffX = player.bowVec.x*6
     player.arrowOffY = player.bowVec.y*6
 
@@ -365,6 +367,7 @@ function player:draw()
     if player.aiming and bowLayer == -1 then
         love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        --love.graphics.draw(hookSpr, px + hookOffX, py + hookOffY, bowRot, 1.15, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
     end
 
     if player.stunTimer > 0 then love.graphics.setShader(shaders.whiteout) end
@@ -380,6 +383,7 @@ function player:draw()
     if player.aiming and bowLayer == 1 then
         love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
+        --love.graphics.draw(hookSpr, px + hookOffX, py + hookOffY, bowRot, 1.15, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
     end
 
     -- Sword 'down' windup
@@ -607,12 +611,15 @@ end
 
 function player:useHookshot()
     if player.state == 0 then
-        player.state = 4
-        player:setLinearVelocity(0, 0)
-    elseif player.state == 4 then
-        player.state = 4.1
-        hookshot:shoot(player.dir)
-        player.animTimer = player.bowRecoveryTime
+        if player.aiming then
+            player.state = 4.1
+            player.attackDir = toMouseVector(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
+            hookshot:shoot(player.attackDir)
+            player:setLinearVelocity(0, 0)
+            player:setDirFromVector(player.attackDir)
+        else
+            player.aiming = true
+        end
     end
 end
 
