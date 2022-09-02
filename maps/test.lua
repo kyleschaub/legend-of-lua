@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 11,
-  nextobjectid = 75,
+  nextobjectid = 76,
   properties = {},
   tilesets = {
     {
@@ -365,17 +365,19 @@ return {
       properties = {},
       objects = {
         {
-          id = 65,
-          name = "eye",
+          id = 75,
+          name = "skeleton",
           type = "",
-          shape = "rectangle",
-          x = 160,
-          y = 176,
-          width = 16,
-          height = 16,
+          shape = "point",
+          x = 165.818,
+          y = 189.455,
+          width = 0,
+          height = 0,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["form"] = 1
+          }
         }
       }
     },
