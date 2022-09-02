@@ -376,7 +376,7 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["form"] = 1
+            ["form"] = 2
           }
         }
       }

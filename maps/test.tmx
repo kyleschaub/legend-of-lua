@@ -92,7 +92,7 @@
  <objectgroup id="6" name="Enemies">
   <object id="75" name="skeleton" x="165.818" y="189.455">
    <properties>
-    <property name="form" type="int" value="1"/>
+    <property name="form" type="int" value="2"/>
    </properties>
    <point/>
   </object>
