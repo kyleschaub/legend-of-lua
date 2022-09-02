@@ -37,6 +37,7 @@ function boomerang:update(dt)
         local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
         for _,e in ipairs(hitEnemies) do
             e.parent:hit(0, self.dir, 0.1, 2)
+            particleEvent("playerHit", e.parent.physics:getX(), e.parent.physics:getY())
         end
         if #hitEnemies > 0 then self.state = 2 end
     elseif self.state == 2 then

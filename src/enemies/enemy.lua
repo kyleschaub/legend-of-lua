@@ -103,7 +103,7 @@ function spawnEnemy(x, y, type, args)
 
     -- Used to make enemies move within a circular area
     function enemy:wanderUpdate(dt)
-        if self.state < 1 or self.state >= 2 then return end
+        if self.state < 1 or self.state >= 2 or self.dizzyTimer > 0 then return end
         if self.wanderTimer > 0 then self.wanderTimer = self.wanderTimer - dt end
         if self.wanderBufferTimer > 0 then self.wanderBufferTimer = self.wanderBufferTimer - dt end
         if self.wanderTimer < 0 then
@@ -254,8 +254,12 @@ function spawnEnemy(x, y, type, args)
         self.dizzyTimer = dizziness or 0
         globalStun = 0.05
 
-        for i=1,14 do
-            effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})
+        if damage > 0 then
+            for i=1,14 do
+                effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})
+            end
+        else
+            
         end
     end
 
