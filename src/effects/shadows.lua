@@ -10,4 +10,9 @@ function drawShadows()
         love.graphics.draw(spr, boomerang.x, boomerang.y+6, nil, 0.8, nil, spr:getWidth()/2, spr:getHeight()/2)
     end
 
+    spr = sprites.effects.arrowShadow
+    for _,a in ipairs(arrows) do
+        love.graphics.draw(spr, a.x, a.y+5, a.rot, nil, nil, spr:getWidth()/2, spr:getHeight()/2)
+    end
+
 end
