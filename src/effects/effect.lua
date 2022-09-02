@@ -91,11 +91,11 @@ function effects:spawn(type, x, y, args)
         effect.spriteSheet = sprites.environment.wave
         effect.width = 16
         effect.height = 16
-        effect.scaleX = 0.8
-        effect.scaleY = 0.8
+        effect.scaleX = 0.7
+        effect.scaleY = 0.7
         effect.layer = -1
         effect.grid = anim8.newGrid(16, 16, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
-        effect.anim = anim8.newAnimation(effect.grid('1-17', 1), 0.05, function() effect.dead = true end)
+        effect.anim = anim8.newAnimation(effect.grid('1-17', 1), 0.07, function() effect.dead = true end)
     end
 
     if type == "arrowTrail" then

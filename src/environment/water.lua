@@ -11,7 +11,7 @@ function spawnWater(x, y, width, height)
     local effectiveW = width-16
     local effectiveY = height-16
     local effectiveArea = effectiveW * effectiveY
-    local max = 350/effectiveArea
+    local max = 400/effectiveArea
     water.maxTime = max
 
     -- Wall spawned overtop of the water, passed water as parent
