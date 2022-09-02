@@ -315,6 +315,8 @@ function player:draw()
 
     local bowLayer = -1
     player.bowVec = toMouseVector(px, py)
+    local bowScaleY = 1
+    if player.bowVec.x < 0 then bowScaleY = -1 end
     local bowRot = math.atan2(player.bowVec.y, player.bowVec.x)
     local bowOffX = player.bowVec.x*6
     local bowOffY = player.bowVec.y*6
@@ -365,7 +367,7 @@ function player:draw()
     end
 
     if player.aiming and bowLayer == -1 then
-        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
+        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, bowScaleY, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
         --love.graphics.draw(hookSpr, px + hookOffX, py + hookOffY, bowRot, 1.15, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
     end
@@ -381,7 +383,7 @@ function player:draw()
     end
 
     if player.aiming and bowLayer == 1 then
-        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
+        love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, bowScaleY, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
         --love.graphics.draw(hookSpr, px + hookOffX, py + hookOffY, bowRot, 1.15, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
     end
