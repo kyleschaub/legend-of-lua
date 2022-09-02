@@ -253,6 +253,7 @@ function spawnEnemy(x, y, type, args)
         if damage == 0 then self.flashTimer = 0 end
         self.dizzyTimer = dizziness or 0
         globalStun = 0.05
+        self.state = 100
 
         if damage > 0 then
             for i=1,14 do
