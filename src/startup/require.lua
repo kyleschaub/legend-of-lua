@@ -29,6 +29,7 @@ function requireAll()
     require("src/enemies/enemy")
 
     require("src/environment/tree")
+    require("src/environment/water")
 
     require("src/items/item")
     require("src/items/loot")

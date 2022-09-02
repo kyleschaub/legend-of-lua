@@ -58,6 +58,12 @@ function loadMap(mapName, destX, destY)
         end
     end
 
+    if gameMap.layers["Water"] then
+        for i, obj in pairs(gameMap.layers["Water"].objects) do
+            spawnWater(obj.x, obj.y, obj.width, obj.height)
+        end
+    end
+
     if gameMap.properties.dark then
         gameMap.dark = gameMap.properties.dark
     else

@@ -64,7 +64,8 @@ function love.keypressed(key)
     end
 
     if key == 'c' then
-        particleEvent("death", player:getX(), player:getY())
+        --particleEvent("death", player:getX(), player:getY())
+        effects:spawn("wave", player:getX()+32, player:getY())
     end
 
     if key == 'lctrl' then
@@ -102,7 +103,7 @@ function love.keypressed(key)
         pause.gridY = pause.gridY + 1
     end
 
-    if key == 's' then
+    if key == 'n' then
         saveGame()
     end
 
