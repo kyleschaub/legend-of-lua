@@ -1,8 +1,8 @@
 function updateAll(dt)
 
-    if pause.active == false then
+    --if pause.active == false then
         updateGame(dt)
-    end
+    --end
     
     pause:update(dt)
     dj.cleanup()

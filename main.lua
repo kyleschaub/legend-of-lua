@@ -65,7 +65,7 @@ function love.keypressed(key)
 
     if key == 'c' then
         --particleEvent("death", player:getX(), player:getY())
-        effects:spawn("wave", player:getX()+32, player:getY())
+        
     end
 
     if key == 'lctrl' then
