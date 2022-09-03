@@ -25,6 +25,7 @@ player.aiming = false
 player.arrowOffX = 0
 player.arrowOffX = 0
 player.bowVec = vector(1, 0)
+player.baseDamping = 12
 
 -- 0 = Normal gameplay
 -- 0.5 = Rolling
@@ -39,7 +40,7 @@ player.state = -1
 
 player:setCollisionClass("Player")
 player:setFixedRotation(true)
-player:setLinearDamping(12)
+player:setLinearDamping(player.baseDamping)
 
 player.grid = anim8.newGrid(19, 21, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
 
@@ -94,6 +95,8 @@ function player:update(dt)
     end
 
     if player.state == 0 then
+
+        player:setLinearDamping(player.baseDamping)
 
         player.prevDirX = player.dirX
         player.prevDirY = player.dirY
@@ -696,7 +699,8 @@ function player:roll()
         dirY = -1
     end
 
-    local dirVec = vector(dirX, dirY):normalized()*120
+    player:setLinearDamping(1.75)
+    local dirVec = vector(dirX, dirY):normalized()*160
     player:setLinearVelocity(dirVec.x, dirVec.y)
 end
 
