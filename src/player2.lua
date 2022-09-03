@@ -9,7 +9,7 @@ player.prevDirY = 1
 player.scaleX = 1
 player.speed = 80
 player.animSpeed = 0.14
-player.walking = false
+player.walking = true
 player.animTimer = 0
 player.health = 4
 player.stunTimer = 0
@@ -58,10 +58,12 @@ player.animations.useUpRight = anim8.newAnimation(player.grid(2, 2), player.anim
 player.animations.useUpLeft = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.hold = anim8.newAnimation(player.grid(1, 1), player.animSpeed)
 player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.11)
-player.animations.idleDown = anim8.newAnimation(player.grid('1-4', 5), 0.22)
-player.animations.idleUp = anim8.newAnimation(player.grid('1-4', 6), 0.22)
+player.animations.idleDown = anim8.newAnimation(player.grid('1-4', 7), {1.2, 0.1, 2.4, 0.1})
+player.animations.idleUp = anim8.newAnimation(player.grid('1-2', 8), 0.22)
+player.animations.stopDown = anim8.newAnimation(player.grid('1-3', 5), 0.22, function() player.anim = player.animations.idleDown end)
+player.animations.stopUp = anim8.newAnimation(player.grid('1-3', 6), 0.22, function() player.anim = player.animations.idleUp end)
 
-player.anim = player.animations.idle
+player.anim = player.animations.idleDown
 
 function player:update(dt)
     if player.state == -1 or gamestate == 0 then return end
@@ -137,17 +139,19 @@ function player:update(dt)
             player:setDirFromVector(player.bowVec)
         end
 
-        if player.dirX == 1 then
-            if player.dirY == 1 then
-                player.anim = player.animations.downRight
+        if player.walking then
+            if player.dirX == 1 then
+                if player.dirY == 1 then
+                    player.anim = player.animations.downRight
+                else
+                    player.anim = player.animations.upRight
+                end
             else
-                player.anim = player.animations.upRight
-            end
-        else
-            if player.dirY == 1 then
-                player.anim = player.animations.downLeft
-            else
-                player.anim = player.animations.upLeft
+                if player.dirY == 1 then
+                    player.anim = player.animations.downLeft
+                else
+                    player.anim = player.animations.upLeft
+                end
             end
         end
 
@@ -157,14 +161,9 @@ function player:update(dt)
         end
 
         if dirX == 0 and dirY == 0 then
-            if player.prevDirY < 0 then
-                player.anim = player.animations.idleUp
-            else
-                player.anim = player.animations.idleDown
-            end
             if player.walking then
                 player.walking = false
-                player.anim:gotoFrame(1)
+                player:justStop()
             end
             if player.aiming then player.anim:gotoFrame(1) end
         else
@@ -633,15 +632,15 @@ function player:resetAnimation(direction)
     --player.anim = player.animations[direction]
     if player.dirX == 1 then
         if player.dirY == 1 then
-            player.anim = player.animations.downRight
+            player.anim = player.animations.idleDown
         else
-            player.anim = player.animations.upRight
+            player.anim = player.animations.idleUp
         end
     else
         if player.dirY == 1 then
-            player.anim = player.animations.downLeft
+            player.anim = player.animations.idleDown
         else
-            player.anim = player.animations.upLeft
+            player.anim = player.animations.idleUp
         end
     end
     player.anim:gotoFrame(1)
@@ -735,4 +734,22 @@ function player:useSet()
             player.anim = player.animations.useUpLeft
         end
     end
+end
+
+function player:justStop()
+    if player.prevDirY < 0 then
+        player.anim = player.animations.stopUp
+    else
+        player.anim = player.animations.stopDown
+    end
+    player.anim:gotoFrame(1)
+end
+
+function player:justIdle()
+    if player.prevDirY < 0 then
+        player.anim = player.animations.idleUp
+    else
+        player.anim = player.animations.idleDown
+    end
+    --player.anim:gotoFrame(1)
 end
