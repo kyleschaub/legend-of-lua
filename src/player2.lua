@@ -4,6 +4,8 @@ player.y = 0
 player.dir = "down"
 player.dirX = 1
 player.dirY = 1
+player.prevDirX = 1
+player.prevDirY = 1
 player.scaleX = 1
 player.speed = 80
 player.animSpeed = 0.14
@@ -55,8 +57,10 @@ player.animations.useUpRight = anim8.newAnimation(player.grid(2, 2), player.anim
 player.animations.useUpLeft = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.hold = anim8.newAnimation(player.grid(1, 1), player.animSpeed)
 player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.11)
+player.animations.idleDown = anim8.newAnimation(player.grid('1-4', 5), 0.22)
+player.animations.idleUp = anim8.newAnimation(player.grid('1-4', 6), 0.22)
 
-player.anim = player.animations.upLeft
+player.anim = player.animations.idle
 
 function player:update(dt)
     if player.state == -1 or gamestate == 0 then return end
@@ -87,6 +91,9 @@ function player:update(dt)
     end
 
     if player.state == 0 then
+
+        player.prevDirX = player.dirX
+        player.prevDirY = player.dirY
     
         local dirX = 0
         local dirY = 0
@@ -147,15 +154,23 @@ function player:update(dt)
         player:setLinearVelocity(vec.x, vec.y)
 
         if dirX == 0 and dirY == 0 then
-            player.walking = false
-            player.anim:gotoFrame(1)
+            if player.prevDirY < 0 then
+                player.anim = player.animations.idleUp
+            else
+                player.anim = player.animations.idleDown
+            end
+            if player.walking then
+                player.walking = false
+                player.anim:gotoFrame(1)
+            end
+            if player.aiming then player.anim:gotoFrame(1) end
         else
             player.walking = true
         end
 
-        if player.walking then
+        --if player.walking then
             player.anim:update(dt)
-        end
+        --end
 
         player:checkDamage()
         player:checkTransition()
