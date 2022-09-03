@@ -39,6 +39,7 @@ player.state = -1
 
 player:setCollisionClass("Player")
 player:setFixedRotation(true)
+player:setLinearDamping(12)
 
 player.grid = anim8.newGrid(19, 21, sprites.playerSheet:getWidth(), sprites.playerSheet:getHeight())
 
@@ -151,7 +152,9 @@ function player:update(dt)
         end
 
         local vec = vector(dirX, dirY):normalized() * player.speed
-        player:setLinearVelocity(vec.x, vec.y)
+        if vec.x ~= 0 or vec.y ~= 0 then
+            player:setLinearVelocity(vec.x, vec.y)
+        end
 
         if dirX == 0 and dirY == 0 then
             if player.prevDirY < 0 then
