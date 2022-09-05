@@ -58,11 +58,12 @@ player.animations.useDownLeft = anim8.newAnimation(player.grid(2, 1), player.ani
 player.animations.useUpRight = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.useUpLeft = anim8.newAnimation(player.grid(2, 2), player.animSpeed)
 player.animations.hold = anim8.newAnimation(player.grid(1, 1), player.animSpeed)
-player.animations.roll = anim8.newAnimation(player.grid('1-3', 4), 0.11)
-player.animations.idleDown = anim8.newAnimation(player.grid('1-4', 7), {1.2, 0.1, 2.4, 0.1})
-player.animations.idleUp = anim8.newAnimation(player.grid('1-2', 8), 0.22)
-player.animations.stopDown = anim8.newAnimation(player.grid('1-3', 5), 0.22, function() player.anim = player.animations.idleDown end)
-player.animations.stopUp = anim8.newAnimation(player.grid('1-3', 6), 0.22, function() player.anim = player.animations.idleUp end)
+player.animations.rollDown = anim8.newAnimation(player.grid('1-3', 4), 0.11)
+player.animations.rollUp = anim8.newAnimation(player.grid('1-3', 5), 0.11)
+player.animations.stopDown = anim8.newAnimation(player.grid('1-3', 6), 0.22, function() player.anim = player.animations.idleDown end)
+player.animations.stopUp = anim8.newAnimation(player.grid('1-3', 7), 0.22, function() player.anim = player.animations.idleUp end)
+player.animations.idleDown = anim8.newAnimation(player.grid('1-4', 8), {1.2, 0.1, 2.4, 0.1})
+player.animations.idleUp = anim8.newAnimation(player.grid('1-2', 9), 0.22)
 
 player.anim = player.animations.idleDown
 
@@ -677,8 +678,6 @@ end
 function player:roll()
     player.state = 0.5
     player.animTimer = 0.3
-    player.anim = player.animations.roll
-    player.anim:gotoFrame(1)
 
     local dirX = 0
     local dirY = 0
@@ -698,6 +697,13 @@ function player:roll()
     if love.keyboard.isDown("w") then
         dirY = -1
     end
+
+    if dirY < 0 then
+        player.anim = player.animations.rollUp
+    else
+        player.anim = player.animations.rollDown
+    end
+    player.anim:gotoFrame(1)
 
     player:setLinearDamping(1.75)
     local dirVec = vector(dirX, dirY):normalized()*160
