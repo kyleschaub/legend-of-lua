@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 11,
-  nextobjectid = 76,
+  nextobjectid = 84,
   properties = {},
   tilesets = {
     {
@@ -241,7 +241,86 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 78,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 321.091,
+          y = 181.818,
+          width = 14,
+          height = 8,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 79,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 272,
+          y = 112,
+          width = 48,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 80,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 208,
+          y = 0,
+          width = 32,
+          height = 112,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 81,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 240,
+          y = 64,
+          width = 16,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 82,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 256,
+          y = 64,
+          width = 224,
+          height = 48,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 83,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64,
+          y = 0,
+          width = 80,
+          height = 80,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -314,8 +393,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 432,
-          y = 256,
+          x = 433.273,
+          y = 258.909,
           width = 16,
           height = 16,
           rotation = 0,
@@ -329,6 +408,19 @@ return {
           shape = "rectangle",
           x = 400,
           y = 128,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 76,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 416,
+          y = 208,
           width = 16,
           height = 16,
           rotation = 0,
@@ -369,14 +461,29 @@ return {
           name = "skeleton",
           type = "",
           shape = "point",
-          x = 165.818,
-          y = 189.455,
+          x = 144,
+          y = 176,
           width = 0,
           height = 0,
           rotation = 0,
           visible = true,
           properties = {
             ["form"] = 2
+          }
+        },
+        {
+          id = 77,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 320,
+          y = 160,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
           }
         }
       }

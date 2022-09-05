@@ -13,9 +13,9 @@ local function eyeInit(enemy, x, y, args)
         enemy.form = args.form
     end
 
-    enemy.health = 3
+    enemy.health = 2
     enemy.speed = 0
-    enemy.maxSpeed = 60
+    enemy.maxSpeed = 50
     enemy.magnitude = 400
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100

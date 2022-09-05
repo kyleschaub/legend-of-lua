@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="76">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="84">
  <editorsettings>
   <export target="test.lua" format="lua"/>
  </editorsettings>
@@ -79,20 +79,34 @@
 1642,1642,1642,1642,1642,1642,1642,1642,1642,1642,1643,2698,2698,2698,2698,2698,2698,2698,1763,1764,1764,1765,2698,2698,2698,2698,2698,2698,2698,2698
 </data>
  </layer>
- <objectgroup id="3" name="Walls"/>
+ <objectgroup id="3" name="Walls">
+  <object id="78" x="321.091" y="181.818" width="14" height="8"/>
+  <object id="79" x="272" y="112" width="48" height="16"/>
+  <object id="80" x="208" y="0" width="32" height="112"/>
+  <object id="81" x="240" y="64" width="16" height="32"/>
+  <object id="82" x="256" y="64" width="224" height="48"/>
+  <object id="83" x="64" y="0" width="80" height="80"/>
+ </objectgroup>
  <objectgroup id="5" name="Loot"/>
  <objectgroup id="9" name="Trees">
   <object id="56" x="157" y="124.75" width="16" height="16"/>
   <object id="57" x="218.75" y="166" width="16" height="16"/>
   <object id="60" x="240" y="288" width="16" height="16"/>
-  <object id="61" x="432" y="256" width="16" height="16"/>
+  <object id="61" x="433.273" y="258.909" width="16" height="16"/>
   <object id="64" x="400" y="128" width="16" height="16"/>
+  <object id="76" x="416" y="208" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="Chests"/>
  <objectgroup id="6" name="Enemies">
-  <object id="75" name="skeleton" x="165.818" y="189.455">
+  <object id="75" name="skeleton" x="144" y="176">
    <properties>
     <property name="form" type="int" value="2"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="77" name="eye" x="320" y="160">
+   <properties>
+    <property name="form" type="int" value="1"/>
    </properties>
    <point/>
   </object>
