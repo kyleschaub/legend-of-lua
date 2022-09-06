@@ -23,6 +23,8 @@ function triggerTransition(id, destX, destY)
         newMap = "testShop"
     elseif id == "toTest" then
         newMap = "test"
+    elseif id == "toTest2" then
+        newMap = "test2"
     elseif id == "toTestCave" then
         newMap = "testCave"
     elseif id == "toTestCave2" then

@@ -7,6 +7,8 @@ curtain.state = 0
 curtain.alpha = 0
 curtain.rad = 0
 curtain.type = "circle"
+curtain.x = -10
+curtain.y = -10
 
 -- Transition information
 curtain.destMap = "test"
@@ -20,6 +22,10 @@ function curtain:call(destMap, destX, destY, type)
     curtain.type = "circle"
     if type then curtain.type = type end
     player.state = 12
+    curtain.x = -10
+    curtain.y = -10
+    curtain.width = love.graphics.getWidth() + 20
+    curtain.height = love.graphics.getHeight() + 20
     curtain:close()
 end
 
@@ -37,6 +43,9 @@ function curtain:draw()
     if curtain.type == "fade" then
         love.graphics.setColor(0,0,0, curtain.alpha)
         love.graphics.rectangle("fill", -10, -10, love.graphics.getWidth() + 20, love.graphics.getHeight() + 20)
+    elseif curtain.type == "left" then
+        love.graphics.setColor(0,0,0,1)
+        love.graphics.rectangle("fill", curtain.x, curtain.y, curtain.width, curtain.height)
     else -- circle
         love.graphics.setColor(0,0,0,1)
         love.graphics.circle("fill", love.graphics.getWidth()/2, love.graphics.getHeight()/2, self.rad)
@@ -48,6 +57,10 @@ function curtain:close()
 
     if curtain.type == "fade" then
         flux.to(self, 0.4, {alpha = 1}):ease("linear"):oncomplete(function() self:open() end)
+    elseif curtain.type == "left" then
+        curtain.x = -1 * curtain.width - 10
+        curtain.y = -10
+        flux.to(self, 0.4, {x = -10}):ease("quadout"):oncomplete(function() self:open() end)
     else -- circle
         local destRad = self.getRad()
         flux.to(self, 1, {rad = destRad}):ease("quadout"):oncomplete(function() self:open() end)
@@ -60,6 +73,11 @@ function curtain:open()
 
     if curtain.type == "fade" then
         flux.to(self, 0.4, {alpha = 0}):ease("linear"):oncomplete(function() self.state = 0 player.state = 0 end)
+    elseif curtain.type == "left" then
+        curtain.x = -10
+        curtain.y = -10
+        local dest = curtain.width + 10
+        flux.to(self, 0.4, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
     else -- circle
         flux.to(self, 1, {rad = 0}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
     end

@@ -434,7 +434,7 @@ function player:checkTransition()
         if t.collider.type == "instant" then
             triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
         else
-            curtain:call(t.collider.id, t.collider.destX, t.collider.destY)
+            curtain:call(t.collider.id, t.collider.destX, t.collider.destY, t.collider.type)
         end
         --triggerTransition(t.collider.id, t.collider.destX, t.collider.destY)
     end
