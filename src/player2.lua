@@ -26,6 +26,7 @@ player.arrowOffX = 0
 player.arrowOffX = 0
 player.bowVec = vector(1, 0)
 player.baseDamping = 12
+player.dustTimer = 0
 
 -- 0 = Normal gameplay
 -- 0.5 = Rolling
@@ -173,6 +174,16 @@ function player:update(dt)
         local vec = vector(dirX, dirY):normalized() * player.speed
         if vec.x ~= 0 or vec.y ~= 0 then
             player:setLinearVelocity(vec.x, vec.y)
+        end
+
+        if player.walking then
+            player.dustTimer = player.dustTimer - dt
+            if player.dustTimer < 0 then
+                player.dustTimer = 0.22
+                effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = vec:normalized()})
+            end
+        else
+            player.dustTimer = 0
         end
 
         if dirX == 0 and dirY == 0 then
