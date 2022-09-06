@@ -9,6 +9,7 @@ curtain.rad = 0
 curtain.type = "circle"
 curtain.x = -10
 curtain.y = -10
+curtain.dirTime = 0.5
 
 -- Transition information
 curtain.destMap = "test"
@@ -43,7 +44,7 @@ function curtain:draw()
     if curtain.type == "fade" then
         love.graphics.setColor(0,0,0, curtain.alpha)
         love.graphics.rectangle("fill", -10, -10, love.graphics.getWidth() + 20, love.graphics.getHeight() + 20)
-    elseif curtain.type == "left" then
+    elseif curtain.type == "left" or curtain.type == "right" or curtain.type == "up" or curtain.type == "down" then
         love.graphics.setColor(0,0,0,1)
         love.graphics.rectangle("fill", curtain.x, curtain.y, curtain.width, curtain.height)
     else -- circle
@@ -60,7 +61,19 @@ function curtain:close()
     elseif curtain.type == "left" then
         curtain.x = -1 * curtain.width - 10
         curtain.y = -10
-        flux.to(self, 0.4, {x = -10}):ease("quadout"):oncomplete(function() self:open() end)
+        flux.to(self, curtain.dirTime, {x = -10}):ease("quadout"):oncomplete(function() self:open() end)
+    elseif curtain.type == "right" then
+        curtain.x = curtain.width + 10
+        curtain.y = -10
+        flux.to(self, curtain.dirTime, {x = -10}):ease("quadout"):oncomplete(function() self:open() end)
+    elseif curtain.type == "down" then
+        curtain.x = -10
+        curtain.y = curtain.height + 10
+        flux.to(self, curtain.dirTime, {y = -10}):ease("quadout"):oncomplete(function() self:open() end)
+    elseif curtain.type == "up" then
+        curtain.x = -10
+        curtain.y = -1 * curtain.height - 10
+        flux.to(self, curtain.dirTime, {y = -10}):ease("quadout"):oncomplete(function() self:open() end)
     else -- circle
         local destRad = self.getRad()
         flux.to(self, 1, {rad = destRad}):ease("quadout"):oncomplete(function() self:open() end)
@@ -77,7 +90,22 @@ function curtain:open()
         curtain.x = -10
         curtain.y = -10
         local dest = curtain.width + 10
-        flux.to(self, 0.4, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+    elseif curtain.type == "right" then
+        curtain.x = -10
+        curtain.y = -10
+        local dest = -1 * curtain.width - 10
+        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+    elseif curtain.type == "down" then
+        curtain.x = -10
+        curtain.y = -10
+        local dest = -1 * curtain.height - 10
+        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+    elseif curtain.type == "up" then
+        curtain.x = -10
+        curtain.y = -10
+        local dest = curtain.height + 10
+        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
     else -- circle
         flux.to(self, 1, {rad = 0}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
     end
