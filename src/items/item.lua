@@ -6,7 +6,7 @@ function useItem(key, released)
     elseif data.item[key] == 3 and released ~= true then
         player:useBomb()
     elseif data.item[key] == 4 then
-        player:useBow()
+        --player:useBow() useBow is handled from player
     elseif data.item[key] == 5 and released ~= true then
         player:useHookshot()
     end

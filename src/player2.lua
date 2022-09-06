@@ -17,7 +17,7 @@ player.damagedTimer = 0
 player.damagedBool = 1
 player.damagedFlashTime = 0.05
 player.invincible = 0 -- timer
-player.bowRecoveryTime = 0.3
+player.bowRecoveryTime = 0.25
 player.holdSprite = sprites.items.heart
 player.attackDir = vector(1, 0)
 player.comboCount = 0
@@ -110,33 +110,44 @@ function player:update(dt)
         if love.keyboard.isDown("d") then
             dirX = 1
             player.dirX = 1
-            --player.anim = player.animations.right
-            player.dir = "right"
         end
 
         if love.keyboard.isDown("a") then
             dirX = -1
             player.dirX = -1
-            --player.anim = player.animations.left
-            player.dir = "left"
         end
 
         if love.keyboard.isDown("s") then
             dirY = 1
             player.dirY = 1
-            --player.anim = player.animations.down
-            player.dir = "down"
         end
 
         if love.keyboard.isDown("w") then
             dirY = -1
             player.dirY = -1
-            --player.anim = player.animations.up
-            player.dir = "up"
         end
 
         if dirY == 0 and dirX ~= 0 then
             player.dirY = 1
+        end
+
+        if data.item['z'] == 4 then -- bow
+            if love.mouse.isDown(1) then
+                player.aiming = true
+            elseif player.aiming then
+                player:useBow()
+                player:setDirFromVector(player.bowVec)
+                return
+            end
+        end
+        if data.item['x'] == 4 then -- bow
+            if love.mouse.isDown(2) then
+                player.aiming = true
+            elseif player.aiming then
+                player:useBow()
+                player:setDirFromVector(player.bowVec)
+                return
+            end
         end
 
         if player.aiming then
@@ -168,15 +179,18 @@ function player:update(dt)
             if player.walking then
                 player.walking = false
                 player:justStop()
+            elseif player.aiming then
+                local mvec = toMouseVector(player:getX(), player:getY())
+                --if mvec.y < 0 then player.dirY = -1 end
+                player:setDirFromVector(player.bowVec)
+                player:justIdle()
             end
-            if player.aiming then player.anim:gotoFrame(1) end
+            --if player.aiming then player.anim:gotoFrame(1) end
         else
             player.walking = true
         end
 
-        --if player.walking then
-            player.anim:update(dt)
-        --end
+        player.anim:update(dt)
 
         player:checkDamage()
         player:checkTransition()
@@ -234,12 +248,15 @@ function player:update(dt)
 
     elseif player.state == 2 or player.state == 3.1 then
 
-        player:setLinearVelocity(0, 0)
+        if player.state == 2 then
+            player:setLinearVelocity(0, 0)
+        end
         player.animTimer = player.animTimer - dt
 
         if player.animTimer < 0 then
             player.state = 0
             player:resetAnimation(player.dir)
+            player.aiming = false
         end
     
     elseif player.state == 3 then
@@ -352,37 +369,6 @@ function player:draw()
 
     love.graphics.draw(sprites.playerShadow, px, py+5, nil, nil, nil, sprites.playerShadow:getWidth()/2, sprites.playerShadow:getHeight()/2)
 
-    -- Sword 'down' finished
-    if player.dir == "down" and player.state == 1.1 then
-        --love.graphics.draw(swSpr, px+12.5, py+7, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'up' windup
-    if player.dir == "up" and player.state == 1 then
-        --love.graphics.draw(swSpr, px+9.5, py+6.5, 0, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'up' finished
-    if player.dir == "up" and player.state == 1.1 then
-        --love.graphics.draw(swSpr, px-14, py+7, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'right' finished
-    if player.dir == "right" and player.state == 1.1 then
-        --love.graphics.draw(swSpr, px+1, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'left' finished
-    if player.dir == "left" and player.state == 1.1 then
-        --love.graphics.draw(swSpr, px-3, py-9, math.pi/-2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Bow 'up'
-    if player.dir == "up" and (player.state == 3 or player.state == 3.1) then
-        --love.graphics.draw(bowSpr, px-2, py-1, math.pi/-2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px-1, py-3, math.pi/-2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
-    end
-
     if player.state == 1.1 and swLayer == -1 then
         love.graphics.draw(swSpr, px+swX, py+swY, swordRot, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
     end
@@ -407,39 +393,6 @@ function player:draw()
         love.graphics.draw(bowSpr, px + bowOffX, py + bowOffY, bowRot, 1.15, bowScaleY, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
         if data.arrowCount > 0 and player.animTimer <= 0 then love.graphics.draw(arrowSpr, px + bowOffX, py + bowOffY, bowRot, 0.85, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
         --love.graphics.draw(hookSpr, px + hookOffX, py + hookOffY, bowRot, 1.15, nil, hookSpr:getWidth()/2, hookSpr:getHeight()/2)
-    end
-
-    -- Sword 'down' windup
-    if player.dir == "down" and player.state == 1 then
-        --love.graphics.draw(swSpr, px-7.5, py+6, math.pi, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'right' windup
-    if player.dir == "right" and player.state == 1 then
-        --love.graphics.draw(swSpr, px+1, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Sword 'left' windup
-    if player.dir == "left" and player.state == 1 then
-        --love.graphics.draw(swSpr, px-3, py+13.5, math.pi/2, nil, nil, swSpr:getWidth()/2, swSpr:getHeight()/2)
-    end
-
-    -- Bow 'right'
-    if player.dir == "right" and (player.state == 3 or player.state == 3.1) then
-        love.graphics.draw(bowSpr, px+5.5, py+6.5, nil, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px+2.5, py+6.5, nil, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
-    end
-
-    -- Bow 'left'
-    if player.dir == "left" and (player.state == 3 or player.state == 3.1) then
-        love.graphics.draw(bowSpr, px-7.5, py+6.5, nil, -1, 1, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px-4.5, py+6.5, nil, -1, 1, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
-    end
-
-    -- Bow 'down'
-    if player.dir == "down" and (player.state == 3 or player.state == 3.1) then
-        love.graphics.draw(bowSpr, px, py+10.5, math.pi/2, nil, nil, bowSpr:getWidth()/2, bowSpr:getHeight()/2)
-        if player.state == 3 and data.arrowCount > 0 then love.graphics.draw(arrowSpr, px, py+11, math.pi/2, nil, nil, arrowSpr:getWidth()/2, arrowSpr:getHeight()/2) end
     end
 
     if player.state == 11 then
@@ -610,14 +563,12 @@ function player:useBow()
     if player.state == 0 and data.arrowCount > 0 then
         if player.aiming and player.animTimer <= 0 then
             spawnArrow(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
+            local oppDir = toMouseVector(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY):rotated(math.pi)*120
+            player:setLinearVelocity(oppDir.x, oppDir.y)
             player.animTimer = player.bowRecoveryTime
+            player.state = 3.1
             --player.aiming = false
-        else
-            player.aiming = true
-            player.animTimer = 0
         end
-    elseif player.state == 3 then
-        player.state = 3.1
     end
 end
 
