@@ -218,26 +218,29 @@ function effects:spawn(type, x, y, args)
     if type == "walkDust" then
         
         effect.rad = 1
-        effect.alpha = 0.2
-        effect.timer = 0.75
-        effect.scaleX = 0.25
+        effect.alpha = 0.7
+        effect.timer = 0.4
+        effect.scaleX = 0.4
+        effect.layer = -1
         effect.offY = 0
         effect.rot = math.random() * math.pi*2
 
         local sprNum = math.random(1, 4)
         effect.sprite = sprites.effects.blobs["blob" .. sprNum]
 
-        local vec = args.dir:rotated(math.pi)
+        if args.scale then effect.scaleX = args.scale end
+
+        local vec = args.dir:normalized():rotated(math.pi)
         local finalX = effect.x + vec.x*6
         local finalY = effect.y + vec.y*6
 
-        flux.to(effect, 0.6, {x = finalX}):ease("quadout")
-        flux.to(effect, 0.6, {y = finalY}):ease("quadout")
+        flux.to(effect, 0.35, {x = finalX}):ease("quadout")
+        flux.to(effect, 0.35, {y = finalY}):ease("quadout")
 
         function effect:update(dt)
             self.scaleX = self.scaleX + (dt)
             self.offY = self.offY - dt*8
-            self.alpha = self.timer / 0.75 * 0.2
+            self.alpha = self.timer / 0.75 * 0.7
         end
 
         function effect:draw()

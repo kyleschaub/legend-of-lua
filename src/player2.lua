@@ -670,6 +670,12 @@ function player:roll()
     player:setLinearDamping(1.75)
     local dirVec = vector(dirX, dirY):normalized()*160
     player:setLinearVelocity(dirVec.x, dirVec.y)
+
+    effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec, scale = 0.8})
+    effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/8), scale = 0.6})
+    effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/-8), scale = 0.6})
+    effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/4), scale = 0.6})
+    effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/-4), scale = 0.6})
 end
 
 function player:setDirFromVector(vec)
