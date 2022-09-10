@@ -55,6 +55,12 @@ function love.keypressed(key)
         end
     end
 
+    if key == 'r' then
+        data.outfit = data.outfit + 1
+        if data.outfit > 4 then data.outfit = 1 end
+        sprites.playerSheet = love.graphics.newImage('sprites/player/playerSheet' .. data.outfit .. '.png')
+    end
+
     if key == 'x' then
         if pause.active then
             pause:equip('x')

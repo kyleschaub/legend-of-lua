@@ -10,6 +10,7 @@ function createNewSave(fileNumber)
     data.money = 0 -- amount of currency
     data.keys = 0 -- number of keys
     data.map = "" -- currently loaded map
+    data.outfit = 1 -- which cloak is equipped
 
     if fileNumber == nil then fileNumber = 1 end
     data.fileNumber = fileNumber -- which file are we using
