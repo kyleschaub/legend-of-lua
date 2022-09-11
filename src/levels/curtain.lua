@@ -27,6 +27,7 @@ function curtain:call(destMap, destX, destY, type)
     curtain.y = -10
     curtain.width = love.graphics.getWidth() + 20
     curtain.height = love.graphics.getHeight() + 20
+    cam.smoother = Camera.smooth.none()
     curtain:close()
 end
 
@@ -84,29 +85,35 @@ function curtain:open()
     self.state = 2
     triggerTransition(self.destMap, self.destX, self.destY)
 
+    local onFinish = function()
+        self.state = 0
+        player.state = 0
+        cam.smoother = Camera.smooth.damped(8)
+    end
+
     if curtain.type == "fade" then
-        flux.to(self, 0.4, {alpha = 0}):ease("linear"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, 0.4, {alpha = 0}):ease("linear"):oncomplete(onFinish)
     elseif curtain.type == "left" then
         curtain.x = -10
         curtain.y = -10
         local dest = curtain.width + 10
-        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(onFinish)
     elseif curtain.type == "right" then
         curtain.x = -10
         curtain.y = -10
         local dest = -1 * curtain.width - 10
-        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, curtain.dirTime, {x = dest}):ease("quadin"):oncomplete(onFinish)
     elseif curtain.type == "down" then
         curtain.x = -10
         curtain.y = -10
         local dest = -1 * curtain.height - 10
-        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(onFinish)
     elseif curtain.type == "up" then
         curtain.x = -10
         curtain.y = -10
         local dest = curtain.height + 10
-        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, curtain.dirTime, {y = dest}):ease("quadin"):oncomplete(onFinish)
     else -- circle
-        flux.to(self, 1, {rad = 0}):ease("quadin"):oncomplete(function() self.state = 0 player.state = 0 end)
+        flux.to(self, 1, {rad = 0}):ease("quadin"):oncomplete(onFinish)
     end
 end
