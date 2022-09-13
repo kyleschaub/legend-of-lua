@@ -225,6 +225,7 @@ function player:update(dt)
 
     elseif player.state == 0.5 then
 
+        player:checkTransition()
         player.anim:update(dt)
 
         player.animTimer = player.animTimer - dt
