@@ -10,6 +10,10 @@ function spawnTree(x, y, type, id)
     tree.height = 10
     tree.sprite = sprites.environment.tree
 
+    if type then
+        tree.sprite = sprites.environment['tree' .. type]
+    end
+
     tree.x = tree.x + (16-tree.width)/2
     tree.y = tree.y + 2
 

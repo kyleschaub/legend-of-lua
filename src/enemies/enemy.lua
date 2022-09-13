@@ -248,6 +248,7 @@ function spawnEnemy(x, y, type, args)
             self.stunTimer = stun*2.25
             mag = 260
         end
+        shake:start(0.1, 1, 0.02)
         self.physics:applyLinearImpulse((dir:normalized()*mag):unpack())
         self.flashTimer = 0.175
         if damage == 0 then self.flashTimer = 0 end

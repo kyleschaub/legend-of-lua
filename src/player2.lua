@@ -517,8 +517,6 @@ function player:swordDamage()
     }
 
     local hitEnemies = world:queryPolygonArea(polygon, {'Enemy'})
-
-    if #hitEnemies > 0 then shake:start(0.1, 1, 0.02) end
     for _,e in ipairs(hitEnemies) do
         local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
         e.parent:hit(1, knockbackDir, 0.1)
