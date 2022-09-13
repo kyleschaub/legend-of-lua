@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="105">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="30" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="110">
  <editorsettings>
   <export target="test2.lua" format="lua"/>
  </editorsettings>
@@ -137,14 +137,44 @@
  <objectgroup id="3" name="Walls"/>
  <objectgroup id="5" name="Loot"/>
  <objectgroup id="9" name="Trees">
-  <object id="100" type="2" x="369.75" y="219.25" width="16" height="16"/>
   <object id="101" type="2" x="343.75" y="109" width="16" height="16"/>
   <object id="102" type="2" x="212" y="164" width="16" height="16"/>
   <object id="103" type="2" x="116" y="196" width="16" height="16"/>
   <object id="104" type="2" x="72" y="124" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="Chests"/>
- <objectgroup id="6" name="Enemies"/>
+ <objectgroup id="6" name="Enemies">
+  <object id="105" name="eye" x="336" y="232">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="106" name="eye" x="376" y="216">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="107" name="eye" x="408" y="256">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="108" name="eye" x="352" y="276">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="109" name="eye" x="452" y="296">
+   <properties>
+    <property name="form" type="int" value="1"/>
+   </properties>
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="10" name="Water">
   <object id="89" x="320" y="0" width="48" height="48"/>
   <object id="90" x="304" y="48" width="64" height="48"/>

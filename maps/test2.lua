@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 11,
-  nextobjectid = 105,
+  nextobjectid = 110,
   properties = {},
   tilesets = {
     {
@@ -379,19 +379,6 @@ return {
       properties = {},
       objects = {
         {
-          id = 100,
-          name = "",
-          type = "2",
-          shape = "rectangle",
-          x = 369.75,
-          y = 219.25,
-          width = 16,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        },
-        {
           id = 101,
           name = "",
           type = "2",
@@ -471,7 +458,83 @@ return {
       parallaxx = 1,
       parallaxy = 1,
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 105,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 336,
+          y = 232,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 106,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 376,
+          y = 216,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 107,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 408,
+          y = 256,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 108,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 352,
+          y = 276,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        },
+        {
+          id = 109,
+          name = "eye",
+          type = "",
+          shape = "point",
+          x = 452,
+          y = 296,
+          width = 0,
+          height = 0,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["form"] = 1
+          }
+        }
+      }
     },
     {
       type = "objectgroup",
