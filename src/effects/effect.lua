@@ -250,6 +250,77 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "ember" then
+        
+        effect.rad = 1
+        effect.alpha = 0.85
+        effect.timer = 0.3
+        effect.scaleX = 0.3
+        effect.layer = -1
+        effect.offY = 0
+        effect.rot = math.random() * math.pi*2
+
+        local sprNum = math.random(1, 4)
+        effect.sprite = sprites.effects.blobs["blob" .. sprNum]
+
+        if args.scale then effect.scaleX = args.scale end
+
+        local vec = vector(0,1)
+        local finalX = effect.x + vec.x*6*math.random()
+        local finalY = effect.y + vec.y*6*math.random()
+
+        flux.to(effect, 0.35, {x = finalX}):ease("quadout")
+        flux.to(effect, 0.35, {y = finalY}):ease("quadout")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX + (dt)
+            self.offY = self.offY - dt*8
+            self.alpha = self.timer / 0.75 * 0.7
+        end
+
+        function effect:draw()
+            --love.graphics.setColor(217/255, 159/255, 130/255, self.alpha)
+            love.graphics.setColor(230/255, 204/255, 161/255, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
+    if type == "fireballSmoke" then
+        
+        effect.rad = 1
+        effect.alpha = 0.7
+        effect.timer = 0.4
+        effect.scaleX = 0.4
+        effect.layer = -1
+        effect.offY = 0
+        effect.rot = math.random() * math.pi*2
+
+        local sprNum = math.random(1, 4)
+        effect.sprite = sprites.effects.blobs["blob" .. sprNum]
+
+        if args.scale then effect.scaleX = args.scale end
+
+        local vec = vector(0,1)
+        local finalX = effect.x + vec.x*6*math.random()
+        local finalY = effect.y + vec.y*6*math.random()
+
+        flux.to(effect, 0.35, {x = finalX}):ease("quadout")
+        flux.to(effect, 0.35, {y = finalY}):ease("quadout")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX + (dt)
+            self.offY = self.offY - dt*8
+            self.alpha = self.timer / 0.75 * 0.7
+        end
+
+        function effect:draw()
+            love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
     if type == "darkMagicSpec" then
         effect.scaleX = 0.75
         effect.x = effect.x + math.random(-1,1)

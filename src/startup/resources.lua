@@ -16,6 +16,7 @@ sprites.effects.death = love.graphics.newImage('sprites/effects/death.png')
 sprites.effects.arrowShadow = love.graphics.newImage('sprites/effects/shadows/arrow.png')
 sprites.effects.boomerangShadow = love.graphics.newImage('sprites/effects/shadows/boomerang.png')
 sprites.effects.treeShadow = love.graphics.newImage('sprites/effects/shadows/tree.png')
+sprites.effects.fireball = love.graphics.newImage('sprites/effects/fireball.png')
 sprites.effects.blobs = {}
 sprites.effects.blobs.blob1 = love.graphics.newImage('sprites/effects/blobs/blob1.png')
 sprites.effects.blobs.blob2 = love.graphics.newImage('sprites/effects/blobs/blob2.png')

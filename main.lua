@@ -130,13 +130,21 @@ function love.mousepressed( x, y, button )
         if pause.active then
             pause:equip('z')
         else
-            useItem('z')
+            if love.keyboard.isDown('lshift') then
+                useItem('altL')
+            else
+                useItem('z')
+            end
         end
     elseif button == 2 then
         if pause.active then
             pause:equip('x')
         else
-            useItem('x')
+            if love.keyboard.isDown('lshift') then
+                useItem('altR')
+            else
+                useItem('x')
+            end
         end
     end
 end

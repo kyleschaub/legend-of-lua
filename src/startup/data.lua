@@ -19,6 +19,8 @@ function createNewSave(fileNumber)
     data.item = {}
     data.item.z = 1
     data.item.x = 5
+    data.item.altL = 11
+    data.item.altR = 12
 
     -- keep track of certain stackable items
     data.arrowCount = 25

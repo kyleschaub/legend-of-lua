@@ -38,6 +38,8 @@ function requireAll()
     require("src/items/boomerang")
     require("src/items/hookshot")
     require("src/items/chest")
+
+    require("src/spells/fireball")
     
     require("src/levels/curtain")
     require("src/levels/loadMap")

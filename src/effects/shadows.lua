@@ -15,4 +15,9 @@ function drawShadows()
         love.graphics.draw(spr, a.x, a.y+5, a.rot, nil, nil, spr:getWidth()/2, spr:getHeight()/2)
     end
 
+    spr = sprites.effects.boomerangShadow
+    for _,f in ipairs(fireballs) do
+        love.graphics.draw(spr, f.x, f.y+6, nil, 0.8, nil, spr:getWidth()/2, spr:getHeight()/2)
+    end
+
 end

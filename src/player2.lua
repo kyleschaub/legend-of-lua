@@ -569,6 +569,11 @@ function player:useBoomerang()
     boomerang:throw(player.dir)
 end
 
+function player:useFireball()
+    player:useItem(0.2)
+    spawnFire(player:getX(), player:getY())
+end
+
 function player:useBow()
     if player.state == 0 and data.arrowCount > 0 then
         if player.aiming and player.animTimer <= 0 then
