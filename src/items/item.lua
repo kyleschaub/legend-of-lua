@@ -10,7 +10,7 @@ function useItem(key, released)
     elseif data.item[key] == 5 and released ~= true then
         player:useHookshot()
     elseif data.item[key] == 11 and released ~= true then
-        player:useFireball()
+        player:useFire()
     elseif data.item[key] == 12 and released ~= true then
         player:useHookshot()
     end

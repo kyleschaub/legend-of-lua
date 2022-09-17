@@ -569,9 +569,9 @@ function player:useBoomerang()
     boomerang:throw(player.dir)
 end
 
-function player:useFireball()
+function player:useFire()
     player:useItem(0.2)
-    spawnFire(player:getX(), player:getY())
+    spawnFlame(player:getX(), player:getY())
 end
 
 function player:useBow()

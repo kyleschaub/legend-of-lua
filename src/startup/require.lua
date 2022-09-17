@@ -40,6 +40,7 @@ function requireAll()
     require("src/items/chest")
 
     require("src/spells/fireball")
+    require("src/spells/flame")
     
     require("src/levels/curtain")
     require("src/levels/loadMap")
