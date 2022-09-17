@@ -80,6 +80,7 @@ function spawnFlame(x, y)
         self.timer = self.timer - dt
         if self.timer < 0 then
             self.state = self.state + 1
+            flame:hit()
             self.timer = iterTime
             if self.state >= 8 then
                 self.dead = true
@@ -90,14 +91,55 @@ function spawnFlame(x, y)
         if self.emberTimer < 0 and self.dead == false then
             flame:fullEmber()
         end
+    end
 
-        -- Query for enemies
-        local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
-        for _,e in ipairs(hitEnemies) do
-            e.parent:hit(1, self.dirVec, 0.1)
+    function flame:hit()
+        local px, py = player:getPosition()
+        local polygon = nil
+        local mag = nil
+        local mag2 = nil
+        local width = 18
+
+        if self.state == 1 then
+            mag = 14 + 6 * self.state
+            width = 18
+        elseif self.state == 2 then
+            mag = 14 + 6 * self.state + 4
+            width = 28
+        elseif self.state == 4 then
+            mag = 14 + 6 * self.state + 4
+            width = 38
+        elseif self.state == 6 then
+            mag = 14 + 6 * self.state + 4
+            width = 48
         end
-        if #hitEnemies > 0 then self.dead = true end
 
+        if mag then
+            mag2 = mag - 8
+            local newVec = self.dir * mag
+            local newVec2 = self.dir * mag2
+            local leftVec = newVec:rotated(math.pi/-2):normalized()
+            local rightVec = newVec:rotated(math.pi/2):normalized()
+            
+            polygon = {
+                px + newVec.x + leftVec.x*width/2,
+                py + newVec.y + leftVec.y*width/2,
+                px + newVec.x + rightVec.x*width/2,
+                py + newVec.y + rightVec.y*width/2,
+                px + newVec2.x + rightVec.x*width/2,
+                py + newVec2.y + rightVec.y*width/2,
+                px + newVec2.x + leftVec.x*width/2,
+                py + newVec2.y + leftVec.y*width/2,
+            }
+        end
+
+        if polygon then
+            local hitEnemies = world:queryPolygonArea(polygon, {'Enemy'})
+            for _,e in ipairs(hitEnemies) do
+                local knockbackDir = self.dir
+                e.parent:hit(0.5, knockbackDir, 0.06)
+            end
+        end
     end
 
     flame:fullEmber()
