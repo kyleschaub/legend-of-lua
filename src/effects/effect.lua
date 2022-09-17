@@ -253,7 +253,7 @@ function effects:spawn(type, x, y, args)
     if type == "ember" then
         
         effect.rad = 1
-        effect.alpha = 0.85
+        effect.alpha = 0.75
         effect.timer = 0.3
         effect.scaleX = 0.3
         effect.layer = -1
@@ -283,13 +283,21 @@ function effects:spawn(type, x, y, args)
             --love.graphics.setColor(217/255, 159/255, 130/255, self.alpha)
             --love.graphics.setColor(230/255, 204/255, 161/255, self.alpha)
             --love.graphics.setColor(189/255, 85/255, 95/255, self.alpha)
-            love.graphics.setColor(196/255, 115/255, 108/255, self.alpha)
+            --love.graphics.setColor(196/255, 115/255, 108/255, self.alpha)
+            love.graphics.setColor(255/255, 207/255, 125/255, self.alpha)
+            --love.graphics.setColor(255/255, 198/255, 125/255, self.alpha)
             if self.color == "dark" then
                 --love.graphics.setColor(140/255, 63/255, 82/255, self.alpha)
                 --love.graphics.setColor(196/255, 115/255, 108/255, self.alpha)
                 --love.graphics.setColor(219/255, 127/255, 81/255, self.alpha)
-                love.graphics.setColor(189/255, 85/255, 95/255, self.alpha)
+                --love.graphics.setColor(189/255, 85/255, 95/255, self.alpha)
+                --love.graphics.setColor(217/255, 159/255, 130/255, self.alpha)
+                --love.graphics.setColor(229/255, 135/255, 72/255, self.alpha)
+                --love.graphics.setColor(255/255, 175/255, 117/255, self.alpha)
+                love.graphics.setColor(255/255, 191/255, 106/255, self.alpha)
             end
+            local gVal = 207 - (((self.timer / 0.3) * 75 - 75)*-1)
+            love.graphics.setColor(255/255, gVal/255, 125/255, self.alpha)
             love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end

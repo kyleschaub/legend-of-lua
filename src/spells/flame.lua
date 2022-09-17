@@ -26,8 +26,8 @@ function spawnFlame(x, y)
             offVec = offVec * offMag
 
             effects:spawn("flameSmoke", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = 0.8})
-            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
-            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            --effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            --effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
             effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
             local offX = math.random()*rad
             local offY = math.random()*rad
