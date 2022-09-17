@@ -26,14 +26,18 @@ function spawnFlame(x, y)
             offVec = offVec * offMag
 
             effects:spawn("flameSmoke", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = 0.8})
-            --effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
-            --effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            local offX = math.random()*rad
+            local offY = math.random()*rad
             effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
             local offX = math.random()*rad
             local offY = math.random()*rad
-            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
-            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
-            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            local offX = math.random()*rad
+            local offY = math.random()*rad
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            local offX = math.random()*rad
+            local offY = math.random()*rad
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
         end
     end
 
@@ -77,7 +81,7 @@ function spawnFlame(x, y)
         if self.timer < 0 then
             self.state = self.state + 1
             self.timer = iterTime
-            if self.state == 8 then
+            if self.state >= 8 then
                 self.dead = true
             end
         end

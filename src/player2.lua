@@ -571,7 +571,8 @@ end
 
 function player:useFire()
     player:useItem(0.2)
-    spawnFlame(player:getX(), player:getY())
+    player:useSet()
+    spawnFlame(player:getX()-2, player:getY()-2)
 end
 
 function player:useBow()
