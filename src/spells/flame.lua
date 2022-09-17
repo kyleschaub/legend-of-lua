@@ -25,10 +25,15 @@ function spawnFlame(x, y)
             offVec = offVec:normalized()
             offVec = offVec * offMag
 
-            effects:spawn("fireballSmoke", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = 0.8})
+            effects:spawn("flameSmoke", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = 0.8})
             effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
             effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
             effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale})
+            local offX = math.random()*rad
+            local offY = math.random()*rad
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
+            effects:spawn("ember", self.x + newVec.x + offX + offVec.x, self.y + newVec.y + offY + offVec.y, {scale = emberScale, color="dark"})
         end
     end
 
@@ -40,62 +45,39 @@ function spawnFlame(x, y)
         effects:spawn("ember", self.x, self.y, {scale = emberScale})]]
         self.emberTimer = 0.035
 
-        local mag = 10 + 10 * self.state
+        local mag = 12 + 6 * self.state
         local newVec = self.dir * mag
         local noVec = vector(0, 0)
         local leftVec = newVec:rotated(math.pi/-2):normalized()
         local rightVec = newVec:rotated(math.pi/2):normalized()
         local iter = 5
 
-        if self.state == 0 then
+        if self.state >= 0 then
             flame:singleEmber(newVec, noVec, 0)
             flame:singleEmber(newVec, leftVec, iter*1)
             flame:singleEmber(newVec, rightVec, iter*1)
-        elseif self.state == 1 then
-            flame:singleEmber(newVec, noVec, 0)
-            flame:singleEmber(newVec, leftVec, iter*1)
-            flame:singleEmber(newVec, rightVec, iter*1)
+        end
+        if self.state >= 2 then
             flame:singleEmber(newVec, leftVec, iter*2)
             flame:singleEmber(newVec, rightVec, iter*2)
-        elseif self.state == 2 then
-            flame:singleEmber(newVec, noVec, 0)
-            flame:singleEmber(newVec, leftVec, iter*1)
-            flame:singleEmber(newVec, rightVec, iter*1)
-            flame:singleEmber(newVec, leftVec, iter*2)
-            flame:singleEmber(newVec, rightVec, iter*2)
+        end
+        if self.state >= 4 then
             flame:singleEmber(newVec, leftVec, iter*3)
             flame:singleEmber(newVec, rightVec, iter*3)
-        elseif self.state == 3 then
-            flame:singleEmber(newVec, noVec, 0)
-            flame:singleEmber(newVec, leftVec, iter*1)
-            flame:singleEmber(newVec, rightVec, iter*1)
-            flame:singleEmber(newVec, leftVec, iter*2)
-            flame:singleEmber(newVec, rightVec, iter*2)
-            flame:singleEmber(newVec, leftVec, iter*3)
-            flame:singleEmber(newVec, rightVec, iter*3)
+        end
+        if self.state >= 6 then
             flame:singleEmber(newVec, leftVec, iter*4)
             flame:singleEmber(newVec, rightVec, iter*4)
         end
     end
 
     function flame:update(dt)
-        local iterTime = 0.15
+        local iterTime = 0.05
         self.timer = self.timer - dt
         if self.timer < 0 then
             self.state = self.state + 1
-            if self.state == 1 then
-                -- spawn first row
-                self.timer = iterTime
-            elseif self.state == 2 then
-                -- spawn second row
-                self.timer = iterTime
-            elseif self.state == 3 then
-                -- spawn third row
-                self.timer = iterTime
-            elseif self.state == 4 then
-                -- spawn fourth row
-                self.timer = iterTime
-            else
+            self.timer = iterTime
+            if self.state == 8 then
                 self.dead = true
             end
         end

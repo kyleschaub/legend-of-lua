@@ -259,6 +259,7 @@ function effects:spawn(type, x, y, args)
         effect.layer = -1
         effect.offY = 0
         effect.rot = math.random() * math.pi*2
+        effect.color = args.color
 
         local sprNum = math.random(1, 4)
         effect.sprite = sprites.effects.blobs["blob" .. sprNum]
@@ -280,7 +281,15 @@ function effects:spawn(type, x, y, args)
 
         function effect:draw()
             --love.graphics.setColor(217/255, 159/255, 130/255, self.alpha)
-            love.graphics.setColor(230/255, 204/255, 161/255, self.alpha)
+            --love.graphics.setColor(230/255, 204/255, 161/255, self.alpha)
+            --love.graphics.setColor(189/255, 85/255, 95/255, self.alpha)
+            love.graphics.setColor(196/255, 115/255, 108/255, self.alpha)
+            if self.color == "dark" then
+                --love.graphics.setColor(140/255, 63/255, 82/255, self.alpha)
+                --love.graphics.setColor(196/255, 115/255, 108/255, self.alpha)
+                --love.graphics.setColor(219/255, 127/255, 81/255, self.alpha)
+                love.graphics.setColor(189/255, 85/255, 95/255, self.alpha)
+            end
             love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
@@ -316,6 +325,42 @@ function effects:spawn(type, x, y, args)
 
         function effect:draw()
             love.graphics.setColor(1, 1, 1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
+    if type == "flameSmoke" then
+        
+        effect.rad = 1
+        effect.alpha = 0.4
+        effect.timer = 0.7
+        effect.scaleX = 0.7
+        effect.layer = -1
+        effect.offY = 0
+        effect.rot = math.random() * math.pi*2
+
+        local sprNum = math.random(1, 4)
+        effect.sprite = sprites.effects.blobs["blob" .. sprNum]
+
+        if args.scale then effect.scaleX = args.scale end
+
+        local vec = vector(0,1)
+        local finalX = effect.x + vec.x*9*math.random()
+        local finalY = effect.y + vec.y*9*math.random()
+
+        flux.to(effect, 0.7, {x = finalX}):ease("quadout")
+        flux.to(effect, 0.7, {y = finalY}):ease("quadout")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX + (dt)
+            self.offY = self.offY - dt*8
+            self.alpha = self.timer / 0.75 * 0.2
+        end
+
+        function effect:draw()
+            --love.graphics.setColor(163/255, 163/255, 163/255, self.alpha)
+            love.graphics.setColor(1,1,1, self.alpha)
             love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
