@@ -10,6 +10,7 @@ sprites.effects.explosion = love.graphics.newImage('sprites/effects/explosion.pn
 sprites.effects.rock = love.graphics.newImage('sprites/effects/rock.png')
 sprites.effects.fuseSmoke = love.graphics.newImage('sprites/effects/fuseSmoke.png')
 sprites.effects.scorch = love.graphics.newImage('sprites/effects/scorch3.png')
+sprites.effects.triangleScorch = love.graphics.newImage('sprites/effects/scorch/triangle.png')
 sprites.effects.darkMagicB = love.graphics.newImage('sprites/effects/darkMagicB.png')
 sprites.effects.darkMagicW = love.graphics.newImage('sprites/effects/darkMagicW.png')
 sprites.effects.death = love.graphics.newImage('sprites/effects/death.png')

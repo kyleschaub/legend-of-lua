@@ -87,6 +87,40 @@ function effects:spawn(type, x, y, args)
         end
     end
 
+    if type == "triangleScorch" then
+        effect.sprite = sprites.effects.triangleScorch
+        effect.scaleX = 0.01
+        effect.scaleY = 0.01
+        effect.alpha = 0.5
+        effect.timer = 2
+        effect.layer = -1
+        effect.rot = 0
+        effect.state = 1
+        effect.y = effect.y + 2
+
+        if args then
+            effect.rot = math.atan2(args.y, args.x)
+        end
+
+        flux.to(effect, 0.5, {scaleX = 0.12}):ease("linear"):oncomplete(function()
+            flux.to(effect, 1.2, {alpha = 0}):ease("quadout")
+            --flux.to(effect, 0.5, {scaleX = 0}):ease("linear")
+            effect.state = 2
+        end)
+        flux.to(effect, 0.5, {scaleY = 0.12}):ease("linear")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX - (dt/10)
+            --self.alpha = self.timer / 2
+        end
+
+        function effect:draw()
+            love.graphics.setColor(0.2, 0.2, 0.2, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y, self.rot, self.scaleX, self.scaleY, 0, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
     if type == "wave" then
         effect.spriteSheet = sprites.environment.wave
         effect.width = 16

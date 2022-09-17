@@ -15,6 +15,8 @@ function spawnFlame(x, y)
     flame.rad = 3
     flame.state = 0
 
+    effects:spawn("triangleScorch", flame.x+2, flame.y+2, flame.dir)
+
     function flame:singleEmber(newVec, offVec, offMag)
         for i=1,3 do
             local emberScale = 0.85
