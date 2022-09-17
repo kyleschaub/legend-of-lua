@@ -15,6 +15,9 @@ function spawnEnemy(x, y, type, args)
     enemy.moving = 1
     enemy.chase = true
     enemy.debugRad = 70
+    enemy.burningTimer = 0
+    enemy.burningCounter = 0 -- how many remaining burn procs
+    enemy.emberTimer = 0
 
     enemy.hookable = true
     enemy.hookVec = nil
@@ -223,6 +226,32 @@ function spawnEnemy(x, y, type, args)
             end
         end
 
+        if self.burningTimer > 0 then
+            self.burningTimer = self.burningTimer - dt
+            if self.burningTimer < 0 then
+                self.burningCounter = self.burningCounter - 1
+                if self.burningCounter > 0 then
+                    -- trigger damage TODO
+                    self.burningTimer = 1
+                else
+                    self.burningTimer = 0
+                end
+            end
+        end
+
+        if self.emberTimer > 0 then
+            self.emberTimer = self.emberTimer - dt
+            if self.emberTimer < 0 then
+                if self.burningCounter > 0 then
+                    effects:spawn("enemyEmber", self.physics:getX(), self.physics:getY(), {scale = 0.6})
+                    effects:spawn("enemyEmber", self.physics:getX(), self.physics:getY(), {scale = 0.6})
+                    self.emberTimer = 0.033
+                else
+                    self.emberTimer = 0
+                end
+            end
+        end
+
         if self.animTimer > 0 then
             self.animTimer = self.animTimer - dt
             if self.animTimer < 0 then
@@ -263,6 +292,12 @@ function spawnEnemy(x, y, type, args)
         else
             
         end
+    end
+
+    function enemy:burn()
+        self.burningTimer = 1
+        self.burningCounter = 5
+        self.emberTimer = 0.1
     end
 
     function enemy:debugRadius()

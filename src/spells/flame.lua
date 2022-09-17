@@ -139,6 +139,7 @@ function spawnFlame(x, y)
             local hitEnemies = world:queryPolygonArea(polygon, {'Enemy'})
             for _,e in ipairs(hitEnemies) do
                 local knockbackDir = self.dir
+                e.parent:burn()
                 e.parent:hit(0.5, knockbackDir, 0.06)
             end
         end

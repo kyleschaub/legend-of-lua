@@ -370,10 +370,15 @@ function effects:spawn(type, x, y, args)
         effect.sprite = sprites.effects.blobs["blob" .. sprNum]
 
         if args.scale then effect.scaleX = args.scale end
+        if args.layer then effect.layer = args.layer end
+
+        local mag = 9
+        if args.mag then mag = args.mag end
 
         local vec = vector(0,1)
-        local finalX = effect.x + vec.x*9*math.random()
-        local finalY = effect.y + vec.y*9*math.random()
+        if args.vec then vec = args.vec end
+        local finalX = effect.x + vec.x*mag*math.random()
+        local finalY = effect.y + vec.y*mag*math.random()
 
         flux.to(effect, 0.7, {x = finalX}):ease("quadout")
         flux.to(effect, 0.7, {y = finalY}):ease("quadout")
@@ -387,6 +392,43 @@ function effects:spawn(type, x, y, args)
         function effect:draw()
             --love.graphics.setColor(163/255, 163/255, 163/255, self.alpha)
             love.graphics.setColor(1,1,1, self.alpha)
+            love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
+            love.graphics.setColor(1,1,1,1)
+        end
+    end
+
+    if type == "enemyEmber" then
+        
+        effect.rad = 1
+        effect.alpha = 0.45
+        effect.timer = 0.3
+        effect.scaleX = 0.3
+        effect.layer = 1
+        effect.offY = 0
+        effect.rot = math.random() * math.pi*2
+        effect.color = args.color
+
+        local sprNum = math.random(1, 4)
+        effect.sprite = sprites.effects.blobs["blob" .. sprNum]
+
+        if args.scale then effect.scaleX = args.scale end
+
+        local vec = vector(0,-1)
+        local finalX = effect.x + vec.x*8*math.random()
+        local finalY = effect.y + vec.y*8*math.random()
+
+        flux.to(effect, 0.35, {x = finalX}):ease("quadout")
+        flux.to(effect, 0.35, {y = finalY}):ease("quadout")
+
+        function effect:update(dt)
+            --self.scaleX = self.scaleX + (dt)
+            self.offY = self.offY - dt*8
+            self.alpha = self.timer / 0.75 * 0.7
+        end
+
+        function effect:draw()
+            local gVal = 207 - (((self.timer / 0.3) * 75 - 75)*-1)
+            love.graphics.setColor(255/255, gVal/255, 125/255, self.alpha)
             love.graphics.draw(self.sprite, self.x, self.y + self.offY, self.rot, self.scaleX, nil, self.sprite:getWidth()/2, self.sprite:getHeight()/2)
             love.graphics.setColor(1,1,1,1)
         end
