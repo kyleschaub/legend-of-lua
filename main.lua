@@ -109,10 +109,6 @@ function love.keypressed(key)
         pause.gridY = pause.gridY + 1
     end
 
-    if key == 'n' then
-        saveGame()
-    end
-
     menu:select(key)
 end
 

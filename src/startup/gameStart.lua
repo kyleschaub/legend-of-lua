@@ -1,7 +1,7 @@
 function gameStart()
 
     math.randomseed(os.time())
-    love.graphics.setBackgroundColor(0.3, 0.3, 0.3)
+    love.graphics.setBackgroundColor(26/255, 26/255, 26/255)
 
     -- Initialize all global variables for the game
     initGlobals()

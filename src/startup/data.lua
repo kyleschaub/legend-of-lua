@@ -18,9 +18,9 @@ function createNewSave(fileNumber)
     -- Currently, can equip an item to Z and X
     data.item = {}
     data.item.z = 1
-    data.item.x = 5
+    data.item.x = 2
     data.item.altL = 11
-    data.item.altR = 12
+    data.item.altR = 2
 
     -- keep track of certain stackable items
     data.arrowCount = 25
@@ -85,11 +85,8 @@ end
 
 function startFresh(fileNumber)
     createNewSave(fileNumber)
-    --loadMap("playerHouse")
-    data.map = "playerHouse"
-    data.playerX = 240
-    data.playerY = 190
+    data.map = "test"
+    data.playerX = 200
+    data.playerY = 280
     player.state = 0
-    --gamestate = 1
-    --saveGame()
 end
