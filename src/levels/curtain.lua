@@ -42,14 +42,16 @@ end
 function curtain:draw()
     if curtain.state == 0 then return end
 
+    local bVal = 16
+
     if curtain.type == "fade" then
-        love.graphics.setColor(0,0,0, curtain.alpha)
+        love.graphics.setColor(bVal/255,bVal/255,bVal/255, curtain.alpha)
         love.graphics.rectangle("fill", -10, -10, love.graphics.getWidth() + 20, love.graphics.getHeight() + 20)
     elseif curtain.type == "left" or curtain.type == "right" or curtain.type == "up" or curtain.type == "down" then
-        love.graphics.setColor(0,0,0,1)
+        love.graphics.setColor(bVal/255,bVal/255,bVal/255,1)
         love.graphics.rectangle("fill", curtain.x, curtain.y, curtain.width, curtain.height)
     else -- circle
-        love.graphics.setColor(0,0,0,1)
+        love.graphics.setColor(bVal/255,bVal/255,bVal/255,1)
         love.graphics.circle("fill", love.graphics.getWidth()/2, love.graphics.getHeight()/2, self.rad)
     end
 end

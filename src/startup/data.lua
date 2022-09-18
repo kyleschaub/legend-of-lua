@@ -86,7 +86,7 @@ end
 function startFresh(fileNumber)
     createNewSave(fileNumber)
     data.map = "test"
-    data.playerX = 200
-    data.playerY = 280
+    data.playerX = 168
+    data.playerY = 192
     player.state = 0
 end
