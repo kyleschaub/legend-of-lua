@@ -47,6 +47,7 @@ sprites.enemies.bat = love.graphics.newImage('sprites/enemies/bat.png')
 sprites.enemies.batDead = love.graphics.newImage('sprites/enemies/batDead.png')
 sprites.enemies.skeletonKnife = love.graphics.newImage('sprites/enemies/skeleton/knife2.png')
 sprites.enemies.skeletonMage = love.graphics.newImage('sprites/enemies/skeleton/mage.png')
+sprites.enemies.skeletonDead = love.graphics.newImage('sprites/enemies/skeleton/skeletonStun.png')
 sprites.items = {}
 sprites.items.arrow = love.graphics.newImage('sprites/items/arrow.png')
 sprites.items.bow1 = love.graphics.newImage('sprites/items/bow1.png')

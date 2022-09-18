@@ -100,7 +100,7 @@ local function skeletonInit(enemy, x, y, args)
         if self.dizzyTimer == 0 then
             self.anim:draw(self.sprite, ex, ey, nil, self.scaleX, 1, 10, 12)
         else
-            love.graphics.draw(sprites.enemies.batDead, ex, ey+3, nil, self.scaleX, 1, 8, 8)
+            love.graphics.draw(sprites.enemies.skeletonDead, ex - (3*self.scaleX), ey-4, nil, self.scaleX, 1, 8, 8)
         end
         setWhite()
         if self.state == 99 then

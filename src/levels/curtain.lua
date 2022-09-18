@@ -27,7 +27,6 @@ function curtain:call(destMap, destX, destY, type)
     curtain.y = -10
     curtain.width = love.graphics.getWidth() + 20
     curtain.height = love.graphics.getHeight() + 20
-    cam.smoother = Camera.smooth.none()
     curtain:close()
 end
 
@@ -85,6 +84,7 @@ end
 
 function curtain:open()
     self.state = 2
+    cam.smoother = Camera.smooth.none()
     triggerTransition(self.destMap, self.destX, self.destY)
 
     local onFinish = function()
