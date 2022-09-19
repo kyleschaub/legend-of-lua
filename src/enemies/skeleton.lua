@@ -39,7 +39,7 @@ local function skeletonInit(enemy, x, y, args)
             end
 
             if self.state == 101 then
-                self.dir = getSelfToPlayerVector(self.physics:getX(), self.physics:getY())*10
+                self.dir = getSelfToPlayerVector(self.physics:getX(), self.physics:getY())*6 -- speed
                 self.physics:setX(self.physics:getX() + self.dir.x * dt)
                 self.physics:setY(self.physics:getY() + self.dir.y * dt)
             end

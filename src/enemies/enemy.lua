@@ -34,7 +34,7 @@ function spawnEnemy(x, y, type, args)
     enemy.startY = y
     enemy.wanderRadius = 30
     enemy.wanderSpeed = 15
-    enemy.wanderTimer = 1
+    enemy.wanderTimer = 0.5 + math.random()*2
     enemy.wanderBufferTimer = 0
     enemy.wanderDir = vector(1,1)
 
