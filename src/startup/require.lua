@@ -15,7 +15,7 @@ function requireAll()
     require("src/utilities/triggers")
     require("src/utilities/utils")
 
-    require("src/player2")
+    require("src/player")
     require("src/update")
     require("src/draw")
 
