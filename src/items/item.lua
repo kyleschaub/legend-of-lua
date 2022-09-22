@@ -5,8 +5,8 @@ function useItem(key, released)
         player:useBoomerang()
     elseif data.item[key] == 3 and released ~= true then
         player:useBomb()
-    elseif data.item[key] == 4 then
-        --player:useBow() useBow is handled from player
+    elseif data.item[key] == 4 and player.state ~= 0 then
+        player:useBow() -- adds bow to the buffer
     elseif data.item[key] == 5 and released ~= true then
         player:useHookshot()
     elseif data.item[key] == 11 and released ~= true then

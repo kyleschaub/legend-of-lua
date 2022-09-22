@@ -68,6 +68,8 @@ player.animations.idleUp = anim8.newAnimation(player.grid('1-2', 9), 0.22)
 
 player.anim = player.animations.idleDown
 
+player.buffer = {} -- input buffer
+
 function player:update(dt)
     if player.state == -1 or gamestate == 0 then return end
 
@@ -318,6 +320,8 @@ function player:update(dt)
 
     end
 
+    player:processBuffer(dt)
+
 end
 
 function player:draw()
@@ -455,7 +459,10 @@ end
 function player:swingSword()
 
     -- The player can only swing their sword if the player.state is 0 (regular gameplay)
-    if player.state ~= 0 then return end
+    if player.state ~= 0 then
+        player:addToBuffer("sword")
+        return
+    end
 
     player.comboCount = player.comboCount + 1
 
@@ -576,6 +583,10 @@ function player:useFire()
 end
 
 function player:useBow()
+    if player.state ~= 0 then
+        player:addToBuffer("bow")
+    end
+
     if player.state == 0 and data.arrowCount > 0 then
         if player.aiming and player.animTimer <= 0 then
             spawnArrow(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
@@ -735,4 +746,56 @@ function player:justIdle()
         player.anim = player.animations.idleDown
     end
     --player.anim:gotoFrame(1)
+end
+
+function player:processBuffer(dt)
+    for i=#player.buffer,1,-1 do
+        player.buffer[i][2] = player.buffer[i][2] - dt
+        if player.buffer[i][2] <= 0 then
+            table.remove(player.buffer, i)
+        end
+    end
+
+    if player.state == 0 then
+        player:useBuffer()
+    end
+end
+
+function player:addToBuffer(action)
+    table.insert(player.buffer, {action, 0.25}) -- Inputs buffered for 0.2s
+end
+
+function player:useBuffer()
+    local action = nil
+    if #player.buffer > 0 then
+        action = player.buffer[1][1]
+    end
+
+    -- clear buffer
+    for k,v in pairs(player.buffer) do player.buffer[k]=nil end
+
+    if action == nil then return end
+
+    if action == "sword" then
+        player:swingSword()
+    elseif action == "bow" then
+        if not player:isBowButtonDown() then
+            player.aiming = true
+            player:useBow()
+        end
+    end
+end
+
+function player:isBowButtonDown()
+    if data.item['z'] == 4 then -- bow
+        if love.mouse.isDown(1) then
+            return true
+        end
+    end
+    if data.item['x'] == 4 then -- bow
+        if love.mouse.isDown(2) then
+            return true
+        end
+    end
+    return false
 end
