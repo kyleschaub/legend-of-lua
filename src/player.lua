@@ -567,16 +567,31 @@ function player:useItem(duration)
 end
 
 function player:useBomb()
+    if player.state ~= 0 then
+        player:addToBuffer("bomb")
+        return
+    end
+
     player:useItem(0.2)
     spawnBomb()
 end
 
 function player:useBoomerang()
+    if player.state ~= 0 then
+        player:addToBuffer("boomerang")
+        return
+    end
+
     player:useItem(0.2)
     boomerang:throw(player.dir)
 end
 
 function player:useFire()
+    if player.state ~= 0 then
+        player:addToBuffer("fire")
+        return
+    end
+
     player:useItem(0.2)
     player:useSet()
     spawnFlame(player:getX()-2, player:getY()-2)
@@ -783,6 +798,12 @@ function player:useBuffer()
             player.aiming = true
             player:useBow()
         end
+    elseif action == "bomb" then
+        player:useBomb()
+    elseif action == "boomerang" then
+        player:useBoomerang()
+    elseif action == "fire" then
+        player:useFire()
     end
 end
 
