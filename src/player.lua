@@ -669,6 +669,11 @@ function player:interact()
 end
 
 function player:roll()
+    if player.state ~= 0 then
+        player:addToBuffer("roll")
+        return
+    end
+
     player.state = 0.5
     player.animTimer = 0.3
 
@@ -804,6 +809,8 @@ function player:useBuffer()
         player:useBoomerang()
     elseif action == "fire" then
         player:useFire()
+    elseif action == "roll" then
+        player:roll()
     end
 end
 
