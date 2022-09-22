@@ -14,7 +14,7 @@ local function skeletonInit(enemy, x, y, args)
     end
 
     enemy.health = 3
-    enemy.magnitude = 55
+    enemy.magnitude = 40
     enemy.dir = vector(0, 1)
     enemy.viewDistance = 100
 
@@ -39,7 +39,7 @@ local function skeletonInit(enemy, x, y, args)
             end
 
             if self.state == 101 then
-                self.dir = getSelfToPlayerVector(self.physics:getX(), self.physics:getY())*6 -- speed
+                self.dir = getSelfToPlayerVector(self.physics:getX(), self.physics:getY())*10 -- speed
                 self.physics:setX(self.physics:getX() + self.dir.x * dt)
                 self.physics:setY(self.physics:getY() + self.dir.y * dt)
             end
