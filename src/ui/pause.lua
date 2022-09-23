@@ -100,8 +100,10 @@ function pause:updateEquipped()
     for i,b in ipairs(pause.items) do
         if b.name == data.item.left then
             pause.equipLeftIndex = i
+            pause.items[i].visible = false
         elseif b.name == data.item.right then
             pause.equipRightIndex = i
+            pause.items[i].visible = false
         end
         pause.items[i].hoverScale = 1
         pause.items[i].tween = nil
@@ -132,22 +134,30 @@ end
 function pause:equip(key)
     if pause.hoverIndex == -1 then return end
     local tweenTime = 0.2
-    if key == 'left' then
-        pause:unequip(key)
-        pause.items[pause.hoverIndex].visible = false
-        data.item.left = pause.items[pause.hoverIndex].name
-        pause.equipLeftX = pause.items[pause.hoverIndex].homeX
-        pause.equipLeftY = pause.items[pause.hoverIndex].homeY
-        flux.to(pause, tweenTime, {equipLeftX = pause.homeLeftX}):ease("quadout")
-        flux.to(pause, tweenTime, {equipLeftY = pause.homeY}):ease("quadout")
-    elseif key == 'right' then
-        pause:unequip(key)
-        pause.items[pause.hoverIndex].visible = false
-        data.item.right = pause.items[pause.hoverIndex].name
-        pause.equipRightX = pause.items[pause.hoverIndex].homeX
-        pause.equipRightY = pause.items[pause.hoverIndex].homeY
-        flux.to(pause, tweenTime, {equipRightX = pause.homeRightX}):ease("quadout")
-        flux.to(pause, tweenTime, {equipRightY = pause.homeY}):ease("quadout")
+    if pause.hoverIndex > -1 then
+        if key == 'left' then
+            pause:unequip(key)
+            pause.items[pause.hoverIndex].visible = false
+            data.item.left = pause.items[pause.hoverIndex].name
+            pause.equipLeftX = pause.items[pause.hoverIndex].homeX
+            pause.equipLeftY = pause.items[pause.hoverIndex].homeY
+            flux.to(pause, tweenTime, {equipLeftX = pause.homeLeftX}):ease("quadout")
+            flux.to(pause, tweenTime, {equipLeftY = pause.homeY}):ease("quadout")
+        elseif key == 'right' then
+            pause:unequip(key)
+            pause.items[pause.hoverIndex].visible = false
+            data.item.right = pause.items[pause.hoverIndex].name
+            pause.equipRightX = pause.items[pause.hoverIndex].homeX
+            pause.equipRightY = pause.items[pause.hoverIndex].homeY
+            flux.to(pause, tweenTime, {equipRightX = pause.homeRightX}):ease("quadout")
+            flux.to(pause, tweenTime, {equipRightY = pause.homeY}):ease("quadout")
+        end
+    end
+
+    if pause.hoverIndex == -11 then -- left
+        pause:unequip('left')
+    elseif pause.hoverIndex == -12 then -- right
+        pause:unequip('right')
     end
     
     pause:updateEquipped()
@@ -155,6 +165,10 @@ function pause:equip(key)
 end
 
 function pause:unequip(key)
+    if (key == "left" and pause.equipLeftIndex <= 0) or (key == "right" and pause.equipRightIndex <= 0) then
+        return
+    end
+
     local index = -1
     local tweenTime = 0.2
     local itemName = data.item[key]
@@ -252,6 +266,13 @@ function pause:update(dt)
             end
         end
     end
+
+    -- Check if hovering over the equipped items
+    if distanceBetween(pause.homeLeftX, pause.homeY, mx, my) < 18*pause.scale then
+        pause.hoverIndex = -11 -- left
+    elseif distanceBetween(pause.homeRightX, pause.homeY, mx, my) < 18*pause.scale then
+        pause.hoverIndex = -12 -- right
+    end
 end
 
 function pause:draw()
@@ -268,6 +289,7 @@ function pause:draw()
         local panelSpr = sprites.pause.itemPanel
 
         for _,b in ipairs(pause.items) do
+            love.graphics.draw(sprites.pause.itemPanelFade, b.homeX, self.y + b.homeY, nil, pause.scale, nil, sprites.pause.itemPanelFade:getWidth()/2, sprites.pause.itemPanelFade:getHeight()/2)
             if b.visible then
                 love.graphics.draw(panelSpr, b.x, self.y + b.y, nil, pause.scale*b.hoverScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
                 love.graphics.draw(b.sprite, b.x, self.y + b.y, b.rot, pause.scale*b.scale*b.hoverScale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)

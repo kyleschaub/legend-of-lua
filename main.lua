@@ -74,7 +74,9 @@ function love.keypressed(key)
     end
 
     if key == 'return' then
-        pause:toggle()
+        if gamestate == 1 then
+            pause:toggle()
+        end
     end
 
     if key == 'space' then

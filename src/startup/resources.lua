@@ -89,6 +89,7 @@ sprites.pause.wideBox = love.graphics.newImage('sprites/ui/pause/wideBox.png')
 sprites.pause.itemPanel = love.graphics.newImage('sprites/ui/pause/itemPanel.png')
 sprites.pause.itemPanelL = love.graphics.newImage('sprites/ui/pause/itemPanelL.png')
 sprites.pause.itemPanelR = love.graphics.newImage('sprites/ui/pause/itemPanelR.png')
+sprites.pause.itemPanelFade = love.graphics.newImage('sprites/ui/pause/itemPanelFade.png')
 sprites.pause.mouse = love.graphics.newImage('sprites/ui/pause/mouse.png')
 sprites.pause.cursor = love.graphics.newImage('sprites/ui/pause/cursor.png')
 sprites.npc = {}
