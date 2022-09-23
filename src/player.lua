@@ -28,6 +28,7 @@ player.bowVec = vector(1, 0)
 player.baseDamping = 12
 player.dustTimer = 0
 player.rollDelayTimer = 0
+player.rotateMargin = 0.25
 
 -- 0 = Normal gameplay
 -- 0.5 = Rolling
@@ -386,7 +387,7 @@ function player:draw()
     player.arrowOffX = player.bowVec.x*6
     player.arrowOffY = player.bowVec.y*6
 
-    if bowRot > 0 then
+    if bowRot > -1 * player.rotateMargin or bowRot < (math.pi - player.rotateMargin) * -1 then
         bowLayer = 1
     end
 
@@ -723,10 +724,10 @@ end
 
 function player:setDirFromVector(vec)
     local rad = math.atan2(vec.y, vec.x)
-    if rad >= 0 and rad < math.pi/2 then
+    if rad >= player.rotateMargin*-1 and rad < math.pi/2 then
         player.dirX = 1
         player.dirY = 1
-    elseif rad >= math.pi/2 and rad < math.pi then
+    elseif (rad >= math.pi/2 and rad < math.pi) or (rad < (math.pi - player.rotateMargin)*-1) then
         player.dirX = -1
         player.dirY = 1
     elseif rad < 0 and rad > math.pi/-2 then
