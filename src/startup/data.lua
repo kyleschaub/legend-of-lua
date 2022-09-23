@@ -17,10 +17,10 @@ function createNewSave(fileNumber)
 
     -- Currently, can equip an item to Z and X
     data.item = {}
-    data.item.z = 1
-    data.item.x = 2
-    data.item.altL = 11
-    data.item.altR = 2
+    data.item.left = "sword"
+    data.item.right = "boomerang"
+    data.item.altL = "fire"
+    data.item.altR = "fire"
 
     -- keep track of certain stackable items
     data.arrowCount = 25

@@ -33,7 +33,7 @@ function love.draw()
     drawAfterCamera()
 
     local debug = require "src/debug"
-    --debug:d()
+    debug:d()
     --debug:single()
 end
 
@@ -69,18 +69,6 @@ function love.keypressed(key)
         end
     end
 
-    if key == 'c' then
-        --particleEvent("death", player:getX(), player:getY())
-        
-    end
-
-    if key == 'lctrl' then
-        data.item.x = data.item.x + 1
-        if data.item.x > 3 then
-            data.item.x = 1
-        end
-    end
-
     if key == 'lshift' or key == 'rshift' then
         player:interact()
     end
@@ -91,22 +79,6 @@ function love.keypressed(key)
 
     if key == 'space' then
         player:roll()
-    end
-
-    if key == 'right' and pause.active then
-        pause.gridX = pause.gridX + 1
-    end
-
-    if key == 'left' and pause.active then
-        pause.gridX = pause.gridX - 1
-    end
-
-    if key == 'up' and pause.active then
-        pause.gridY = pause.gridY - 1
-    end
-
-    if key == 'down' and pause.active then
-        pause.gridY = pause.gridY + 1
     end
 
     menu:select(key)
@@ -124,22 +96,22 @@ end
 function love.mousepressed( x, y, button )
     if button == 1 then
         if pause.active then
-            pause:equip('z')
+            pause:equip('left')
         else
             if love.keyboard.isDown('lshift') then
                 useItem('altL')
             else
-                useItem('z')
+                useItem('left')
             end
         end
     elseif button == 2 then
         if pause.active then
-            pause:equip('x')
+            pause:equip('right')
         else
             if love.keyboard.isDown('lshift') then
                 useItem('altR')
             else
-                useItem('x')
+                useItem('right')
             end
         end
     end

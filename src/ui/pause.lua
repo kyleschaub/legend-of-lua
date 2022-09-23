@@ -53,6 +53,7 @@ pause.homeY = cy - box*1.2
 pause.homeLeftX = cx - box*1.1
 pause.homeRightX = cx + box*1.1
 pause.equipScale = 1.2
+pause.hoverIndex = -1
 
 pause.equipLeftX = pause.homeLeftX
 pause.equipLeftY = pause.homeY
@@ -93,10 +94,13 @@ function pause:toggle()
 end
 
 function pause:equip(key)
-    if key == 'z' then
-        data.item.z = pause:getItemNumber()
-    elseif key == 'x' then
-        data.item.x = pause:getItemNumber()
+    d1 = "equippubg"
+    if pause.hoverIndex == -1 then return end
+    d1 = "hehe"
+    if key == 'left' then
+        data.item.left = pause.items[pause.hoverIndex].name
+    elseif key == 'right' then
+        data.item.right = pause.items[pause.hoverIndex].name
     end
 end
 
@@ -145,6 +149,10 @@ function pause:getSprite(key)
 end
 
 function pause:update(dt)
+    if pause.active == false then return end
+
+    d2 = pause.hoverIndex
+
     pause.textTitle = ""
     pause.textSubtitle = ""
     pause.spriteZ = nil
@@ -178,15 +186,15 @@ function pause:update(dt)
     end
 
     local mx, my = love.mouse.getPosition()
-    local hoverIndex = -1
+    pause.hoverIndex = -1
     for i,b in ipairs(pause.items) do
         if pause.equipLeftIndex == i or pause.equipRightIndex == i then
             -- item is already equipped, do not tween
         elseif distanceBetween(b.homeX, b.homeY, mx, my) < 15*pause.scale then
+            pause.hoverIndex = i
             if b.growing then
                 -- item is already growing
             else
-                hoverIndex = i
                 if b.tween ~= nil then
                     pause.items[i].tween:stop()
                     pause.items[i].tween = nil
