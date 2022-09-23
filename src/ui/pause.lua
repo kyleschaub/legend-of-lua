@@ -16,6 +16,7 @@ pause.leftX = love.graphics.getWidth()/2 - (56 * scale)
 pause.equipBoxGap = 6
 
 pause.items = {}
+pause.scales = {}
 
 function pause:createItem(n, s, sc, hx, hy)
     local item = {
@@ -23,7 +24,10 @@ function pause:createItem(n, s, sc, hx, hy)
         sprite = s,
         scale = sc,
         homeX = hx,
-        homeY = hy
+        homeY = hy,
+        tween = nil,
+        hoverScale = 1,
+        growing = false
     }
     table.insert(pause.items, item)
 end
@@ -40,11 +44,22 @@ pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box)
 pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box)
 pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box)
 
+for i,b in ipairs(pause.items) do
+    pause.scales[i] = 1
+end
+
 pause.homeX = cx
 pause.homeY = cy - box*1.2
 pause.homeLeftX = cx - box*1.1
 pause.homeRightX = cx + box*1.1
 pause.equipScale = 1.2
+
+pause.equipLeftX = pause.homeLeftX
+pause.equipLeftY = pause.homeY
+pause.equipRightX = pause.homeRightX
+pause.equipRightY = pause.homeY
+pause.equipLeftIndex = 1 -- index from the pause.items table that is equipped
+pause.equipRightIndex = 2
 
 if windowWidth < windowHeight then
     -- assumes main scale of 8
@@ -162,6 +177,32 @@ function pause:update(dt)
         end
     end
 
+    local mx, my = love.mouse.getPosition()
+    local hoverIndex = -1
+    for i,b in ipairs(pause.items) do
+        if pause.equipLeftIndex == i or pause.equipRightIndex == i then
+            -- item is already equipped, do not tween
+        elseif distanceBetween(b.homeX, b.homeY, mx, my) < 15*pause.scale then
+            if b.growing then
+                -- item is already growing
+            else
+                hoverIndex = i
+                if b.tween ~= nil then
+                    pause.items[i].tween:stop()
+                    pause.items[i].tween = nil
+                end
+                pause.items[i].growing = true
+                pause.items[i].tween = flux.to(pause.items[i], 0.1, {hoverScale = 1.2}):ease("quadout")
+            end
+        else
+            pause.items[i].growing = false
+            if b.tween then pause.items[i].tween:stop() pause.items[i].tween = nil end
+            if b.hoverScale ~= 1 then
+                pause.items[i].tween = flux.to(pause.items[i], 0.1, {hoverScale = 1}):ease("quadout")
+            end
+        end
+    end
+
     pause:getSprite('z')
     pause:getSprite('x')
 end
@@ -177,10 +218,23 @@ function pause:draw()
         love.graphics.draw(sprites.pause.mouse, pause.homeX, self.y + pause.homeY, nil, pause.scale, nil, sprites.pause.mouse:getWidth()/2, sprites.pause.mouse:getHeight()/2)
         love.graphics.draw(sprites.pause.itemPanelR, pause.homeRightX, self.y + pause.homeY, nil, pause.scale * pause.equipScale, nil, sprites.pause.itemPanelL:getWidth()/2, sprites.pause.itemPanelL:getHeight()/2)
 
+        local panelSpr = sprites.pause.itemPanel
+
         for _,b in ipairs(pause.items) do
-            local panelSpr = sprites.pause.itemPanel
-            love.graphics.draw(panelSpr, b.homeX, self.y + b.homeY, nil, pause.scale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
-            love.graphics.draw(b.sprite, b.homeX, self.y + b.homeY, nil, pause.scale*b.scale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)
+            love.graphics.draw(panelSpr, b.homeX, self.y + b.homeY, nil, pause.scale*b.hoverScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
+            love.graphics.draw(b.sprite, b.homeX, self.y + b.homeY, nil, pause.scale*b.scale*b.hoverScale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)
+        end
+
+        if pause.equipLeftIndex > -1 then
+            local item = pause.items[pause.equipLeftIndex]
+            love.graphics.draw(panelSpr, pause.equipLeftX, self.y + pause.equipLeftY, nil, pause.scale * pause.equipScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
+            love.graphics.draw(item.sprite, pause.equipLeftX, self.y + pause.equipLeftY, nil, pause.scale*item.scale*pause.equipScale, nil, item.sprite:getWidth()/2, item.sprite:getHeight()/2)
+        end
+
+        if pause.equipRightIndex > -1 then
+            local item = pause.items[pause.equipRightIndex]
+            love.graphics.draw(panelSpr, pause.equipRightX, self.y + pause.equipRightY, nil, pause.scale * pause.equipScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
+            love.graphics.draw(item.sprite, pause.equipRightX, self.y + pause.equipRightY, nil, pause.scale*item.scale*pause.equipScale, nil, item.sprite:getWidth()/2, item.sprite:getHeight()/2)
         end
     end
 end
