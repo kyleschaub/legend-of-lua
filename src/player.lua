@@ -27,6 +27,7 @@ player.arrowOffX = 0
 player.bowVec = vector(1, 0)
 player.baseDamping = 12
 player.dustTimer = 0
+player.rollDelayTimer = 0
 
 -- 0 = Normal gameplay
 -- 0.5 = Rolling
@@ -96,6 +97,10 @@ function player:update(dt)
         player.damagedTimer = 0
         --world:collisionClear()
         world:collisionEventsClear()
+    end
+
+    if player.rollDelayTimer > 0 then
+        player.rollDelayTimer = player.rollDelayTimer - dt
     end
 
     if player.state == 0 then
@@ -234,6 +239,7 @@ function player:update(dt)
         if player.animTimer < 0 then
             player.state = 0
             player.animTimer = 0
+            player.rollDelayTimer = 0.3
         end
 
     elseif player.state >= 1 and player.state < 2 then
@@ -669,7 +675,7 @@ function player:interact()
 end
 
 function player:roll()
-    if player.state ~= 0 then
+    if player.state ~= 0 or player.rollDelayTimer > 0 then
         player:addToBuffer("roll")
         return
     end
@@ -771,6 +777,8 @@ end
 function player:processBuffer(dt)
     for i=#player.buffer,1,-1 do
         player.buffer[i][2] = player.buffer[i][2] - dt
+    end
+    for i=#player.buffer,1,-1 do
         if player.buffer[i][2] <= 0 then
             table.remove(player.buffer, i)
         end
@@ -782,7 +790,11 @@ function player:processBuffer(dt)
 end
 
 function player:addToBuffer(action)
-    table.insert(player.buffer, {action, 0.25}) -- Inputs buffered for 0.2s
+    if action == "roll" and player.state == 0.5 then
+        table.insert(player.buffer, {action, 0.1})
+    else
+        table.insert(player.buffer, {action, 0.25})
+    end
 end
 
 function player:useBuffer()
