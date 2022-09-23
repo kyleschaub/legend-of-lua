@@ -245,9 +245,10 @@ function player:update(dt)
     elseif player.state >= 1 and player.state < 2 then
 
         player.animTimer = player.animTimer - dt
+        player:checkDamage()
 
         if player.state == 1 then
-            player:setLinearVelocity((player.attackDir*120):unpack())
+            player:setLinearVelocity((player.attackDir*90):unpack())
         elseif player.state == 1.1 then
             player:setLinearVelocity(0, 0)
         end
@@ -493,7 +494,7 @@ function player:swingSword()
 
     --player.anim:gotoFrame(1)
     -- animTimer for sword wind-up
-    player.animTimer = 0.1
+    player.animTimer = 0.075
 
 end
 
