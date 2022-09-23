@@ -271,7 +271,7 @@ function player:update(dt)
     elseif player.state == 2 or player.state == 3.1 then
 
         if player.state == 2 then
-            player:setLinearVelocity(0, 0)
+            --player:setLinearVelocity(0, 0)
         end
         player.animTimer = player.animTimer - dt
 
@@ -543,6 +543,7 @@ function player:useItem(duration)
 
     if player.state ~= 3 and player.state ~= 3.1 and player.state ~= 4 and player.state ~= 4.1 then
         player.state = 2
+        player:setLinearVelocity(0, 0)
     end
 
     --[[if player.dir == "down" then
@@ -602,6 +603,8 @@ function player:useFire()
 
     player:useItem(0.2)
     player:useSet()
+    local oppDir = toMouseVector(player:getX(), player:getY()):rotated(math.pi)*80
+    player:setLinearVelocity(oppDir.x, oppDir.y)
     spawnFlame(player:getX()-2, player:getY()-2)
 end
 
