@@ -6,28 +6,45 @@ pause.width = 130 * pause.scale
 pause.x = love.graphics.getWidth()/2 - (pause.width/2)
 pause.y = 40 * pause.scale
 
-pause.trueY = 28 * pause.scale
+pause.trueY = 0 * pause.scale
 pause.fadeY = 40 * pause.scale
-
-pause.cursor = {}
-pause.gridX = 0
-pause.gridY = 0
-pause.cursor.grid = anim8.newGrid(24, 24, sprites.pause.cursor:getWidth(), sprites.pause.cursor:getHeight(), nil, nil, 1)
-pause.cursor.anim = anim8.newAnimation(pause.cursor.grid('1-2', 1), 0.35)
 
 pause.textTitle = ""
 pause.textSubtitle = ""
-pause.spriteZ = nil
-pause.spriteX = nil
-pause.spriteZrot = 0
-pause.spriteXrot = 0
-pause.spriteZscale = 1
-pause.spriteXscale = 1
-pause.spriteZoffY = 0
-pause.spriteXoffY = 0
 
 pause.leftX = love.graphics.getWidth()/2 - (56 * scale)
 pause.equipBoxGap = 6
+
+pause.items = {}
+
+function pause:createItem(n, s, sc, hx, hy)
+    local item = {
+        name = n,
+        sprite = s,
+        scale = sc,
+        homeX = hx,
+        homeY = hy
+    }
+    table.insert(pause.items, item)
+end
+
+local cx = love.graphics.getWidth()/2
+local cy = love.graphics.getHeight()/2
+local box = 32*pause.scale
+local topY = cy
+
+pause:createItem("sword", sprites.sword, 1.35, cx - box, topY)
+pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY)
+pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY)
+pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box)
+pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box)
+pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box)
+
+pause.homeX = cx
+pause.homeY = cy - box*1.2
+pause.homeLeftX = cx - box*1.1
+pause.homeRightX = cx + box*1.1
+pause.equipScale = 1.2
 
 if windowWidth < windowHeight then
     -- assumes main scale of 8
@@ -113,8 +130,6 @@ function pause:getSprite(key)
 end
 
 function pause:update(dt)
-    pause.cursor.anim:update(dt)
-
     pause.textTitle = ""
     pause.textSubtitle = ""
     pause.spriteZ = nil
@@ -156,50 +171,16 @@ function pause:draw()
         love.graphics.setColor(0,0,0,0.7 * pause.alpha)
         love.graphics.rectangle("fill", -10, -10, love.graphics.getWidth() + 20, love.graphics.getHeight() + 20)
 
-        -- Draw all boxes
         love.graphics.setColor(1,1,1,pause.alpha)
-        love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 - (self.width/pause.equipBoxGap), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
-        love.graphics.draw(sprites.pause.equipBox, love.graphics.getWidth()/2 + (self.width/pause.equipBoxGap), self.y, nil, pause.scale, nil, sprites.pause.equipBox:getWidth()/2, sprites.pause.equipBox:getHeight()/2)
-        love.graphics.draw(sprites.pause.wideBox, love.graphics.getWidth()/2, self.y + (33 * pause.scale), nil, pause.scale, nil, sprites.pause.wideBox:getWidth()/2, sprites.pause.wideBox:getHeight()/2)
-        love.graphics.draw(sprites.pause.wideBox, love.graphics.getWidth()/2, self.y + (63 * pause.scale), nil, pause.scale, nil, sprites.pause.wideBox:getWidth()/2, sprites.pause.wideBox:getHeight()/2)
 
-        -- Draw equipped items
-        if pause.spriteZ then
-            love.graphics.draw(pause.spriteZ, love.graphics.getWidth()/2 - (self.width/pause.equipBoxGap), self.y + (pause.spriteZoffY * pause.scale), pause.spriteZrot, pause.scale * pause.spriteZscale, nil, pause.spriteZ:getWidth()/2, pause.spriteZ:getHeight()/2)
+        love.graphics.draw(sprites.pause.itemPanelL, pause.homeLeftX, self.y + pause.homeY, nil, pause.scale * pause.equipScale, nil, sprites.pause.itemPanelL:getWidth()/2, sprites.pause.itemPanelL:getHeight()/2)
+        love.graphics.draw(sprites.pause.mouse, pause.homeX, self.y + pause.homeY, nil, pause.scale, nil, sprites.pause.mouse:getWidth()/2, sprites.pause.mouse:getHeight()/2)
+        love.graphics.draw(sprites.pause.itemPanelR, pause.homeRightX, self.y + pause.homeY, nil, pause.scale * pause.equipScale, nil, sprites.pause.itemPanelL:getWidth()/2, sprites.pause.itemPanelL:getHeight()/2)
+
+        for _,b in ipairs(pause.items) do
+            local panelSpr = sprites.pause.itemPanel
+            love.graphics.draw(panelSpr, b.homeX, self.y + b.homeY, nil, pause.scale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
+            love.graphics.draw(b.sprite, b.homeX, self.y + b.homeY, nil, pause.scale*b.scale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)
         end
-        if pause.spriteX then
-           love.graphics.draw(pause.spriteX, love.graphics.getWidth()/2 + (self.width/pause.equipBoxGap), self.y + (pause.spriteXoffY * pause.scale), pause.spriteXrot, pause.scale * pause.spriteXscale, nil, pause.spriteX:getWidth()/2, pause.spriteX:getHeight()/2)
-        end
-
-        -- Draw all items
-        love.graphics.draw(sprites.sword, pause.leftX, self.y + (33 * pause.scale), math.pi/-2, pause.scale*1.35, nil, sprites.sword:getWidth()/2, sprites.sword:getHeight()/2)
-        love.graphics.draw(sprites.items.boomerang, pause.leftX + (22 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*1.8, nil, sprites.items.boomerang:getWidth()/2, sprites.items.boomerang:getHeight()/2)
-        love.graphics.draw(sprites.items.bomb, pause.leftX + (44 * pause.scale), self.y + (34 * pause.scale), nil, pause.scale*1.5, nil, sprites.items.bomb:getWidth()/2, sprites.items.bomb:getHeight()/2)
-        love.graphics.draw(sprites.items.bowIcon, pause.leftX + (66 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*0.25, nil, sprites.items.bowIcon:getWidth()/2, sprites.items.bowIcon:getHeight()/2)
-        love.graphics.draw(sprites.items.hookshot, pause.leftX + (88 * pause.scale), self.y + (33 * pause.scale), nil, pause.scale*1.8, nil, sprites.items.hookshot:getWidth()/2, sprites.items.hookshot:getHeight()/2)
-
-        love.graphics.draw(sprites.items.lantern, pause.leftX, self.y + (63 * pause.scale), nil, pause.scale*1.5, nil, sprites.items.lantern:getWidth()/2, sprites.items.lantern:getHeight()/2)
-        love.graphics.draw(sprites.items.quiver, pause.leftX + (22 * pause.scale), self.y + (62 * pause.scale), nil, pause.scale*1.25, nil, sprites.items.quiver:getWidth()/2, sprites.items.quiver:getHeight()/2)
-
-        -- Draw the Z and X box labels
-        love.graphics.setFont(fonts.pauseZX)
-        --love.graphics.printf("Z", love.graphics.getWidth()/2 - (self.width/6 + 200), self.y - (28*scale), 400, "center")
-        --love.graphics.printf("X", love.graphics.getWidth()/2 + (self.width/6 - 200), self.y - (28*scale), 400, "center")
-        love.graphics.printf("Z", love.graphics.getWidth()/2 - (self.width/pause.equipBoxGap + 200), self.y - (21*scale), 400, "center")
-        love.graphics.printf("X", love.graphics.getWidth()/2 + (self.width/pause.equipBoxGap - 200), self.y - (21*scale), 400, "center")
-
-        -- Text at the bottom
-        love.graphics.setFont(fonts.pause1)
-        love.graphics.printf(pause.textTitle, love.graphics.getWidth()/2 - 4000, self.y + (80 * pause.scale), 8000, "center")
-        love.graphics.setFont(fonts.pause2)
-        --love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (92 * pause.scale), 8000, "center")
-        love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (96 * pause.scale), 8000, "center")
-
-        -- Cursor
-        local cx = pause.leftX + (22 * pause.gridX * pause.scale)
-        local cy = (self.y + (33 * pause.scale)) + (30 * pause.gridY * pause.scale)
-        pause.cursor.anim:draw(sprites.pause.cursor, cx, cy, nil, pause.scale*0.95, nil, 12, 12)
-
-        --love.graphics.rectangle("line", self.x, self.y, self.width, 24 * pause.scale)
     end
 end
