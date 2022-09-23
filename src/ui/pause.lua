@@ -28,12 +28,15 @@ function pause:createItem(n, s, sc, hx, hy, r)
         name = n,
         sprite = s,
         scale = sc,
+        x = hx,
+        y = hy,
         homeX = hx,
         homeY = hy,
         rot = r or 0,
         tween = nil,
         hoverScale = 1,
-        growing = false
+        growing = false,
+        visible = true
     }
     table.insert(pause.items, item)
 end
@@ -92,6 +95,8 @@ function pause:init()
 end
 
 function pause:updateEquipped()
+    pause.equipLeftIndex = -1
+    pause.equipRightIndex = -1
     for i,b in ipairs(pause.items) do
         if b.name == data.item.left then
             pause.equipLeftIndex = i
@@ -126,12 +131,60 @@ end
 
 function pause:equip(key)
     if pause.hoverIndex == -1 then return end
+    local tweenTime = 0.2
     if key == 'left' then
+        pause:unequip(key)
+        pause.items[pause.hoverIndex].visible = false
         data.item.left = pause.items[pause.hoverIndex].name
+        pause.equipLeftX = pause.items[pause.hoverIndex].homeX
+        pause.equipLeftY = pause.items[pause.hoverIndex].homeY
+        flux.to(pause, tweenTime, {equipLeftX = pause.homeLeftX}):ease("quadout")
+        flux.to(pause, tweenTime, {equipLeftY = pause.homeY}):ease("quadout")
     elseif key == 'right' then
+        pause:unequip(key)
+        pause.items[pause.hoverIndex].visible = false
         data.item.right = pause.items[pause.hoverIndex].name
+        pause.equipRightX = pause.items[pause.hoverIndex].homeX
+        pause.equipRightY = pause.items[pause.hoverIndex].homeY
+        flux.to(pause, tweenTime, {equipRightX = pause.homeRightX}):ease("quadout")
+        flux.to(pause, tweenTime, {equipRightY = pause.homeY}):ease("quadout")
     end
+    
     pause:updateEquipped()
+
+end
+
+function pause:unequip(key)
+    local index = -1
+    local tweenTime = 0.2
+    local itemName = data.item[key]
+    index = pause:getIndexFromName(itemName)
+    data.item[key] = ""
+
+    if key == "left" then
+        pause.items[index].x = pause.homeLeftX
+        pause.items[index].y = pause.homeY
+    elseif key == "right" then
+        pause.items[index].x = pause.homeRightX
+        pause.items[index].y = pause.homeY
+    end
+
+    pause.items[index].visible = true
+
+    local destX = pause.items[index].homeX
+    local destY = pause.items[index].homeY
+    flux.to(pause.items[index], tweenTime, {x = destX}):ease("quadout")
+    flux.to(pause.items[index], tweenTime, {y = destY}):ease("quadout")
+end
+
+function pause:getIndexFromName(name)
+    for i,b in ipairs(pause.items) do
+        if b.name == name then
+            return i
+        end
+        pause.items[i].hoverScale = 1
+        pause.items[i].tween = nil
+    end
 end
 
 function pause:getItemNumber()
@@ -215,8 +268,10 @@ function pause:draw()
         local panelSpr = sprites.pause.itemPanel
 
         for _,b in ipairs(pause.items) do
-            love.graphics.draw(panelSpr, b.homeX, self.y + b.homeY, nil, pause.scale*b.hoverScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
-            love.graphics.draw(b.sprite, b.homeX, self.y + b.homeY, b.rot, pause.scale*b.scale*b.hoverScale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)
+            if b.visible then
+                love.graphics.draw(panelSpr, b.x, self.y + b.y, nil, pause.scale*b.hoverScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
+                love.graphics.draw(b.sprite, b.x, self.y + b.y, b.rot, pause.scale*b.scale*b.hoverScale, nil, b.sprite:getWidth()/2, b.sprite:getHeight()/2)
+            end
         end
 
         if pause.equipLeftIndex > -1 then
