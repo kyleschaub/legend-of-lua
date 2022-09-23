@@ -140,7 +140,7 @@ function player:update(dt)
             player.dirY = 1
         end
 
-        if data.item['z'] == 4 then -- bow
+        if data.item['left'] == "bow" then
             if love.mouse.isDown(1) then
                 player.aiming = true
             elseif player.aiming then
@@ -149,7 +149,7 @@ function player:update(dt)
                 return
             end
         end
-        if data.item['x'] == 4 then -- bow
+        if data.item['right'] == "bow" then
             if love.mouse.isDown(2) then
                 player.aiming = true
             elseif player.aiming then

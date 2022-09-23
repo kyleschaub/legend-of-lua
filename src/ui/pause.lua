@@ -1,4 +1,5 @@
 pause = {}
+
 pause.active = false
 pause.scale = scale
 pause.alpha = 0
@@ -18,6 +19,10 @@ pause.equipBoxGap = 6
 pause.items = {}
 pause.scales = {}
 
+for i,b in ipairs(pause.items) do
+    pause.scales[i] = 1
+end
+
 function pause:createItem(n, s, sc, hx, hy)
     local item = {
         name = n,
@@ -32,48 +37,79 @@ function pause:createItem(n, s, sc, hx, hy)
     table.insert(pause.items, item)
 end
 
-local cx = love.graphics.getWidth()/2
-local cy = love.graphics.getHeight()/2
-local box = 32*pause.scale
-local topY = cy
+function pause:init()
+    pause.active = false
+    pause.scale = scale
+    pause.alpha = 0
+    pause.width = 130 * pause.scale
+    pause.x = love.graphics.getWidth()/2 - (pause.width/2)
+    pause.y = 40 * pause.scale
 
-pause:createItem("sword", sprites.sword, 1.35, cx - box, topY)
-pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY)
-pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY)
-pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box)
-pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box)
-pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box)
+    pause.trueY = 0 * pause.scale
+    pause.fadeY = 40 * pause.scale
 
-for i,b in ipairs(pause.items) do
-    pause.scales[i] = 1
+    pause.textTitle = ""
+    pause.textSubtitle = ""
+
+    pause.leftX = love.graphics.getWidth()/2 - (56 * scale)
+    pause.equipBoxGap = 6
+
+    pause.items = {}
+
+    local cx = love.graphics.getWidth()/2
+    local cy = love.graphics.getHeight()/2
+    local box = 32*pause.scale
+    local topY = cy
+
+    pause:createItem("sword", sprites.sword, 1.35, cx - box, topY)
+    pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY)
+    pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY)
+    pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box)
+    pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box)
+    pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box)
+
+    pause.homeX = cx
+    pause.homeY = cy - box*1.2
+    pause.homeLeftX = cx - box*1.1
+    pause.homeRightX = cx + box*1.1
+    pause.equipScale = 1.2
+    pause.hoverIndex = -1
+
+    pause.equipLeftX = pause.homeLeftX
+    pause.equipLeftY = pause.homeY
+    pause.equipRightX = pause.homeRightX
+    pause.equipRightY = pause.homeY
+    pause.equipLeftIndex = 1 -- index from the pause.items table that is equipped
+    pause.equipRightIndex = 2
+
+    if windowWidth < windowHeight then
+        -- assumes main scale of 8
+        pause.scale = 9
+        pause.leftX = love.graphics.getWidth()/2 - (39 * scale)
+    
+        pause.y = 76 * pause.scale
+        pause.trueY = 64 * pause.scale
+        pause.fadeY = 76 * pause.scale
+        pause.equipBoxGap = 10
+    end
+
+    pause:updateEquipped()
 end
 
-pause.homeX = cx
-pause.homeY = cy - box*1.2
-pause.homeLeftX = cx - box*1.1
-pause.homeRightX = cx + box*1.1
-pause.equipScale = 1.2
-pause.hoverIndex = -1
-
-pause.equipLeftX = pause.homeLeftX
-pause.equipLeftY = pause.homeY
-pause.equipRightX = pause.homeRightX
-pause.equipRightY = pause.homeY
-pause.equipLeftIndex = 1 -- index from the pause.items table that is equipped
-pause.equipRightIndex = 2
-
-if windowWidth < windowHeight then
-    -- assumes main scale of 8
-    pause.scale = 9
-    pause.leftX = love.graphics.getWidth()/2 - (39 * scale)
-
-    pause.y = 76 * pause.scale
-    pause.trueY = 64 * pause.scale
-    pause.fadeY = 76 * pause.scale
-    pause.equipBoxGap = 10
+function pause:updateEquipped()
+    for i,b in ipairs(pause.items) do
+        if b.name == data.item.left then
+            pause.equipLeftIndex = i
+        elseif b.name == data.item.right then
+            pause.equipRightIndex = i
+        end
+        pause.items[i].hoverScale = 1
+        pause.items[i].tween = nil
+    end
 end
 
 function pause:open()
+    pause:init()
     self.active = true
     flux.to(pause, 0.25, {alpha = 1}):ease("quadout")
     flux.to(pause, 0.25, {y = pause.trueY}):ease("quadout")
@@ -94,58 +130,18 @@ function pause:toggle()
 end
 
 function pause:equip(key)
-    d1 = "equippubg"
     if pause.hoverIndex == -1 then return end
-    d1 = "hehe"
     if key == 'left' then
         data.item.left = pause.items[pause.hoverIndex].name
     elseif key == 'right' then
         data.item.right = pause.items[pause.hoverIndex].name
     end
+    pause:updateEquipped()
 end
 
 function pause:getItemNumber()
     if pause.gridY == 1 then return 0 end
     return pause.gridX + 1
-end
-
-function pause:getSprite(key)
-    local item = data.item[key]
-    local spr = nil
-    local rot = 0
-    local sprScale = 1
-    local offY = 0
-    
-    if item == 1 then
-        spr = sprites.sword
-        rot = math.pi/-2
-        sprScale = 1.35
-    elseif item == 2 then
-        spr = sprites.items.boomerang
-        sprScale = 1.8
-    elseif item == 3 then
-        spr = sprites.items.bomb
-        sprScale = 1.5
-        offY = 1
-    elseif item == 4 then
-        spr = sprites.items.bowIcon
-        sprScale = 0.25
-    elseif item == 5 then
-        spr = sprites.items.hookshot
-        sprScale = 1.8
-    end
-
-    if key == 'z' then
-        pause.spriteZ = spr
-        pause.spriteZrot = rot
-        pause.spriteZscale = sprScale
-        pause.spriteZoffY = offY
-    elseif key == 'x' then
-        pause.spriteX = spr
-        pause.spriteXrot = rot
-        pause.spriteXscale = sprScale
-        pause.spriteXoffY = offY
-    end
 end
 
 function pause:update(dt)
@@ -210,9 +206,6 @@ function pause:update(dt)
             end
         end
     end
-
-    pause:getSprite('z')
-    pause:getSprite('x')
 end
 
 function pause:draw()
