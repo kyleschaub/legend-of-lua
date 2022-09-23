@@ -55,6 +55,11 @@ function pause:init()
     pause.leftX = love.graphics.getWidth()/2 - (56 * scale)
     pause.equipBoxGap = 6
 
+    if windowWidth < windowHeight then
+        -- assumes main scale of 8
+        pause.scale = scale * 0.8
+    end
+
     pause.items = {}
 
     local cx = love.graphics.getWidth()/2
@@ -82,17 +87,6 @@ function pause:init()
     pause.equipRightY = pause.homeY
     pause.equipLeftIndex = 1 -- index from the pause.items table that is equipped
     pause.equipRightIndex = 2
-
-    if windowWidth < windowHeight then
-        -- assumes main scale of 8
-        pause.scale = 9
-        pause.leftX = love.graphics.getWidth()/2 - (39 * scale)
-    
-        pause.y = 76 * pause.scale
-        pause.trueY = 64 * pause.scale
-        pause.fadeY = 76 * pause.scale
-        pause.equipBoxGap = 10
-    end
 
     pause:updateEquipped()
 end
