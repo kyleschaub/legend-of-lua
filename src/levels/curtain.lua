@@ -86,6 +86,7 @@ function curtain:open()
     self.state = 2
     cam.smoother = Camera.smooth.none()
     triggerTransition(self.destMap, self.destX, self.destY)
+    love.graphics.setBackgroundColor(96/255, 174/255, 140/255)
 
     local onFinish = function()
         self.state = 0
