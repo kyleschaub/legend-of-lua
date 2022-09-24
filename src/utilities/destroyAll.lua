@@ -9,6 +9,8 @@ function destroyAll()
     removeTable(triggers)
     removeTable(trees)
     removeTable(waters)
+    removeTable(arrows)
+    removeTable(bombs)
 
     -- Remove enemies
     for i=#enemies,1,-1 do

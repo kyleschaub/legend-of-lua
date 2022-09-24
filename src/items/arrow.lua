@@ -5,7 +5,7 @@ function spawnArrow(x, y)
         return
     end
     
-    data.arrowCount = data.arrowCount - 1
+    --data.arrowCount = data.arrowCount - 1
     local direction = toMouseVector(x, y)
 
     local arrow = {}

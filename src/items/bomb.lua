@@ -5,7 +5,7 @@ function spawnBomb()
         --return
     end
     
-    data.bombCount = data.bombCount - 1
+    --data.bombCount = data.bombCount - 1
 
     local bomb = {}
     bomb.x = player:getX()
