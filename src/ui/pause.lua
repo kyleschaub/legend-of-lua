@@ -10,7 +10,7 @@ pause.y = 40 * pause.scale
 pause.trueY = 0 * pause.scale
 pause.fadeY = 40 * pause.scale
 
-pause.textTitle = ""
+pause.textHoverName = ""
 pause.textSubtitle = ""
 
 pause.leftX = love.graphics.getWidth()/2 - (56 * scale)
@@ -23,7 +23,7 @@ for i,b in ipairs(pause.items) do
     pause.scales[i] = 1
 end
 
-function pause:createItem(n, s, sc, hx, hy, r)
+function pause:createItem(n, s, sc, hx, hy, t, sub, r)
     local item = {
         name = n,
         sprite = s,
@@ -32,6 +32,8 @@ function pause:createItem(n, s, sc, hx, hy, r)
         y = hy,
         homeX = hx,
         homeY = hy,
+        title = t,
+        subtitle = sub,
         rot = r or 0,
         tween = nil,
         hoverScale = 1,
@@ -70,12 +72,12 @@ function pause:init()
     local box = 32*pause.scale
     local topY = cy
 
-    pause:createItem("sword", sprites.sword, 1.35, cx - box, topY, math.pi/-4)
-    pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY)
-    pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY)
-    pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box)
-    pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box)
-    pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box)
+    pause:createItem("sword", sprites.sword, 1.35, cx - box, topY, "Sword", "Slash at enemies to deal damage", math.pi/-4)
+    pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY, "Bow and Arrows", "Shoot at enemies to deal damage")
+    pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY, "Boomerang", "Throw at enemies to stun them")
+    pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box, "Bombs", "Use to destroy obstacles")
+    pause:createItem("grapple", sprites.items.hookshot, 1.35, cx, topY + box, "Grapple", "Tether to distant walls")
+    pause:createItem("fire", sprites.items.lantern, 1.4, cx + box, topY + box, "Fire", "Spell that hits multiple times")
 
     pause.homeX = cx
     pause.homeY = cy - box*1.2
@@ -206,6 +208,22 @@ function pause:getItemNumber()
     return pause.gridX + 1
 end
 
+function pause:updateText()
+    if pause.hoverIndex == -11 and pause.equipLeftIndex > 0 then
+        pause.textHoverName = pause.items[pause.equipLeftIndex].title
+        pause.textSubtitle = pause.items[pause.equipLeftIndex].subtitle
+    elseif pause.hoverIndex == -12 and pause.equipRightIndex > 0 then
+        pause.textHoverName = pause.items[pause.equipRightIndex].title
+        pause.textSubtitle = pause.items[pause.equipRightIndex].subtitle
+    elseif pause.hoverIndex > 0 then
+        pause.textHoverName = pause.items[pause.hoverIndex].title
+        pause.textSubtitle = pause.items[pause.hoverIndex].subtitle
+    else
+        pause.textHoverName = ""
+        pause.textSubtitle = ""
+    end
+end
+
 function pause:update(dt)
     if pause.active == false then return end
 
@@ -273,6 +291,8 @@ function pause:update(dt)
     elseif distanceBetween(pause.homeRightX, pause.homeY, mx, my) < 18*pause.scale then
         pause.hoverIndex = -12 -- right
     end
+
+    pause:updateText()
 end
 
 function pause:draw()
@@ -307,5 +327,13 @@ function pause:draw()
             love.graphics.draw(panelSpr, pause.equipRightX, self.y + pause.equipRightY, nil, pause.scale * pause.equipScale, nil, panelSpr:getWidth()/2, panelSpr:getHeight()/2)
             love.graphics.draw(item.sprite, pause.equipRightX, self.y + pause.equipRightY, item.rot, pause.scale*item.scale*pause.equipScale, nil, item.sprite:getWidth()/2, item.sprite:getHeight()/2)
         end
+
+        -- Text at the bottom
+        love.graphics.setFont(fonts.pauseTop)
+        love.graphics.printf("Left or Right Click on an item to equip it", love.graphics.getWidth()/2 - 4000, self.y + (6 * pause.scale), 8000, "center")
+        love.graphics.setFont(fonts.pause1)
+        love.graphics.printf(pause.textHoverName, love.graphics.getWidth()/2 - 4000, self.y + (124 * pause.scale), 8000, "center")
+        love.graphics.setFont(fonts.pause2)
+        love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (134 * pause.scale), 8000, "center")
     end
 end

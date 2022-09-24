@@ -103,11 +103,8 @@ fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Squar
 fonts.coins = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 6.5*scale)
 fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
 
---fonts.pauseZX = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
---fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 13*scale)
---fonts.pause2 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
-fonts.pauseZX = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
-fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
-fonts.pause2 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 7*scale)
+fonts.pause1 = love.graphics.newFont("fonts/kenney_fontpackage/Fonts/Kenney Pixel.ttf", 12*scale)
+fonts.pause2 = love.graphics.newFont("fonts/kenney_fontpackage/Fonts/Kenney Pixel.ttf", 9*scale)
+fonts.pauseTop = love.graphics.newFont("fonts/kenney_fontpackage/Fonts/Kenney Pixel.ttf", 10*scale)
 
 sounds = {}
