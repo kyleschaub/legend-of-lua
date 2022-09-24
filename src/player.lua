@@ -685,9 +685,6 @@ function player:roll()
         return
     end
 
-    player.state = 0.5
-    player.animTimer = 0.3
-
     local dirX = 0
     local dirY = 0
 
@@ -706,6 +703,11 @@ function player:roll()
     if love.keyboard.isDown("w") then
         dirY = -1
     end
+
+    if dirX == 0 and dirY == 0 then return end -- must have some direction to roll
+
+    player.state = 0.5
+    player.animTimer = 0.3
 
     if dirY < 0 then
         player.anim = player.animations.rollUp
