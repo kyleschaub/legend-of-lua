@@ -328,13 +328,15 @@ function pause:draw()
             love.graphics.draw(item.sprite, pause.equipRightX, self.y + pause.equipRightY, item.rot, pause.scale*item.scale*pause.equipScale, nil, item.sprite:getWidth()/2, item.sprite:getHeight()/2)
         end
 
+        local cy = love.graphics.getHeight()/2
+
         -- Text at the bottom
         love.graphics.setFont(fonts.pauseTop)
-        love.graphics.printf("Left or Right Click on an item to equip it", love.graphics.getWidth()/2 - 4000, self.y + (6 * pause.scale), 8000, "center")
+        love.graphics.printf("Left or Right Click on an item to equip it", love.graphics.getWidth()/2 - 4000, self.y + (cy - 68 * pause.scale), 8000, "center")
         love.graphics.setFont(fonts.pause1)
-        love.graphics.printf(pause.textHoverName, love.graphics.getWidth()/2 - 4000, self.y + (124 * pause.scale), 8000, "center")
+        love.graphics.printf(pause.textHoverName, love.graphics.getWidth()/2 - 4000, self.y + (cy + 48 * pause.scale), 8000, "center")
         love.graphics.setFont(fonts.pause2)
-        love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (134 * pause.scale), 8000, "center")
+        love.graphics.printf(pause.textSubtitle, love.graphics.getWidth()/2 - 4000, self.y + (cy + 60 * pause.scale), 8000, "center")
 
         love.graphics.draw(sprites.hud.coin, love.graphics.getWidth() - 27*scale, self.y + (139 * pause.scale), nil, 1.5*scale)
         love.graphics.setFont(fonts.coins)
