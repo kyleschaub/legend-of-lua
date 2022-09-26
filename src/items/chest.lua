@@ -48,12 +48,20 @@ function spawnChest(x, y, id, size)
             end
         end
     end
+
+    function chest:update(dt)
+        if distanceBetween(self.x+self.width/2, self.y+self.height/2, player:getX(), player:getY()) < 24 then
+            self:interact()
+        end
+    end
     
     table.insert(chests, chest)
 end
 
 function chests:update(dt)
-
+    for _,c in ipairs(chests) do
+        c:update(dt)
+    end
 end
 
 function chests:draw()
@@ -78,13 +86,13 @@ function chests:spawnSmallLoot(x, y, id)
     end
 
     if id == 'test1' then
-        spawnLoot(x, y, "heart", true, nil, getJumpVec(-1, 0))
-        spawnLoot(x, y, "bomb", true, nil, getJumpVec(1, 0))
-    elseif id == 'test2' then
-        spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 0))
+        spawnLoot(x, y, "coin2", true, nil, getJumpVec(-1, 0))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(-1, 1))
         spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 1))
-        spawnLoot(x, y, "coin1", true, nil, getJumpVec(1, 0))
+        spawnLoot(x, y, "coin2", true, nil, getJumpVec(1, 0))
+    elseif id == 'test2' then
+        spawnLoot(x, y, "coin3", true, nil, getJumpVec(-1, 0))
+        spawnLoot(x, y, "coin3", true, nil, getJumpVec(1, 0))
     elseif id == 'test3' then
         spawnLoot(x, y, "coin2", true, nil, getJumpVec(-1, 0))
         spawnLoot(x, y, "coin3", true, nil, getJumpVec(-1, 1))
