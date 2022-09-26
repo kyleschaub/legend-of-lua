@@ -194,7 +194,7 @@
   <object id="57" x="202.75" y="166" width="16" height="16"/>
   <object id="61" x="408" y="216" width="16" height="16"/>
   <object id="88" x="60" y="56" width="16" height="16"/>
-  <object id="99" x="236" y="292" width="16" height="16"/>
+  <object id="99" x="244" y="292" width="16" height="16"/>
   <object id="102" x="344" y="272" width="16" height="16"/>
  </objectgroup>
  <objectgroup id="8" name="Chests">
