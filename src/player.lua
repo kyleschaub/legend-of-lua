@@ -73,6 +73,8 @@ player.anim = player.animations.idleDown
 player.buffer = {} -- input buffer
 
 function player:update(dt)
+
+    if pause.active then player.anim:update(dt) end
     if player.state == -1 or gamestate == 0 then return end
 
     if player.stunTimer > 0 then
@@ -431,7 +433,9 @@ function player:checkDamage()
     local hitEnemies = world:queryCircleArea(player:getX(), player:getY(), 5, {'Enemy'})
     if #hitEnemies > 0 then
         local e = hitEnemies[1]
-        player:hurt(0.5, e:getX(), e:getY())
+        if e.parent.dizzyTimer <= 0 and e.parent.stunTimer <= 0 then
+            player:hurt(0.5, e:getX(), e:getY())
+        end
     end
 
     if player:enter('Projectile') then
