@@ -537,6 +537,9 @@ function player:swordDamage()
         py + dir:rotated(math.pi/-8).y*20,
     }
 
+    local range = math.random()/4
+    dj.play(sounds.items.sword, "static", "effect", 1, 1+range)
+
     local hitEnemies = world:queryPolygonArea(polygon, {'Enemy'})
     for _,e in ipairs(hitEnemies) do
         local knockbackDir = getPlayerToSelfVector(e:getX(), e:getY())
@@ -725,6 +728,8 @@ function player:roll()
     local dirVec = vector(dirX, dirY):normalized()*160
     player:setLinearVelocity(dirVec.x, dirVec.y)
 
+    local range = math.random()/5
+    dj.play(sounds.player.roll, "static", "effect", 1, 1+range)
     effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec, scale = 0.8})
     effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/8), scale = 0.6})
     effects:spawn("walkDust", player:getX(), player:getY()+6, {dir = dirVec:rotated(math.pi/-8), scale = 0.6})

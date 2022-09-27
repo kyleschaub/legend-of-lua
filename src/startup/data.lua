@@ -18,7 +18,7 @@ function createNewSave(fileNumber)
     -- Currently, can equip an item to Z and X
     data.item = {}
     data.item.left = "sword"
-    data.item.right = "boomerang"
+    data.item.right = "bow"
     data.item.altL = "fire"
     data.item.altR = "fire"
 
