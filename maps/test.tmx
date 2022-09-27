@@ -178,7 +178,7 @@
   <object id="79" x="256" y="112" width="48" height="16"/>
   <object id="80" x="192" y="0" width="32" height="112"/>
   <object id="81" x="224" y="64" width="16" height="20"/>
-  <object id="82" x="240" y="64" width="224" height="48"/>
+  <object id="82" x="240" y="64" width="112" height="48"/>
   <object id="93" x="0" y="96" width="64" height="64"/>
   <object id="94" x="0" y="0" width="32" height="96"/>
   <object id="95" x="32" y="0" width="160" height="32"/>

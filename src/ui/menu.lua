@@ -10,9 +10,9 @@ function menu:draw()
         --love.graphics.printf("3.  File #3", love.graphics.getWidth()/2 - 4000, 40 * scale, 8000, "center")
 
         love.graphics.printf("Use WASD or Arrow Keys to move.", love.graphics.getWidth()/2 - 4000, 20 * scale, 8000, "center")
-        love.graphics.printf("Press Enter to equip items.", love.graphics.getWidth()/2 - 4000, 30 * scale, 8000, "center")
-        love.graphics.printf("Use the mouse to aim and attack.", love.graphics.getWidth()/2 - 4000, 40 * scale, 8000, "center")
-        love.graphics.printf("Press any key to start!", love.graphics.getWidth()/2 - 4000, 60 * scale, 8000, "center")
+        love.graphics.printf("Press Enter to equip items.", love.graphics.getWidth()/2 - 4000, 32 * scale, 8000, "center")
+        love.graphics.printf("Use the mouse to aim and attack.", love.graphics.getWidth()/2 - 4000, 44 * scale, 8000, "center")
+        love.graphics.printf("Press any key to start!", love.graphics.getWidth()/2 - 4000, 72 * scale, 8000, "center")
     end
 end
 
