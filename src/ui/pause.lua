@@ -76,7 +76,7 @@ function pause:init()
     pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY, "Bow and Arrows", "Shoot at enemies to deal damage")
     pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY, "Boomerang", "Throw at enemies to stun them")
     pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box, "Bombs", "Use to destroy obstacles")
-    pause:createItem("grapple", sprites.items.hookshot, 0.27, cx, topY + box, "Grapple", "Tether to distant walls", math.pi/-4)
+    pause:createItem("grapple", sprites.items.grapple, 0.27, cx, topY + box, "Grapple", "Tether to distant walls", math.pi/-4)
     pause:createItem("fire", sprites.items.fire, 1.4, cx + box, topY + box, "Fire", "Spell that hits multiple times")
 
     pause.homeX = cx

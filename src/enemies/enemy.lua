@@ -261,10 +261,10 @@ function spawnEnemy(x, y, type, args)
             end
         end
 
-        if self.hookVec and self.dizzyTimer > 0 and hookshot.state == -1 then
+        if self.hookVec and self.dizzyTimer > 0 and grapple.state == -1 then
             self.physics:setLinearVelocity(0, 0)
-            self.physics:setX( self.physics:getX() + (self.hookVec.x * hookshot.speed * -1 * dt) )
-            self.physics:setY( self.physics:getY() + (self.hookVec.y * hookshot.speed * -1 * dt) )
+            self.physics:setX( self.physics:getX() + (self.hookVec.x * grapple.speed * -1 * dt) )
+            self.physics:setY( self.physics:getY() + (self.hookVec.y * grapple.speed * -1 * dt) )
         end
 
         self:wanderUpdate(dt)

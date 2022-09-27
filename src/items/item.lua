@@ -8,7 +8,7 @@ function useItem(key, released)
     elseif data.item[key] == "bow" and player.state ~= 0 then
         player:useBow() -- adds bow to the buffer
     elseif data.item[key] == "grapple" and released ~= true then
-        player:useHookshot()
+        player:usegrapple()
     elseif data.item[key] == "fire" and released ~= true then
         player:useFire()
     end

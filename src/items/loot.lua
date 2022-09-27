@@ -114,9 +114,9 @@ function spawnLoot(x, y, type, bounce, price, dir)
             end
         end
 
-        if self.hookVec and hookshot.state == -1 then
-            self.x = self.x + (self.hookVec.x * hookshot.speed * -1 * dt)
-            self.y = self.y + (self.hookVec.y * hookshot.speed * -1 * dt)
+        if self.hookVec and grapple.state == -1 then
+            self.x = self.x + (self.hookVec.x * grapple.speed * -1 * dt)
+            self.y = self.y + (self.hookVec.y * grapple.speed * -1 * dt)
         end
 
         if self.boomeranged then

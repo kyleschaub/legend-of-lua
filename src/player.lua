@@ -35,7 +35,7 @@ player.rotateMargin = 0.25
 -- 1 = Sword swing
 -- 2 = Use (bomb)
 -- 3 = Bow (3: bow drawn, 3.1: recover)
--- 4 = Hookshot (4: armed, 4.1: launching, 4.2: moving)
+-- 4 = grapple (4: armed, 4.1: launching, 4.2: moving)
 -- 10 = Damage stun
 -- 11 = Hold item
 -- 12 = Transition
@@ -290,12 +290,12 @@ function player:update(dt)
     
     elseif player.state == 4 or player.state == 4.1 then
 
-        -- while arming the hookshot, always 'use' the item
+        -- while arming the grapple, always 'use' the item
         -- player:useItem(1)
 
-        if player.state == 4.1 and hookshot.state == -1 then
-            if distanceBetween(player:getX(), player:getY(), hookshot.x, hookshot.y) < 12 then
-                hookshot.state = 0
+        if player.state == 4.1 and grapple.state == -1 then
+            if distanceBetween(player:getX(), player:getY(), grapple.x, grapple.y) < 12 then
+                grapple.state = 0
                 player.state = 0
                 player:resetAnimation(player.dir)
             end
@@ -303,8 +303,8 @@ function player:update(dt)
 
     elseif player.state == 4.2 then
 
-        player:setX( player:getX() + (hookshot.dir.x * hookshot.speed * dt) )
-        player:setY( player:getY() + (hookshot.dir.y * hookshot.speed * dt) )
+        player:setX( player:getX() + (grapple.dir.x * grapple.speed * dt) )
+        player:setY( player:getY() + (grapple.dir.y * grapple.speed * dt) )
 
     elseif player.state == 11 then -- got an item
 
@@ -353,9 +353,9 @@ function player:draw()
     local swLayer = -1
     local arrowSpr = sprites.items.arrow
     local bowSpr = sprites.items.bow1
-    --local hookSpr = sprites.items.hookshotArmed
+    --local hookSpr = sprites.items.grappleArmed
     if player.aiming and (player.animTimer > 0 or data.arrowCount < 1) then bowSpr = sprites.items.bow2 end
-    --if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.hookshotHandle end
+    --if player.state == 4.1 or player.state == 4.2 then hookSpr = sprites.items.grappleHandle end
 
     local swordRot = 0
     if player.state == 1.1 then
@@ -633,12 +633,12 @@ function player:useBow()
     end
 end
 
-function player:useHookshot()
+function player:usegrapple()
     if player.state == 0 then
         player.state = 4.1
         player.attackDir = toMouseVector(player:getX() + player.arrowOffX, player:getY()+1+player.arrowOffY)
         player:useSet()
-        hookshot:shoot(player.attackDir)
+        grapple:shoot(player.attackDir)
         player:setLinearVelocity(0, 0)
         player:setDirFromVector(player.attackDir)
     end
