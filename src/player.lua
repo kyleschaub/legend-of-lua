@@ -347,7 +347,7 @@ function player:draw()
     end
 
     -- Sword sprite
-    local swSpr = sprites.sword
+    local swSpr = sprites.items.sword
     local swX = 0
     local swY = 0
     local swLayer = -1

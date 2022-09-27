@@ -72,7 +72,7 @@ function pause:init()
     local box = 32*pause.scale
     local topY = cy
 
-    pause:createItem("sword", sprites.sword, 1.35, cx - box, topY, "Sword", "Slash at enemies to deal damage", math.pi/-4)
+    pause:createItem("sword", sprites.items.sword, 1.35, cx - box, topY, "Sword", "Slash at enemies to deal damage", math.pi/-4)
     pause:createItem("bow", sprites.items.bowIcon, 0.25, cx, topY, "Bow and Arrows", "Shoot at enemies to deal damage")
     pause:createItem("boomerang", sprites.items.boomerang, 1.5, cx + box, topY, "Boomerang", "Throw at enemies to stun them")
     pause:createItem("bomb", sprites.items.bomb, 1.4, cx - box, topY + box, "Bombs", "Use to destroy obstacles")

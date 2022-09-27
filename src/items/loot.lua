@@ -60,7 +60,7 @@ function spawnLoot(x, y, type, bounce, price, dir)
         loot.anim = anim8.newAnimation(loot.grid('1-4', 1), 0.18)
         ]]
     elseif loot.type == "sword2" then
-        loot.spr = sprites.sword2
+        loot.spr = sprites.items.sword2
         loot.rot = math.pi/-2
     elseif loot.type == "container" then
         loot.spr = sprites.items.container

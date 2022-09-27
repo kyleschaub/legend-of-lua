@@ -1,8 +1,6 @@
 sprites = {}
 sprites.playerSheet = love.graphics.newImage('sprites/player/playerSheet1.png')
 sprites.playerShadow = love.graphics.newImage('sprites/player/playerShadow.png')
-sprites.sword = love.graphics.newImage('sprites/sword.png')
-sprites.sword2 = love.graphics.newImage('sprites/sword2.png')
 sprites.effects = {}
 sprites.effects.slice = love.graphics.newImage('sprites/effects/slice.png')
 sprites.effects.sliceAnim = love.graphics.newImage('sprites/effects/sliceAnim.png')
@@ -49,6 +47,8 @@ sprites.enemies.skeletonKnife = love.graphics.newImage('sprites/enemies/skeleton
 sprites.enemies.skeletonMage = love.graphics.newImage('sprites/enemies/skeleton/mage.png')
 sprites.enemies.skeletonDead = love.graphics.newImage('sprites/enemies/skeleton/skeletonStun.png')
 sprites.items = {}
+sprites.items.sword = love.graphics.newImage('sprites/items/sword.png')
+sprites.items.sword2 = love.graphics.newImage('sprites/items/sword2.png')
 sprites.items.arrow = love.graphics.newImage('sprites/items/arrow.png')
 sprites.items.bow1 = love.graphics.newImage('sprites/items/bow1.png')
 sprites.items.bow2 = love.graphics.newImage('sprites/items/bow2.png')
