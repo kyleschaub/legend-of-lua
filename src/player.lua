@@ -118,22 +118,22 @@ function player:update(dt)
 
         if pause.active then return end
 
-        if love.keyboard.isDown("d") then
+        if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
             dirX = 1
             player.dirX = 1
         end
 
-        if love.keyboard.isDown("a") then
+        if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
             dirX = -1
             player.dirX = -1
         end
 
-        if love.keyboard.isDown("s") then
+        if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
             dirY = 1
             player.dirY = 1
         end
 
-        if love.keyboard.isDown("w") then
+        if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
             dirY = -1
             player.dirY = -1
         end
@@ -696,19 +696,19 @@ function player:roll()
     local dirX = 0
     local dirY = 0
 
-    if love.keyboard.isDown("d") then
+    if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
         dirX = 1
     end
 
-    if love.keyboard.isDown("a") then
+    if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
         dirX = -1
     end
 
-    if love.keyboard.isDown("s") then
+    if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
         dirY = 1
     end
 
-    if love.keyboard.isDown("w") then
+    if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
         dirY = -1
     end
 
