@@ -22,6 +22,7 @@ function spawnBomb()
     bomb.anim = bomb.anim1
 
     player:useSet()
+    dj.play(sounds.items.set, "static", "effect")
 
     local offVec = toMouseVector(bomb.x, bomb.y)*14
     bomb.x = bomb.x + offVec.x

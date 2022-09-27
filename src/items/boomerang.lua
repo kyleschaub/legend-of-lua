@@ -9,6 +9,7 @@ boomerang.baseSpeed = 250
 boomerang.timer = 0
 boomerang.accel = 340
 boomerang.rad = 6
+boomerang.soundTimer = 0
 
 -- 0 = inactive
 -- 1 = flying away
@@ -57,6 +58,12 @@ function boomerang:update(dt)
 
     self.x = self.x + self.dir.x * dt
     self.y = self.y + self.dir.y * dt
+
+    self.soundTimer = self.soundTimer - dt
+    if self.soundTimer < 0 then
+        self.soundTimer = 0.24
+        --dj.play(sounds.items.boomerang, "static", "effect")
+    end
 end
 
 function boomerang:draw()
@@ -73,6 +80,7 @@ function boomerang:throw(dir)
     self.timer = 0.65
     self.dir = toMouseVector(self.x, self.y) * self.speed
     dj.play(sounds.items.boomerang, "static", "effect")
+    self.soundTimer = 0.24
 
     player:useSet()
 end

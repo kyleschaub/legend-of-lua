@@ -64,6 +64,7 @@ function hookshot:update(dt)
         local walls = world:queryCircleArea(self.x, self.y, self.rad, {'Wall'})
         if #walls > 0 then
             self.state = 2
+            dj.play(sounds.items.set, "static", "effect")
             player.state = 4.2
             player:setCollisionClass('Ignore')
         end

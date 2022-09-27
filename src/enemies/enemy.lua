@@ -290,11 +290,11 @@ function spawnEnemy(x, y, type, args)
             for i=1,14 do
                 effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})
             end
-            local range = math.random()/4
-            dj.play(sounds.enemies.hurt, "static", "effect", 1, 1+range)
         else
             
         end
+        local range = math.random()/4
+        dj.play(sounds.enemies.hurt, "static", "effect", 1, 1+range)
     end
 
     function enemy:burn()

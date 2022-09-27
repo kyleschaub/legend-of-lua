@@ -189,7 +189,7 @@ function pause:unequip(key)
 
     local destX = pause.items[index].homeX
     local destY = pause.items[index].homeY
-    flux.to(pause.items[index], tweenTime, {x = destX}):ease("quadout"):oncomplete(function() dj.play(sounds.ui.click, "static", "effect") end)
+    flux.to(pause.items[index], tweenTime, {x = destX}):ease("quadout")--:oncomplete(function() dj.play(sounds.ui.click, "static", "effect") end)
     flux.to(pause.items[index], tweenTime, {y = destY}):ease("quadout")
 end
 

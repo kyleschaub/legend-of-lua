@@ -121,6 +121,7 @@ sounds.items.coin = 'sounds/items/coin-edit.wav'
 sounds.items.explosion = 'sounds/items/explosion.wav'
 sounds.items.fire = 'sounds/items/fire.wav'
 sounds.items.grapple = 'sounds/items/grapple.wav'
+sounds.items.set = 'sounds/items/set.wav'
 sounds.items.sword = 'sounds/items/sword.wav'
 sounds.player = {}
 sounds.player.hurt = 'sounds/player/playerHurt.wav'

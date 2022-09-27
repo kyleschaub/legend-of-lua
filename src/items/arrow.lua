@@ -17,7 +17,7 @@ function spawnArrow(x, y)
     arrow.dirVec = direction
     arrow.rot = math.atan2(direction.y, direction.x)
     arrow.rad = 3
-    arrow.speed = 200
+    arrow.speed = 230
 
     function arrow:update(dt)
         self.timer = self.timer - dt
