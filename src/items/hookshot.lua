@@ -30,6 +30,8 @@ function hookshot:shoot(dir)
     hookshot.handleX = hookshot.x + dir.x*3
     hookshot.handleY = hookshot.y + dir.y*3
 
+    dj.play(sounds.items.grapple, "static", "effect")
+
 end
 
 function hookshot:update(dt)

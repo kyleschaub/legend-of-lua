@@ -59,6 +59,7 @@ function effects:spawn(type, x, y, args)
         effect.scaleY = 1.25
         effect.grid = anim8.newGrid(32, 32, effect.spriteSheet:getWidth(), effect.spriteSheet:getHeight())
         effect.anim = anim8.newAnimation(effect.grid('1-6', 1), 0.08, function() effect.dead = true end)
+        dj.play(sounds.items.explosion, "static", "effect")
     end
 
     if type == "scorch" then

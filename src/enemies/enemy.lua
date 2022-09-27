@@ -211,6 +211,7 @@ function spawnEnemy(x, y, type, args)
                 --self:die()
                 local ex, ey = self.physics:getPosition()
                 particleEvent("death", ex, ey)
+                dj.play(sounds.enemies.die, "static", "effect")
             end
         else
 
@@ -289,6 +290,7 @@ function spawnEnemy(x, y, type, args)
             for i=1,14 do
                 effects:spawn("damage", self.physics:getX(), self.physics:getY(), {dir = dir})
             end
+            dj.play(sounds.enemies.hurt, "static", "effect")
         else
             
         end

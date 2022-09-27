@@ -15,6 +15,8 @@ function spawnFlame(x, y)
     flame.rad = 3
     flame.state = 0
 
+    dj.play(sounds.items.fire, "static", "effect")
+
     effects:spawn("triangleScorch", flame.x+2, flame.y+2, flame.dir)
 
     function flame:singleEmber(newVec, offVec, offMag)

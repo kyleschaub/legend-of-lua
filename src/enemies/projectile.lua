@@ -5,6 +5,7 @@ function spawnProjectile(type, x, y)
     local rad = 5
 
     if type == "mage" then
+        dj.play(sounds.enemies.projectile, "static", "effect")
         rad = 4
     end
     

@@ -43,6 +43,8 @@ function spawnArrow(x, y)
 
     end
 
+    dj.play(sounds.items.arrow, "static", "effect")
+
     table.insert(arrows, arrow)
 end
 

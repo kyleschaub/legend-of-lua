@@ -72,6 +72,7 @@ function boomerang:throw(dir)
     self.state = 1
     self.timer = 0.65
     self.dir = toMouseVector(self.x, self.y) * self.speed
+    dj.play(sounds.items.boomerang, "static", "effect")
 
     player:useSet()
 end

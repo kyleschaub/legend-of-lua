@@ -143,7 +143,7 @@ function pause:equip(key)
             data.item.left = pause.items[pause.hoverIndex].name
             pause.equipLeftX = pause.items[pause.hoverIndex].homeX
             pause.equipLeftY = pause.items[pause.hoverIndex].homeY
-            flux.to(pause, tweenTime, {equipLeftX = pause.homeLeftX}):ease("quadout")
+            flux.to(pause, tweenTime, {equipLeftX = pause.homeLeftX}):ease("quadout"):oncomplete(function() dj.play(sounds.ui.click, "static", "effect") end)
             flux.to(pause, tweenTime, {equipLeftY = pause.homeY}):ease("quadout")
         elseif key == 'right' then
             pause:unequip(key)
@@ -151,7 +151,7 @@ function pause:equip(key)
             data.item.right = pause.items[pause.hoverIndex].name
             pause.equipRightX = pause.items[pause.hoverIndex].homeX
             pause.equipRightY = pause.items[pause.hoverIndex].homeY
-            flux.to(pause, tweenTime, {equipRightX = pause.homeRightX}):ease("quadout")
+            flux.to(pause, tweenTime, {equipRightX = pause.homeRightX}):ease("quadout"):oncomplete(function() dj.play(sounds.ui.click, "static", "effect") end)
             flux.to(pause, tweenTime, {equipRightY = pause.homeY}):ease("quadout")
         end
     end
@@ -189,7 +189,7 @@ function pause:unequip(key)
 
     local destX = pause.items[index].homeX
     local destY = pause.items[index].homeY
-    flux.to(pause.items[index], tweenTime, {x = destX}):ease("quadout")
+    flux.to(pause.items[index], tweenTime, {x = destX}):ease("quadout"):oncomplete(function() dj.play(sounds.ui.click, "static", "effect") end)
     flux.to(pause.items[index], tweenTime, {y = destY}):ease("quadout")
 end
 

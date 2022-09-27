@@ -15,6 +15,7 @@ function spawnLoot(x, y, type, bounce, price, dir)
     loot.dir = dir
     loot.hookVec = nil
     loot.boomeranged = false
+    loot.sound = sounds.items.coin
 
     loot.price = 0
     if price and price > 0 then
@@ -85,6 +86,8 @@ function spawnLoot(x, y, type, bounce, price, dir)
                     return nil
                 end
             end
+
+            dj.play(self.sound, "static", "effect")
 
             self.dead = true
             if self.type == "arrow" then

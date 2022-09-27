@@ -462,6 +462,7 @@ function player:hurt(damage, srcX, srcY)
     player.damagedTimer = 2
     shake:start(0.1, 2, 0.03)
     particleEvent("playerHit", player:getX(), player:getY())
+    dj.play(sounds.player.hurt, "static", "effect")
     player.health = player.health - damage
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())

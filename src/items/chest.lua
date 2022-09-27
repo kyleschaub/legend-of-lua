@@ -40,6 +40,7 @@ function spawnChest(x, y, id, size)
     function chest:interact()
         if self.state == 0 then
             self.state = 1
+            dj.play(sounds.items.chest, "static", "effect")
             data.chests[self.id] = true
             if self.size == "small" then
                 chests:spawnSmallLoot(self.centerX, self.centerY, self.id)
