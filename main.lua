@@ -47,6 +47,26 @@ function love.keypressed(key)
         love.event.quit()
     end
 
+    if key == 'backspace' then
+        if fullscreen then
+            local newWidth = 1920
+            local newHeight = 1080
+            local fractionW = love.graphics.getWidth()*0.9
+            local fractionH = love.graphics.getHeight()*0.9
+            if fractionW < newWidth then
+                newWidth = fractionW
+            end
+            if fractionH < newHeight then
+                newHeight = fractionH
+            end
+
+            setWindowSize(false, newWidth, newHeight)
+        else
+            setWindowSize(true)
+        end
+        reinitSize()
+    end
+
     if key == 'z' then
         if pause.active then
             pause:equip('z')

@@ -96,17 +96,21 @@ sprites.pause.cursor = love.graphics.newImage('sprites/ui/pause/cursor.png')
 sprites.npc = {}
 sprites.npc.merchant = love.graphics.newImage('sprites/npc/merchant.png')
 
-fonts = {}
-fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
-fonts.debug2 = love.graphics.newFont(10*scale)
-fonts.debugSmall = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
-fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
-fonts.coins = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 6.5*scale)
-fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
+-- since fonts are influenced by scale, they need to be re-initialized when the scale changes
+function initFonts()
+    fonts = {}
+    fonts.debug = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 15*scale)
+    fonts.debug2 = love.graphics.newFont(10*scale)
+    fonts.debugSmall = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
+    fonts.ammo = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 4.5*scale)
+    fonts.coins = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 6.5*scale)
+    fonts.shop = love.graphics.newFont("fonts/kenney-pixel-square/Kenney-Pixel-Square.ttf", 8)
 
-fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
-fonts.pause2 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 9*scale)
-fonts.pauseTop = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
+    fonts.pause1 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 12*scale)
+    fonts.pause2 = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 9*scale)
+    fonts.pauseTop = love.graphics.newFont("fonts/vt323/VT323-Regular.ttf", 10*scale)
+end
+initFonts()
 
 sounds = {}
 sounds.enemies = {}

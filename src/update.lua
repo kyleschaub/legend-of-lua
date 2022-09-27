@@ -7,6 +7,7 @@ function updateAll(dt)
     pause:update(dt)
     dj.cleanup()
     if gameMap then gameMap:update(dt) end
+    checkWindowSize()
 
 end
 

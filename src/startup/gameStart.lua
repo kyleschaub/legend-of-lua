@@ -11,7 +11,8 @@ function gameStart()
 
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
-    setWindowSize(false, 1920, 1080)
+    fullscreen = true
+    setWindowSize(fullscreen, 1920, 1080)
 
     -- The game's graphics scale up, this method finds the right ratio
     setScale()
@@ -39,10 +40,12 @@ end
 
 function setWindowSize(full, width, height)
     if full then
+        fullscreen = true
         love.window.setFullscreen(true)
         windowWidth = love.graphics.getWidth()
         windowHeight = love.graphics.getHeight()
     else
+        fullscreen = false
         if width == nil or height == nil then
             windowWidth = 1920
             windowHeight = 1080
@@ -50,7 +53,7 @@ function setWindowSize(full, width, height)
             windowWidth = width
             windowHeight = height
         end
-        love.window.setMode( windowWidth, windowHeight, flags )
+        love.window.setMode( windowWidth, windowHeight, {resizable = true} )
     end
 end
 
@@ -74,4 +77,21 @@ function setScale(input)
     if cam then
         cam:zoomTo(scale)
     end
+end
+
+function checkWindowSize()
+    local width = love.graphics.getWidth()
+    local height = love.graphics.getHeight()
+    if width ~= windowWidth or height ~= windowHeight then
+        reinitSize()
+    end
+end
+
+function reinitSize()
+    -- Reinitialize everything
+    windowWidth = love.graphics.getWidth()
+    windowHeight = love.graphics.getHeight()
+    setScale()
+    pause:init()
+    initFonts()
 end
