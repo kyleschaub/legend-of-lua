@@ -136,6 +136,7 @@ end
 function pause:equip(key)
     if pause.hoverIndex == -1 then return end
     local tweenTime = 0.2
+    dj.play(sounds.ui.select, "static", "effect")
     if pause.hoverIndex > -1 then
         if key == 'left' then
             pause:unequip(key)
