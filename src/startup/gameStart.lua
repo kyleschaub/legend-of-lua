@@ -12,6 +12,7 @@ function gameStart()
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
     fullscreen = false
+    testWindow = false
     setWindowSize(fullscreen, 1920, 1080)
 
     -- The game's graphics scale up, this method finds the right ratio
@@ -53,7 +54,7 @@ function setWindowSize(full, width, height)
             windowWidth = width
             windowHeight = height
         end
-        love.window.setMode( windowWidth, windowHeight, {resizable = true} )
+        love.window.setMode( windowWidth, windowHeight, {resizable = not testWindow} )
     end
 end
 
@@ -68,7 +69,7 @@ function initGlobals()
 end
 
 function setScale(input)
-    scale = (8 / 1200) * windowHeight
+    scale = (7.3 / 1200) * windowHeight
 
     if input == "zone" then -- 12 tiles high
         scale = (6.25 / 1200) * windowHeight
