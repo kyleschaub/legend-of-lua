@@ -114,6 +114,7 @@ end
 
 function pause:open()
     pause:init()
+    dj.play(sounds.ui.menuOpen, "static", "effect")
     self.active = true
     flux.to(pause, 0.25, {alpha = 1}):ease("quadout")
     flux.to(pause, 0.25, {y = pause.trueY}):ease("quadout")
@@ -121,6 +122,7 @@ end
 
 function pause:close()
     --self.active = false
+    dj.play(sounds.ui.menuClose, "static", "effect")
     flux.to(pause, 0.25, {alpha = 0}):ease("quadout"):oncomplete(function() pause.active = false end)
     flux.to(pause, 0.25, {y = pause.fadeY}):ease("quadout")
 end

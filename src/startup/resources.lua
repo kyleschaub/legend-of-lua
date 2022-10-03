@@ -133,3 +133,5 @@ sounds.player.roll = 'sounds/player/roll.wav'
 sounds.ui = {}
 sounds.ui.click = 'sounds/ui/click.wav'
 sounds.ui.select = 'sounds/ui/select.wav'
+sounds.ui.menuOpen = 'sounds/ui/menu-open.wav'
+sounds.ui.menuClose = 'sounds/ui/menu-close.wav'
