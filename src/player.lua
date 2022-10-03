@@ -609,7 +609,7 @@ function player:useFire()
         return
     end
 
-    player:useItem(0.2)
+    player:useItem(0.35)
     player:useSet()
     local oppDir = toMouseVector(player:getX(), player:getY()):rotated(math.pi)*80
     player:setLinearVelocity(oppDir.x, oppDir.y)

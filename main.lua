@@ -39,8 +39,7 @@ end
 
 function love.keypressed(key)
     if key == 'q' then
-        colliderToggle = not (colliderToggle and true);
-        data.arrowCount = 100
+        --colliderToggle = not (colliderToggle and true);
     end
 
     if key == 'escape' then
@@ -67,30 +66,14 @@ function love.keypressed(key)
         reinitSize()
     end
 
-    if key == 'z' then
-        if pause.active then
-            pause:equip('z')
-        else
-            useItem('z')
-        end
-    end
-
     if key == 'r' then
         data.outfit = data.outfit + 1
         if data.outfit > 4 then data.outfit = 1 end
         sprites.playerSheet = love.graphics.newImage('sprites/player/playerSheet' .. data.outfit .. '.png')
     end
 
-    if key == 'x' then
-        if pause.active then
-            pause:equip('x')
-        else
-            useItem('x')
-        end
-    end
-
     if key == 'lshift' or key == 'rshift' then
-        player:interact()
+        --player:interact()
     end
 
     if key == 'return' then

@@ -12,9 +12,10 @@ function menu:draw()
         love.graphics.printf("Press BackSpace to toggle fullscreen.", love.graphics.getWidth()/2 - 4000, 10 * scale, 8000, "center")
         love.graphics.printf("Press Esc to close the game.", love.graphics.getWidth()/2 - 4000, 22 * scale, 8000, "center")
         love.graphics.printf("Use WASD or Arrow Keys to move.", love.graphics.getWidth()/2 - 4000, 47 * scale, 8000, "center")
-        love.graphics.printf("Press Enter to equip items.", love.graphics.getWidth()/2 - 4000, 59 * scale, 8000, "center")
-        love.graphics.printf("Use the mouse to aim and attack.", love.graphics.getWidth()/2 - 4000, 71 * scale, 8000, "center")
-        love.graphics.printf("Press any key to start!", love.graphics.getWidth()/2 - 4000, 99 * scale, 8000, "center")
+        love.graphics.printf("Press the Spacebar to roll.", love.graphics.getWidth()/2 - 4000, 59 * scale, 8000, "center")
+        love.graphics.printf("Press Enter to equip items.", love.graphics.getWidth()/2 - 4000, 71 * scale, 8000, "center")
+        love.graphics.printf("Use the mouse to aim and attack.", love.graphics.getWidth()/2 - 4000, 83 * scale, 8000, "center")
+        love.graphics.printf("Press any key to start!", love.graphics.getWidth()/2 - 4000, 111 * scale, 8000, "center")
     end
 end
 
