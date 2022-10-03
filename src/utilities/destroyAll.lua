@@ -19,6 +19,8 @@ function destroyAll()
         end
         table.remove(enemies, i)
     end
+
+    boomerang:reset()
 end
 
 -- Used for tables of colliders

@@ -45,8 +45,7 @@ function boomerang:update(dt)
         self.dir = vector(player:getX() - self.x, player:getY() - self.y):normalized() * self.speed
         self.speed = self.speed + self.accel*dt
         if distanceBetween(player:getX(), player:getY(), self.x, self.y) < 10 then
-            self.state = 0
-            self.speed = self.baseSpeed
+            boomerang:reset()
         end
     end
 
@@ -83,4 +82,9 @@ function boomerang:throw(dir)
     self.soundTimer = 0.24
 
     player:useSet()
+end
+
+function boomerang:reset()
+    self.state = 0
+    self.speed = self.baseSpeed
 end
