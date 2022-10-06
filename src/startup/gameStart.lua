@@ -11,7 +11,7 @@ function gameStart()
 
     -- 3 parameters: fullscreen, width, height
     -- width and height are ignored if fullscreen is true
-    fullscreen = false
+    fullscreen = true
     testWindow = false
     setWindowSize(fullscreen, 1920, 1080)
 
