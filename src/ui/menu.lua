@@ -15,13 +15,13 @@ function menu:draw()
         love.graphics.printf("Press the Spacebar to roll.", love.graphics.getWidth()/2 - 4000, 59 * scale, 8000, "center")
         love.graphics.printf("Press Enter to equip items.", love.graphics.getWidth()/2 - 4000, 71 * scale, 8000, "center")
         love.graphics.printf("Use the mouse to aim and attack.", love.graphics.getWidth()/2 - 4000, 83 * scale, 8000, "center")
-        love.graphics.printf("Press any key to start!", love.graphics.getWidth()/2 - 4000, 111 * scale, 8000, "center")
+        love.graphics.printf("Press the Spacebar to start!", love.graphics.getWidth()/2 - 4000, 111 * scale, 8000, "center")
     end
 end
 
 function menu:select(key)
     if gamestate == 0 then
-        if key == "backspace" then return end
+        if key ~= "space" then return end
 
         startFresh(1)
 
