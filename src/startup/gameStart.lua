@@ -13,7 +13,14 @@ function gameStart()
     -- width and height are ignored if fullscreen is true
     fullscreen = true
     testWindow = false
+    vertical = false
     setWindowSize(fullscreen, 1920, 1080)
+
+    if vertical then
+        fullscreen = false
+        testWindow = true
+        setWindowSize(fullscreen, 1360, 1920)
+    end
 
     -- The game's graphics scale up, this method finds the right ratio
     setScale()
@@ -71,8 +78,8 @@ end
 function setScale(input)
     scale = (7.3 / 1200) * windowHeight
 
-    if input == "zone" then -- 12 tiles high
-        scale = (6.25 / 1200) * windowHeight
+    if vertical then
+        scale = (7 / 1200) * windowHeight
     end
 
     if cam then
