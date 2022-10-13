@@ -271,7 +271,7 @@ function player:update(dt)
         end
 
     elseif player.state == 2 or player.state == 3.1 then
-
+        player:checkDamage()
         if player.state == 2 then
             --player:setLinearVelocity(0, 0)
         end
@@ -474,6 +474,7 @@ function player:hurt(damage, srcX, srcY)
     player.state = 10 -- damaged
     player:setLinearVelocity((getFromToVector(srcX, srcY, player:getX(), player:getY()) * 300):unpack())
     player.stunTimer = 0.075
+    player.aiming = false
 end
 
 function player:swingSword()

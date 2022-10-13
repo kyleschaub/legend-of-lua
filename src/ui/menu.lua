@@ -34,6 +34,7 @@ function menu:select(key)
     end
 
     -- Testing destinations (be sure to remove!)
+    --[[
     if key == "1" then
         loadMap("test")
     elseif key == "2" then
@@ -43,4 +44,5 @@ function menu:select(key)
     elseif key == "4" then
         loadMap("testDungeon2", 408, 494)
     end
+    ]]
 end
