@@ -35,15 +35,11 @@ function boomerang:update(dt)
             self.state = 2
         end
 
-        local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
-        for _,e in ipairs(hitEnemies) do
-            e.parent:hit(0, self.dir, 0.1, 2)
-            particleEvent("playerHit", e.parent.physics:getX(), e.parent.physics:getY())
-        end
-        if #hitEnemies > 0 then self.state = 2 end
+        boomerang:lookForEnemies()
     elseif self.state == 2 then
         self.dir = vector(player:getX() - self.x, player:getY() - self.y):normalized() * self.speed
         self.speed = self.speed + self.accel*dt
+        boomerang:lookForEnemies()
         if distanceBetween(player:getX(), player:getY(), self.x, self.y) < 10 then
             boomerang:reset()
         end
@@ -63,6 +59,17 @@ function boomerang:update(dt)
         self.soundTimer = 0.24
         --dj.play(sounds.items.boomerang, "static", "effect")
     end
+end
+
+function boomerang:lookForEnemies()
+    local hitEnemies = world:queryCircleArea(self.x, self.y, self.rad, {'Enemy'})
+    for _,e in ipairs(hitEnemies) do
+        if e.parent.dizzyTimer <= 0 or boomerang.state == 1 then
+            e.parent:hit(0, self.dir, 0.1, 2)
+            particleEvent("playerHit", e.parent.physics:getX(), e.parent.physics:getY())
+        end
+    end
+    if #hitEnemies > 0 then self.state = 2 end
 end
 
 function boomerang:draw()
