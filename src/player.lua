@@ -701,7 +701,7 @@ function player:roll()
         return
     end
 
-    if pause.active then player:justStop() return end
+    if pause.active then player:justIdle() return end
 
     local dirX = 0
     local dirY = 0

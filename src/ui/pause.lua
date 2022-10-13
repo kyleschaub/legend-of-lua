@@ -119,7 +119,13 @@ function pause:open()
     flux.to(pause, 0.25, {alpha = 1}):ease("quadout")
     flux.to(pause, 0.25, {y = pause.trueY}):ease("quadout")
 
-    player:justStop()
+    player.walking = false
+    local pvx, pvy = player:getLinearVelocity()
+    if math.abs(pvx) > 0.1 or math.abs(pvy) > 0.1 then
+        player:justStop()
+    else
+        player:justIdle()
+    end
 end
 
 function pause:close()
@@ -131,9 +137,13 @@ end
 
 function pause:toggle()
     if self.active then
-        pause:close()
+        if pause.alpha == 1 then
+            pause:close()
+        end
     else
-        pause:open()
+        if pause.alpha <= 0 then
+            pause:open()
+        end
     end
 end
 

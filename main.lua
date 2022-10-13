@@ -43,7 +43,11 @@ function love.keypressed(key)
     end
 
     if key == 'escape' then
-        love.event.quit()
+        if pause.active then
+            pause:toggle()
+        else
+            love.event.quit()
+        end
     end
 
     if key == 'backspace' then
@@ -76,7 +80,7 @@ function love.keypressed(key)
         --player:interact()
     end
 
-    if key == 'return' then
+    if key == 'return' or key == 'tab' or key == 'e' then
         if gamestate == 1 then
             pause:toggle()
         end
