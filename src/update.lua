@@ -34,6 +34,7 @@ function updateGame(dt)
     enemies:update(dt)
     enemies:destroyDead()
     projectiles:update(dt)
+    trees:update(dt)
 
     cam:update(dt)
     shake:update(dt)

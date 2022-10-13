@@ -9,6 +9,7 @@ function spawnTree(x, y, type, id)
     tree.width = 12
     tree.height = 10
     tree.sprite = sprites.environment.tree
+    tree.layer = 1
 
     if type then
         tree.sprite = sprites.environment['tree' .. type]
@@ -28,11 +29,19 @@ function spawnTree(x, y, type, id)
 end
 
 function trees:update(dt)
-
+    for _,t in ipairs(trees) do
+        if t.y + 2 < player:getY() then
+            t.layer = -1
+        else
+            t.layer = 1
+        end
+    end
 end
 
-function trees:draw()
+function trees:draw(layer)
     for _,t in ipairs(trees) do
-        love.graphics.draw(t.sprite, t.x + t.width/2, t.y, nil, nil, nil, t.sprite:getWidth()/2, t.sprite:getHeight()*0.75)
+        if t.layer == layer then
+            love.graphics.draw(t.sprite, t.x + t.width/2, t.y, nil, nil, nil, t.sprite:getWidth()/2, t.sprite:getHeight()*0.75)
+        end
     end
 end
