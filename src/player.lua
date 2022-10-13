@@ -438,6 +438,13 @@ function player:checkDamage()
         end
     end
 
+    -- to fix the overlap issue, check distance as well
+    for _,e in ipairs(enemies) do
+        if e.physics and distanceBetween(e.physics:getX(), e.physics:getY(), player:getX(), player:getY()) < 4 then
+            player:hurt(0.5, e.physics:getX(), e.physics:getY())
+        end
+    end
+
     if player:enter('Projectile') then
         local e = player:getEnterCollisionData('Projectile')
         e.collider.dead = true
