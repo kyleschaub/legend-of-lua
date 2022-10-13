@@ -2,6 +2,7 @@ sprites = {}
 sprites.playerSheet = love.graphics.newImage('sprites/player/playerSheet1.png')
 sprites.playerShadow = love.graphics.newImage('sprites/player/playerShadow.png')
 sprites.effects = {}
+sprites.effects.darkness = love.graphics.newImage('sprites/effects/darkness-wide.png')
 sprites.effects.slice = love.graphics.newImage('sprites/effects/slice.png')
 sprites.effects.sliceAnim = love.graphics.newImage('sprites/effects/sliceAnim.png')
 sprites.effects.explosion = love.graphics.newImage('sprites/effects/explosion.png')
