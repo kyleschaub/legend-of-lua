@@ -8,6 +8,7 @@ function spawnChest(x, y, id, size)
     chest.id = id
     chest.size = "small"
     chest.state = 0
+    chest.layer = -1
     if size then chest.size = size end
 
     -- if the id is in this list, the chest was already opened
@@ -54,6 +55,12 @@ function spawnChest(x, y, id, size)
         if distanceBetween(self.x+self.width/2, self.y+self.height/2, player:getX(), player:getY()) < 24 then
             self:interact()
         end
+
+        if self.y + 2 < player:getY() then
+            self.layer = -1
+        else
+            self.layer = 1
+        end
     end
     
     table.insert(chests, chest)
@@ -65,16 +72,18 @@ function chests:update(dt)
     end
 end
 
-function chests:draw()
+function chests:draw(layer)
     for _,c in ipairs(chests) do
-        if c.state == 0 and c.size == "small" then
-            love.graphics.draw(sprites.items.chestClosed, c.x, c.y)
-        elseif c.state == 1 and c.size == "small" then
-            love.graphics.draw(sprites.items.chestOpen, c.x, c.y)
-        elseif c.state == 0 and c.size == "big" then
-            love.graphics.draw(sprites.items.chestBigClosed, c.x, c.y)
-        elseif c.state == 1 and c.size == "big" then
-            love.graphics.draw(sprites.items.chestBigOpen, c.x, c.y)
+        if c.layer == layer then
+            if c.state == 0 and c.size == "small" then
+                love.graphics.draw(sprites.items.chestClosed, c.x, c.y)
+            elseif c.state == 1 and c.size == "small" then
+                love.graphics.draw(sprites.items.chestOpen, c.x, c.y)
+            elseif c.state == 0 and c.size == "big" then
+                love.graphics.draw(sprites.items.chestBigClosed, c.x, c.y)
+            elseif c.state == 1 and c.size == "big" then
+                love.graphics.draw(sprites.items.chestBigOpen, c.x, c.y)
+            end
         end
     end
 end

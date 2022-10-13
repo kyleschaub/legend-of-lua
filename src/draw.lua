@@ -28,9 +28,9 @@ function drawCamera()
     end
 
     drawShadows()
-    effects:draw(-1) -- two layers of effects
     walls:draw()
-    chests:draw()
+    effects:draw(-1) -- two layers of effects
+    chests:draw(-1)
     bombs:draw()
     boomerang:draw()
     loots:draw()
@@ -40,6 +40,7 @@ function drawCamera()
     effects:draw(0)
     trees:draw(-1)
     player:draw()
+    chests:draw(1)
     arrows:draw(1)
     fireballs:draw(1)
     grapple:draw(1)
