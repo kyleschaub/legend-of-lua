@@ -118,6 +118,8 @@ function pause:open()
     self.active = true
     flux.to(pause, 0.25, {alpha = 1}):ease("quadout")
     flux.to(pause, 0.25, {y = pause.trueY}):ease("quadout")
+
+    player:justStop()
 end
 
 function pause:close()
