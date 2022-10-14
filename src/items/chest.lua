@@ -73,6 +73,7 @@ function chests:update(dt)
 end
 
 function chests:draw(layer)
+    love.graphics.setColor(1,1,1,1)
     for _,c in ipairs(chests) do
         if c.layer == layer then
             if c.state == 0 and c.size == "small" then

@@ -31,7 +31,8 @@ end
 function trees:update(dt)
     for _,t in ipairs(trees) do
         if t.y + 2 < player:getY() then
-            t.layer = -1
+            --t.layer = -1
+            t.layer = 1
         else
             t.layer = 1
         end
